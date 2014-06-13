@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="cane.brothers.e4.commander">
+         <property
+               name="appName"
+               value="cane.brothers.e4.commander">
+         </property>
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/cane.brothers.e4.commander/css/default.css">
+         </property>
+         <property
+               name="applicationXMI"
+               value="cane.brothers.e4.commander/Application.e4xmi">
+         </property>
+         <property
+               name="clearPersistedState"
+               value="true">
+         </property>
+      </product>
+   </extension>
+
+
+</plugin>
