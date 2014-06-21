@@ -22,6 +22,10 @@
                name="clearPersistedState"
                value="true">
          </property>
+         <property
+               name="windowImages"
+               value="icons/application_side_tree.png">
+         </property>
       </product>
    </extension>
 
