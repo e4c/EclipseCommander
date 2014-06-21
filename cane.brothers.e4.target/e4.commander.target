@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="e4 commander target" sequenceNumber="29">
+<?pde version="3.8"?><target name="e4 commander target" sequenceNumber="36">
 <locations>
-<location path="D:\Java\workspaces\EclipseCommander\cane.brothers.e4.target\features" type="Directory"/>
-<location path="D:\Java\workspaces\EclipseCommander\cane.brothers.e4.target\features.sources" type="Directory"/>
-<location path="D:\Java\workspaces\EclipseCommander\cane.brothers.e4.target\plugins" type="Directory"/>
-<location path="D:\Java\workspaces\EclipseCommander\cane.brothers.e4.target\plugins.sources" type="Directory"/>
+<location id="org.eclipse.emf.ecore" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.emf.common" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.e4.rcp" path="${eclipse_home}" type="Feature"/>
 </locations>
 </target>
