@@ -1,2 +1,0 @@
-org.eclipse.core.runtime.compatibility.registry.source_3.5.200.v20130514-1256.jar
-org.eclipse.swt.win32.win32.x86.source_3.102.1.v20130827-2048.jar
