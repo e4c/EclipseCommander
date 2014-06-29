@@ -23,6 +23,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_N0J9IFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handledmenuitem.test" label="test" command="_1mZAUFmoEeOT-PJJdUfiZQ"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_Nh1X4FnMEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handledmenuitem.copytab" label="copy tab" command="_wXY7IFnEEeOT-PJJdUfiZQ"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_NliJkP93EeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handledmenuitem.copydescriptortab" label="copy descriptor tab" command="_272gkP9uEeOZGL8AHW3wCQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_0awZ0P-PEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handledmenuitem.0" label="copy descriptor tab to opposite " command="_umqtkP-KEeOZGL8AHW3wCQ"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_FUSYYFmwEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.trimbar.main">
@@ -36,6 +37,7 @@
   <handlers xmi:id="_d3vVgFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handlers.CloseActivePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CloseActivePartHandler" command="_Y5AKoFmvEeOT-PJJdUfiZQ"/>
   <handlers xmi:id="_0QsH8FnEEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handlers.CopyPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CopyPartHandler" command="_wXY7IFnEEeOT-PJJdUfiZQ"/>
   <handlers xmi:id="_tdrV8P9uEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handlers.CopyDescriptorPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CopyPartDescriptorHandler" command="_272gkP9uEeOZGL8AHW3wCQ"/>
+  <handlers xmi:id="_-VPtAP-PEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handlers.CopyPartToOppositeHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CopyPartToOppositeHandler" command="_umqtkP-KEeOZGL8AHW3wCQ"/>
   <bindingTables xmi:id="_mKUpMFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.bindingtable.0" bindingContext="_s7WREFnPEeOT-PJJdUfiZQ">
     <bindings xmi:id="_wzTaEFnPEeOT-PJJdUfiZQ" elementId="" keySequence="M1+T" command="_wXY7IFnEEeOT-PJJdUfiZQ"/>
   </bindingTables>
@@ -46,6 +48,7 @@
   <commands xmi:id="_Y5AKoFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.0" commandName="command.closeActivePart"/>
   <commands xmi:id="_wXY7IFnEEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.copyPart" commandName="command.copyPart" description="copy part"/>
   <commands xmi:id="_272gkP9uEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.copyDescriptorPart" commandName="command.copyDescriptorPart" description="copy descriptor part"/>
+  <commands xmi:id="_umqtkP-KEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.copyDescriptorPart.toOpposite" commandName="command.copyDescriptorPart.toOpposite" description="copy descriptor part to opposite panel"/>
   <addons xmi:id="_C6-GsVmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_C6-GslmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_C6-Gs1mnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
