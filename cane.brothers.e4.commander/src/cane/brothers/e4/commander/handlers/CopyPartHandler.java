@@ -12,6 +12,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
+import cane.brothers.e4.commander.PartUtils;
 import cane.brothers.e4.commander.parts.ITabNameId;
 
 /**
@@ -26,8 +27,10 @@ public class CopyPartHandler {
 	EPartService partService;
 
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
+	//public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
+	public void execute() {
 		System.out.println((this.getClass().getSimpleName() + " called"));
+		MPart part = partService.getActivePart();
 
 		MPart newPart = copyPart(part);
 		partService.showPart(newPart, PartState.ACTIVATE);
@@ -41,33 +44,13 @@ public class CopyPartHandler {
 	private MPart copyPart(MPart part) {
 		MPart newPart = MBasicFactory.INSTANCE.createPart();
 
-		newPart.setLabel(createPartLabel(part));
-		newPart.setElementId(createElementId(part));
+		newPart.setLabel(PartUtils.createPartLabel(part));
+		newPart.setElementId(PartUtils.createElementId(part));
 		newPart.setContributionURI(part.getContributionURI());
-		newPart.setCloseable(part.isCloseable());
+		// newPart.setCloseable(part.isCloseable());
 		// NB должен быть задан parent, чтобы закладку добавить на туже сторону
 		newPart.setParent(part.getParent());
 
 		return newPart;
 	}
-
-	private String createPartLabel(MPart part) {
-		String label = null;
-		if (part != null && part.getObject() instanceof ITabNameId) {
-			ITabNameId tab = (ITabNameId) part.getObject();
-			label = tab.getTabName();
-		}
-		return label;
-	}
-
-	private String createElementId(MPart part) {
-		String elemId = null;
-		if (part != null && part.getObject() instanceof ITabNameId) {
-			ITabNameId tab = (ITabNameId) part.getObject();
-			elemId = tab.getElementId();
-		}
-		return elemId;
-	}
-
-
 }
