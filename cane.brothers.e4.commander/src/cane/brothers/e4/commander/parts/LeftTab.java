@@ -5,6 +5,7 @@ import javax.inject.Named;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
