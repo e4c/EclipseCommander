@@ -4,3 +4,4 @@ Bundle-Name: Target
 Bundle-SymbolicName: cane.brothers.e4.target
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Vendor: cane
