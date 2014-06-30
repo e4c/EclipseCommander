@@ -1,5 +1,6 @@
 package cane.brothers.e4.commander.parts;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.swt.SWT;
@@ -14,6 +15,9 @@ public class DynamicTab implements ITabNameId {
 	public static final String DYNAMIC_TAB_ID_PREF = ".dynamictab.".intern();
 	private static int tabsId = 1;
 	private static final String tabName = "Dynamic tab ".intern();
+	
+	private int currentTabId = -1;
+	
 /**
  * GUI stuff
  */
@@ -22,27 +26,28 @@ public class DynamicTab implements ITabNameId {
 			.getSystemColor(SWT.COLOR_WHITE);
 
 	@Inject
-	public DynamicTab(Composite parent) {
+	public DynamicTab() {
+		currentTabId = tabsId++;
+	}
+	
+	@PostConstruct
+	public void createPartControl(Composite parent) {
+		
 		parent.setBackground(bgColor);
 		parent.setLayout(new GridLayout());
 
 		label = new Label(parent, SWT.NONE);
 		label.setText("Dynamic tab");
 	}
-	
-	@Override
-	public int getNewId() {
-		return ++tabsId;
-	}
 
 	@Override
 	public String getElementId() {
-		return ELEMENT_ID + DYNAMIC_TAB_ID_PREF + getNewId();
+		return ELEMENT_ID + DYNAMIC_TAB_ID_PREF + currentTabId;
 	}
 
 	@Override
 	public String getTabName() {
-		return tabName + getNewId();
+		return tabName + currentTabId;
 	}
 
 }
