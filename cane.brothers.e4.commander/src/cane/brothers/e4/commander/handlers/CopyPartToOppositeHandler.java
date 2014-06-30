@@ -11,7 +11,7 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
-import cane.brothers.e4.commander.IIdContainer;
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.PartUtils;
 
 public class CopyPartToOppositeHandler {
@@ -29,7 +29,7 @@ public class CopyPartToOppositeHandler {
 
 		MPart activePart = partService.getActivePart();
 		
-		MPart newPart = partService.createPart(IIdContainer.DYNAMIC_PART_DESCRIPTOR_ID);
+		MPart newPart = partService.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
 		newPart = copyPart(newPart, activePart);
 		
 		// ƒобавл€ем новую вкладку на другую сторону

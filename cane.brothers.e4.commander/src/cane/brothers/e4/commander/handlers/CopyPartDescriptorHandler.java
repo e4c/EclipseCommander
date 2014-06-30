@@ -5,7 +5,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
-import cane.brothers.e4.commander.IIdContainer;
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.PartUtils;
 
 /**
@@ -30,7 +30,7 @@ public class CopyPartDescriptorHandler {
 		// create a new Part based on a PartDescriptor
 		// in the application model
 		// assume the ID is used for the PartDescriptor
-		MPart newPart = partService.createPart(IIdContainer.DYNAMIC_PART_DESCRIPTOR_ID);
+		MPart newPart = partService.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
 		newPart = copyPart(newPart, activePart);
 
 		// If multiple parts of this type are now allowed

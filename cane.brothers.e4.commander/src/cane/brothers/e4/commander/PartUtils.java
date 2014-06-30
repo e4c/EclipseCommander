@@ -66,9 +66,9 @@ public class PartUtils {
 	 */
 	private static String getOppositePanelId(String panelId) {
 		if (panelId != null) {
-			return (panelId.equals(IIdContainer.LEFT_PANEL_ID) 
-					? IIdContainer.RIGHT_PANEL_ID
-					: IIdContainer.LEFT_PANEL_ID);
+			return (panelId.equals(IdStorage.LEFT_PANEL_ID) 
+					? IdStorage.RIGHT_PANEL_ID
+					: IdStorage.LEFT_PANEL_ID);
 		}
 		return panelId;
 	}
