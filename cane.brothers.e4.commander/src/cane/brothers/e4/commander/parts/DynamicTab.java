@@ -27,7 +27,7 @@ public class DynamicTab implements ITabNameId {
 
 	@Inject
 	public DynamicTab() {
-		currentTabId = tabsId++;
+		currentTabId = ++tabsId;
 	}
 	
 	@PostConstruct

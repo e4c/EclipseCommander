@@ -5,12 +5,12 @@
       <children xsi:type="advanced:Perspective" xmi:id="_OHkiAFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.perspective.main">
         <children xsi:type="basic:PartSashContainer" xmi:id="_SJW8cFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partsashcontainer.main" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_VfDF4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.left">
-            <children xsi:type="basic:Part" xmi:id="_aMDAgFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.part.lefttab.1" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.LeftTab" label="left tab 1" closeable="true">
+            <children xsi:type="basic:Part" xmi:id="_aMDAgFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic.1" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab" label="left tab 1" closeable="true">
               <toolbar xmi:id="_IyqdYFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.toolbar.0"/>
             </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_ZDCKAFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.right">
-            <children xsi:type="basic:Part" xmi:id="_fni_4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.part.right.tab.1" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.RightTab" label="right side" closeable="true">
+            <children xsi:type="basic:Part" xmi:id="_fni_4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic.2" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab" label="right side" closeable="true">
               <toolbar xmi:id="_Kkg1gFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.toolbar.1"/>
             </children>
           </children>
