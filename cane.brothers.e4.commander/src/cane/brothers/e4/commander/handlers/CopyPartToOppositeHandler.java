@@ -42,7 +42,10 @@ public class CopyPartToOppositeHandler {
 			stack.getChildren().add(newPart);
 		}
 		
-		partService.showPart(newPart, PartState.ACTIVATE);
+		
+		partService.showPart(newPart, PartState.VISIBLE);
+		//partService.showPart(newPart, PartState.ACTIVATE);
+		partService.showPart(activePart, PartState.ACTIVATE);
 	}
 	
 	private MPart copyPart(MPart newPart, MPart part) {

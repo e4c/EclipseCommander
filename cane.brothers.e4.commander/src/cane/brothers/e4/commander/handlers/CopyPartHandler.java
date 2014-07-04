@@ -33,7 +33,8 @@ public class CopyPartHandler {
 		MPart part = partService.getActivePart();
 
 		MPart newPart = copyPart(part);
-		partService.showPart(newPart, PartState.ACTIVATE);
+		partService.showPart(newPart, PartState.VISIBLE);
+		partService.showPart(part, PartState.ACTIVATE);
 	}
 
 	@CanExecute
@@ -47,7 +48,7 @@ public class CopyPartHandler {
 		newPart.setLabel(PartUtils.createPartLabel(part));
 		newPart.setElementId(PartUtils.createElementId(part));
 		newPart.setContributionURI(part.getContributionURI());
-		// newPart.setCloseable(part.isCloseable());
+		newPart.setCloseable(part.isCloseable());
 		// NB должен быть задан parent, чтобы закладку добавить на туже сторону
 		newPart.setParent(part.getParent());
 

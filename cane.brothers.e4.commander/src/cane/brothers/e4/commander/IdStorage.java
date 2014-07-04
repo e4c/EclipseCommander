@@ -11,7 +11,9 @@ public final class IdStorage {
 	//public static final String PART_SASH_CONTAINER_ID = "cane.brothers.e4.commander.partsashcontainer.main"
 	//		.intern();
 	
-
+	/** perspective id */
+	public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";	
+	
 	/** part descriptor id  */
 	public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic"
 			.intern();

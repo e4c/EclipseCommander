@@ -1,7 +1,11 @@
 package cane.brothers.e4.commander.handlers;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
@@ -17,14 +21,18 @@ import cane.brothers.e4.commander.PartUtils;
  * 
  */
 public class CopyPartDescriptorHandler {
-
+	@Inject
+	EPartService partService;
+	
 	@Execute
-	public void execute(EPartService partService) {
+	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
+		//public void execute(EPartService partService) {
 		System.out.println((this.getClass().getSimpleName() + " called"));
 
 		// активная вкладка используется только для того,
 		// чтобы определить id и имя для новой вкладки.
-		MPart activePart = partService.getActivePart();
+		MPart activePart = part;
+		//MPart activePart = partService.getActivePart();
 		// partService.addPartListener(listener);
 
 		// create a new Part based on a PartDescriptor
@@ -37,7 +45,7 @@ public class CopyPartDescriptorHandler {
 		// in the application model,
 		// then the provided part will be shown
 		// and returned
-		newPart = partService.showPart(newPart, PartState.ACTIVATE);
+		newPart = partService.showPart(newPart, PartState.VISIBLE);
 	}
 
 	private MPart copyPart(MPart newPart, MPart part) {
@@ -45,6 +53,7 @@ public class CopyPartDescriptorHandler {
 
 			newPart.setLabel(PartUtils.createPartLabel(part));
 			newPart.setElementId(PartUtils.createElementId(part));
+			newPart.setCloseable(part.isCloseable());
 
 			/**
 			 * Задавая ContributionURI мы, тем самым, определяем id view part,
