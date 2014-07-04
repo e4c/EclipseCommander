@@ -1,4 +1,4 @@
-package cane.brothers.e4.commander.handlers;
+package cane.brothers.e4.commander.test;
 
 import javax.inject.Inject;
 import javax.inject.Named;

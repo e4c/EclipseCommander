@@ -1,5 +1,5 @@
  
-package cane.brothers.e4.commander.parts;
+package cane.brothers.e4.commander.test;
 
 import javax.annotation.PostConstruct;
 

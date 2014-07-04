@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * File: CopyPartDescriptorHandler.java
+ * 
+ * Date: Jul 5, 2014
+ * Author: Mikhail Niedre
+ * 
+ * Copyright (c) 2014 Original authors and others.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
+ * 
+ * Contributors:
+ * Original authors and others - initial API and implementation
+ ******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
 import javax.inject.Inject;
@@ -23,22 +39,23 @@ import cane.brothers.e4.commander.PartUtils;
 public class CopyPartDescriptorHandler {
 	@Inject
 	EPartService partService;
-	
+
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
-		//public void execute(EPartService partService) {
+		// public void execute(EPartService partService) {
 		System.out.println((this.getClass().getSimpleName() + " called"));
 
 		// активная вкладка используется только для того,
 		// чтобы определить id и имя для новой вкладки.
 		MPart activePart = part;
-		//MPart activePart = partService.getActivePart();
+		// MPart activePart = partService.getActivePart();
 		// partService.addPartListener(listener);
 
 		// create a new Part based on a PartDescriptor
 		// in the application model
 		// assume the ID is used for the PartDescriptor
-		MPart newPart = partService.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+		MPart newPart = partService
+		        .createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
 		newPart = copyPart(newPart, activePart);
 
 		// If multiple parts of this type are now allowed
@@ -63,16 +80,15 @@ public class CopyPartDescriptorHandler {
 			// другой вариант - определить для PartDescriptor id - свою вьюху
 			// newPart.setContributionURI(part.getContributionURI());
 
-			if(part.getParent() != null) {
-				System.out.println("Parent id: " + part.getParent().getElementId());
+			if (part.getParent() != null) {
+				System.out.println("Parent id: "
+				        + part.getParent().getElementId());
 			}
-			
-			
+
 			// newPart.setCloseable(part.isCloseable());
 			// Добавляем новую вкладку на туже сторону
 			// 1.
 			newPart.setParent(part.getParent());
-			
 
 			// 2.
 			// MElementContainer<MUIElement> container = part.getParent();
