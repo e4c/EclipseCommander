@@ -1,5 +1,5 @@
 /*******************************************************************************
- * File: CopyPartDescriptorHandler.java
+ * File: DuplicatePartHandler.java
  * 
  * Date: Jul 5, 2014
  * Author: Mikhail Niedre
@@ -33,23 +33,17 @@ import cane.brothers.e4.commander.PartUtils;
  * 
  * @see PartDescriptor
  * 
- * @author cane
- * 
  */
-public class CopyPartDescriptorHandler {
+public class DuplicatePartHandler {
 	@Inject
 	EPartService partService;
 
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
-		// public void execute(EPartService partService) {
+	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
 		System.out.println((this.getClass().getSimpleName() + " called"));
 
 		// активная вкладка используется только для того,
 		// чтобы определить id и имя для новой вкладки.
-		MPart activePart = part;
-		// MPart activePart = partService.getActivePart();
-		// partService.addPartListener(listener);
 
 		// create a new Part based on a PartDescriptor
 		// in the application model
@@ -63,6 +57,9 @@ public class CopyPartDescriptorHandler {
 		// then the provided part will be shown
 		// and returned
 		newPart = partService.showPart(newPart, PartState.VISIBLE);
+
+		// текущая вкладка остается активной
+		partService.showPart(activePart, PartState.ACTIVATE);
 	}
 
 	private MPart copyPart(MPart newPart, MPart part) {
@@ -70,7 +67,10 @@ public class CopyPartDescriptorHandler {
 
 			newPart.setLabel(PartUtils.createPartLabel(part));
 			newPart.setElementId(PartUtils.createElementId(part));
-			newPart.setCloseable(part.isCloseable());
+			// newPart.setCloseable(part.isCloseable());
+
+			// копируется также active tag
+			newPart.getTags().addAll(part.getTags());
 
 			/**
 			 * Задавая ContributionURI мы, тем самым, определяем id view part,
