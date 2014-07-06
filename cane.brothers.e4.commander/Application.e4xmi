@@ -20,6 +20,7 @@
     <mainMenu xmi:id="_irOW0FmoEeOT-PJJdUfiZQ" elementId="menu:org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_u3JhIFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.menu.main" label="Main">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_mhF1IFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handledmenuitem.exit" label="exit" command="_OqxgQFmoEeOT-PJJdUfiZQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_UIEUYARXEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.handledmenuitem.preferences" label="preferences" command="_eFElgARWEeSRJPX1RYcCyQ"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="__gJAYARREeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.menu.test" label="Test">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_N0J9IFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handledmenuitem.test" label="test" command="_1mZAUFmoEeOT-PJJdUfiZQ"/>
@@ -41,6 +42,7 @@
   <handlers xmi:id="_d3vVgFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.handlers.CloseActivePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CloseActivePartHandler" command="_Y5AKoFmvEeOT-PJJdUfiZQ"/>
   <handlers xmi:id="_tdrV8P9uEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handlers.DuplicatePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.DuplicatePartHandler" command="_272gkP9uEeOZGL8AHW3wCQ"/>
   <handlers xmi:id="_-VPtAP-PEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handlers.CopyPartToOppositeHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CopyPartHandler" command="_umqtkP-KEeOZGL8AHW3wCQ"/>
+  <handlers xmi:id="_A3XDQARYEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.handler.PreferencesHandler" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_eFElgARWEeSRJPX1RYcCyQ"/>
   <bindingTables xmi:id="_mKUpMFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.bindingtable.0" bindingContext="_s7WREFnPEeOT-PJJdUfiZQ">
     <bindings xmi:id="_wzTaEFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T" command="_272gkP9uEeOZGL8AHW3wCQ"/>
     <bindings xmi:id="_R7EHAAO3EeSxOp60xrSWbA" elementId="cane.brothers.e4.commander.keybinding.copyTabToOtherPanel" keySequence="M1+M2+T" command="_umqtkP-KEeOZGL8AHW3wCQ"/>
@@ -53,11 +55,12 @@
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <commands xmi:id="_OqxgQFmoEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.file.exit" commandName="command.exit"/>
-  <commands xmi:id="_1mZAUFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.test" commandName="command.test"/>
+  <commands xmi:id="_OqxgQFmoEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.file.exit" commandName="command.exit" category="_lKWmIARWEeSRJPX1RYcCyQ"/>
+  <commands xmi:id="_1mZAUFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.test" commandName="command.test" category="_z-hlEARWEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_Y5AKoFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.closePart" commandName="command.closePart" description="close active tab" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_272gkP9uEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.duplicatePart" commandName="command.duplicatePart" description="duplicate this tab" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_umqtkP-KEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.copyPart" commandName="command.copyPart" description="copy tab to other panel" category="_6QycEARQEeSRJPX1RYcCyQ"/>
+  <commands xmi:id="_eFElgARWEeSRJPX1RYcCyQ" elementId="org.eclipse.ui.window.preferences" commandName="command.preferences" description="open preferences" category="_lKWmIARWEeSRJPX1RYcCyQ"/>
   <addons xmi:id="_C6-GsVmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_C6-GslmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_C6-Gs1mnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -66,4 +69,6 @@
   <addons xmi:id="_C6-GtlmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
   <addons xmi:id="_C6-Gt1mnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <categories xmi:id="_6QycEARQEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.category.tabs" name="Tabs" description="Tabs category"/>
+  <categories xmi:id="_lKWmIARWEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.category.file" name="File" description="File category"/>
+  <categories xmi:id="_z-hlEARWEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.category.test" name="Test" description="Test category"/>
 </application:Application>

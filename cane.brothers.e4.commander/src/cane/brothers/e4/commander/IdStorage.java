@@ -26,6 +26,9 @@ public final class IdStorage {
 	// "cane.brothers.e4.commander.partsashcontainer.main"
 	// .intern();
 
+	/** plugin id */
+	public static final String PLUGIN_ID = "cane.brothers.e4.commander";
+
 	/** perspective id */
 	public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";
 

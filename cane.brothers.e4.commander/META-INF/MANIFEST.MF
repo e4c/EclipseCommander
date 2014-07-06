@@ -5,11 +5,16 @@ Bundle-SymbolicName: cane.brothers.e4.commander;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: cane
 Require-Bundle: javax.inject;bundle-version="1.0.0",
- org.eclipse.jface;bundle-version="3.8.101",
- org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1", 
+ org.eclipse.jface,
+ org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1",
  org.eclipse.e4.ui.services;bundle-version="0.10.2",
  org.eclipse.e4.ui.workbench;bundle-version="0.10.3",
+ org.eclipse.e4.core.commands;bundle-version="0.10.2",
  org.eclipse.e4.core.di;bundle-version="1.2.0",
- javax.annotation
+ org.eclipse.e4.core.di.extensions;bundle-version="0.11.100",
+ javax.annotation,
+ com.opcoach.e4.preferences;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: javax.inject
+Import-Package: javax.inject,
+ org.eclipse.core.runtime.preferences;version="3.3.0",
+ org.osgi.service.prefs;version="1.1.1"

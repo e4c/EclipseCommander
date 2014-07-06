@@ -25,8 +25,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 /**
- * 
- * TODO
+ * Close active tab handler.
  * 
  */
 public class CloseActivePartHandler {
