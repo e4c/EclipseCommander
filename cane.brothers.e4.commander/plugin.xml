@@ -26,7 +26,30 @@
                name="windowImages"
                value="icons/application_side_tree.png">
          </property>
+         <property
+               name="preferenceCustomization"
+               value="preferences/plugin_customization.ini">
+         </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="cane.brothers.e4.commander.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferencePages">
+      <page
+            class="cane.brothers.e4.commander.preferences.pages.GeneralPreferencePage"
+            id="cane.brothers.e4.commander.preferences.GeneralPreferencePage"
+            name="General Preferences">
+      </page>
+      <page
+            class="cane.brothers.e4.commander.preferences.pages.TabsPreferencePage"
+            id="cane.brothers.e4.commander.preferences.TabsPreferencePage"
+            name="Tabs Preferences">
+      </page>
    </extension>
 
 
