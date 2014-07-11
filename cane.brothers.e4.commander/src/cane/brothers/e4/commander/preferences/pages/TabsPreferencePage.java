@@ -34,7 +34,7 @@ public class TabsPreferencePage extends FieldEditorPreferencePage {
 	public TabsPreferencePage() {
 		super(GRID);
 		// setTitle("Tabs Settings");
-		// setDescription("A demonstration of a preference page implementation");
+		setDescription("There are preferences present on this page to show tab's properies.");
 	}
 
 	/*
