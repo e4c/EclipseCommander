@@ -31,7 +31,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-public class SamplePart {
+public class EFSPart {
 
 	private Text txtInput;
 	private TableViewer tableViewer;
@@ -46,7 +46,7 @@ public class SamplePart {
 		parent.setLayout(new GridLayout(1, false));
 
 		txtInput = new Text(parent, SWT.BORDER);
-		txtInput.setMessage("Enter text to mark part as dirty");
+		txtInput.setMessage("Enter path to see efs properties");
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
