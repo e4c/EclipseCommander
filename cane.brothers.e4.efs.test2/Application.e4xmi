@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_RF500AlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ide.application" bindingContexts="_RF502QlCEeSAxpaU9UqfZA">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_RF500QlCEeSAxpaU9UqfZA" label="cane.brothers.e4.efs.test2" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_RF6b8wlCEeSAxpaU9UqfZA">
+      <children xsi:type="advanced:Perspective" xmi:id="_RF7C8AlCEeSAxpaU9UqfZA">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_RF7C8QlCEeSAxpaU9UqfZA">
+          <children xsi:type="basic:PartStack" xmi:id="_RF7C8glCEeSAxpaU9UqfZA">
+            <children xsi:type="basic:Part" xmi:id="_RF7C8wlCEeSAxpaU9UqfZA" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.parts.SamplePart" label="Sample Part"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_RF6b7AlCEeSAxpaU9UqfZA" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_RF6b7QlCEeSAxpaU9UqfZA" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RF6b7glCEeSAxpaU9UqfZA" label="Open" iconURI="platform:/plugin/cane.brothers.e4.efs.test2/icons/sample.png" command="_RF6b4wlCEeSAxpaU9UqfZA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RF6b7wlCEeSAxpaU9UqfZA" label="Save" iconURI="platform:/plugin/cane.brothers.e4.efs.test2/icons/save_edit.png" command="_RF6b5glCEeSAxpaU9UqfZA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RF6b8AlCEeSAxpaU9UqfZA" label="Quit" command="_RF503AlCEeSAxpaU9UqfZA"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_RF6b8QlCEeSAxpaU9UqfZA" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RF6b8glCEeSAxpaU9UqfZA" label="About" command="_RF6b6QlCEeSAxpaU9UqfZA"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_RF7C9AlCEeSAxpaU9UqfZA">
+      <children xsi:type="menu:ToolBar" xmi:id="_RF7C9QlCEeSAxpaU9UqfZA" elementId="toolbar:org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_RF7C9glCEeSAxpaU9UqfZA" iconURI="platform:/plugin/cane.brothers.e4.efs.test2/icons/sample.png" command="_RF6b4wlCEeSAxpaU9UqfZA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_RF7C9wlCEeSAxpaU9UqfZA" iconURI="platform:/plugin/cane.brothers.e4.efs.test2/icons/save_edit.png" command="_RF6b5glCEeSAxpaU9UqfZA"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_RF6b4AlCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.handler.quitCommand" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.handlers.QuitHandler" command="_RF503AlCEeSAxpaU9UqfZA"/>
+  <handlers xmi:id="_RF6b5AlCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.handler.openCommand" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.handlers.OpenHandler" command="_RF6b4wlCEeSAxpaU9UqfZA"/>
+  <handlers xmi:id="_RF6b5wlCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.handler.saveCommand" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.handlers.SaveHandler" command="_RF6b5glCEeSAxpaU9UqfZA"/>
+  <handlers xmi:id="_RF6b6glCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.handler.aboutCommand" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.handlers.AboutHandler" command="_RF6b6QlCEeSAxpaU9UqfZA"/>
+  <bindingTables xmi:id="_RF6b4QlCEeSAxpaU9UqfZA" bindingContext="_RF502QlCEeSAxpaU9UqfZA">
+    <bindings xmi:id="_RF6b4glCEeSAxpaU9UqfZA" keySequence="M1+Q" command="_RF503AlCEeSAxpaU9UqfZA"/>
+    <bindings xmi:id="_RF6b5QlCEeSAxpaU9UqfZA" keySequence="M1+O" command="_RF6b4wlCEeSAxpaU9UqfZA"/>
+    <bindings xmi:id="_RF6b6AlCEeSAxpaU9UqfZA" keySequence="M1+S" command="_RF6b5glCEeSAxpaU9UqfZA"/>
+    <bindings xmi:id="_RF6b6wlCEeSAxpaU9UqfZA" keySequence="M1+A" command="_RF6b6QlCEeSAxpaU9UqfZA"/>
+  </bindingTables>
+  <rootContext xmi:id="_RF502QlCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_RF502glCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_RF502wlCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_RF503AlCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_RF6b4wlCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.open" commandName="openCommand"/>
+  <commands xmi:id="_RF6b5glCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_RF6b6QlCEeSAxpaU9UqfZA" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <addons xmi:id="_RF500glCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_RF500wlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_RF501AlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_RF501QlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_RF501glCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_RF501wlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_RF502AlCEeSAxpaU9UqfZA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
