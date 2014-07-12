@@ -13,7 +13,7 @@
          </property>
          <property
                name="appName"
-               value="cane.brothers.e4.efs.test2">
+               value="File API">
          </property>
       </product>
    </extension>
