@@ -5,10 +5,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="cane.brothers.e4.commander">
+            name="EclipseCommander">
          <property
                name="appName"
-               value="cane.brothers.e4.commander">
+               value="EclipseCommander">
          </property>
          <property
                name="applicationCSS"
