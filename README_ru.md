@@ -1,7 +1,7 @@
 EclipseCommander
 ================
 
-> This is a Russian version, see [README.MD](README.MD) for English.
+> This is a Russian version, see [README.md](README.md) for English.
 
 
 Eclipse Commander
@@ -14,7 +14,7 @@ Eclipse Commander
 --------
 
  * Создать файловый менеджер на платформе e4 (в прошлом RCP).
- * Применить знания Java NIO.2, полученные при подготовке к ![OCAJP7](http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=652&get_params=p_exam_id:1Z0-804).
+ * Применить знания Java NIO.2, полученные при подготовке к ![OCAJP7](http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=5001&get_params=p_exam_id:1Z0-804).
 
 
 
@@ -38,7 +38,7 @@ Eclipse Commander
 
 Вы можете поделитесь своими идеями, задать вопрос или сообщить об ошибке одним из способов:
 
-- [e-mail](mailto:webcane@ya.ru)
+- [e-mail](mailto:webcane@ya.ru?subject=EclipseCommander)
 - [Метод для гиков](https://github.com/webcane/EclipseCommander/issues)
 
 
