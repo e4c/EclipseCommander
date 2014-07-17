@@ -79,6 +79,7 @@ public class NIO2Part {
 
 						if (dir != null) {
 							for (Path filename : dir) {
+								list.add("  " + filename);
 								System.out.println(filename);
 							}
 						}

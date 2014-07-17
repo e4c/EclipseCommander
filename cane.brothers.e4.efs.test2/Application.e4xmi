@@ -7,6 +7,7 @@
           <children xsi:type="basic:PartStack" xmi:id="_RF7C8glCEeSAxpaU9UqfZA">
             <children xsi:type="basic:Part" xmi:id="_RF7C8wlCEeSAxpaU9UqfZA" elementId="cane.brothers.e4.efs.test2.part.efs" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.parts.EFSPart" label="EFS"/>
             <children xsi:type="basic:Part" xmi:id="_MCDFgAmnEeS00OSm_6J6tA" elementId="cane.brothers.e4.efs.test2.part.nio2" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.parts.NIO2Part" label="NIO2"/>
+            <children xsi:type="basic:Part" xmi:id="_kXcKAA3vEeSrYNig9XwNIQ" elementId="cane.brothers.e4.efs.test2.part.nio2.table" contributionURI="bundleclass://cane.brothers.e4.efs.test2/cane.brothers.e4.efs.test2.parts.NIO2TablePart" label="NIO2.Table"/>
           </children>
         </children>
       </children>
