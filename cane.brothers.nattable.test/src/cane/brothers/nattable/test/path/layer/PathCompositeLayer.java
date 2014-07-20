@@ -7,14 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.nebula.widgets.nattable.data.IColumnPropertyAccessor;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.grid.GridRegion;
-import org.eclipse.nebula.widgets.nattable.grid.data.DefaultColumnHeaderDataProvider;
 import org.eclipse.nebula.widgets.nattable.grid.layer.ColumnHeaderLayer;
 import org.eclipse.nebula.widgets.nattable.layer.CompositeLayer;
 import org.eclipse.nebula.widgets.nattable.layer.DataLayer;
@@ -31,7 +30,7 @@ public class PathCompositeLayer extends CompositeLayer  {
 	private Path rootPath;
 	private List<PathFixture> contents;
 	
-	private final Map<String, String> propertyToLabelMap = new HashMap<String,String>();
+	private final Map<String, String> propertyToLabelMap = new LinkedHashMap<String,String>();
 	
 
     private final ListDataProvider<PathFixture> bodyDataProvider;
