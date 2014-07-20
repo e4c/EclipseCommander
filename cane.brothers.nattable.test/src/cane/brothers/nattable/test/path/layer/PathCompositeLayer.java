@@ -52,6 +52,12 @@ public class PathCompositeLayer extends CompositeLayer  {
 		bodyDataProvider = new ListDataProvider<PathFixture>(this.contents, columnPropertyAccessor);
 		
 		final DataLayer bodyDataLayer = new DataLayer(bodyDataProvider);
+		
+		// set columns fixed percentage sizing
+		bodyDataLayer.setColumnWidthPercentageByPosition(0, 75);
+		bodyDataLayer.setColumnWidthPercentageByPosition(1, 15);
+		bodyDataLayer.setColumnWidthPercentageByPosition(2, 10);
+		
 		final SelectionLayer selectionLayer = new SelectionLayer(bodyDataLayer);
 		ViewportLayer viewportLayer = new ViewportLayer(selectionLayer);
 
