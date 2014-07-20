@@ -10,5 +10,6 @@
 			<attribute name="source_encoding" value="UTF-8"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/IDE/nattable/E110/org.eclipse.jface_3.9.1.v20130725-1141.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
