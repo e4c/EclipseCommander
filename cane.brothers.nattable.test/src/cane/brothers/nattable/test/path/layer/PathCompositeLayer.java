@@ -18,12 +18,17 @@ import org.eclipse.nebula.widgets.nattable.grid.layer.ColumnHeaderLayer;
 import org.eclipse.nebula.widgets.nattable.layer.CompositeLayer;
 import org.eclipse.nebula.widgets.nattable.layer.DataLayer;
 import org.eclipse.nebula.widgets.nattable.layer.ILayer;
+import org.eclipse.nebula.widgets.nattable.selection.RowSelectionModel;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
+import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBindings;
+import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 
+import cane.brothers.nattable.test.data.SimpleColumnHeaderDataProvider;
 import cane.brothers.nattable.test.path.data.PathColumnPropertyAccessor;
 import cane.brothers.nattable.test.path.data.PathFixture;
-import cane.brothers.nattable.test.path.data.SimpleColumnHeaderDataProvider;
+import cane.brothers.nattable.test.path.data.PathFixtureRowIdAccessor;
+
 
 public class PathCompositeLayer extends CompositeLayer  {
 
@@ -53,12 +58,24 @@ public class PathCompositeLayer extends CompositeLayer  {
 		final DataLayer bodyDataLayer = new DataLayer(bodyDataProvider);
 		
 		// set columns fixed percentage sizing
-		bodyDataLayer.setColumnWidthPercentageByPosition(0, 75);
-		bodyDataLayer.setColumnWidthPercentageByPosition(1, 15);
-		bodyDataLayer.setColumnWidthPercentageByPosition(2, 10);
+		bodyDataLayer.setColumnWidthPercentageByPosition(0, 85);
+		bodyDataLayer.setColumnWidthPercentageByPosition(1, 10);
+		bodyDataLayer.setColumnWidthPercentageByPosition(2, 5);
 		
 		final SelectionLayer selectionLayer = new SelectionLayer(bodyDataLayer);
 		ViewportLayer viewportLayer = new ViewportLayer(selectionLayer);
+
+		//use a RowSelectionModel that will perform row selections and is able to identify a row via unique ID
+		selectionLayer.setSelectionModel(new RowSelectionModel<PathFixture>(selectionLayer, bodyDataProvider, new PathFixtureRowIdAccessor(this.contents)));
+		
+		//register different selection move command handler that always moves by row
+		selectionLayer.addConfiguration(new RowOnlySelectionConfiguration<PathFixture>());
+		
+		//register selection bindings that will perform row selections instead of cell selections
+		//registering the bindings on a layer that is above the SelectionLayer will consume the
+		//commands before they are handled by the SelectionLayer
+		viewportLayer.addConfiguration(new RowOnlySelectionBindings());
+		
 
 		ILayer columnHeaderLayer = new ColumnHeaderLayer(
 				new DataLayer(new SimpleColumnHeaderDataProvider(propertyToLabelMap)),
