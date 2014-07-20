@@ -1,4 +1,4 @@
-package cane.brothers.nattable.test.path.data;
+package cane.brothers.nattable.test.data;
 
 import java.util.ArrayList;
 import java.util.List;
