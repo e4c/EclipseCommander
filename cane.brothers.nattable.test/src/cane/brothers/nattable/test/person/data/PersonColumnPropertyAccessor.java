@@ -45,8 +45,7 @@ public class PersonColumnPropertyAccessor implements IColumnPropertyAccessor<Per
 
 	@Override
 	public int getColumnIndex(String propertyName) {
-		propertyNames.indexOf(propertyName);
-		return 0;
+		return propertyNames.indexOf(propertyName);
 	}
 
 	@Override
