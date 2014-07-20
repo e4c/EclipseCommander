@@ -28,7 +28,9 @@ public class PathNatTableTest {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setText("Path NatTable Test");
-		shell.setLayout(new GridLayout());
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.marginWidth = 0;
+		shell.setLayout(gridLayout);
 
 
 		createContents(shell);
