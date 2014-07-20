@@ -3,15 +3,16 @@ package cane.brothers.nattable.test.path;
 import java.nio.file.Paths;
 
 import org.eclipse.jface.layout.GridDataFactory;
-
-
 import org.eclipse.nebula.widgets.nattable.NatTable;
-import org.eclipse.nebula.widgets.nattable.util.GUIHelper;
+import org.eclipse.nebula.widgets.nattable.painter.NatTableBorderOverlayPainter;
+import org.eclipse.nebula.widgets.nattable.style.theme.ModernNatTableThemeConfiguration;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import cane.brothers.nattable.test.path.config.ActiveTableStyleConfiguration;
+import cane.brothers.nattable.test.path.config.PathStyleConfiguration;
 import cane.brothers.nattable.test.path.layer.PathCompositeLayer;
 
 public class PathNatTableTest {
@@ -52,9 +53,19 @@ public class PathNatTableTest {
 	 */
 	private void createContents(Composite parent) {
 		
-		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(Paths.get("C:\\Cane")));
+		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(Paths.get("C:\\Cane")), false);
 		
-		natTable.setBackground(GUIHelper.COLOR_WHITE);
+		//natTable.setBackground(GUIHelper.COLOR_WHITE);
+		natTable.addConfiguration(new PathStyleConfiguration());
+		//natTable.addConfiguration(new ActiveTableStyleConfiguration());
+		natTable.configure();
+		
+		//set the modern theme
+		natTable.setTheme(new ModernNatTableThemeConfiguration());
+		
+		//add overlay painter for full borders
+		//natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
+
 		
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(natTable);
 
