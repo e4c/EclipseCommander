@@ -4,10 +4,10 @@ EclipseCommander
 > This is a Russian version, see [README.md][4] for English.
 
 
-Eclipse Commander
+Описание
 -------
 
-Исходные коды [файлового менеджера][8] под названием Eclipse Commander, написанного на платформе Eclipse [e4][9].
+Исходные коды [файлового менеджера][8] под названием _Eclipse Commander_, построенного на платформе Eclipse [e4][9].
 
 
 Цели создания
@@ -18,6 +18,11 @@ Eclipse Commander
  * Применить знания [NatTable][7].
 
 
+Функциональные возможности
+--------
+
+ * использование разных стилей выдления.
+ 
 
 Структура плагинов
 --------
@@ -29,7 +34,7 @@ Eclipse Commander
 Используемые сторонние плагины
 --------
 
-- [e4Preferences][5] - свойства e4 в диалоговом окне как для RCP.
+- [e4Preferences][5] - extention point to manage e4 preferences in preference dialog like in RCP.
 - [Nebula NatTable][7] - высокоэффективная, высокопроизводительная и, в тоже время, гибкая таблица данных на SWT с динамичным дизайном, предназначенная для обработки больших наборов данных в реальном времени.
 
 
