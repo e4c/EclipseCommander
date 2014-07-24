@@ -47,7 +47,7 @@ Eclipse Commander
 Лицензия
 -------
 
-Разрабатывалось под лицензией [Eclipse Public License (EPL) v1.0][3]
+Разрабатывается под лицензией [Eclipse Public License (EPL) v1.0][3]
 
 [1]: cane.brothers.e4.commander
 [2]: cane.brothers.e4.target
