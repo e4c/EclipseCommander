@@ -7,7 +7,7 @@ EclipseCommander
 Eclipse Commander
 -------
 
-Исходные коды приложения под названием Eclipse Commander.
+Исходные коды [файлового менеджера][8] под названием Eclipse Commander, написанного на платформе Eclipse [e4][9].
 
 
 Цели создания
@@ -56,3 +56,5 @@ Eclipse Commander
 [5]: https://github.com/opcoach/e4Preferences
 [6]: http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=5001&get_params=p_exam_id:1Z0-804
 [7]: http://www.eclipse.org/nattable
+[8]: http://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D1%8B%D0%B9_%D0%BC%D0%B5%D0%BD%D0%B5%D0%B4%D0%B6%D0%B5%D1%80
+[9]: http://www.eclipse.org/e4/
