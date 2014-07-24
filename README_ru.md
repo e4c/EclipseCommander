@@ -15,6 +15,7 @@ Eclipse Commander
 
  * Создать файловый менеджер на платформе e4 (в прошлом RCP).
  * Применить знания Java NIO.2, полученные при подготовке к [OCAJP7][6].
+ * Применить знания [NatTable][7].
 
 
 
@@ -53,3 +54,4 @@ Eclipse Commander
 [4]: README.md
 [5]: https://github.com/opcoach/e4Preferences
 [6]: http://education.oracle.com/pls/web_prod-plq-dad/db_pages.getpage?page_id=5001&get_params=p_exam_id:1Z0-804
+[7]: http://www.eclipse.org/nattable
