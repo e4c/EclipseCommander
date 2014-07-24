@@ -1,12 +1,11 @@
 EclipseCommander
 ================
-> This is a English version, see [README_ru.md][4] for Russian.
 
 
 Desciption
 -------
 
-Open-source [file manager][8] named _Eclipse Commander_ built on the Eclipse 4 application platform.
+_Eclipse Commander_ is open-source [file manager][8] built on the [Eclipse 4][9] application platform.
 
 
 Targets
@@ -50,7 +49,7 @@ You can share Your ideas, ask a question or inform about errors using one of the
 
 License
 -------
-Developed under license [Eclipse Public License (EPL) v1.0][3]
+Developed under [Eclipse Public License (EPL) v1.0][3]
 
 [1]: cane.brothers.e4.commander
 [2]: cane.brothers.e4.target
