@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import cane.brothers.nattable.test.path.config.ActiveTableStyleConfiguration;
 import cane.brothers.nattable.test.path.config.PathStyleConfiguration;
 import cane.brothers.nattable.test.path.layer.PathCompositeLayer;
+import cane.brothers.nattable.test.path.style.PathFirstThemeConfiguration;
 
 public class PathNatTableTest {
 
@@ -56,12 +57,12 @@ public class PathNatTableTest {
 		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(Paths.get("C:\\Cane")), false);
 		
 		//natTable.setBackground(GUIHelper.COLOR_WHITE);
-		natTable.addConfiguration(new PathStyleConfiguration());
+		////natTable.addConfiguration(new PathStyleConfiguration());
 		//natTable.addConfiguration(new ActiveTableStyleConfiguration());
 		natTable.configure();
 		
 		//set the modern theme
-		natTable.setTheme(new ModernNatTableThemeConfiguration());
+		natTable.setTheme(new PathFirstThemeConfiguration());
 		
 		//add overlay painter for full borders
 		//natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
