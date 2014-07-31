@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+<stringAttribute key="bad_container_name" value="/cane.brothers.nattable/n"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="/usr/bin/java"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-d64&#10;-XstartOnFirstThread&#10;-classpath .:NatTableExamples-1.1.0.jar:org.eclipse.swt.cocoa.macosx.x86_64_3.103.0.v20140605-2012.jar&#10;org.eclipse.nebula.widgets.nattable.examples.NatTableExamples"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="/Users/icane/java/nattable"/>
+</launchConfiguration>
