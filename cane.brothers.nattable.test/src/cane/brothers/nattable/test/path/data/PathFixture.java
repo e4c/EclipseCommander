@@ -25,7 +25,8 @@ public class PathFixture {
 			this.size = 0;
 			// TODO ex
 		}
-		this.attributes = PathUtils.getDosAttributesString(path);
+		
+		this.attributes = PathUtils.getAttributesString(path);
 	}
 
 	public String getName() {

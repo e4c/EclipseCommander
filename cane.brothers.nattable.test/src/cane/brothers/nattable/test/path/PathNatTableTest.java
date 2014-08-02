@@ -1,5 +1,6 @@
 package cane.brothers.nattable.test.path;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -53,11 +54,11 @@ public class PathNatTableTest {
 	 *            the shell
 	 */
 	private void createContents(Composite parent) {
-		
-		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(Paths.get("C:\\Cane")), false);
+		Path homePath = Paths.get(System.getenv().get("HOME")); 
+		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(homePath), false);
 		
 		//natTable.setBackground(GUIHelper.COLOR_WHITE);
-		////natTable.addConfiguration(new PathStyleConfiguration());
+		//natTable.addConfiguration(new PathStyleConfiguration());
 		//natTable.addConfiguration(new ActiveTableStyleConfiguration());
 		natTable.configure();
 		
@@ -69,7 +70,6 @@ public class PathNatTableTest {
 
 		
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(natTable);
-
 	}
 
 }
