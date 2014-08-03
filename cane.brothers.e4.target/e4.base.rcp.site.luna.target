@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="e4 Luna Base RCP" sequenceNumber="3">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rcp.sdk.id" version="4.4.0.I20140606-1215"/>
+<repository location="http://download.eclipse.org/releases/luna/"/>
+</location>
+</locations>
+</target>
