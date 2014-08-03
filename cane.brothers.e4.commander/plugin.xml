@@ -23,10 +23,6 @@
                value="true">
          </property>
          <property
-               name="windowImages"
-               value="icons/application_side_tree.png">
-         </property>
-         <property
                name="preferenceCustomization"
                value="preferences/plugin_customization.ini">
          </property>

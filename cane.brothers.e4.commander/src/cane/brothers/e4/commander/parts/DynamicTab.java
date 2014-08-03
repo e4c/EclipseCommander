@@ -16,15 +16,21 @@
  ******************************************************************************/
 package cane.brothers.e4.commander.parts;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+
+import cane.brothers.e4.commander.pathTable.PathNatTable;
 
 /**
  * Dynamic Tab
@@ -41,9 +47,14 @@ public class DynamicTab implements ITabNameId {
 	/**
 	 * GUI stuff
 	 */
-	private Label label;
+	//private Label label;
+	
+	private PathNatTable table;
+	
 	private final Color bgColor = Display.getCurrent().getSystemColor(
 	        SWT.COLOR_WHITE);
+	
+	
 
 	@Inject
 	public DynamicTab() {
@@ -54,10 +65,19 @@ public class DynamicTab implements ITabNameId {
 	public void createPartControl(Composite parent) {
 
 		parent.setBackground(bgColor);
-		parent.setLayout(new GridLayout());
+		
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.marginWidth = 0;
+		parent.setLayout(gridLayout);
+		
+		Path homePath = Paths.get(System.getenv().get("HOME")); 
+		table = new PathNatTable(parent, homePath);
+		table.setBackground(bgColor);
 
-		label = new Label(parent, SWT.NONE);
-		label.setText("Dynamic tab");
+//		label = new Label(parent, SWT.NONE);
+//		label.setText("Dynamic tab");
+		
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
 	}
 
 	@Override
