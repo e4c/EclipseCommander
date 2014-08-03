@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="e4 Luna Base RCP" sequenceNumber="3">
+<?pde version="3.8"?><target includeMode="feature" name="e4 Luna Base RCP" sequenceNumber="14">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.rcp.sdk.id" version="4.4.0.I20140606-1215"/>
 <repository location="http://download.eclipse.org/releases/luna/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
+<unit id="ca.odell.glazedlists.source" version="1.9.0.v201303080712"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group" version="1.1.0.201405012245"/>
+<unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="1.1.0.201405012245"/>
+<repository location="http://download.eclipse.org/nattable/releases/1.1.0/repository/"/>
+</location>
 </locations>
+<environment>
+<os>macosx</os>
+<ws>cocoa</ws>
+<arch>x86_64</arch>
+</environment>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7 [1.7.0_65]"/>
 </target>
