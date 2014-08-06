@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_C6-GsFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_D4NyEFmnEeOT-PJJdUfiZQ" elementId="" label="ecommander" width="640" height="480">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_D4NyEFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.trimmedwindow" label="ecommander" width="640" height="480">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_J7zFIFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.perspectivestack.main">
       <children xsi:type="advanced:Perspective" xmi:id="_OHkiAFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.perspective.main" label="main perspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_SJW8cFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partsashcontainer.main" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_VfDF4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.left">
-            <children xsi:type="basic:Part" xmi:id="_aMDAgFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic.1" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab" label="left tab 1" closeable="true">
-              <toolbar xmi:id="_IyqdYFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.toolbar.0"/>
-            </children>
-          </children>
-          <children xsi:type="basic:PartStack" xmi:id="_ZDCKAFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.right">
-            <children xsi:type="basic:Part" xmi:id="_fni_4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic.2" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab" label="right side" closeable="true">
-              <toolbar xmi:id="_Kkg1gFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.toolbar.1"/>
-            </children>
-          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_VfDF4FmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.left"/>
+          <children xsi:type="basic:PartStack" xmi:id="_ZDCKAFmnEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.partstack.right"/>
         </children>
       </children>
     </children>
@@ -51,6 +43,7 @@
   </bindingTables>
   <rootContext xmi:id="_s7WREFnPEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
   <descriptors xmi:id="_LxzbwP9vEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic" label="dynamic part" allowMultiple="true" closeable="true" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab">
+    <persistedState key="rootPath"/>
     <menus xmi:id="_epOL8APIEeSqlIblLCtLJA" elementId="cane.brothers.e4.commander.partDescriptor.menu" label="tab menu">
       <tags>ViewMenu</tags>
     </menus>

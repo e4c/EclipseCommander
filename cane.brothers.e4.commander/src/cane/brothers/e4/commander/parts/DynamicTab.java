@@ -22,72 +22,63 @@ import java.nio.file.Paths;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 
 /**
- * Dynamic Tab
+ * Dynamic Tab. GUI class of part descriptor implementation.
  * 
  */
-public class DynamicTab implements ITabNameId {
-
-	public static final String DYNAMIC_TAB_ID_PREF = ".dynamictab.".intern(); //$NON-NLS-1$
-	private static int tabsId = 1;
-	private static final String tabName = "Dynamic tab ".intern(); //$NON-NLS-1$
-
-	private int currentTabId = -1;
+public class DynamicTab {
 
 	/**
 	 * GUI stuff
 	 */
-	//private Label label;
-	
 	private PathNatTable table;
-	
-	private final Color bgColor = Display.getCurrent().getSystemColor(
-	        SWT.COLOR_WHITE);
-	
-	
+
+	private Path rootPath;
+
+	private final Color bgColor = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
+
+	@Inject
+	IEclipseContext context;
 
 	@Inject
 	public DynamicTab() {
-		currentTabId = ++tabsId;
 	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 
 		parent.setBackground(bgColor);
-		
+
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.marginWidth = 0;
 		parent.setLayout(gridLayout);
-		
-		Path homePath = Paths.get(System.getenv().get("HOME")); 
-		table = new PathNatTable(parent, homePath);
+
+		// TODO switch context
+		rootPath = Paths.get(context.get("rootPath").toString());
+		// rootPath = Paths.get(activePart.getPersistedState().get("rootPath"));
+
+		// create path table
+		table = new PathNatTable(parent, rootPath);
 		table.setBackground(bgColor);
 
-//		label = new Label(parent, SWT.NONE);
-//		label.setText("Dynamic tab");
-		
+		// layout
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
 	}
 
-	@Override
-	public String getElementId() {
-		return ELEMENT_ID + DYNAMIC_TAB_ID_PREF + currentTabId;
-	}
-
-	@Override
-	public String getTabName() {
-		return tabName + currentTabId;
-	}
+	// @Inject
+	// //@Optional
+	// public void setPartInput( @Named( "inputPath" ) Object partInput ) {
+	// int i1=1;
+	// }
 
 }

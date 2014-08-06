@@ -31,4 +31,6 @@ package cane.brothers.e4.commander.preferences;
 public final class PreferenceConstants {
 
 	public static final String PB_STAY_ACTIVE_TAB = "stay_active_tab";
+	
+	public static final String PS_DEFAULT_TAB_PATH = "DEFAULT_TAB_PATH";
 }

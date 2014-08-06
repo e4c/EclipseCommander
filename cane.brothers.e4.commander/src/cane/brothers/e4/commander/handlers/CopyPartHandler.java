@@ -16,6 +16,10 @@
  ******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -50,6 +54,7 @@ public class CopyPartHandler {
 	@Inject
 	EPartService partService;
 
+	@SuppressWarnings("restriction")
 	@Inject
 	@Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
 	boolean stayActiveTab;
@@ -62,7 +67,7 @@ public class CopyPartHandler {
 		        .createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
 		newPart = copyPart(newPart, activePart);
 
-		// Добавляем новую вкладку на другую сторону
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		String oppositePanelId = PartUtils.getPanelId(activePart, true);
 		MUIElement oppositePanel = modelService.find(oppositePanelId,
@@ -83,8 +88,15 @@ public class CopyPartHandler {
 	private MPart copyPart(MPart newPart, MPart part) {
 		if (part != null) {
 
-			newPart.setLabel(PartUtils.createPartLabel(part));
-			newPart.setElementId(PartUtils.createElementId(part));
+			Map<String, String> state = part.getPersistedState();
+			Path rootPath = Paths.get(state.get("rootPath"));
+			String rootPathString = rootPath.getFileName().toString();
+			newPart.setLabel(rootPathString);
+			
+			//newPart.setLabel(PartUtils.createPartLabel(part));
+			
+			newPart.setElementId(PartUtils.createElementId());
+			//newPart.setElementId(PartUtils.createElementId(part));
 
 			// NB! copy also "active" tag
 			newPart.getTags().addAll(part.getTags());

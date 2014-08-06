@@ -3,63 +3,124 @@
  */
 package cane.brothers.e4.commander.lifecycle;
 
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
 
-import javax.inject.Inject;
-
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
+import org.eclipse.e4.ui.workbench.lifecycle.PreSave;
 import org.eclipse.e4.ui.workbench.lifecycle.ProcessAdditions;
+import org.eclipse.e4.ui.workbench.lifecycle.ProcessRemovals;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 import cane.brothers.e4.commander.IdStorage;
+import cane.brothers.e4.commander.PartUtils;
 
 /**
  * @author cane
  *
  */
 public class LifeCycleManager {
-	
-	@Inject
-	MApplication application;
-	
-	@Inject
-	EModelService modelService;
-	
-	@Inject
-	EPartService partService;
+
+	// @Inject
+	// MApplication application;
+
+	// @Inject
+	// EModelService modelService;
+
+	// @Inject
+	// EPartService partService;
+
+	// @Inject
+	// @Preference(PreferenceConstants.PS_DEFAULT_TAB_PATH)
+	// boolean defaultTabPath;
 
 	/**
 	 * 
 	 */
 	public LifeCycleManager() {
 		System.out.println("life cycle manager");
-
 	}
-	
-	@SuppressWarnings("restriction")
+
+	@PreSave
+	public void preSave(MApplication application, EModelService modelService,
+			EPartService partService) {
+		System.out.println("preSave()");
+		// setAppWindowSize();
+	}
+
+	@ProcessRemovals
+	public void processRemovals() {
+		System.out.println("processRemovals()");
+	}
+
+	@PostContextCreate
+	public void postContextCreate(MApplication application,
+			EModelService modelService, EPartService partService) {
+		System.out.println("postContextCreate()");
+	}
+
 	@ProcessAdditions
-	void
-	addModelHook() {
+	public void processAdditions(MApplication application,
+			EModelService modelService, IEclipseContext context) {
+
+		System.out.println("processAdditions()");
+
+		// set default path
+		Path rootPath = Paths.get(System.getenv().get("HOME"));
+		String rootPathString = rootPath.getFileName().toString();
+
+		// FIXME set general context value
+		context.set("rootPath", rootPath.toString());
+
+		// persist default path
+		// prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH, rootPathString);
+
+		//
+		// create first parts, one left and one right
+		//
+
+		// left part
+		MPart leftPart = PartUtils.createPart(modelService);
+
+		leftPart.setLabel(rootPathString);
+		leftPart.setElementId(PartUtils.createElementId());
 		
+		Map<String, String> state = leftPart.getPersistedState();
+		state.put("rootPath", rootPath.toString());
+
+		// add tab to left stack
+		MPartStack leftPartStack = (MPartStack) modelService.find(
+				IdStorage.LEFT_PANEL_ID, application);
+
+		leftPartStack.getChildren().add(leftPart);
+
+		// right part
+		MPart rightPart = PartUtils.createPart(modelService);
+
+		rightPart.setLabel(rootPath.getFileName().toString());
+		rightPart.setElementId(PartUtils.createElementId());
 		
-		List<MWindow> existingWindows = application.getChildren();
-		for(MWindow win: existingWindows) {
-			System.out.println(win.getElementId());
-			System.out.println(win.getLabel());
-//			for(MWindowElement elem :win.getChildren()) {
-//				System.out.println(elem.getElementId());
-//			}
-		}
-		
-	// setAppWindowSize();
+		state = rightPart.getPersistedState();
+		state.put("rootPath", rootPath.toString());
+
+		// add tab to right stack
+		MPartStack rightPartStack = (MPartStack) modelService.find(
+				IdStorage.RIGHT_PANEL_ID, application);
+		rightPartStack.getChildren().add(rightPart);
+
+		// setAppWindowSize();
 	}
 
-	private void setAppWindowSize() {
-		MWindow window = (MWindow) modelService.find(IdStorage.WINDOW_ID,
-				application);
-		window.setWidth(1000);
-	}
+	// private void setAppWindowSize() {
+	// MWindow window = (MWindow) modelService.find(IdStorage.WINDOW_ID,
+	// application);
+	// window.setWidth(1000);
+	// }
 
 }

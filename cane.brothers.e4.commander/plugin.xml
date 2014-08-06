@@ -26,6 +26,10 @@
                name="preferenceCustomization"
                value="preferences/plugin_customization.ini">
          </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.lifecycle.LifeCycleManager">
+         </property>
       </product>
    </extension>
    <extension

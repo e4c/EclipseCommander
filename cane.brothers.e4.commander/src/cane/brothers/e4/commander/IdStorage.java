@@ -29,6 +29,13 @@ public final class IdStorage {
 	/** plugin id */
 	public static final String PLUGIN_ID = "cane.brothers.e4.commander";
 
+	/** application id */
+	public static final String APPLICATION_ID = "cane.brothers.e4.commander.application".intern();
+	
+	/** window id */
+	public static final String WINDOW_ID = "cane.brothers.e4.commander.trimmedwindow".intern();
+	
+
 	/** perspective id */
 	public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";
 

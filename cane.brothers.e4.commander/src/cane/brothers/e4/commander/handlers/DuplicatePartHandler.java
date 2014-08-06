@@ -16,6 +16,10 @@
  ******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -48,14 +52,14 @@ public class DuplicatePartHandler {
 	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
 		System.out.println((this.getClass().getSimpleName() + " called"));
 
-		// активная вкладка используется только для того,
-		// чтобы определить id и имя для новой вкладки.
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 		// create a new Part based on a PartDescriptor
 		// in the application model
 		// assume the ID is used for the PartDescriptor
 		MPart newPart = partService
-		        .createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+				.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
 		newPart = copyPart(newPart, activePart);
 
 		// If multiple parts of this type are now allowed
@@ -66,33 +70,40 @@ public class DuplicatePartHandler {
 
 		// The current tab will stay active
 		partService.showPart(stayActiveTab ? activePart : newPart,
-		        PartState.ACTIVATE);
+				PartState.ACTIVATE);
 	}
 
 	private MPart copyPart(MPart newPart, MPart part) {
 		if (part != null) {
 
-			newPart.setLabel(PartUtils.createPartLabel(part));
-			newPart.setElementId(PartUtils.createElementId(part));
+			// load root path
+			Map<String, String> state = part.getPersistedState();
+			Path rootPath = Paths.get(state.get("rootPath"));
+			String rootPathString = rootPath.getFileName().toString();
+			newPart.setLabel(rootPathString);
+			// newPart.setLabel(PartUtils.createPartLabel(part));
+
+			newPart.setElementId(PartUtils.createElementId());
+			// newPart.setElementId(PartUtils.createElementId(part));
 
 			// NB! copy also "active" tag
 			newPart.getTags().addAll(part.getTags());
 
 			/**
-			 * Задавая ContributionURI мы, тем самым, определяем id view part,
-			 * которая будет использоваться для создания новой вкладки.
+			 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ContributionURI пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ id view part,
+			 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 			 */
-			// задаем ContributionURI чтобы знать, какой создать новую закладку
-			// другой вариант - определить для PartDescriptor id - свою вьюху
+			// пїЅпїЅпїЅпїЅпїЅпїЅ ContributionURI пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ PartDescriptor id - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 			// newPart.setContributionURI(part.getContributionURI());
 
 			if (part.getParent() != null) {
 				System.out.println("Parent id: "
-				        + part.getParent().getElementId());
+						+ part.getParent().getElementId());
 			}
 
 			// newPart.setCloseable(part.isCloseable());
-			// Добавляем новую вкладку на туже сторону
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			// 1.
 			newPart.setParent(part.getParent());
 

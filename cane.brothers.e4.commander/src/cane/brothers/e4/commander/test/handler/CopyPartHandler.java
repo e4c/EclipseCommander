@@ -59,11 +59,13 @@ public class CopyPartHandler {
 	private MPart copyPart(MPart part) {
 		MPart newPart = MBasicFactory.INSTANCE.createPart();
 
-		newPart.setLabel(PartUtils.createPartLabel(part));
-		newPart.setElementId(PartUtils.createElementId(part));
+		newPart.setLabel("test");
+		
+		newPart.setElementId(PartUtils.createElementId());
+		//newPart.setElementId(PartUtils.createElementId(part));
 		newPart.setContributionURI(part.getContributionURI());
 		newPart.setCloseable(part.isCloseable());
-		// NB должен быть задан parent, чтобы закладку добавить на туже сторону
+		// NB пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ parent, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		newPart.setParent(part.getParent());
 
 		return newPart;
