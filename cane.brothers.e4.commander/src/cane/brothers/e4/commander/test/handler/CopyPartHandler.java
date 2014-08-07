@@ -28,7 +28,6 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.PartUtils;
-import cane.brothers.e4.commander.parts.ITabNameId;
 
 /**
  * Open new tab directly after active part.
