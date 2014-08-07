@@ -17,7 +17,7 @@ public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathF
 	
 	private Path parentPath;
 	
-	private static final String parentPathStr = "\\..".intern();
+	private static final String parentPathStr = "../".intern();
 	
 
 	private static final String pathDirSizeStr = "<DIR>".intern();
