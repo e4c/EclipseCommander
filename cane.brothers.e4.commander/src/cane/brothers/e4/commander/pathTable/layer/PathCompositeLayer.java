@@ -24,6 +24,8 @@ import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBind
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 
+import cane.brothers.e4.commander.pathTable.command.OpenPathHandler;
+import cane.brothers.e4.commander.pathTable.config.PathSelectionLayerConfiguration;
 import cane.brothers.e4.commander.pathTable.data.PathColumnPropertyAccessor;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
 import cane.brothers.e4.commander.pathTable.data.PathFixtureRowIdAccessor;
@@ -42,7 +44,9 @@ public class PathCompositeLayer extends CompositeLayer  {
     private final ListDataProvider<PathFixture> bodyDataProvider;
     
     private IColumnPropertyAccessor<PathFixture> columnPropertyAccessor;	
-	
+
+    private SelectionLayer selectionLayer;
+
 	public PathCompositeLayer(Path rootPath) {
 		super(1, 2);
 		
@@ -63,7 +67,7 @@ public class PathCompositeLayer extends CompositeLayer  {
 		bodyDataLayer.setColumnWidthPercentageByPosition(1, 10);
 		bodyDataLayer.setColumnWidthPercentageByPosition(2, 10);
 		
-		final SelectionLayer selectionLayer = new SelectionLayer(bodyDataLayer);
+		selectionLayer = new SelectionLayer(bodyDataLayer, false);
 		ViewportLayer viewportLayer = new ViewportLayer(selectionLayer);
 
 		//use a RowSelectionModel that will perform row selections and is able to identify a row via unique ID
@@ -71,6 +75,12 @@ public class PathCompositeLayer extends CompositeLayer  {
 		
 		//register different selection move command handler that always moves by row
 		selectionLayer.addConfiguration(new RowOnlySelectionConfiguration<PathFixture>());
+		selectionLayer.addConfiguration(new PathSelectionLayerConfiguration());
+		
+		// register path handler
+		OpenPathHandler pathHandler = new OpenPathHandler(selectionLayer, bodyDataProvider);
+		selectionLayer.registerCommandHandler(pathHandler);
+		
 		
 		//register selection bindings that will perform row selections instead of cell selections
 		//registering the bindings on a layer that is above the SelectionLayer will consume the
@@ -106,6 +116,15 @@ public class PathCompositeLayer extends CompositeLayer  {
 
 		}
 		return result;
+	}
+
+    
+	public SelectionLayer getSelectionLayer() {
+		return selectionLayer;
+	}
+	
+	public ListDataProvider<PathFixture> getBodyDataProvider() {
+		return bodyDataProvider;
 	}
 
 }
