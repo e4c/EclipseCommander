@@ -6,7 +6,13 @@ import java.nio.file.Path;
 
 import cane.brothers.e4.commander.pathTable.utils.PathUtils;
 
+/**
+ * @author icane
+ *
+ */
 public class PathFixture {
+	
+	private Path path; 
 	
 	private String name;
 	private long size;
@@ -18,6 +24,8 @@ public class PathFixture {
 	 * @param path
 	 */
 	public PathFixture(Path path) {
+		this.path = path;
+		
 		this.name = path.getFileName().toString();
 		try {
 			this.size = Files.size(path);
@@ -27,6 +35,10 @@ public class PathFixture {
 		}
 		
 		this.attributes = PathUtils.getAttributesString(path);
+	}
+
+	public Path getPath() {
+		return path;
 	}
 
 	public String getName() {

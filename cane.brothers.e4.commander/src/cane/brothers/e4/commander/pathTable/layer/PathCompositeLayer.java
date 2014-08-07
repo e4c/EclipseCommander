@@ -53,7 +53,7 @@ public class PathCompositeLayer extends CompositeLayer  {
 		propertyToLabelMap.put("size", "Size");
 		propertyToLabelMap.put("attr", "Attr");
 		
-		columnPropertyAccessor = new PathColumnPropertyAccessor(propertyToLabelMap);
+		columnPropertyAccessor = new PathColumnPropertyAccessor(propertyToLabelMap, rootPath);
 		bodyDataProvider = new ListDataProvider<PathFixture>(this.contents, columnPropertyAccessor);
 		
 		final DataLayer bodyDataLayer = new DataLayer(bodyDataProvider);
@@ -90,6 +90,10 @@ public class PathCompositeLayer extends CompositeLayer  {
 	
 	private List<PathFixture> getContents(Path dir) {
 		List<PathFixture> result = new ArrayList<>();
+		
+		// add parent path
+		Path parentPath = dir.getParent();
+		result.add(new PathFixture(parentPath));
 		
 		if (dir != null && Files.isDirectory(dir, LinkOption.NOFOLLOW_LINKS)) {
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {

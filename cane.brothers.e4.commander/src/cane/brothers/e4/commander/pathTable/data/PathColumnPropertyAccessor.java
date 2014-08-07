@@ -1,5 +1,8 @@
 package cane.brothers.e4.commander.pathTable.data;
 
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,22 +15,38 @@ public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathF
 	/** use list instead of set because indexes */
 	private List<String> propertyNames;
 	
+	private Path parentPath;
+	
+	private static final String parentPathStr = "\\..".intern();
+	
+
+	private static final String pathDirSizeStr = "<DIR>".intern();
+	
 	/**
 	 * Constructor
 	 * 
 	 * @param propertyToLabels
 	 */
-	public PathColumnPropertyAccessor(Map<String, String> propertyToLabels) {
+	public PathColumnPropertyAccessor(Map<String, String> propertyToLabels, Path rootPath) {
 		this.propertyNames = new ArrayList<String>(propertyToLabels.keySet());
+		this.parentPath = rootPath.getParent();
 	}
 	
 	@Override
 	public Object getDataValue(PathFixture rowObject, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return rowObject.getName();
+			if(parentPath.equals(rowObject.getPath())) {
+				return parentPathStr;
+			} else {
+				return rowObject.getName();
+			}
 		case 1:
-			return rowObject.getSize();
+			if(Files.isDirectory(rowObject.getPath(), LinkOption.NOFOLLOW_LINKS)) {
+				return pathDirSizeStr;
+			} else {
+				return rowObject.getSize();
+			}
 		case 2:
 			return rowObject.getAttributes();
 		}
