@@ -9,7 +9,9 @@ import java.util.Map;
 
 import org.eclipse.nebula.widgets.nattable.data.IColumnPropertyAccessor;
 
-public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathFixture> {
+import cane.brothers.e4.commander.pathTable.IRootPath;
+
+public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathFixture>, IRootPath {
 
 
 	/** use list instead of set because indexes */
@@ -56,7 +58,7 @@ public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathF
 	@Override
 	public void setDataValue(PathFixture rowObject, int columnIndex,
 			Object newValue) {
-		new UnsupportedOperationException("none");
+		new UnsupportedOperationException("none"); //$NON-NLS-1$
 	}
 
 	@Override
@@ -72,6 +74,13 @@ public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathF
 	@Override
 	public int getColumnIndex(String propertyName) {
 		return propertyNames.indexOf(propertyName);
+	}
+
+	@Override
+	public void setRootPath(Path newPath) {
+		if(newPath != null) {
+			this.parentPath = newPath.getParent();
+		}
 	}
 
 }
