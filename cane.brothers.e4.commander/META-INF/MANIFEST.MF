@@ -8,15 +8,20 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  javax.annotation,
  org.eclipse.jface,
  org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1",
+ org.eclipse.e4.ui.di;bundle-version="1.0.0",
  org.eclipse.e4.ui.services;bundle-version="0.10.2",
  org.eclipse.e4.ui.workbench;bundle-version="0.10.3",
+ org.eclipse.e4.core.contexts,
  org.eclipse.e4.core.di;bundle-version="1.2.0",
  org.eclipse.e4.core.di.extensions;bundle-version="0.11.100",
+ org.eclipse.e4.core.services;bundle-version="1.2.0",
  com.opcoach.e4.preferences;bundle-version="1.0.0",
  org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0",
  org.eclipse.core.databinding.beans;bundle-version="1.2.200",
- org.eclipse.e4.core.contexts
+ org.eclipse.osgi.services;bundle-version="3.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.inject,
  org.eclipse.core.runtime.preferences;version="3.3.0",
+ org.eclipse.e4.core.services.log,
  org.osgi.service.prefs;version="1.1.1"
+Bundle-ActivationPolicy: lazy
