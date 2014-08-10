@@ -4,6 +4,10 @@
 package cane.brothers.e4.commander.pathTable;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -11,7 +15,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.nebula.widgets.nattable.NatTable;
-import org.eclipse.nebula.widgets.nattable.coordinate.PositionCoordinate;
+import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.selection.RowSelectionProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.style.theme.DefaultNatTableThemeConfiguration;
@@ -158,14 +162,26 @@ public class PathNatTable extends NatTable implements IRootPath {
 
 		setTheme(theme);
 	}
-
-	public PositionCoordinate getSelectionAnchor() {
+	
+	public int getSelectedRowPosition() {
 		if (compositeLayer != null) {
 			SelectionLayer selectionLayer = compositeLayer.getSelectionLayer();
-			if (selectionLayer != null) {
-				return selectionLayer.getSelectionAnchor();
+			
+			final Set<Range> selectedRows = selectionLayer.getSelectedRowPositions();
+			List<Integer> selectedRowPositions = new ArrayList<Integer>();
+			for (Range range : selectedRows) {
+				for (int rowPosition = range.start; rowPosition < range.end; rowPosition++) {
+					// + 1
+					selectedRowPositions.add(rowPosition + 1);
+				}
+			}
+			Collections.sort(selectedRowPositions);
+			
+			// at this moment return only first 
+			if(selectedRowPositions.size() > 0) {
+				return selectedRowPositions.get(0).intValue();
 			}
 		}
-		return null;
+		return -1;
 	}
 }

@@ -7,17 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.nebula.widgets.nattable.command.AbstractLayerCommandHandler;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
+import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
 import cane.brothers.e4.commander.MyEventConstants;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
@@ -68,6 +63,8 @@ public class OpenPathHandler extends
 		Set<Range> selections = selectionLayer.getSelectedRowPositions();
 		PathFixture fixture = null;
 
+		 System.out.println("Selected Row: " + ObjectUtils.toString(selections));
+		
 		for (Range r : selections) {
 			for (int i = r.start; i < r.end; i++) {
 				// handle only first row object in range
