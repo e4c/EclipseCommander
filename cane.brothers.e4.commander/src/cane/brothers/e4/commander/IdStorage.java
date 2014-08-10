@@ -1,7 +1,7 @@
 /*******************************************************************************
  * File: IdStorage.java
  * 
- * Date: Jul 5, 2014
+ * Date: 2014/08/11
  * Author: Mikhail Niedre
  * 
  * Copyright (c) 2014 Original authors and others.
@@ -10,10 +10,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
- * 
+ *
  * Contributors:
- * Original authors and others - initial API and implementation
- ******************************************************************************/
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander;
 
 /**
@@ -21,32 +21,33 @@ package cane.brothers.e4.commander;
  * 
  */
 public final class IdStorage {
-	/** part sash container id */
-	// public static final String PART_SASH_CONTAINER_ID =
-	// "cane.brothers.e4.commander.partsashcontainer.main"
-	// .intern();
+    /** part sash container id */
+    // public static final String PART_SASH_CONTAINER_ID =
+    // "cane.brothers.e4.commander.partsashcontainer.main"
+    // .intern();
 
-	/** plugin id */
-	public static final String PLUGIN_ID = "cane.brothers.e4.commander";
+    /** plugin id */
+    public static final String PLUGIN_ID = "cane.brothers.e4.commander";
 
-	/** application id */
-	public static final String APPLICATION_ID = "cane.brothers.e4.commander.application".intern();
-	
-	/** window id */
-	public static final String WINDOW_ID = "cane.brothers.e4.commander.trimmedwindow".intern();
-	
+    /** application id */
+    public static final String APPLICATION_ID = "cane.brothers.e4.commander.application"
+	    .intern();
 
-	/** perspective id */
-	public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";
+    /** window id */
+    public static final String WINDOW_ID = "cane.brothers.e4.commander.trimmedwindow"
+	    .intern();
 
-	/** part descriptor id */
-	public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic"
-	        .intern();
+    /** perspective id */
+    public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";
 
-	/** panel id's */
-	public static String LEFT_PANEL_ID = "cane.brothers.e4.commander.partstack.left"
-	        .intern();
+    /** part descriptor id */
+    public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic"
+	    .intern();
 
-	public static String RIGHT_PANEL_ID = "cane.brothers.e4.commander.partstack.right"
-	        .intern();
+    /** panel id's */
+    public static String LEFT_PANEL_ID = "cane.brothers.e4.commander.partstack.left"
+	    .intern();
+
+    public static String RIGHT_PANEL_ID = "cane.brothers.e4.commander.partstack.right"
+	    .intern();
 }

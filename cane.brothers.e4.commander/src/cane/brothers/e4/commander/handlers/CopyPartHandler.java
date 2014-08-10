@@ -1,7 +1,7 @@
 /*******************************************************************************
  * File: CopyPartHandler.java
  * 
- * Date: Jul 5, 2014
+ * Date: 2014/08/10
  * Author: Mikhail Niedre
  * 
  * Copyright (c) 2014 Original authors and others.
@@ -10,10 +10,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
- * 
+ *
  * Contributors:
- * Original authors and others - initial API and implementation
- ******************************************************************************/
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
 import java.nio.file.Path;
@@ -45,64 +45,64 @@ import cane.brothers.e4.commander.preferences.PreferenceConstants;
  */
 public class CopyPartHandler {
 
-	@Inject
-	EModelService modelService;
+    @Inject
+    EModelService modelService;
 
-	@Inject
-	MApplication application;
+    @Inject
+    MApplication application;
 
-	@Inject
-	EPartService partService;
+    @Inject
+    EPartService partService;
 
-	@SuppressWarnings("restriction")
-	@Inject
-	@Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
-	boolean stayActiveTab;
+    @SuppressWarnings("restriction")
+    @Inject
+    @Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
+    boolean stayActiveTab;
 
-	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-		System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
+    @Execute
+    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
+	System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
 
-		MPart newPart = partService
-		        .createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-		newPart = copyPart(newPart, activePart);
+	MPart newPart = partService
+		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+	newPart = copyPart(newPart, activePart);
 
-		// ��������� ����� ������� �� ������ �������
+	// ��������� ����� ������� �� ������ �������
 
-		String oppositePanelId = PartUtils.getPanelId(activePart, true);
-		MUIElement oppositePanel = modelService.find(oppositePanelId,
-		        application);
+	String oppositePanelId = PartUtils.getPanelId(activePart, true);
+	MUIElement oppositePanel = modelService.find(oppositePanelId,
+		application);
 
-		if (oppositePanel instanceof MPartStack) {
-			MPartStack stack = (MPartStack) oppositePanel;
-			stack.getChildren().add(newPart);
-		}
-
-		partService.showPart(newPart, PartState.VISIBLE);
-
-		// The current tab will stay active
-		partService.showPart(stayActiveTab ? activePart : newPart,
-		        PartState.ACTIVATE);
+	if (oppositePanel instanceof MPartStack) {
+	    MPartStack stack = (MPartStack) oppositePanel;
+	    stack.getChildren().add(newPart);
 	}
 
-	private MPart copyPart(MPart newPart, MPart part) {
-		if (part != null) {
+	partService.showPart(newPart, PartState.VISIBLE);
 
-			Map<String, String> state = part.getPersistedState();
-			Path rootPath = Paths.get(state.get("rootPath"));
-			String rootPathString = rootPath.getFileName().toString();
-			newPart.setLabel(rootPathString);
-			
-			//newPart.setLabel(PartUtils.createPartLabel(part));
-			
-			newPart.setElementId(PartUtils.createElementId());
-			//newPart.setElementId(PartUtils.createElementId(part));
+	// The current tab will stay active
+	partService.showPart(stayActiveTab ? activePart : newPart,
+		PartState.ACTIVATE);
+    }
 
-			// NB! copy also "active" tag
-			newPart.getTags().addAll(part.getTags());
-		}
+    private MPart copyPart(MPart newPart, MPart part) {
+	if (part != null) {
 
-		return newPart;
+	    Map<String, String> state = part.getPersistedState();
+	    Path rootPath = Paths.get(state.get("rootPath"));
+	    String rootPathString = rootPath.getFileName().toString();
+	    newPart.setLabel(rootPathString);
+
+	    // newPart.setLabel(PartUtils.createPartLabel(part));
+
+	    newPart.setElementId(PartUtils.createElementId());
+	    // newPart.setElementId(PartUtils.createElementId(part));
+
+	    // NB! copy also "active" tag
+	    newPart.getTags().addAll(part.getTags());
 	}
+
+	return newPart;
+    }
 
 }

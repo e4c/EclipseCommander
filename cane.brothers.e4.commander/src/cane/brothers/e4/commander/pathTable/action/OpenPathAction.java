@@ -1,10 +1,22 @@
-/**
+/*******************************************************************************
+ * File: OpenPathAction.java
  * 
- */
+ * Date: 2014/08/10
+ * Author: Mikhail Niedre
+ * 
+ * Copyright (c) 2014 Original authors and others.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
+ *
+ * Contributors:
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander.pathTable.action;
 
 import org.eclipse.nebula.widgets.nattable.NatTable;
-import org.eclipse.nebula.widgets.nattable.coordinate.PositionCoordinate;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
 import org.eclipse.swt.events.KeyEvent;
 
@@ -12,30 +24,30 @@ import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
 
 /**
- * @author icane
+ * TODO
  *
  */
 public class OpenPathAction implements IKeyAction {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction#run(org.eclipse
-	 * .nebula.widgets.nattable.NatTable, org.eclipse.swt.events.KeyEvent)
-	 */
-	@Override
-	public void run(NatTable natTable, KeyEvent event) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction#run(org.eclipse
+     * .nebula.widgets.nattable.NatTable, org.eclipse.swt.events.KeyEvent)
+     */
+    @Override
+    public void run(NatTable natTable, KeyEvent event) {
 
-		if (natTable instanceof PathNatTable) {
-			PathNatTable pathTable = (PathNatTable) natTable;
-			int rowPosition = pathTable.getSelectedRowPosition();
-			System.out.println("rowPos: " + rowPosition);
-			
-			if (rowPosition != -1) {
-				natTable.doCommand(new OpenPathCommand(pathTable, rowPosition));
-			}
-		}
+	if (natTable instanceof PathNatTable) {
+	    PathNatTable pathTable = (PathNatTable) natTable;
+	    int rowPosition = pathTable.getSelectedRowPosition();
+	    System.out.println("rowPos: " + rowPosition);
+
+	    if (rowPosition != -1) {
+		natTable.doCommand(new OpenPathCommand(pathTable, rowPosition));
+	    }
 	}
+    }
 
 }

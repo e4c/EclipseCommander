@@ -1,6 +1,19 @@
-/**
+/*******************************************************************************
+ * File: LifeCycleManager.java
  * 
- */
+ * Date: 2014/08/10
+ * Author: Mikhail Niedre
+ * 
+ * Copyright (c) 2014 Original authors and others.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
+ *
+ * Contributors:
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander.lifecycle;
 
 import java.nio.file.Path;
@@ -22,105 +35,105 @@ import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.PartUtils;
 
 /**
- * @author cane
+ * TODO
  *
  */
 public class LifeCycleManager {
 
-	// @Inject
-	// MApplication application;
+    // @Inject
+    // MApplication application;
 
-	// @Inject
-	// EModelService modelService;
+    // @Inject
+    // EModelService modelService;
 
-	// @Inject
-	// EPartService partService;
+    // @Inject
+    // EPartService partService;
 
-	// @Inject
-	// @Preference(PreferenceConstants.PS_DEFAULT_TAB_PATH)
-	// boolean defaultTabPath;
+    // @Inject
+    // @Preference(PreferenceConstants.PS_DEFAULT_TAB_PATH)
+    // boolean defaultTabPath;
 
-	/**
+    /**
 	 * 
 	 */
-	public LifeCycleManager() {
-		System.out.println("life cycle manager");
-	}
+    public LifeCycleManager() {
+	System.out.println("life cycle manager");
+    }
 
-	@PreSave
-	public void preSave(MApplication application, EModelService modelService,
-			EPartService partService) {
-		System.out.println("preSave()");
-		// setAppWindowSize();
-	}
+    @PreSave
+    public void preSave(MApplication application, EModelService modelService,
+	    EPartService partService) {
+	System.out.println("preSave()");
+	// setAppWindowSize();
+    }
 
-	@ProcessRemovals
-	public void processRemovals() {
-		System.out.println("processRemovals()");
-	}
+    @ProcessRemovals
+    public void processRemovals() {
+	System.out.println("processRemovals()");
+    }
 
-	@PostContextCreate
-	public void postContextCreate(MApplication application,
-			EModelService modelService, EPartService partService) {
-		System.out.println("postContextCreate()");
-	}
+    @PostContextCreate
+    public void postContextCreate(MApplication application,
+	    EModelService modelService, EPartService partService) {
+	System.out.println("postContextCreate()");
+    }
 
-	@ProcessAdditions
-	public void processAdditions(MApplication application,
-			EModelService modelService, IEclipseContext context) {
+    @ProcessAdditions
+    public void processAdditions(MApplication application,
+	    EModelService modelService, IEclipseContext context) {
 
-		System.out.println("processAdditions()");
+	System.out.println("processAdditions()");
 
-		// set default path
-		Path rootPath = Paths.get(System.getenv().get("HOME"));
-		String rootPathString = rootPath.getFileName().toString();
+	// set default path
+	Path rootPath = Paths.get(System.getenv().get("HOME"));
+	String rootPathString = rootPath.getFileName().toString();
 
-		// FIXME set general context value
-		context.set("rootPath", rootPath.toString());
+	// FIXME set general context value
+	context.set("rootPath", rootPath.toString());
 
-		// persist default path
-		// prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH, rootPathString);
+	// persist default path
+	// prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH, rootPathString);
 
-		//
-		// create first parts, one left and one right
-		//
+	//
+	// create first parts, one left and one right
+	//
 
-		// left part
-		MPart leftPart = PartUtils.createPart(modelService);
+	// left part
+	MPart leftPart = PartUtils.createPart(modelService);
 
-		leftPart.setLabel(rootPathString);
-		leftPart.setElementId(PartUtils.createElementId());
-		
-		Map<String, String> state = leftPart.getPersistedState();
-		state.put("rootPath", rootPath.toString());
+	leftPart.setLabel(rootPathString);
+	leftPart.setElementId(PartUtils.createElementId());
 
-		// add tab to left stack
-		MPartStack leftPartStack = (MPartStack) modelService.find(
-				IdStorage.LEFT_PANEL_ID, application);
+	Map<String, String> state = leftPart.getPersistedState();
+	state.put("rootPath", rootPath.toString());
 
-		leftPartStack.getChildren().add(leftPart);
+	// add tab to left stack
+	MPartStack leftPartStack = (MPartStack) modelService.find(
+		IdStorage.LEFT_PANEL_ID, application);
 
-		// right part
-		MPart rightPart = PartUtils.createPart(modelService);
+	leftPartStack.getChildren().add(leftPart);
 
-		rightPart.setLabel(rootPath.getFileName().toString());
-		rightPart.setElementId(PartUtils.createElementId());
-		
-		state = rightPart.getPersistedState();
-		state.put("rootPath", rootPath.toString());
+	// right part
+	MPart rightPart = PartUtils.createPart(modelService);
 
-		// add tab to right stack
-		MPartStack rightPartStack = (MPartStack) modelService.find(
-				IdStorage.RIGHT_PANEL_ID, application);
-		rightPartStack.getChildren().add(rightPart);
+	rightPart.setLabel(rootPath.getFileName().toString());
+	rightPart.setElementId(PartUtils.createElementId());
 
-		// setAppWindowSize();
-	}
+	state = rightPart.getPersistedState();
+	state.put("rootPath", rootPath.toString());
 
-	// private void setAppWindowSize() {
-	// MWindow window = (MWindow) modelService.find(IdStorage.WINDOW_ID,
-	// application);
-	// window.setWidth(1000);
-	// }
+	// add tab to right stack
+	MPartStack rightPartStack = (MPartStack) modelService.find(
+		IdStorage.RIGHT_PANEL_ID, application);
+	rightPartStack.getChildren().add(rightPart);
+
+	// setAppWindowSize();
+    }
+
+    // private void setAppWindowSize() {
+    // MWindow window = (MWindow) modelService.find(IdStorage.WINDOW_ID,
+    // application);
+    // window.setWidth(1000);
+    // }
 
 }

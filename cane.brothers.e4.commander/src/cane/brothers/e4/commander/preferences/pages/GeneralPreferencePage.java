@@ -1,7 +1,7 @@
 /*******************************************************************************
  * File: GeneralPreferencePage.java
  * 
- * Date: Jul 6, 2014
+ * Date: 2014/08/11
  * Author: Mikhail Niedre
  * 
  * Copyright (c) 2014 Original authors and others.
@@ -10,10 +10,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
- * 
+ *
  * Contributors:
- * Original authors and others - initial API and implementation
- ******************************************************************************/
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander.preferences.pages;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -33,31 +33,35 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 
 public class GeneralPreferencePage extends FieldEditorPreferencePage {
 
-	public GeneralPreferencePage() {
-		super(GRID);
-		// setTitle("General Settings");
-		// setDescription("A demonstration of a preference page implementation");
-	}
+    /**
+     * Constructor
+     *
+     */
+    public GeneralPreferencePage() {
+	super(GRID);
+	// setTitle("General Settings");
+	// setDescription("A demonstration of a preference page implementation");
+    }
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of
-	 * the common GUI blocks needed to manipulate various types
-	 * of preferences. Each field editor knows how to save and
-	 * restore itself.
-	 */
-	@Override
-	public void createFieldEditors() {
+    /**
+     * Creates the field editors. Field editors are abstractions of
+     * the common GUI blocks needed to manipulate various types
+     * of preferences. Each field editor knows how to save and
+     * restore itself.
+     */
+    @Override
+    public void createFieldEditors() {
 
-		// addField(new DirectoryFieldEditor(PreferenceConstants.P_PATH,
-		// "&Directory preference:", getFieldEditorParent()));
-		// addField(new BooleanFieldEditor(PreferenceConstants.P_BOOLEAN,
-		// "&An example of a boolean preference", getFieldEditorParent()));
-		//
-		// addField(new RadioGroupFieldEditor(PreferenceConstants.P_CHOICE,
-		// "An example of a multiple-choice preference", 1,
-		// new String[][] { { "&Choice 1", "choice1" },
-		// { "C&hoice 2", "choice2" } }, getFieldEditorParent()));
-		// addField(new StringFieldEditor(PreferenceConstants.P_STRING,
-		// "A &text preference:", getFieldEditorParent()));
-	}
+	// addField(new DirectoryFieldEditor(PreferenceConstants.P_PATH,
+	// "&Directory preference:", getFieldEditorParent()));
+	// addField(new BooleanFieldEditor(PreferenceConstants.P_BOOLEAN,
+	// "&An example of a boolean preference", getFieldEditorParent()));
+	//
+	// addField(new RadioGroupFieldEditor(PreferenceConstants.P_CHOICE,
+	// "An example of a multiple-choice preference", 1,
+	// new String[][] { { "&Choice 1", "choice1" },
+	// { "C&hoice 2", "choice2" } }, getFieldEditorParent()));
+	// addField(new StringFieldEditor(PreferenceConstants.P_STRING,
+	// "A &text preference:", getFieldEditorParent()));
+    }
 }

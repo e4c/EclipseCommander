@@ -1,7 +1,7 @@
 /*******************************************************************************
  * File: CloseActivePartHandler.java
  * 
- * Date: Jul 5, 2014
+ * Date: 2014/08/10
  * Author: Mikhail Niedre
  * 
  * Copyright (c) 2014 Original authors and others.
@@ -10,10 +10,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * <a href="http://www.eclipse.org/legal/epl-v10.html">epl-v1.0</a>
- * 
+ *
  * Contributors:
- * Original authors and others - initial API and implementation
- ******************************************************************************/
+ * Mikhail Niedre - initial API and implementation
+ *******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
 import javax.inject.Named;
@@ -29,17 +29,17 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
  * 
  */
 public class CloseActivePartHandler {
-	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
-	        EPartService partService) {
-		// close active part
-		partService.hidePart(part);
-	}
+    @Execute
+    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
+	    EPartService partService) {
+	// close active part
+	partService.hidePart(part);
+    }
 
-	@CanExecute
-	public boolean canExecute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
-	        EPartService partService) {
-		return partService.isPartVisible(part);
-	}
+    @CanExecute
+    public boolean canExecute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
+	    EPartService partService) {
+	return partService.isPartVisible(part);
+    }
 
 }
