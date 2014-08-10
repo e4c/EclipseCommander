@@ -21,8 +21,14 @@ import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -30,6 +36,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
+import cane.brothers.e4.commander.MyEventConstants;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 
 /**
@@ -38,6 +45,9 @@ import cane.brothers.e4.commander.pathTable.PathNatTable;
  */
 public class DynamicTab {
 
+	@Inject
+	private IEventBroker eventBroker;
+
 	/**
 	 * GUI stuff
 	 */
@@ -45,7 +55,8 @@ public class DynamicTab {
 
 	private Path rootPath;
 
-	private final Color bgColor = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
+	private final Color bgColor = Display.getCurrent().getSystemColor(
+			SWT.COLOR_WHITE);
 
 	@Inject
 	IEclipseContext context;
@@ -68,17 +79,29 @@ public class DynamicTab {
 		// rootPath = Paths.get(activePart.getPersistedState().get("rootPath"));
 
 		// create path table
-		table = new PathNatTable(parent, rootPath);
+		table = new PathNatTable(parent, rootPath, eventBroker);
 		table.setBackground(bgColor);
 
 		// layout
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
 	}
 
-	// @Inject
-	// //@Optional
-	// public void setPartInput( @Named( "inputPath" ) Object partInput ) {
-	// int i1=1;
-	// }
+	@Inject
+	@Optional
+	private void setRootPart(
+			@Named(IServiceConstants.ACTIVE_PART) MPart activePart,
+			@UIEventTopic(MyEventConstants.TAB_PATH_OPEN) Path newPath) {
+
+		// update root path of current tab
+		if (activePart != null && 
+				activePart.getObject() == this) {
+			
+			rootPath = newPath;
+			if (table != null) {
+				table.setRootPath(rootPath);
+				table.refresh();
+			}
+		}
+	}
 
 }

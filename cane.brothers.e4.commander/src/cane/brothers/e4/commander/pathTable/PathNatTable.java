@@ -5,6 +5,7 @@ package cane.brothers.e4.commander.pathTable;
 
 import java.nio.file.Path;
 
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -24,120 +25,144 @@ import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
  * @author icane
  *
  */
-public class PathNatTable extends NatTable {
-	
-	private Path rootPath = null;
+public class PathNatTable extends NatTable implements IRootPath {
+
+	//private Path rootPath = null;
+
+//	/**
+//	 * @return the rootPath
+//	 */
+//	public Path getRootPath() {
+//		return rootPath;
+//	}
+
+	@Override
+	public void setRootPath(Path newPath) {
+		//this.rootPath = rootPath;
+		if (compositeLayer != null) {
+			compositeLayer.setRootPath(newPath);
+		}
+	}
+
 	private PathCompositeLayer compositeLayer = null;
 	private DefaultNatTableThemeConfiguration theme = null;
 
 	/**
 	 * @param parent
 	 */
-	public PathNatTable(Composite parent, Path rootPath) {
+	public PathNatTable(Composite parent, Path rootPath,
+			IEventBroker eventBroker) {
 		super(parent, false);
-		this.rootPath = rootPath;
-		compositeLayer = new PathCompositeLayer(rootPath);
-		theme = new PathFirstThemeConfiguration();
-		//natTable.setBackground(GUIHelper.COLOR_WHITE);
-		//natTable.addConfiguration(new PathStyleConfiguration());
-		//natTable.addConfiguration(new ActiveTableStyleConfiguration());
-		//add overlay painter for full borders
-		//natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
-		
-//		addKeyListener(new KeyListener() {
-//			
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				if (e.keyCode == SWT.En) {
-//					closeDialog();
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		})
-		
-		
-		//
-		// 1. 
-		//
-		
-//		// This adds a custom ILayerListener that will listen and handle selection events on NatTable level
-//		// !!!There are no mouse selection handling here !!!
-//		addLayerListener(new ILayerListener() {
-//
-//					// row selection behavior
-//					@Override
-//					public void handleLayerEvent(ILayerEvent event) {
-//						if (event instanceof RowSelectionEvent) {
-//							
-//							RowSelectionEvent rowEvent = (RowSelectionEvent) event;
-//							System.out.println("Selected Row: " + ObjectUtils.toString(rowEvent.getRowPositionRanges()));
-//						
-//							
-//							
-////							//directly ask the SelectionLayer about the selected rows and access the data via IRowDataProvider
-////							SelectionLayer selectionLayer = ((RowSelectionEvent) event).getSelectionLayer();
-////							Set<Range> selections = selectionLayer.getSelectedRowPositions();
-////							
-////							for (Range r : selections) {
-////								for (int i = r.start; i < r.end; i++) {
-////									
-////									ListDataProvider<PathFixture> dataProvider = compositeLayer.getBodyDataProvider();
-////									
-////									PathFixture fixture = dataProvider.getRowObject(i);
-////									System.out.println(fixture);
-////									
-////								}
-////							}
-//						} else if (event instanceof CellSelectionEvent) {
-//							System.out.println(event);
-//						}
-//					}
-//				});
-		
-		
-		//
-		// 2. 
-		//
-		
-		// Provides rows where any cell in the row is selected
-		ISelectionProvider selectionProvider = new RowSelectionProvider<PathFixture>(compositeLayer.getSelectionLayer(), compositeLayer.getBodyDataProvider(), true, false); 
-		
-		selectionProvider.addSelectionChangedListener(new ISelectionChangedListener() {			
-			public void selectionChanged(SelectionChangedEvent event) {
-				System.out.println("Selection changed:");
-				
-				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-				
-				for(Object sel : selection.toArray()) {
-					if(sel instanceof PathFixture) {
-						System.out.println("   " + sel);
-					}
-				}
-			}
-		});
-		
-//		// Programmatically select a few rows
-//		selectionProvider.setSelection(new StructuredSelection(new Person[] { homer, smithers, nelson }));
-				
+		//this.rootPath = rootPath;
 
-		
+		compositeLayer = new PathCompositeLayer(rootPath, eventBroker);
+		theme = new PathFirstThemeConfiguration();
+
+		// natTable.setBackground(GUIHelper.COLOR_WHITE);
+		// natTable.addConfiguration(new PathStyleConfiguration());
+		// natTable.addConfiguration(new ActiveTableStyleConfiguration());
+		// add overlay painter for full borders
+		// natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
+
+		// addKeyListener(new KeyListener() {
+		//
+		// @Override
+		// public void keyReleased(KeyEvent e) {
+		// if (e.keyCode == SWT.En) {
+		// closeDialog();
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public void keyPressed(KeyEvent e) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// })
+
+		//
+		// 1.
+		//
+
+		// // This adds a custom ILayerListener that will listen and handle
+		// selection events on NatTable level
+		// // !!!There are no mouse selection handling here !!!
+		// addLayerListener(new ILayerListener() {
+		//
+		// // row selection behavior
+		// @Override
+		// public void handleLayerEvent(ILayerEvent event) {
+		// if (event instanceof RowSelectionEvent) {
+		//
+		// RowSelectionEvent rowEvent = (RowSelectionEvent) event;
+		// System.out.println("Selected Row: " +
+		// ObjectUtils.toString(rowEvent.getRowPositionRanges()));
+		//
+		//
+		//
+		// // //directly ask the SelectionLayer about the selected rows and
+		// access the data via IRowDataProvider
+		// // SelectionLayer selectionLayer = ((RowSelectionEvent)
+		// event).getSelectionLayer();
+		// // Set<Range> selections = selectionLayer.getSelectedRowPositions();
+		// //
+		// // for (Range r : selections) {
+		// // for (int i = r.start; i < r.end; i++) {
+		// //
+		// // ListDataProvider<PathFixture> dataProvider =
+		// compositeLayer.getBodyDataProvider();
+		// //
+		// // PathFixture fixture = dataProvider.getRowObject(i);
+		// // System.out.println(fixture);
+		// //
+		// // }
+		// // }
+		// } else if (event instanceof CellSelectionEvent) {
+		// System.out.println(event);
+		// }
+		// }
+		// });
+
+		//
+		// 2.
+		//
+
+		// Provides rows where any cell in the row is selected
+		ISelectionProvider selectionProvider = new RowSelectionProvider<PathFixture>(
+				compositeLayer.getSelectionLayer(),
+				compositeLayer.getBodyDataProvider(), true, false);
+
+		selectionProvider
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+					public void selectionChanged(SelectionChangedEvent event) {
+						System.out.println("Selection changed:");
+
+						IStructuredSelection selection = (IStructuredSelection) event
+								.getSelection();
+
+						for (Object sel : selection.toArray()) {
+							if (sel instanceof PathFixture) {
+								System.out.println("   " + sel);
+							}
+						}
+					}
+				});
+
+		// // Programmatically select a few rows
+		// selectionProvider.setSelection(new StructuredSelection(new Person[] {
+		// homer, smithers, nelson }));
+
 		setLayer(compositeLayer);
 		configure();
-		
-		
+
 		setTheme(theme);
 	}
-	
+
 	public PositionCoordinate getSelectionAnchor() {
-		if(compositeLayer != null) {
+		if (compositeLayer != null) {
 			SelectionLayer selectionLayer = compositeLayer.getSelectionLayer();
-			if(selectionLayer != null) {
+			if (selectionLayer != null) {
 				return selectionLayer.getSelectionAnchor();
 			}
 		}

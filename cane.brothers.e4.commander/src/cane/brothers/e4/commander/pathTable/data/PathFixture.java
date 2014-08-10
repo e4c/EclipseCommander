@@ -26,12 +26,20 @@ public class PathFixture {
 	public PathFixture(Path path) {
 		this.path = path;
 		
-		this.name = path.getFileName().toString();
-		try {
-			this.size = Files.size(path);
-		} catch (IOException ex) {
-			this.size = 0;
-			// TODO ex
+		if(path != null) {
+			if(path.getFileName() != null) {
+				this.name = path.getFileName().toString();
+			} else {
+				System.out.println("error file name");
+			}
+			try {
+				this.size = Files.size(path);
+			} catch (IOException ex) {
+				this.size = 0;
+				// TODO ex
+			}
+		} else {
+			System.out.println("error path");
 		}
 		
 		this.attributes = PathUtils.getAttributesString(path);

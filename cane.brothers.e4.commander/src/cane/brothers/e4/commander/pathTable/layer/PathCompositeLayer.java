@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.nebula.widgets.nattable.data.IColumnPropertyAccessor;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.grid.GridRegion;
@@ -24,6 +25,7 @@ import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBind
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 
+import cane.brothers.e4.commander.pathTable.IRootPath;
 import cane.brothers.e4.commander.pathTable.command.OpenPathHandler;
 import cane.brothers.e4.commander.pathTable.config.PathSelectionLayerConfiguration;
 import cane.brothers.e4.commander.pathTable.data.PathColumnPropertyAccessor;
@@ -33,10 +35,29 @@ import cane.brothers.e4.commander.pathTable.data.SimpleColumnHeaderDataProvider;
 
 
 
-public class PathCompositeLayer extends CompositeLayer  {
-
+public class PathCompositeLayer extends CompositeLayer implements IRootPath  {
+	
+	//private IEventBroker eventBroker;
+	
 	private Path rootPath;
-	private List<PathFixture> contents;
+	/**
+	 * @return the root path
+	 */
+	public Path getPath() {
+		return rootPath;
+	}
+	
+	@Override
+	public void setRootPath(Path newPath) {
+		this.rootPath = newPath;
+		fillContentList(rootPath);
+		
+		if(columnPropertyAccessor instanceof IRootPath) {
+			((IRootPath) columnPropertyAccessor).setRootPath(rootPath);
+		}	
+	}
+
+	private List<PathFixture> contentlist = new ArrayList<>();
 	
 	private final Map<String, String> propertyToLabelMap = new LinkedHashMap<String,String>();
 	
@@ -45,22 +66,24 @@ public class PathCompositeLayer extends CompositeLayer  {
     
     private IColumnPropertyAccessor<PathFixture> columnPropertyAccessor;	
 
+    private DataLayer bodyDataLayer;
+    
     private SelectionLayer selectionLayer;
 
-	public PathCompositeLayer(Path rootPath) {
+	public PathCompositeLayer(Path rootPath, IEventBroker eventBroker) {
 		super(1, 2);
 		
 		this.rootPath = rootPath; 
-		this.contents = getContents(rootPath);
+		fillContentList(rootPath);
 		
 		propertyToLabelMap.put("name", "Name");
 		propertyToLabelMap.put("size", "Size");
 		propertyToLabelMap.put("attr", "Attr");
 		
 		columnPropertyAccessor = new PathColumnPropertyAccessor(propertyToLabelMap, rootPath);
-		bodyDataProvider = new ListDataProvider<PathFixture>(this.contents, columnPropertyAccessor);
+		bodyDataProvider = new ListDataProvider<PathFixture>(this.contentlist, columnPropertyAccessor);
 		
-		final DataLayer bodyDataLayer = new DataLayer(bodyDataProvider);
+		bodyDataLayer = new DataLayer(bodyDataProvider);
 		
 		// set columns fixed percentage sizing
 		bodyDataLayer.setColumnWidthPercentageByPosition(0, 80);
@@ -71,14 +94,14 @@ public class PathCompositeLayer extends CompositeLayer  {
 		ViewportLayer viewportLayer = new ViewportLayer(selectionLayer);
 
 		//use a RowSelectionModel that will perform row selections and is able to identify a row via unique ID
-		selectionLayer.setSelectionModel(new RowSelectionModel<PathFixture>(selectionLayer, bodyDataProvider, new PathFixtureRowIdAccessor(this.contents)));
+		selectionLayer.setSelectionModel(new RowSelectionModel<PathFixture>(selectionLayer, bodyDataProvider, new PathFixtureRowIdAccessor(this.contentlist)));
 		
 		//register different selection move command handler that always moves by row
 		selectionLayer.addConfiguration(new RowOnlySelectionConfiguration<PathFixture>());
 		selectionLayer.addConfiguration(new PathSelectionLayerConfiguration());
 		
 		// register path handler
-		OpenPathHandler pathHandler = new OpenPathHandler(selectionLayer, bodyDataProvider);
+		OpenPathHandler pathHandler = new OpenPathHandler(selectionLayer, bodyDataProvider, eventBroker);
 		selectionLayer.registerCommandHandler(pathHandler);
 		
 		
@@ -98,24 +121,24 @@ public class PathCompositeLayer extends CompositeLayer  {
 
 	}
 	
-	private List<PathFixture> getContents(Path dir) {
-		List<PathFixture> result = new ArrayList<>();
+	private boolean fillContentList(Path dir) {
+		contentlist.clear();
 		
 		// add parent path
 		Path parentPath = dir.getParent();
-		result.add(new PathFixture(parentPath));
+		contentlist.add(new PathFixture(parentPath));
 		
 		if (dir != null && Files.isDirectory(dir, LinkOption.NOFOLLOW_LINKS)) {
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 				for (Path entry : stream) {
-					result.add(new PathFixture(entry));
+					contentlist.add(new PathFixture(entry));
 				}
 			} catch (DirectoryIteratorException | IOException ex) {
 				System.out.println(ex.getMessage());
 			}
 
 		}
-		return result;
+		return (contentlist.size() > 1 ? true : false);
 	}
 
     
