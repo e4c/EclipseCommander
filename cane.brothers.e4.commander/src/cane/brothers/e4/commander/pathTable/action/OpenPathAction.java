@@ -20,11 +20,10 @@ import org.eclipse.nebula.widgets.nattable.NatTable;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
 import org.eclipse.swt.events.KeyEvent;
 
-import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
 
 /**
- * TODO
+ * Open new path by keys press action.
  *
  */
 public class OpenPathAction implements IKeyAction {
@@ -38,16 +37,7 @@ public class OpenPathAction implements IKeyAction {
      */
     @Override
     public void run(NatTable natTable, KeyEvent event) {
-
-	if (natTable instanceof PathNatTable) {
-	    PathNatTable pathTable = (PathNatTable) natTable;
-	    int rowPosition = pathTable.getSelectedRowPosition();
-	    System.out.println("rowPos: " + rowPosition);
-
-	    if (rowPosition != -1) {
-		natTable.doCommand(new OpenPathCommand(pathTable, rowPosition));
-	    }
-	}
+	natTable.doCommand(new OpenPathCommand());
     }
 
 }

@@ -18,11 +18,15 @@ package cane.brothers.e4.commander.pathTable.config;
 
 import org.eclipse.nebula.widgets.nattable.config.AbstractUiBindingConfiguration;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
+import org.eclipse.nebula.widgets.nattable.ui.action.IMouseAction;
+import org.eclipse.nebula.widgets.nattable.ui.action.NoOpMouseAction;
 import org.eclipse.nebula.widgets.nattable.ui.binding.UiBindingRegistry;
 import org.eclipse.nebula.widgets.nattable.ui.matcher.KeyEventMatcher;
+import org.eclipse.nebula.widgets.nattable.ui.matcher.MouseEventMatcher;
 import org.eclipse.swt.SWT;
 
 import cane.brothers.e4.commander.pathTable.action.OpenPathAction;
+import cane.brothers.e4.commander.pathTable.action.OpenPathMouseClickAction;
 
 /**
  * TODO
@@ -32,8 +36,13 @@ public class PathSelectionUiBinding extends AbstractUiBindingConfiguration {
 
     @Override
     public void configureUiBindings(UiBindingRegistry uiBindingRegistry) {
+
 	// press Enter
 	configureEnterBindings(uiBindingRegistry, new OpenPathAction());
+
+	// double-click
+	configureBodyMouseClickBindings(uiBindingRegistry,
+		new OpenPathMouseClickAction());
     }
 
     protected void configureEnterBindings(UiBindingRegistry uiBindingRegistry,
@@ -42,6 +51,18 @@ public class PathSelectionUiBinding extends AbstractUiBindingConfiguration {
 		SWT.CR), action);
 	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
 		SWT.CR), action);
+    }
+
+    protected void configureBodyMouseClickBindings(
+	    UiBindingRegistry uiBindingRegistry, IMouseAction action) {
+
+	// added NoOpMouseAction on single click because of Bug 428901
+	uiBindingRegistry.registerFirstSingleClickBinding(
+		MouseEventMatcher.bodyLeftClick(SWT.NONE),
+		new NoOpMouseAction());
+
+	uiBindingRegistry.registerDoubleClickBinding(
+		MouseEventMatcher.bodyLeftClick(SWT.NONE), action);
     }
 
 }

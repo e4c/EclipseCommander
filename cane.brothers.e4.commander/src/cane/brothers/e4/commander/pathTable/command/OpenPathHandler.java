@@ -31,7 +31,7 @@ import cane.brothers.e4.commander.MyEventConstants;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
 
 /**
- * TODO
+ * Open new path. Selection in the table should be not null.
  *
  */
 public class OpenPathHandler extends
