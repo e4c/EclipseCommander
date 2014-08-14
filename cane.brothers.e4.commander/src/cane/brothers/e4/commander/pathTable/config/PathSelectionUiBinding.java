@@ -16,9 +16,8 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.pathTable.config;
 
-import org.eclipse.nebula.widgets.nattable.config.AbstractUiBindingConfiguration;
+import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBindings;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
-import org.eclipse.nebula.widgets.nattable.ui.action.IMouseAction;
 import org.eclipse.nebula.widgets.nattable.ui.action.NoOpMouseAction;
 import org.eclipse.nebula.widgets.nattable.ui.binding.UiBindingRegistry;
 import org.eclipse.nebula.widgets.nattable.ui.matcher.KeyEventMatcher;
@@ -29,22 +28,20 @@ import cane.brothers.e4.commander.pathTable.action.OpenPathAction;
 import cane.brothers.e4.commander.pathTable.action.OpenPathMouseClickAction;
 
 /**
- * TODO
+ * Path row selection binding
  *
  */
-public class PathSelectionUiBinding extends AbstractUiBindingConfiguration {
+public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 
     @Override
     public void configureUiBindings(UiBindingRegistry uiBindingRegistry) {
+	super.configureUiBindings(uiBindingRegistry);
 
 	// press Enter
 	configureEnterBindings(uiBindingRegistry, new OpenPathAction());
-
-	// double-click
-	configureBodyMouseClickBindings(uiBindingRegistry,
-		new OpenPathMouseClickAction());
     }
 
+    // add Enter key binding
     protected void configureEnterBindings(UiBindingRegistry uiBindingRegistry,
 	    IKeyAction action) {
 	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE,
@@ -53,8 +50,11 @@ public class PathSelectionUiBinding extends AbstractUiBindingConfiguration {
 		SWT.CR), action);
     }
 
+    @Override
     protected void configureBodyMouseClickBindings(
-	    UiBindingRegistry uiBindingRegistry, IMouseAction action) {
+	    UiBindingRegistry uiBindingRegistry) {
+
+	super.configureBodyMouseClickBindings(uiBindingRegistry);
 
 	// added NoOpMouseAction on single click because of Bug 428901
 	uiBindingRegistry.registerFirstSingleClickBinding(
@@ -62,7 +62,18 @@ public class PathSelectionUiBinding extends AbstractUiBindingConfiguration {
 		new NoOpMouseAction());
 
 	uiBindingRegistry.registerDoubleClickBinding(
-		MouseEventMatcher.bodyLeftClick(SWT.NONE), action);
+		MouseEventMatcher.bodyLeftClick(SWT.NONE),
+		new OpenPathMouseClickAction());
+    }
+
+    @Override
+    protected void configureColumnHeaderMouseClickBindings(
+	    UiBindingRegistry uiBindingRegistry) {
+    }
+
+    @Override
+    protected void configureRowHeaderMouseClickBindings(
+	    UiBindingRegistry uiBindingRegistry) {
     }
 
 }

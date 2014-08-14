@@ -37,13 +37,12 @@ import org.eclipse.nebula.widgets.nattable.layer.DataLayer;
 import org.eclipse.nebula.widgets.nattable.layer.ILayer;
 import org.eclipse.nebula.widgets.nattable.selection.RowSelectionModel;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
-import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBindings;
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 
 import cane.brothers.e4.commander.pathTable.IRootPath;
 import cane.brothers.e4.commander.pathTable.command.OpenPathHandler;
-import cane.brothers.e4.commander.pathTable.config.PathSelectionLayerConfiguration;
+import cane.brothers.e4.commander.pathTable.config.PathSelectionUiBinding;
 import cane.brothers.e4.commander.pathTable.data.PathColumnPropertyAccessor;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
 import cane.brothers.e4.commander.pathTable.data.PathFixtureRowIdAccessor;
@@ -123,7 +122,6 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 	// by row
 	selectionLayer
 		.addConfiguration(new RowOnlySelectionConfiguration<PathFixture>());
-	selectionLayer.addConfiguration(new PathSelectionLayerConfiguration());
 
 	// register path handler
 	OpenPathHandler pathHandler = new OpenPathHandler(selectionLayer,
@@ -135,7 +133,7 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 	// registering the bindings on a layer that is above the SelectionLayer
 	// will consume the
 	// commands before they are handled by the SelectionLayer
-	viewportLayer.addConfiguration(new RowOnlySelectionBindings());
+	viewportLayer.addConfiguration(new PathSelectionUiBinding());
 
 	ILayer columnHeaderLayer = new ColumnHeaderLayer(new DataLayer(
 		new SimpleColumnHeaderDataProvider(propertyToLabelMap)),
