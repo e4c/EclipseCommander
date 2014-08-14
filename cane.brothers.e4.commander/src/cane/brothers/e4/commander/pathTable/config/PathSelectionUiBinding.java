@@ -79,10 +79,4 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 		MouseEventMatcher.columnHeaderLeftClick(SWT.MOD1),
 		new ViewportSelectFirstPathAction());
     }
-
-    @Override
-    protected void configureRowHeaderMouseClickBindings(
-	    UiBindingRegistry uiBindingRegistry) {
-    }
-
 }
