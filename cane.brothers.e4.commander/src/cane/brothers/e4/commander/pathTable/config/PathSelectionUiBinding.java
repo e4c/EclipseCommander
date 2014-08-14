@@ -26,6 +26,7 @@ import org.eclipse.swt.SWT;
 
 import cane.brothers.e4.commander.pathTable.action.OpenPathAction;
 import cane.brothers.e4.commander.pathTable.action.OpenPathMouseClickAction;
+import cane.brothers.e4.commander.pathTable.action.ViewportSelectFirstPathAction;
 
 /**
  * Path row selection binding
@@ -69,6 +70,14 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
     @Override
     protected void configureColumnHeaderMouseClickBindings(
 	    UiBindingRegistry uiBindingRegistry) {
+
+	uiBindingRegistry.registerSingleClickBinding(
+		MouseEventMatcher.columnHeaderLeftClick(SWT.NONE),
+		new ViewportSelectFirstPathAction());
+
+	uiBindingRegistry.registerSingleClickBinding(
+		MouseEventMatcher.columnHeaderLeftClick(SWT.MOD1),
+		new ViewportSelectFirstPathAction());
     }
 
     @Override
