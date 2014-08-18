@@ -24,7 +24,6 @@ import org.eclipse.nebula.widgets.nattable.command.AbstractLayerCommandHandler;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
-import org.eclipse.nebula.widgets.nattable.selection.command.ClearAllSelectionsCommand;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
 import cane.brothers.e4.commander.MyEventConstants;
@@ -88,9 +87,7 @@ public class OpenPathHandler extends
 	}
 
 	// clear selection
-	selectionLayer.doCommand(new ClearAllSelectionsCommand());
-
-	// TODO select first
+	// selectionLayer.doCommand(new ClearAllSelectionsCommand());
 
 	if (fixture != null) {
 	    // 2. check if directory

@@ -18,6 +18,7 @@ package cane.brothers.e4.commander.pathTable.action;
 
 import org.eclipse.nebula.widgets.nattable.NatTable;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
+import org.eclipse.nebula.widgets.nattable.viewport.command.ViewportSelectRowCommand;
 import org.eclipse.swt.events.KeyEvent;
 
 import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
@@ -37,7 +38,12 @@ public class OpenPathAction implements IKeyAction {
      */
     @Override
     public void run(NatTable natTable, KeyEvent event) {
+	// open new path
 	natTable.doCommand(new OpenPathCommand());
+	
+	// select first
+	natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
+		false));
     }
 
 }

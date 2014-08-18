@@ -18,6 +18,7 @@ package cane.brothers.e4.commander.pathTable.action;
 
 import org.eclipse.nebula.widgets.nattable.NatTable;
 import org.eclipse.nebula.widgets.nattable.ui.action.IMouseClickAction;
+import org.eclipse.nebula.widgets.nattable.viewport.command.ViewportSelectRowCommand;
 import org.eclipse.swt.events.MouseEvent;
 
 import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
@@ -42,6 +43,10 @@ public class OpenPathMouseClickAction implements IMouseClickAction {
 	if (rowPosition != -1) {
 	    natTable.doCommand(new OpenPathCommand());
 	}
+
+	// select first
+	natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
+		false));
     }
 
     /*
