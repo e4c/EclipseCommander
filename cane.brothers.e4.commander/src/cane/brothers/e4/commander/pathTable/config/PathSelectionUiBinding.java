@@ -16,6 +16,7 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.pathTable.config;
 
+import org.eclipse.nebula.widgets.nattable.selection.action.MoveToLastRowAction;
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionBindings;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
 import org.eclipse.nebula.widgets.nattable.ui.action.NoOpMouseAction;
@@ -78,5 +79,22 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 	uiBindingRegistry.registerSingleClickBinding(
 		MouseEventMatcher.columnHeaderLeftClick(SWT.MOD1),
 		new ViewportSelectFirstPathAction());
+    }
+
+    @Override
+    protected void configureMoveDownBindings(
+	    UiBindingRegistry uiBindingRegistry, IKeyAction action) {
+
+	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE,
+		SWT.ARROW_DOWN), action);
+
+	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT,
+		SWT.ARROW_DOWN), action);
+
+	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
+		SWT.ARROW_DOWN), new MoveToLastRowAction());
+
+	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT
+		| SWT.MOD1, SWT.ARROW_DOWN), new MoveToLastRowAction());
     }
 }
