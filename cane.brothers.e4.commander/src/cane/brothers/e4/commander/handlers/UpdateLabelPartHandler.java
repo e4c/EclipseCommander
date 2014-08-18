@@ -44,8 +44,16 @@ public class UpdateLabelPartHandler {
 
 	// update label of current tab
 	if (activePart != null && newPath != null) {
-	    String rootPathString = newPath.getFileName().toString();
+	    String rootPathString = null;
+	    // root path have no file name
+	    if (newPath.getFileName() == null) {
+		rootPathString = newPath.toString();
+	    }
+	    else {
+		rootPathString = newPath.getFileName().toString();
+	    }
 	    activePart.setLabel(rootPathString);
+
 	}
     }
 }

@@ -66,18 +66,21 @@ public class PathUtils {
     }
 
     public static String getPosixAttributesString(Path path) {
-	PosixFileAttributeView basicView = Files.getFileAttributeView(path,
+	PosixFileAttributeView posixView = Files.getFileAttributeView(path,
 		PosixFileAttributeView.class);
 	StringBuilder attrs = new StringBuilder();
 
 	try {
 	    // + all basic attributes
-	    PosixFileAttributes posixAttrs = basicView.readAttributes();
+	    PosixFileAttributes posixAttrs = posixView.readAttributes();
 
-	    attrs.append(PosixFilePermissions.toString(posixAttrs.permissions()));
+	    if (posixAttrs != null) {
+		attrs.append(PosixFilePermissions.toString(posixAttrs
+			.permissions()));
+	    }
 	}
 	catch (IOException e) {
-	    e.printStackTrace();
+	    System.out.println(e.getMessage());
 	}
 	return attrs.toString();
     }

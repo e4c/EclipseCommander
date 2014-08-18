@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -69,7 +68,6 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
     public void setRootPath(Path newPath) {
 	this.rootPath = newPath;
 	fillContentList(rootPath);
-
 	if (columnPropertyAccessor instanceof IRootPath) {
 	    ((IRootPath) columnPropertyAccessor).setRootPath(rootPath);
 	}
@@ -126,7 +124,7 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 	// register path handler
 	OpenPathHandler pathHandler = new OpenPathHandler(selectionLayer,
 		bodyDataProvider, eventBroker);
-	selectionLayer.registerCommandHandler(pathHandler);
+	viewportLayer.registerCommandHandler(pathHandler);
 
 	// register selection bindings that will perform row selections instead
 	// of cell selections
@@ -147,11 +145,13 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
     private boolean fillContentList(Path dir) {
 	contentlist.clear();
 
-	// add parent path
+	// add parent path only if possible
 	Path parentPath = dir.getParent();
-	contentlist.add(new PathFixture(parentPath));
+	if (parentPath != null) {
+	    contentlist.add(new PathFixture(parentPath));
+	}
 
-	if (dir != null && Files.isDirectory(dir, LinkOption.NOFOLLOW_LINKS)) {
+	if (dir != null && Files.isDirectory(dir)) {
 	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 		for (Path entry : stream) {
 		    contentlist.add(new PathFixture(entry));
@@ -162,6 +162,7 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 	    }
 
 	}
+
 	return (contentlist.size() > 1 ? true : false);
     }
 

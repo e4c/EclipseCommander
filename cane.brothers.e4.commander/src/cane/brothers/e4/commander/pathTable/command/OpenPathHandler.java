@@ -17,7 +17,6 @@
 package cane.brothers.e4.commander.pathTable.command;
 
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.util.Set;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -25,6 +24,7 @@ import org.eclipse.nebula.widgets.nattable.command.AbstractLayerCommandHandler;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
+import org.eclipse.nebula.widgets.nattable.selection.command.ClearAllSelectionsCommand;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
 import cane.brothers.e4.commander.MyEventConstants;
@@ -87,11 +87,14 @@ public class OpenPathHandler extends
 	    }
 	}
 
-	// TODO clear selection - select first
+	// clear selection
+	selectionLayer.doCommand(new ClearAllSelectionsCommand());
+
+	// TODO select first
 
 	if (fixture != null) {
 	    // 2. check if directory
-	    if (Files.isDirectory(fixture.getPath(), LinkOption.NOFOLLOW_LINKS)) {
+	    if (Files.isDirectory(fixture.getPath())) {
 		// 2.1 open new path
 		System.out.println("dir");
 

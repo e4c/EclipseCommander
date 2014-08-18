@@ -43,12 +43,15 @@ public class PathFixture {
 	this.path = path;
 
 	if (path != null) {
-	    if (path.getFileName() != null) {
-		this.name = path.getFileName().toString();
+
+	    // root path have no file name
+	    if (path.getFileName() == null) {
+		this.name = path.toString();
 	    }
 	    else {
-		System.out.println("error file name");
+		this.name = path.getFileName().toString();
 	    }
+
 	    try {
 		this.size = Files.size(path);
 	    }
@@ -58,7 +61,7 @@ public class PathFixture {
 	    }
 	}
 	else {
-	    System.out.println("error path");
+	    System.out.println("path is null");
 	}
 
 	this.attributes = PathUtils.getAttributesString(path);

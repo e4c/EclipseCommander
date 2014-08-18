@@ -17,7 +17,6 @@
 package cane.brothers.e4.commander.pathTable.data;
 
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,15 +57,16 @@ public class PathColumnPropertyAccessor implements
     public Object getDataValue(PathFixture rowObject, int columnIndex) {
 	switch (columnIndex) {
 	    case 0:
-		if (parentPath.equals(rowObject.getPath())) {
+		// there are parent path of root path
+		if (parentPath != null
+			&& parentPath.equals(rowObject.getPath())) {
 		    return parentPathStr;
 		}
 		else {
 		    return rowObject.getName();
 		}
 	    case 1:
-		if (Files.isDirectory(rowObject.getPath(),
-			LinkOption.NOFOLLOW_LINKS)) {
+		if (Files.isDirectory(rowObject.getPath())) {
 		    return pathDirSizeStr;
 		}
 		else {
