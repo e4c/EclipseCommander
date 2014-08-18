@@ -146,4 +146,23 @@ public class PartUtils {
 		null, null, tags);
 	System.out.println("Found parts(s) : " + elementsWithTags.size());
     }
+
+    // activePart must be not null
+    public static List<MPart> findActiveOppositeTabs(MApplication application,
+	    EModelService modelService, MPart activePart) {
+	List<MPart> oppositeTabs = new ArrayList<MPart>();
+	if (activePart != null) {
+	    String oppositePanelId = getPanelId(activePart, true);
+	    MUIElement oppositePanel = modelService.find(oppositePanelId,
+		    application);
+
+	    List<String> searchTags = new ArrayList<String>();
+	    searchTags.add("active");
+
+	    oppositeTabs.addAll(modelService.findElements(oppositePanel, null,
+		    MPart.class, searchTags));
+	}
+	return oppositeTabs;
+    }
+
 }

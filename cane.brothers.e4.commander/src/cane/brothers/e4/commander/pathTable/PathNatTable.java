@@ -199,4 +199,22 @@ public class PathNatTable extends NatTable implements IRootPath {
 	}
 	return -1;
     }
+
+    /**
+     * clear selection
+     */
+    public void clearSelection() {
+	SelectionLayer selLayer = getSelectionLayer();
+	if (selLayer != null) {
+	    selLayer.clear();
+	}
+
+    }
+
+    private SelectionLayer getSelectionLayer() {
+	if (compositeLayer != null) {
+	    return compositeLayer.getSelectionLayer();
+	}
+	return null;
+    }
 }
