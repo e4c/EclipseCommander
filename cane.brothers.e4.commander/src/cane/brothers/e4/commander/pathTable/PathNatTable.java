@@ -174,6 +174,9 @@ public class PathNatTable extends NatTable implements IRootPath {
 	setLayer(compositeLayer);
 	configure();
 
+	// add overlay painter for full borders
+	// addOverlayPainter(new NatTableBorderOverlayPainter());
+
 	setTheme(theme);
     }
 
