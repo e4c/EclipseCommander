@@ -64,6 +64,13 @@ public class DynamicTab {
      */
     private PathNatTable table;
 
+    /**
+     * @return the table
+     */
+    public PathNatTable getTable() {
+	return table;
+    }
+
     private Path rootPath;
 
     private final Color bgColor = Display.getCurrent().getSystemColor(
