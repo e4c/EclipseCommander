@@ -211,7 +211,6 @@ public class PathNatTable extends NatTable implements IRootPath {
 	if (selLayer != null) {
 	    selLayer.clear();
 	}
-
     }
 
     private SelectionLayer getSelectionLayer() {
@@ -220,4 +219,18 @@ public class PathNatTable extends NatTable implements IRootPath {
 	}
 	return null;
     }
+
+    // /* (non-Javadoc)
+    // * @see org.eclipse.swt.widgets.Composite#setFocus()
+    // */
+    // @Override
+    // public boolean setFocus() {
+    // return super.setFocus();
+    //
+    // SelectionLayer selLayer = getSelectionLayer();
+    // if (selLayer != null) {
+    // selLayer.clear();
+    // }
+    //
+    // }
 }

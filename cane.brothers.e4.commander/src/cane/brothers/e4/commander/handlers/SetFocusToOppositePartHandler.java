@@ -16,8 +16,6 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,9 +24,6 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
-
-import cane.brothers.e4.commander.PartUtils;
-import cane.brothers.e4.commander.parts.DynamicTab;
 
 /**
  * set focus to opposite part by Tab key.
@@ -51,31 +46,31 @@ public class SetFocusToOppositePartHandler {
 
 	if (activePart != null) {
 
-	    // clear selection on current tab
-	    if (activePart.getObject() instanceof DynamicTab) {
-		DynamicTab currentTab = (DynamicTab) activePart.getObject();
-		currentTab.clearSelection();
-	    }
-
-	    // set focus to opposite active tab
-	    List<MPart> oppositeTabs = PartUtils.findActiveOppositeTabs(
-		    application, modelService, activePart);
-
-	    // pass throw all opposite active tab and remove selections
-	    for (MPart elem : oppositeTabs) {
-		System.out.println(elem);
-		if (elem.getObject() instanceof DynamicTab) {
-		    System.out.println("set focus to opposite tab");
-
-		    DynamicTab oppositeTab = (DynamicTab) elem.getObject();
-
-		    if (oppositeTab.getTable() != null) {
-			oppositeTab.getTable().setFocus();
-
-			// TODO select first
-		    }
-		}
-	    }
+	    // // clear selection on current tab
+	    // if (activePart.getObject() instanceof DynamicTab) {
+	    // DynamicTab currentTab = (DynamicTab) activePart.getObject();
+	    // currentTab.clearSelection();
+	    // }
+	    //
+	    // // set focus to opposite active tab
+	    // List<MPart> oppositeTabs = PartUtils.findVisibleOppositeTab(
+	    // application, modelService, activePart);
+	    //
+	    // // pass throw all opposite active tab and remove selections
+	    // for (MPart elem : oppositeTabs) {
+	    // System.out.println(elem);
+	    // if (elem.getObject() instanceof DynamicTab) {
+	    // System.out.println("set focus to opposite tab");
+	    //
+	    // DynamicTab oppositeTab = (DynamicTab) elem.getObject();
+	    //
+	    // if (oppositeTab.getTable() != null) {
+	    // oppositeTab.getTable().setFocus();
+	    //
+	    // // TODO select first
+	    // }
+	    // }
+	    // }
 	}
     }
 }

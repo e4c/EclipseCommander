@@ -23,7 +23,10 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 /**
  * 
@@ -148,21 +151,32 @@ public class PartUtils {
     }
 
     // activePart must be not null
-    public static List<MPart> findActiveOppositeTabs(MApplication application,
-	    EModelService modelService, MPart activePart) {
-	List<MPart> oppositeTabs = new ArrayList<MPart>();
+    public static MPart getVisibleOppositePart(MApplication application,
+	    EModelService modelService, EPartService partService,
+	    MPart activePart) {
+	MPart visiblePart = null;
+
 	if (activePart != null) {
+	    // find opposite panel
 	    String oppositePanelId = getPanelId(activePart, true);
 	    MUIElement oppositePanel = modelService.find(oppositePanelId,
 		    application);
 
-	    List<String> searchTags = new ArrayList<String>();
-	    searchTags.add("active");
+	    if (oppositePanel instanceof MPartStack) {
+		for (MStackElement elem : ((MPartStack) oppositePanel)
+			.getChildren()) {
+		    if (elem instanceof MPart) {
+			MPart part = (MPart) elem;
 
-	    oppositeTabs.addAll(modelService.findElements(oppositePanel, null,
-		    MPart.class, searchTags));
+			// get opposite visible part
+			if (partService.isPartVisible(part)) {
+			    visiblePart = part;
+			    break;
+			}
+		    }
+		}
+	    }
 	}
-	return oppositeTabs;
+	return visiblePart;
     }
-
 }

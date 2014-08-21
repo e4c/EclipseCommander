@@ -18,7 +18,6 @@ package cane.brothers.e4.commander.parts;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -33,10 +32,16 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
@@ -59,6 +64,19 @@ public class DynamicTab {
     @Inject
     MApplication application;
 
+    @Inject
+    IEclipseContext context;
+
+    @Inject
+    @Named(IServiceConstants.ACTIVE_PART)
+    MPart activePart;
+
+    @Inject
+    ESelectionService selectionService;
+
+    @Inject
+    EPartService partService;
+
     /**
      * GUI stuff
      */
@@ -77,31 +95,70 @@ public class DynamicTab {
 	    SWT.COLOR_WHITE);
 
     @Inject
-    IEclipseContext context;
-
-    @Inject
     public DynamicTab() {
     }
 
     @PostConstruct
     public void createPartControl(Composite parent) {
 
-	parent.setBackground(bgColor);
+	Composite panel = new Composite(parent, SWT.NONE);
+	// panel.setLayout(new GridLayout(2, true));
+
+	panel.setBackground(bgColor);
 
 	GridLayout gridLayout = new GridLayout();
 	gridLayout.marginWidth = 0;
-	parent.setLayout(gridLayout);
+	panel.setLayout(gridLayout);
 
 	// TODO switch context
 	rootPath = Paths.get(context.get("rootPath").toString());
 	// rootPath = Paths.get(activePart.getPersistedState().get("rootPath"));
 
 	// create path table
-	table = new PathNatTable(parent, rootPath, eventBroker);
+	table = new PathNatTable(panel, rootPath, eventBroker);
 	table.setBackground(bgColor);
 
 	// layout
 	GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
+
+	// add a region for buttons
+	Composite buttonArea = new Composite(panel, SWT.NONE);
+	buttonArea.setLayout(new RowLayout());
+	GridDataFactory.fillDefaults().grab(true, false).span(2, 1)
+		.applyTo(buttonArea);
+
+	// create a button to enable selection provider change
+	Button button = new Button(buttonArea, SWT.PUSH);
+	button.setText("focus");
+	button.addSelectionListener(new SelectionAdapter() {
+	    @Override
+	    public void widgetSelected(SelectionEvent e) {
+		// table.doCommand(new VisualRefreshCommand());
+		setFocus();
+
+		// clear other selections
+		if (activePart != null) {
+		    MPart oppositePart = PartUtils.getVisibleOppositePart(
+			    application, modelService, partService, activePart);
+
+		    if (oppositePart != null) {
+			if (oppositePart.getObject() instanceof DynamicTab) {
+			    System.out
+				    .println("remove selection from opposite tab");
+
+			    DynamicTab oppositeTab = (DynamicTab) oppositePart
+				    .getObject();
+
+			    oppositeTab.clearSelection();
+			    // selectionService.setSelection(oppositeTab);
+
+			    oppositeTab.setFocus();
+			}
+
+		    }
+		}
+	    }
+	});
     }
 
     @Inject
@@ -131,26 +188,18 @@ public class DynamicTab {
     }
 
     @Focus
-    private void setFocus(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
+    private void setFocus() {
 	if (table != null) {
-	    table.setFocus();
-	}
-
-	// clear other selections
-	if (activePart != null) {
-	    List<MPart> oppositeTabs = PartUtils.findActiveOppositeTabs(
-		    application, modelService, activePart);
-
-	    // pass throw all opposite active tab and remove selections
-	    for (MPart elem : oppositeTabs) {
-		System.out.println(elem);
-		if (elem.getObject() instanceof DynamicTab) {
-		    System.out.println("remove selection from opposite tab");
-
-		    DynamicTab oppositeTab = (DynamicTab) elem.getObject();
-		    oppositeTab.clearSelection();
-		}
+	    if (table.setFocus()) {
+		System.out.println("set focus for table");
 	    }
 	}
     }
+
+    @Override
+    public String toString() {
+	return super.toString() + " "
+		+ (rootPath != null ? rootPath.toString() : rootPath);
+    }
+
 }
