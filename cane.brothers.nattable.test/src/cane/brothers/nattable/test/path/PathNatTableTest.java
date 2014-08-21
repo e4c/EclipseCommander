@@ -54,6 +54,7 @@ public class PathNatTableTest {
 	 *            the shell
 	 */
 	private void createContents(Composite parent) {
+		
 		Path homePath = Paths.get(System.getenv().get("HOME")); 
 		final NatTable natTable = new NatTable(parent, new PathCompositeLayer(homePath), false);
 		
