@@ -41,6 +41,10 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 
 	// press Enter
 	configureEnterBindings(uiBindingRegistry, new OpenPathAction());
+
+	// press Tab
+	// configureTabBindings(uiBindingRegistry,
+	// new ViewportSelectOppositePathAction());
     }
 
     // add Enter key binding
@@ -50,6 +54,17 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 		SWT.CR), action);
 	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
 		SWT.CR), action);
+    }
+
+    // add Tab key binding
+    protected void configureTabBindings(UiBindingRegistry uiBindingRegistry,
+	    IKeyAction action) {
+	// unregisterKeyBinding
+
+	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT,
+		SWT.TAB), action);
+	// uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
+	// SWT.TAB), action);
     }
 
     @Override

@@ -1,7 +1,7 @@
 /*******************************************************************************
- * File: SelectFirstPathClickAction.java
+ * File: ViewportSelectOppositePathAction.java
  * 
- * Date: 14 авг. 2014 г.
+ * Date: 19 авг. 2014 г.
  * Author: Mikhail Niedre
  * 
  * Copyright (c) 2014 Original authors and others.
@@ -17,48 +17,37 @@
 package cane.brothers.e4.commander.pathTable.action;
 
 import org.eclipse.nebula.widgets.nattable.NatTable;
-import org.eclipse.nebula.widgets.nattable.ui.action.IMouseClickAction;
-import org.eclipse.nebula.widgets.nattable.viewport.action.ViewportSelectRowAction;
+import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
 import org.eclipse.nebula.widgets.nattable.viewport.command.ViewportSelectRowCommand;
-import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.widgets.Composite;
 
 /**
- * It simply select first path.
- * 
- * @see ViewportSelectRowAction
+ * select first path on the opposite tab.
  */
-public class ViewportSelectFirstPathAction implements IMouseClickAction {
+public class ViewportSelectOppositePathAction implements IKeyAction {
 
     /*
      * (non-Javadoc)
      * 
      * @see
-     * org.eclipse.nebula.widgets.nattable.ui.action.IMouseAction#run(org.eclipse
-     * .nebula.widgets.nattable.NatTable, org.eclipse.swt.events.MouseEvent)
+     * org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction#run(org.eclipse
+     * .nebula.widgets.nattable.NatTable, org.eclipse.swt.events.KeyEvent)
      */
     @Override
-    public void run(NatTable natTable, MouseEvent event) {
+    public void run(NatTable natTable, KeyEvent event) {
+
+	// new SetFocusToOppositePartHandler().execute();
+
 	// first row
 	int rowPosition = 1;
+
+	Composite cmp = natTable.getParent();
 
 	// only perform the selection if the cursor is null
 	if (natTable.getCursor() == null) {
 	    natTable.doCommand(new ViewportSelectRowCommand(natTable,
 		    rowPosition, false, false));
 	}
-
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.nebula.widgets.nattable.ui.action.IMouseClickAction#isExclusive
-     * ()
-     */
-    @Override
-    public boolean isExclusive() {
-	return true;
-    }
-
 }
