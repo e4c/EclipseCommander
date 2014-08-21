@@ -40,10 +40,12 @@ public class OpenPathAction implements IKeyAction {
     public void run(NatTable natTable, KeyEvent event) {
 	// open new path
 	natTable.doCommand(new OpenPathCommand());
-	
+
 	// select first
-	natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
-		false));
+	if (natTable.getCursor() == null) {
+	    natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
+		    false));
+	}
     }
 
 }
