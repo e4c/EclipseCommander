@@ -16,10 +16,12 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.lifecycle;
 
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import org.apache.commons.lang.SystemUtils;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -85,50 +87,77 @@ public class LifeCycleManager {
 	System.out.println("processAdditions()");
 
 	// set default path
-	Path rootPath = Paths.get(System.getenv().get("HOME"));
-	String rootPathString = rootPath.getFileName().toString();
+	Path rootPath = setDefaultPath();
+	String rootPathString = null;
+	
+	if(rootPath != null) {
+		
+		if(rootPath.getFileName() != null) {
+			rootPathString = rootPath.getFileName().toString();
+		} else {
+			rootPathString = rootPath.toString();
+		}
+		
+		// FIXME set general context value
+		context.set("rootPath", rootPath.toString());
+		
+		// persist default path
+		// prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH, rootPathString);
+		
+		//
+		// create first parts, one left and one right
+		//
+		
+		// left part
+		MPart leftPart = PartUtils.createPart(modelService);
+		
+		leftPart.setLabel(rootPathString);
+		leftPart.setElementId(PartUtils.createElementId());
+		
+		Map<String, String> state = leftPart.getPersistedState();
+		state.put("rootPath", rootPath.toString());
+		
+		// add tab to left stack
+		MPartStack leftPartStack = (MPartStack) modelService.find(
+				IdStorage.LEFT_PANEL_ID, application);
+		
+		leftPartStack.getChildren().add(leftPart);
+		
+		// right part
+		MPart rightPart = PartUtils.createPart(modelService);
+		
+		rightPart.setLabel(rootPathString);
+		rightPart.setElementId(PartUtils.createElementId());
+		
+		state = rightPart.getPersistedState();
+		state.put("rootPath", rootPath.toString());
+		
+		// add tab to right stack
+		MPartStack rightPartStack = (MPartStack) modelService.find(
+				IdStorage.RIGHT_PANEL_ID, application);
+		rightPartStack.getChildren().add(rightPart);
+	}
 
-	// FIXME set general context value
-	context.set("rootPath", rootPath.toString());
-
-	// persist default path
-	// prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH, rootPathString);
-
-	//
-	// create first parts, one left and one right
-	//
-
-	// left part
-	MPart leftPart = PartUtils.createPart(modelService);
-
-	leftPart.setLabel(rootPathString);
-	leftPart.setElementId(PartUtils.createElementId());
-
-	Map<String, String> state = leftPart.getPersistedState();
-	state.put("rootPath", rootPath.toString());
-
-	// add tab to left stack
-	MPartStack leftPartStack = (MPartStack) modelService.find(
-		IdStorage.LEFT_PANEL_ID, application);
-
-	leftPartStack.getChildren().add(leftPart);
-
-	// right part
-	MPart rightPart = PartUtils.createPart(modelService);
-
-	rightPart.setLabel(rootPath.getFileName().toString());
-	rightPart.setElementId(PartUtils.createElementId());
-
-	state = rightPart.getPersistedState();
-	state.put("rootPath", rootPath.toString());
-
-	// add tab to right stack
-	MPartStack rightPartStack = (MPartStack) modelService.find(
-		IdStorage.RIGHT_PANEL_ID, application);
-	rightPartStack.getChildren().add(rightPart);
 
 	// setAppWindowSize();
     }
+
+    /**
+     * Default path can be different for various OS
+     * 
+     * @return default path
+     */
+	private Path setDefaultPath() {
+		Path defaultPath = Paths.get("");
+		
+		if(SystemUtils.IS_OS_WINDOWS) {
+			defaultPath = Paths.get("C:\\"); //$NON-NLS-1$
+		} 
+		else if(SystemUtils.IS_OS_MAC_OSX) {
+			defaultPath = Paths.get(System.getenv().get("HOME")); //$NON-NLS-1$
+		}
+		return defaultPath;
+	}
 
     // private void setAppWindowSize() {
     // MWindow window = (MWindow) modelService.find(IdStorage.WINDOW_ID,

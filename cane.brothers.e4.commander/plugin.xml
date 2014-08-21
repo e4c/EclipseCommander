@@ -30,6 +30,10 @@
                name="lifeCycleURI"
                value="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.lifecycle.LifeCycleManager">
          </property>
+         <property
+               name="windowImages"
+               value="icons/application_side_tree.png">
+         </property>
       </product>
    </extension>
    <extension
