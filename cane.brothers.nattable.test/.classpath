@@ -2,10 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/cane.brothers.nattable"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt_3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jface"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/nattable"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt_win"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt_3"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/jface"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/nattable"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
