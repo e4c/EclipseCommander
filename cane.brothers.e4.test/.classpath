@@ -5,6 +5,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jface"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt_3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt_win"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
