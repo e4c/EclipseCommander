@@ -28,6 +28,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
+import cane.brothers.e4.commander.parts.DynamicTab;
+
 /**
  * 
  * Part's utils class.
@@ -178,5 +180,54 @@ public class PartUtils {
 	    }
 	}
 	return visiblePart;
+    }
+
+    /**
+     * @param part
+     *            MPart associated with DynamicTab
+     * @return DynamicTab association
+     */
+    public static DynamicTab getTab(MPart part) {
+	DynamicTab tab = null;
+	if (part != null) {
+	    if (part.getObject() instanceof DynamicTab) {
+		tab = (DynamicTab) part.getObject();
+	    }
+	    else {
+		System.out
+			.println("Error: it is not a kind of DynamicTab part");
+	    }
+	}
+	else {
+	    System.out.println("Error: part is null");
+	}
+	return tab;
+    }
+
+    /**
+     * Clear table selection on the tab
+     * 
+     * @param part
+     *            MPart associated with DynamicTab
+     */
+    public static void clearSelection(MPart part) {
+	DynamicTab tab = getTab(part);
+	if (tab != null) {
+	    tab.clearSelection();
+	}
+    }
+
+    /**
+     * Set table focus and selection on the tab
+     * 
+     * @param part
+     *            MPart associated with DynamicTab
+     */
+    public static void setSelection(MPart part) {
+	DynamicTab tab = getTab(part);
+	if (tab != null) {
+	    tab.setFocus();
+	    tab.setSelection();
+	}
     }
 }

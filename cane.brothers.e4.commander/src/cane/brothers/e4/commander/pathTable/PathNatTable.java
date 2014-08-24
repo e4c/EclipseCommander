@@ -220,6 +220,16 @@ public class PathNatTable extends NatTable implements IRootPath {
 	return null;
     }
 
+    /**
+     * select first row in the table
+     */
+    public void setDefaultSelection() {
+	SelectionLayer selLayer = getSelectionLayer();
+	if (selLayer != null) {
+	    selLayer.selectRow(0, 0, false, false);
+	}
+    }
+
     // /* (non-Javadoc)
     // * @see org.eclipse.swt.widgets.Composite#setFocus()
     // */

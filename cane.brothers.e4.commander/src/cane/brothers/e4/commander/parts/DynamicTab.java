@@ -133,30 +133,23 @@ public class DynamicTab {
 	button.addSelectionListener(new SelectionAdapter() {
 	    @Override
 	    public void widgetSelected(SelectionEvent e) {
-		// table.doCommand(new VisualRefreshCommand());
-		setFocus();
 
-		// clear other selections
-		if (activePart != null) {
-		    MPart oppositePart = PartUtils.getVisibleOppositePart(
-			    application, modelService, partService, activePart);
+		// clear current selection
+		PartUtils.clearSelection(activePart);
+		System.out.println("remove selection from current tab");
 
-		    if (oppositePart != null) {
-			if (oppositePart.getObject() instanceof DynamicTab) {
-			    System.out
-				    .println("remove selection from opposite tab");
+		MPart oppositePart = PartUtils.getVisibleOppositePart(
+			application, modelService, partService, activePart);
 
-			    DynamicTab oppositeTab = (DynamicTab) oppositePart
-				    .getObject();
+		// TODO will be not necessary after #31
+		// clear opposite part selection
+		PartUtils.clearSelection(oppositePart);
+		System.out.println("remove selection from opposite tab");
 
-			    oppositeTab.clearSelection();
-			    // selectionService.setSelection(oppositeTab);
-
-			    oppositeTab.setFocus();
-			}
-
-		    }
-		}
+		// set opposite tab focus and selection
+		PartUtils.setSelection(oppositePart);
+		System.out
+			.println("set focus and default selection on opposite tab");
 	    }
 	});
     }
@@ -187,8 +180,17 @@ public class DynamicTab {
 	}
     }
 
+    /**
+     * set default table selection
+     */
+    public void setSelection() {
+	if (table != null) {
+	    table.setDefaultSelection();
+	}
+    }
+
     @Focus
-    private void setFocus() {
+    public void setFocus() {
 	if (table != null) {
 	    if (table.setFocus()) {
 		System.out.println("set focus for table");
