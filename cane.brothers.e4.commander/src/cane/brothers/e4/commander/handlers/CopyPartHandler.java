@@ -35,8 +35,8 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.IdStorage;
-import cane.brothers.e4.commander.PartUtils;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
+import cane.brothers.e4.commander.utils.PartUtils;
 
 /**
  * Copy tab to other panel using PartDescriptor.

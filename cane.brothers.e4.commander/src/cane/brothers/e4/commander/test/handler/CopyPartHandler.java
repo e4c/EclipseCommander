@@ -27,7 +27,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
-import cane.brothers.e4.commander.PartUtils;
+import cane.brothers.e4.commander.utils.PartUtils;
 
 /**
  * Open new tab directly after active part.

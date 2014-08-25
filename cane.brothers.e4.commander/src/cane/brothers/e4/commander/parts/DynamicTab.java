@@ -46,8 +46,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import cane.brothers.e4.commander.MyEventConstants;
-import cane.brothers.e4.commander.PartUtils;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
+import cane.brothers.e4.commander.utils.PartUtils;
 
 /**
  * Dynamic Tab. GUI class of part descriptor implementation.

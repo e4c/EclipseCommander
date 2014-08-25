@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import cane.brothers.e4.commander.pathTable.utils.PathUtils;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
  * TODO

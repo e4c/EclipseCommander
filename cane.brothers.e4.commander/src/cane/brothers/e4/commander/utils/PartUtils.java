@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brothers.e4.commander;
+package cane.brothers.e4.commander.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.parts.DynamicTab;
 
 /**

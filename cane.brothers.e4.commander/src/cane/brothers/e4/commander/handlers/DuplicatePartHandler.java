@@ -31,8 +31,9 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.IdStorage;
-import cane.brothers.e4.commander.PartUtils;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
+import cane.brothers.e4.commander.utils.PartUtils;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
  * Open new tab directly after active part using PartDescriptor.
@@ -41,82 +42,82 @@ import cane.brothers.e4.commander.preferences.PreferenceConstants;
  * 
  */
 public class DuplicatePartHandler {
-    @Inject
-    EPartService partService;
+	@Inject
+	EPartService partService;
 
-    @Inject
-    @Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
-    boolean stayActiveTab;
+	@Inject
+	@Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
+	boolean stayActiveTab;
 
-    @Execute
-    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-	System.out.println((this.getClass().getSimpleName() + " called"));
+	@Execute
+	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
+		System.out.println((this.getClass().getSimpleName() + " called"));
 
-	// �������� ������� ������������ ������ ��� ����,
-	// ����� ���������� id � ��� ��� ����� �������.
+		// �������� ������� ������������ ������ ��� ����,
+		// ����� ���������� id � ��� ��� ����� �������.
 
-	// create a new Part based on a PartDescriptor
-	// in the application model
-	// assume the ID is used for the PartDescriptor
-	MPart newPart = partService
-		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	newPart = copyPart(newPart, activePart);
+		// create a new Part based on a PartDescriptor
+		// in the application model
+		// assume the ID is used for the PartDescriptor
+		MPart newPart = partService
+				.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+		newPart = copyPart(newPart, activePart);
 
-	// If multiple parts of this type are now allowed
-	// in the application model,
-	// then the provided part will be shown
-	// and returned
-	newPart = partService.showPart(newPart, PartState.VISIBLE);
+		// If multiple parts of this type are now allowed
+		// in the application model,
+		// then the provided part will be shown
+		// and returned
+		newPart = partService.showPart(newPart, PartState.VISIBLE);
 
-	// The current tab will stay active
-	partService.showPart(stayActiveTab ? activePart : newPart,
-		PartState.ACTIVATE);
-    }
-
-    private MPart copyPart(MPart newPart, MPart part) {
-	if (part != null) {
-
-	    // load root path
-	    Map<String, String> state = part.getPersistedState();
-	    Path rootPath = Paths.get(state.get("rootPath"));
-	    String rootPathString = rootPath.getFileName().toString();
-	    newPart.setLabel(rootPathString);
-	    // newPart.setLabel(PartUtils.createPartLabel(part));
-
-	    newPart.setElementId(PartUtils.createElementId());
-	    // newPart.setElementId(PartUtils.createElementId(part));
-
-	    // NB! copy also "active" tag
-	    newPart.getTags().addAll(part.getTags());
-
-	    /**
-	     * ������� ContributionURI ��, ��� �����, ���������� id view part,
-	     * ������� ����� �������������� ��� �������� ����� �������.
-	     */
-	    // ������ ContributionURI ����� �����, ����� ������� ����� ��������
-	    // ������ ������� - ���������� ��� PartDescriptor id - ���� �����
-	    // newPart.setContributionURI(part.getContributionURI());
-
-	    if (part.getParent() != null) {
-		System.out.println("Parent id: "
-			+ part.getParent().getElementId());
-	    }
-
-	    // newPart.setCloseable(part.isCloseable());
-	    // ��������� ����� ������� �� ���� �������
-	    // 1.
-	    newPart.setParent(part.getParent());
-
-	    // 2.
-	    // MElementContainer<MUIElement> container = part.getParent();
-	    // container.getChildren().add(newPart);
-
-	    // 3. EPartService
-	    // MPartStack stack = (MPartStack)modelService.find(stack_id,
-	    // application);
-	    // stack.getChildren().add(part);
+		// The current tab will stay active
+		partService.showPart(stayActiveTab ? activePart : newPart,
+				PartState.ACTIVATE);
 	}
 
-	return newPart;
-    }
+	private MPart copyPart(MPart newPart, MPart part) {
+		if (part != null) {
+
+			// load root path
+			Map<String, String> state = part.getPersistedState();
+			Path rootPath = Paths.get(state.get("rootPath"));
+
+			newPart.setLabel(PathUtils.getFileName(rootPath));
+			// newPart.setLabel(PartUtils.createPartLabel(part));
+
+			newPart.setElementId(PartUtils.createElementId());
+			// newPart.setElementId(PartUtils.createElementId(part));
+
+			// NB! copy also "active" tag
+			newPart.getTags().addAll(part.getTags());
+
+			/**
+			 * ������� ContributionURI ��, ��� �����, ���������� id view part,
+			 * ������� ����� �������������� ��� �������� ����� �������.
+			 */
+			// ������ ContributionURI ����� �����, ����� ������� ����� ��������
+			// ������ ������� - ���������� ��� PartDescriptor id - ���� �����
+			// newPart.setContributionURI(part.getContributionURI());
+
+			if (part.getParent() != null) {
+				System.out.println("Parent id: "
+						+ part.getParent().getElementId());
+			}
+
+			// newPart.setCloseable(part.isCloseable());
+			// ��������� ����� ������� �� ���� �������
+			// 1.
+			newPart.setParent(part.getParent());
+
+			// 2.
+			// MElementContainer<MUIElement> container = part.getParent();
+			// container.getChildren().add(newPart);
+
+			// 3. EPartService
+			// MPartStack stack = (MPartStack)modelService.find(stack_id,
+			// application);
+			// stack.getChildren().add(part);
+		}
+
+		return newPart;
+	}
 }
