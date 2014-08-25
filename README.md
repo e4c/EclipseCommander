@@ -11,15 +11,17 @@ _Eclipse Commander_ is open-source [file manager][8] built on the [Eclipse 4][9]
 Targets
 -------
 
- * create file manager based [e4][9] platform using new programming model.
- * apply the knowledge of Java NIO.2 I have acquired during preparation for [OCAJP7][6].
+ * create file manager based on [e4][9] platform using new programming model.
+ * apply the knowledge of Java NIO.2 I have acquired during preparation of [OCAJP7][6].
  * apply the knowledge and skills of [NatTable][7].
 
 
 Features
 -------
  
- * using bouth selection styles (like in Total Commander and Windows)
+ * using bouth selection styles:
+   - selection at once
+   - selection with cursor
  
 
 Structure
@@ -32,7 +34,7 @@ Structure
 Third-party libraries
 -------
 
-- [e4Preferences][5] - свойства e4 в диалоговом окне как для RCP.
+- [e4Preferences][5] - e4 preferences in the RCP preferences dialog.
 - [Nebula NatTable][7] - NatTable is a powerful and flexible SWT table/grid widget that is built to handle very large data sets, real-time updates, dynamic styling, and more.
 
 
