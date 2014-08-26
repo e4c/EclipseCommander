@@ -37,10 +37,18 @@
   <handlers xmi:id="_A3XDQARYEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.handler.PreferencesHandler" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_eFElgARWEeSRJPX1RYcCyQ"/>
   <handlers xmi:id="_eLzIcCAJEeSEDas-SlsudA" elementId="cane.brothers.e4.commander.handler.UpdateLabelPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.UpdateLabelPartHandler" command="_8E3p8CAJEeSEDas-SlsudA"/>
   <bindingTables xmi:id="_mKUpMFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.bindingtable.0" bindingContext="_s7WREFnPEeOT-PJJdUfiZQ">
-    <bindings xmi:id="_wzTaEFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T" command="_272gkP9uEeOZGL8AHW3wCQ"/>
-    <bindings xmi:id="_R7EHAAO3EeSxOp60xrSWbA" elementId="cane.brothers.e4.commander.keybinding.copyTabToOtherPanel" keySequence="M1+M2+T" command="_umqtkP-KEeOZGL8AHW3wCQ"/>
-    <bindings xmi:id="_kQTAYARQEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.keybinding.closeTab" keySequence="M1+W" command="_Y5AKoFmvEeOT-PJJdUfiZQ"/>
-    <bindings xmi:id="_lmtHwARSEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.keybinding.exit" keySequence="M3+F4" command="_OqxgQFmoEeOT-PJJdUfiZQ"/>
+    <bindings xmi:id="_wzTaEFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T" command="_272gkP9uEeOZGL8AHW3wCQ">
+      <tags>type:user</tags>
+    </bindings>
+    <bindings xmi:id="_R7EHAAO3EeSxOp60xrSWbA" elementId="cane.brothers.e4.commander.keybinding.copyTabToOtherPanel" keySequence="M1+M2+T" command="_umqtkP-KEeOZGL8AHW3wCQ">
+      <tags>type:user</tags>
+    </bindings>
+    <bindings xmi:id="_kQTAYARQEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.keybinding.closeTab" keySequence="M1+W" command="_Y5AKoFmvEeOT-PJJdUfiZQ">
+      <tags>type:user</tags>
+    </bindings>
+    <bindings xmi:id="_lmtHwARSEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.keybinding.exit" keySequence="M3+F4" command="_OqxgQFmoEeOT-PJJdUfiZQ">
+      <tags>type:user</tags>
+    </bindings>
   </bindingTables>
   <rootContext xmi:id="_s7WREFnPEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
   <descriptors xmi:id="_LxzbwP9vEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic" label="dynamic part" allowMultiple="true" closeable="true" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab">
