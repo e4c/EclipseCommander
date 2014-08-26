@@ -37,6 +37,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.utils.PartUtils;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
  * Copy tab to other panel using PartDescriptor.
@@ -90,13 +91,9 @@ public class CopyPartHandler {
 
 	    Map<String, String> state = part.getPersistedState();
 	    Path rootPath = Paths.get(state.get("rootPath"));
-	    String rootPathString = rootPath.getFileName().toString();
-	    newPart.setLabel(rootPathString);
 
-	    // newPart.setLabel(PartUtils.createPartLabel(part));
-
+	    newPart.setLabel(PathUtils.getFileName(rootPath));
 	    newPart.setElementId(PartUtils.createElementId());
-	    // newPart.setElementId(PartUtils.createElementId(part));
 
 	    // NB! copy also "active" tag
 	    newPart.getTags().addAll(part.getTags());
