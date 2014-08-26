@@ -37,6 +37,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.utils.PartUtils;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
  * Copy tab to other panel using PartDescriptor.
@@ -45,64 +46,63 @@ import cane.brothers.e4.commander.utils.PartUtils;
  */
 public class CopyPartHandler {
 
-    @Inject
-    EModelService modelService;
+	@Inject
+	EModelService modelService;
 
-    @Inject
-    MApplication application;
+	@Inject
+	MApplication application;
 
-    @Inject
-    EPartService partService;
+	@Inject
+	EPartService partService;
 
-    @SuppressWarnings("restriction")
-    @Inject
-    @Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
-    boolean stayActiveTab;
+	@SuppressWarnings("restriction")
+	@Inject
+	@Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
+	boolean stayActiveTab;
 
-    @Execute
-    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-	System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
+	@Execute
+	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
+		System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
 
-	MPart newPart = partService
-		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	newPart = copyPart(newPart, activePart);
+		MPart newPart = partService
+				.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+		newPart = copyPart(newPart, activePart);
 
-	// ��������� ����� ������� �� ������ �������
+		// ��������� ����� ������� �� ������ �������
 
-	String oppositePanelId = PartUtils.getPanelId(activePart, true);
-	MUIElement oppositePanel = modelService.find(oppositePanelId,
-		application);
+		String oppositePanelId = PartUtils.getPanelId(activePart, true);
+		MUIElement oppositePanel = modelService.find(oppositePanelId,
+				application);
 
-	if (oppositePanel instanceof MPartStack) {
-	    MPartStack stack = (MPartStack) oppositePanel;
-	    stack.getChildren().add(newPart);
+		if (oppositePanel instanceof MPartStack) {
+			MPartStack stack = (MPartStack) oppositePanel;
+			stack.getChildren().add(newPart);
+		}
+
+		partService.showPart(newPart, PartState.VISIBLE);
+
+		// The current tab will stay active
+		partService.showPart(stayActiveTab ? activePart : newPart,
+				PartState.ACTIVATE);
 	}
 
-	partService.showPart(newPart, PartState.VISIBLE);
+	private MPart copyPart(MPart newPart, MPart part) {
+		if (part != null) {
 
-	// The current tab will stay active
-	partService.showPart(stayActiveTab ? activePart : newPart,
-		PartState.ACTIVATE);
-    }
+			Map<String, String> state = part.getPersistedState();
+			Path rootPath = Paths.get(state.get("rootPath"));
+			newPart.setLabel(PathUtils.getFileName(rootPath));
 
-    private MPart copyPart(MPart newPart, MPart part) {
-	if (part != null) {
+			// newPart.setLabel(PartUtils.createPartLabel(part));
 
-	    Map<String, String> state = part.getPersistedState();
-	    Path rootPath = Paths.get(state.get("rootPath"));
-	    String rootPathString = rootPath.getFileName().toString();
-	    newPart.setLabel(rootPathString);
+			newPart.setElementId(PartUtils.createElementId());
+			// newPart.setElementId(PartUtils.createElementId(part));
 
-	    // newPart.setLabel(PartUtils.createPartLabel(part));
+			// NB! copy also "active" tag
+			newPart.getTags().addAll(part.getTags());
+		}
 
-	    newPart.setElementId(PartUtils.createElementId());
-	    // newPart.setElementId(PartUtils.createElementId(part));
-
-	    // NB! copy also "active" tag
-	    newPart.getTags().addAll(part.getTags());
+		return newPart;
 	}
-
-	return newPart;
-    }
 
 }
