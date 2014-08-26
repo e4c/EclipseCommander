@@ -35,6 +35,9 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -47,6 +50,7 @@ import org.eclipse.swt.widgets.Display;
 
 import cane.brothers.e4.commander.MyEventConstants;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
+import cane.brothers.e4.commander.pathTable.data.PathFixture;
 import cane.brothers.e4.commander.utils.PartUtils;
 
 /**
@@ -59,23 +63,23 @@ public class DynamicTab {
     private IEventBroker eventBroker;
 
     @Inject
-    EModelService modelService;
+    private EModelService modelService;
 
     @Inject
-    MApplication application;
+    private MApplication application;
 
     @Inject
-    IEclipseContext context;
+    private IEclipseContext context;
 
     @Inject
     @Named(IServiceConstants.ACTIVE_PART)
-    MPart activePart;
+    private MPart activePart;
 
     @Inject
-    ESelectionService selectionService;
+    private ESelectionService selectionService;
 
     @Inject
-    EPartService partService;
+    private EPartService partService;
 
     /**
      * GUI stuff
@@ -117,6 +121,28 @@ public class DynamicTab {
 	// create path table
 	table = new PathNatTable(panel, rootPath, eventBroker);
 	table.setBackground(bgColor);
+
+	// attach a selection listener to our table
+	table.getSelectionProvider().addSelectionChangedListener(
+		new ISelectionChangedListener() {
+		    @Override
+		    public void selectionChanged(SelectionChangedEvent event) {
+			System.out.println("Selection changed:");
+
+			IStructuredSelection selection = (IStructuredSelection) event
+				.getSelection();
+
+			// set the selection to the service
+			selectionService.setSelection(selection.size() == 1 ? selection
+				.getFirstElement() : selection.toArray());
+
+			for (Object sel : selection.toArray()) {
+			    if (sel instanceof PathFixture) {
+				System.out.println("   " + sel);
+			    }
+			}
+		    }
+		});
 
 	// layout
 	GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
@@ -186,6 +212,7 @@ public class DynamicTab {
     public void setSelection() {
 	if (table != null) {
 	    table.setDefaultSelection();
+	    System.out.println("set default table selection");
 	}
     }
 
