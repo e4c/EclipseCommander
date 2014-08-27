@@ -27,33 +27,27 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
-import cane.brothers.e4.commander.MyEventConstants;
+import cane.brothers.e4.commander.PathEvents;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
- * TODO
+ * Update tab label when You set new path.
  *
  */
 public class UpdateLabelPartHandler {
 
     @Inject
+    @Named(IServiceConstants.ACTIVE_PART)
+    private MPart activePart;
+
+    @Inject
     @Optional
     @Execute
-    public void execute(
-	    @UIEventTopic(MyEventConstants.TAB_PATH_OPEN) Path newPath,
-	    @Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
+    public void execute(@UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
 
 	// update label of current tab
 	if (activePart != null && newPath != null) {
-	    String rootPathString = null;
-	    // root path have no file name
-	    if (newPath.getFileName() == null) {
-		rootPathString = newPath.toString();
-	    }
-	    else {
-		rootPathString = newPath.getFileName().toString();
-	    }
-	    activePart.setLabel(rootPathString);
-
+	    activePart.setLabel(PathUtils.getFileName(newPath));
 	}
     }
 }

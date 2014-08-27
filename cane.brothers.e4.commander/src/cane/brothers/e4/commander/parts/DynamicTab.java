@@ -28,11 +28,8 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.modeling.EModelService;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -44,7 +41,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
-import cane.brothers.e4.commander.MyEventConstants;
+import cane.brothers.e4.commander.PathEvents;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
 
@@ -57,11 +54,11 @@ public class DynamicTab {
     @Inject
     private IEventBroker eventBroker;
 
-    @Inject
-    private EModelService modelService;
+    // @Inject
+    // private EModelService modelService;
 
-    @Inject
-    private MApplication application;
+    // @Inject
+    // private MApplication application;
 
     @Inject
     private IEclipseContext context;
@@ -73,8 +70,8 @@ public class DynamicTab {
     @Inject
     private ESelectionService selectionService;
 
-    @Inject
-    private EPartService partService;
+    // @Inject
+    // private EPartService partService;
 
     /**
      * GUI stuff
@@ -133,7 +130,15 @@ public class DynamicTab {
 
 			for (Object sel : selection.toArray()) {
 			    if (sel instanceof PathFixture) {
-				System.out.println("   " + sel);
+				PathFixture fixture = (PathFixture) sel;
+				System.out.println("   " + fixture);
+
+				// // asynchronously sending a path
+				// if (eventBroker != null) {
+				// eventBroker.post(
+				// PathEvents.TAB_REMOVE_SELECTION,
+				// fixture.getPath());
+				// }
 			    }
 			}
 		    }
@@ -147,7 +152,7 @@ public class DynamicTab {
     @Inject
     @Optional
     private void setRootPart(
-	    @UIEventTopic(MyEventConstants.TAB_PATH_OPEN) Path newPath) {
+	    @UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
 
 	// update root path of current tab
 	if (activePart != null && activePart.getObject() == this) {
