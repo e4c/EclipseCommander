@@ -39,19 +39,14 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import cane.brothers.e4.commander.MyEventConstants;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
-import cane.brothers.e4.commander.utils.PartUtils;
 
 /**
  * Dynamic Tab. GUI class of part descriptor implementation.
@@ -147,43 +142,11 @@ public class DynamicTab {
 	// layout
 	GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
 
-	// add a region for buttons
-	Composite buttonArea = new Composite(panel, SWT.NONE);
-	buttonArea.setLayout(new RowLayout());
-	GridDataFactory.fillDefaults().grab(true, false).span(2, 1)
-		.applyTo(buttonArea);
-
-	// create a button to enable selection provider change
-	Button button = new Button(buttonArea, SWT.PUSH);
-	button.setText("focus");
-	button.addSelectionListener(new SelectionAdapter() {
-	    @Override
-	    public void widgetSelected(SelectionEvent e) {
-
-		// clear current selection
-		PartUtils.clearSelection(activePart);
-		System.out.println("remove selection from current tab");
-
-		MPart oppositePart = PartUtils.getVisibleOppositePart(
-			application, modelService, partService, activePart);
-
-		// TODO will be not necessary after #31
-		// clear opposite part selection
-		PartUtils.clearSelection(oppositePart);
-		System.out.println("remove selection from opposite tab");
-
-		// set opposite tab focus and selection
-		PartUtils.setSelection(oppositePart);
-		System.out
-			.println("set focus and default selection on opposite tab");
-	    }
-	});
     }
 
     @Inject
     @Optional
     private void setRootPart(
-	    @Named(IServiceConstants.ACTIVE_PART) MPart activePart,
 	    @UIEventTopic(MyEventConstants.TAB_PATH_OPEN) Path newPath) {
 
 	// update root path of current tab
