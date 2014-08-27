@@ -36,6 +36,7 @@
   <handlers xmi:id="_-VPtAP-PEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.handlers.CopyPartToOppositeHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.CopyPartHandler" command="_umqtkP-KEeOZGL8AHW3wCQ"/>
   <handlers xmi:id="_A3XDQARYEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.handler.PreferencesHandler" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_eFElgARWEeSRJPX1RYcCyQ"/>
   <handlers xmi:id="_eLzIcCAJEeSEDas-SlsudA" elementId="cane.brothers.e4.commander.handler.UpdateLabelPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.UpdateLabelPartHandler" command="_8E3p8CAJEeSEDas-SlsudA"/>
+  <handlers xmi:id="_u0jF0C4fEeSXLKrPMWRFLg" elementId="cane.brothers.e4.commander.handler.0" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.handlers.SetFocusToOppositePartHandler" command="_vw1H4C4fEeSXLKrPMWRFLg"/>
   <bindingTables xmi:id="_mKUpMFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.bindingtable.0" bindingContext="_s7WREFnPEeOT-PJJdUfiZQ">
     <bindings xmi:id="_wzTaEFnPEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T" command="_272gkP9uEeOZGL8AHW3wCQ">
       <tags>type:user</tags>
@@ -47,6 +48,9 @@
       <tags>type:user</tags>
     </bindings>
     <bindings xmi:id="_lmtHwARSEeSRJPX1RYcCyQ" elementId="cane.brothers.e4.commander.keybinding.exit" keySequence="M3+F4" command="_OqxgQFmoEeOT-PJJdUfiZQ">
+      <tags>type:user</tags>
+    </bindings>
+    <bindings xmi:id="_78JOMC4fEeSXLKrPMWRFLg" elementId="cane.brothers.e4.commander.keybinding.setFocusToOpposite" keySequence="TAB" command="_vw1H4C4fEeSXLKrPMWRFLg">
       <tags>type:user</tags>
     </bindings>
   </bindingTables>
@@ -64,6 +68,7 @@
   <commands xmi:id="_umqtkP-KEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.copyPart" commandName="command.copyPart" description="copy tab to other panel" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_eFElgARWEeSRJPX1RYcCyQ" elementId="org.eclipse.ui.window.preferences" commandName="command.preferences" description="open preferences" category="_lKWmIARWEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_8E3p8CAJEeSEDas-SlsudA" elementId="cane.brothers.e4.commander.command.updatePartLabel" commandName="command.updatePartLabel" description="update part label"/>
+  <commands xmi:id="_vw1H4C4fEeSXLKrPMWRFLg" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab" commandName="command.setFocusToOppositeTab" description="set focus to opposite tab"/>
   <addons xmi:id="_C6-GsVmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_C6-GslmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_C6-Gs1mnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
