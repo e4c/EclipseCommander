@@ -133,11 +133,13 @@ public class DynamicTab {
 				PathFixture fixture = (PathFixture) sel;
 				System.out.println("   " + fixture);
 
-				// asynchronously sending a path
-				if (eventBroker != null) {
-				    eventBroker.post(
-					    PathEvents.TAB_REMOVE_SELECTION,
-					    activePart);
+				if (activePart != null) {
+				    // asynchronously sending a path
+				    if (eventBroker != null) {
+					eventBroker
+						.post(PathEvents.TAB_REMOVE_SELECTION,
+							activePart);
+				    }
 				}
 			    }
 			}
@@ -161,6 +163,7 @@ public class DynamicTab {
 	    if (table != null) {
 		table.setRootPath(rootPath);
 		table.refresh();
+		setFocus();
 	    }
 	}
     }

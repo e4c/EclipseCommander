@@ -80,9 +80,11 @@ public class OpenPathHandler extends
 
 	for (Range r : selections) {
 	    for (int i = r.start; i < r.end; i++) {
-		// handle only first row object in range
-		fixture = bodyDataProvider.getRowObject(i);
-		break;
+		if (i > -1) {
+		    // handle only first row object in range
+		    fixture = bodyDataProvider.getRowObject(i);
+		    break;
+		}
 	    }
 	}
 
@@ -95,6 +97,7 @@ public class OpenPathHandler extends
 		// 2.1 open new path
 		System.out.println("dir");
 
+		System.out.println("open new path: " + fixture.getPath());
 		// asynchronously sending a path
 		if (eventBroker != null) {
 		    eventBroker.post(PathEvents.TAB_PATH_OPEN,

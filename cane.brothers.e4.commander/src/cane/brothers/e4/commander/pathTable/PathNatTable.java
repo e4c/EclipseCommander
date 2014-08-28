@@ -36,19 +36,12 @@ import cane.brothers.e4.commander.pathTable.layer.PathCompositeLayer;
 import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
 
 /**
- * TODO
+ * The table with path's as row entries.
  *
  */
 public class PathNatTable extends NatTable implements IRootPath {
 
-    // private Path rootPath = null;
-
-    // /**
-    // * @return the rootPath
-    // */
-    // public Path getRootPath() {
-    // return rootPath;
-    // }
+    private Path rootPath = null;
 
     private ISelectionProvider selectionProvider;
 
@@ -57,14 +50,6 @@ public class PathNatTable extends NatTable implements IRootPath {
      */
     public ISelectionProvider getSelectionProvider() {
 	return selectionProvider;
-    }
-
-    @Override
-    public void setRootPath(Path newPath) {
-	// this.rootPath = rootPath;
-	if (compositeLayer != null) {
-	    compositeLayer.setRootPath(newPath);
-	}
     }
 
     private PathCompositeLayer compositeLayer = null;
@@ -216,6 +201,31 @@ public class PathNatTable extends NatTable implements IRootPath {
 	SelectionLayer selLayer = getSelectionLayer();
 	if (selLayer != null) {
 	    selLayer.selectRow(0, 0, false, false);
+	}
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see cane.brothers.e4.commander.pathTable.IRootPath#getRootPath()
+     */
+    @Override
+    public Path getRootPath() {
+	return rootPath;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cane.brothers.e4.commander.pathTable.IRootPath#setRootPath(java.nio.file
+     * .Path)
+     */
+    @Override
+    public void setRootPath(Path newPath) {
+	this.rootPath = newPath;
+	if (compositeLayer != null) {
+	    compositeLayer.setRootPath(newPath);
 	}
     }
 

@@ -27,7 +27,12 @@ import org.eclipse.nebula.widgets.nattable.data.IColumnPropertyAccessor;
 import cane.brothers.e4.commander.pathTable.IRootPath;
 
 /**
- * TODO
+ * The column property accessor class for Path table.
+ * 
+ * Defines column count, in which column
+ * should be which data.
+ * Defines hooks for special data values like parent path representation and dir
+ * size substitution.
  *
  */
 public class PathColumnPropertyAccessor implements
@@ -35,6 +40,8 @@ public class PathColumnPropertyAccessor implements
 
     /** use list instead of set because indexes */
     private List<String> propertyNames;
+
+    private Path rootPath;
 
     private Path parentPath;
 
@@ -49,6 +56,7 @@ public class PathColumnPropertyAccessor implements
      */
     public PathColumnPropertyAccessor(Map<String, String> propertyToLabels,
 	    Path rootPath) {
+	this.rootPath = rootPath;
 	this.propertyNames = new ArrayList<String>(propertyToLabels.keySet());
 	this.parentPath = rootPath.getParent();
     }
@@ -99,11 +107,29 @@ public class PathColumnPropertyAccessor implements
 	return propertyNames.indexOf(propertyName);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cane.brothers.e4.commander.pathTable.IRootPath#setRootPath(java.nio.file
+     * .Path)
+     */
     @Override
     public void setRootPath(Path newPath) {
 	if (newPath != null) {
+	    this.rootPath = newPath;
 	    this.parentPath = newPath.getParent();
 	}
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see cane.brothers.e4.commander.pathTable.IRootPath#getRootPath()
+     */
+    @Override
+    public Path getRootPath() {
+	return rootPath;
     }
 
 }

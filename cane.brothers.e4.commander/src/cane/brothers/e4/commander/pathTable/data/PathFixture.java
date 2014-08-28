@@ -23,7 +23,8 @@ import java.nio.file.Path;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
- * TODO
+ * Class wrapper for given path representation in the table row. One field per
+ * column except path.
  *
  */
 public class PathFixture {
@@ -45,12 +46,7 @@ public class PathFixture {
 	if (path != null) {
 
 	    // root path have no file name
-	    if (path.getFileName() == null) {
-		this.name = path.toString();
-	    }
-	    else {
-		this.name = path.getFileName().toString();
-	    }
+	    this.name = PathUtils.getFileName(path);
 
 	    try {
 		this.size = Files.size(path);
