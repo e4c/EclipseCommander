@@ -68,7 +68,7 @@
   <commands xmi:id="_272gkP9uEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.duplicatePart" commandName="command.duplicatePart" description="duplicate this tab" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_umqtkP-KEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.command.copyPart" commandName="command.copyPart" description="copy tab to other panel" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_eFElgARWEeSRJPX1RYcCyQ" elementId="org.eclipse.ui.window.preferences" commandName="command.preferences" description="open preferences" category="_lKWmIARWEeSRJPX1RYcCyQ"/>
-  <commands xmi:id="_8E3p8CAJEeSEDas-SlsudA" elementId="cane.brothers.e4.commander.command.updatePartLabel" commandName="command.updatePartLabel" description="update part label"/>
+  <commands xmi:id="_8E3p8CAJEeSEDas-SlsudA" elementId="cane.brothers.e4.commander.command.updatePartLabel" commandName="command.updatePartLabel" description="update part label" category="_6QycEARQEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_vw1H4C4fEeSXLKrPMWRFLg" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab" commandName="command.setFocusToOppositeTab" description="set focus to opposite tab" category="_l21IYC7ZEeSXLKrPMWRFLg"/>
   <commands xmi:id="_O9VoIC7ZEeSXLKrPMWRFLg" elementId="cane.brothers.e4.commander.command.removeSelectionPart" commandName="command.removeSelectionPart" description="remove selection from unactive part" category="_l21IYC7ZEeSXLKrPMWRFLg"/>
   <addons xmi:id="_C6-GsVmnEeOT-PJJdUfiZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
