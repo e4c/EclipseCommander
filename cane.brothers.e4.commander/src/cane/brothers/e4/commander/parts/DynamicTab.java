@@ -133,12 +133,12 @@ public class DynamicTab {
 				PathFixture fixture = (PathFixture) sel;
 				System.out.println("   " + fixture);
 
-				// // asynchronously sending a path
-				// if (eventBroker != null) {
-				// eventBroker.post(
-				// PathEvents.TAB_REMOVE_SELECTION,
-				// fixture.getPath());
-				// }
+				// asynchronously sending a path
+				if (eventBroker != null) {
+				    eventBroker.post(
+					    PathEvents.TAB_REMOVE_SELECTION,
+					    activePart);
+				}
 			    }
 			}
 		    }
@@ -191,6 +191,13 @@ public class DynamicTab {
 		System.out.println("set focus for table");
 	    }
 	}
+    }
+
+    /**
+     * @return the rootPath
+     */
+    public Path getRootPath() {
+	return rootPath;
     }
 
     @Override
