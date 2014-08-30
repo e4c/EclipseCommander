@@ -91,18 +91,16 @@ public class CopyPartHandler {
 
 			Map<String, String> state = part.getPersistedState();
 			Path rootPath = Paths.get(state.get("rootPath"));
+
 			newPart.setLabel(PathUtils.getFileName(rootPath));
-
-			// newPart.setLabel(PartUtils.createPartLabel(part));
-
 			newPart.setElementId(PartUtils.createElementId());
-			// newPart.setElementId(PartUtils.createElementId(part));
 
 			// NB! copy also "active" tag
 			newPart.getTags().addAll(part.getTags());
 		}
 
 		return newPart;
+
 	}
 
 }
