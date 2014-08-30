@@ -229,17 +229,15 @@ public class PathNatTable extends NatTable implements IRootPath {
 	}
     }
 
-    // /* (non-Javadoc)
-    // * @see org.eclipse.swt.widgets.Composite#setFocus()
-    // */
-    // @Override
-    // public boolean setFocus() {
-    // return super.setFocus();
-    //
-    // SelectionLayer selLayer = getSelectionLayer();
-    // if (selLayer != null) {
-    // selLayer.clear();
-    // }
-    //
-    // }
+    /**
+     * @return true if selection layer have selected rows
+     */
+    public boolean hasSelection() {
+	SelectionLayer selLayer = getSelectionLayer();
+	if (selLayer != null && selLayer.hasRowSelection()) {
+	    return true;
+	}
+	return false;
+    }
+
 }
