@@ -61,8 +61,9 @@ public class LifeCycleManager {
     // boolean defaultTabPath;
 
     /**
-	 * 
-	 */
+     * Constructor
+     *
+     */
     public LifeCycleManager() {
 	System.out.println("life cycle manager");
     }
@@ -151,7 +152,7 @@ public class LifeCycleManager {
     // }
 
     @PostConstruct
-    private static void setDefaultSelection(final IEventBroker eventBroker) {
+    private void setDefaultSelection(final IEventBroker eventBroker) {
 	// System.out.println("1. postConstruct");
 
 	// subscribe once for default MPart activation
@@ -168,19 +169,6 @@ public class LifeCycleManager {
 			    if (obj instanceof MPart) {
 				DynamicTab tab = PartUtils.getTab((MPart) obj);
 				// System.out.println("3. " + tab);
-
-				// TODO
-				// // Possible to send active part with event
-				// // broker only
-				//
-				// if (activePart != null) {
-				// // asynchronously sending a path
-				// if (eventBroker != null) {
-				// eventBroker
-				// .post(PathEvents.TAB_REMOVE_SELECTION,
-				// activePart);
-				// }
-				// }
 
 				// set default selection
 				tab.setSelection();
