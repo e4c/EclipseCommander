@@ -30,6 +30,7 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -40,6 +41,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.osgi.service.event.Event;
 
 import cane.brothers.e4.commander.PathEvents;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
@@ -172,6 +174,37 @@ public class DynamicTab {
     // System.out.println("selection");
     // }
     // }
+
+    /**
+     * remove selection on other tabs if any tab was activated
+     * 
+     * @param event
+     */
+    @Inject
+    @Optional
+    public void partActivation(
+	    @UIEventTopic(UIEvents.UILifeCycle.ACTIVATE) Event event) {
+
+	if (event != null && event.getPropertyNames() != null) {
+
+	    // get active part
+	    Object obj = event.getProperty(event.getPropertyNames()[0]);
+	    if (obj instanceof MPart) {
+
+		MPart part = (MPart) obj;
+
+		// send event only ones
+		if (part.getObject() == this) {
+		    // asynchronously sending an active part
+		    if (eventBroker != null) {
+			eventBroker.post(PathEvents.TAB_REMOVE_SELECTION,
+				(MPart) obj);
+		    }
+		}
+	    }
+	}
+
+    }
 
     /**
      * clear table selection
