@@ -36,7 +36,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 
 /**
- * TODO
+ * ThemeConfiguration that extends default styles configuration.
  *
  */
 public class PathFirstThemeConfiguration extends
@@ -51,7 +51,7 @@ public class PathFirstThemeConfiguration extends
 	this.cHeaderHAlign = HorizontalAlignmentEnum.LEFT;
 	this.cHeaderFont = GUIHelper.DEFAULT_FONT;
 	this.cHeaderCellPainter = new PaddingDecorator(new TextPainter(), 0, 5,
-		5, 5);
+		5, 5, true);
 
 	// column header selection style
 	this.cHeaderSelectionHAlign = HorizontalAlignmentEnum.LEFT;

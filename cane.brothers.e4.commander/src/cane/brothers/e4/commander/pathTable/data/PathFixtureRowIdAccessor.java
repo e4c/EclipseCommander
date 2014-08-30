@@ -22,7 +22,7 @@ import java.util.List;
 import org.eclipse.nebula.widgets.nattable.data.IRowIdAccessor;
 
 /**
- * TODO
+ * Row id accessor for path fixtures.
  *
  */
 public class PathFixtureRowIdAccessor implements IRowIdAccessor<PathFixture> {

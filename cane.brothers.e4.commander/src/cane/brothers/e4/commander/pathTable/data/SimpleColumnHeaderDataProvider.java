@@ -23,8 +23,8 @@ import java.util.Map;
 import org.eclipse.nebula.widgets.nattable.data.IDataProvider;
 
 /**
- * TODO
- *
+ * Simple column header data provider which take on input only the property to
+ * label map and creates list of property names by keys from map.
  */
 public class SimpleColumnHeaderDataProvider implements IDataProvider {
 
