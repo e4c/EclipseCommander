@@ -95,14 +95,27 @@ public class CopyPartHandler {
 
 			// newPart.setLabel(PartUtils.createPartLabel(part));
 
+<<<<<<< HEAD
 			newPart.setElementId(PartUtils.createElementId());
 			// newPart.setElementId(PartUtils.createElementId(part));
+=======
+	    Map<String, String> state = part.getPersistedState();
+	    Path rootPath = Paths.get(state.get("rootPath"));
+>>>>>>> branch 'master' of https://github.com/webcane/EclipseCommander.git
 
+<<<<<<< HEAD
 			// NB! copy also "active" tag
 			newPart.getTags().addAll(part.getTags());
 		}
 
 		return newPart;
+=======
+	    newPart.setLabel(PathUtils.getFileName(rootPath));
+	    newPart.setElementId(PartUtils.createElementId());
+
+	    // NB! copy also "active" tag
+	    newPart.getTags().addAll(part.getTags());
+>>>>>>> branch 'master' of https://github.com/webcane/EclipseCommander.git
 	}
 
 }

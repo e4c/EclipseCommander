@@ -48,19 +48,24 @@ import cane.brothers.e4.commander.pathTable.data.PathFixtureRowIdAccessor;
 import cane.brothers.e4.commander.pathTable.data.SimpleColumnHeaderDataProvider;
 
 /**
- * TODO
+ * Composite layer for Path table. Contains column header and body regions only.
+ *
+ * see:
+ * <ul>
+ * <li>{@link GridRegion.COLUMN_HEADER}</li>
+ * <li>{@link GridRegion.BODY}</li>
+ * </ul>
  *
  */
 public class PathCompositeLayer extends CompositeLayer implements IRootPath {
-
-    // private IEventBroker eventBroker;
 
     private Path rootPath;
 
     /**
      * @return the root path
      */
-    public Path getPath() {
+    @Override
+    public Path getRootPath() {
 	return rootPath;
     }
 
@@ -85,6 +90,12 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 
     private SelectionLayer selectionLayer;
 
+    /**
+     * Constructor
+     *
+     * @param rootPath
+     * @param eventBroker
+     */
     public PathCompositeLayer(Path rootPath, IEventBroker eventBroker) {
 	super(1, 2);
 
@@ -163,7 +174,7 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 
 	}
 
-	return (contentlist.size() > 1 ? true : false);
+	return (contentlist.size() >= 1 ? true : false);
     }
 
     public SelectionLayer getSelectionLayer() {

@@ -19,10 +19,16 @@ package cane.brothers.e4.commander.pathTable;
 import java.nio.file.Path;
 
 /**
- * TODO
+ * interface for current using path
  *
  */
 public interface IRootPath {
+
+    /**
+     * 
+     * @return current used path
+     */
+    public Path getRootPath();
 
     /**
      * @param path

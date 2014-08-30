@@ -23,10 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.nebula.widgets.nattable.NatTable;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.selection.RowSelectionProvider;
@@ -39,26 +36,20 @@ import cane.brothers.e4.commander.pathTable.layer.PathCompositeLayer;
 import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
 
 /**
- * TODO
+ * The table with path's as row entries.
  *
  */
 public class PathNatTable extends NatTable implements IRootPath {
 
-    // private Path rootPath = null;
+    private Path rootPath = null;
 
-    // /**
-    // * @return the rootPath
-    // */
-    // public Path getRootPath() {
-    // return rootPath;
-    // }
+    private ISelectionProvider selectionProvider;
 
-    @Override
-    public void setRootPath(Path newPath) {
-	// this.rootPath = rootPath;
-	if (compositeLayer != null) {
-	    compositeLayer.setRootPath(newPath);
-	}
+    /**
+     * @return the selectionProvider
+     */
+    public ISelectionProvider getSelectionProvider() {
+	return selectionProvider;
     }
 
     private PathCompositeLayer compositeLayer = null;
@@ -146,26 +137,9 @@ public class PathNatTable extends NatTable implements IRootPath {
 	//
 
 	// Provides rows where any cell in the row is selected
-	ISelectionProvider selectionProvider = new RowSelectionProvider<PathFixture>(
+	selectionProvider = new RowSelectionProvider<PathFixture>(
 		compositeLayer.getSelectionLayer(),
 		compositeLayer.getBodyDataProvider(), true, false);
-
-	selectionProvider
-		.addSelectionChangedListener(new ISelectionChangedListener() {
-		    @Override
-		    public void selectionChanged(SelectionChangedEvent event) {
-			System.out.println("Selection changed:");
-
-			IStructuredSelection selection = (IStructuredSelection) event
-				.getSelection();
-
-			for (Object sel : selection.toArray()) {
-			    if (sel instanceof PathFixture) {
-				System.out.println("   " + sel);
-			    }
-			}
-		    }
-		});
 
 	// // Programmatically select a few rows
 	// selectionProvider.setSelection(new StructuredSelection(new Person[] {
@@ -227,6 +201,31 @@ public class PathNatTable extends NatTable implements IRootPath {
 	SelectionLayer selLayer = getSelectionLayer();
 	if (selLayer != null) {
 	    selLayer.selectRow(0, 0, false, false);
+	}
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see cane.brothers.e4.commander.pathTable.IRootPath#getRootPath()
+     */
+    @Override
+    public Path getRootPath() {
+	return rootPath;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cane.brothers.e4.commander.pathTable.IRootPath#setRootPath(java.nio.file
+     * .Path)
+     */
+    @Override
+    public void setRootPath(Path newPath) {
+	this.rootPath = newPath;
+	if (compositeLayer != null) {
+	    compositeLayer.setRootPath(newPath);
 	}
     }
 
