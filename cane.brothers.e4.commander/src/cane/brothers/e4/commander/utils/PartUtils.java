@@ -16,8 +16,11 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.utils;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
@@ -91,6 +94,29 @@ public class PartUtils {
 	part.getPersistedState().putAll(descriptor.getPersistedState());
 	part.getBindingContexts().addAll(descriptor.getBindingContexts());
 	return part;
+    }
+
+    /**
+     * Copy all necessary data from given part to new one
+     * 
+     * @param newPart
+     * @param part
+     * @return copy of part
+     */
+    public static MPart copyPart(MPart newPart, MPart part) {
+	if (part != null) {
+
+	    Map<String, String> state = part.getPersistedState();
+	    Path rootPath = Paths.get(state.get("rootPath"));
+
+	    newPart.setLabel(PathUtils.getFileName(rootPath));
+	    newPart.setElementId(PartUtils.createElementId());
+
+	    // NB! copy also "active" tag
+	    newPart.getTags().addAll(part.getTags());
+	}
+
+	return newPart;
     }
 
     /**
