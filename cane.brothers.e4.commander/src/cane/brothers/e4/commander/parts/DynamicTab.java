@@ -194,7 +194,7 @@ public class DynamicTab {
 		MPart part = (MPart) obj;
 
 		// send event only ones
-		if (part.getObject() == this) {
+		if (part.equals(activePart) && part.getObject() == this) {
 		    // asynchronously sending an active part
 		    if (eventBroker != null) {
 			eventBroker.post(PathEvents.TAB_REMOVE_SELECTION,
