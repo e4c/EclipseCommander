@@ -36,98 +36,114 @@ import org.apache.commons.lang.SystemUtils;
  */
 public class PathUtils {
 
-	/**
-	 * Root path have no file name.
-	 * 
-	 * @param path
-	 * @return file name
-	 */
-	public static String getFileName(Path path) {
-		String pathString = null;
-		if (path != null) {
-			if (path.getFileName() != null) {
-				pathString = path.getFileName().toString();
-			} else {
-				pathString = path.toString();
-			}
-		}
-		return pathString;
+    /**
+     * @param path
+     * @return path as string or null
+     */
+    public static String getPath(Path path) {
+	if (path != null) {
+	    return path.toString();
 	}
+	return null;
+    }
 
-	/**
-	 * Default path can be different for various OS
-	 * 
-	 * @return default path
-	 */
-	public static Path getDefaultPath() {
-		Path defaultPath = Paths.get(""); //$NON-NLS-1$
-
-		if (SystemUtils.IS_OS_WINDOWS) {
-			defaultPath = Paths.get("C:\\"); //$NON-NLS-1$
-		} else if (SystemUtils.IS_OS_MAC_OSX) {
-			defaultPath = Paths.get(System.getenv().get("HOME")); //$NON-NLS-1$
-		}
-		return defaultPath;
+    /**
+     * Root path have no file name.
+     * 
+     * @param path
+     * @return file name
+     */
+    public static String getFileName(Path path) {
+	String pathString = null;
+	if (path != null) {
+	    if (path.getFileName() != null) {
+		pathString = path.getFileName().toString();
+	    }
+	    else {
+		pathString = path.toString();
+	    }
 	}
+	return pathString;
+    }
 
-	/**
-	 * @param path
-	 * @return
-	 */
-	public static String getAttributesString(Path path) {
-		Set<String> views = FileSystems.getDefault()
-				.supportedFileAttributeViews();
+    /**
+     * Default path can be different for various OS
+     * 
+     * @return default path
+     */
+    public static Path getDefaultPath() {
+	Path defaultPath = Paths.get(""); //$NON-NLS-1$
 
-		if (views.contains("posix")) {
-			return getPosixAttributesString(path);
-		} else {
-			return getDosAttributesString(path);
-		}
+	if (SystemUtils.IS_OS_WINDOWS) {
+	    defaultPath = Paths.get("C:\\"); //$NON-NLS-1$
 	}
-
-	/**
-	 * @param path
-	 * @return
-	 */
-	public static String getDosAttributesString(Path path) {
-		DosFileAttributeView basicView = Files.getFileAttributeView(path,
-				DosFileAttributeView.class, LinkOption.NOFOLLOW_LINKS);
-		StringBuilder attrs = new StringBuilder();
-
-		try {
-			// + all basic attributes
-			DosFileAttributes dosAttrs = basicView.readAttributes();
-
-			attrs.append(dosAttrs.isReadOnly() ? "r" : "-");
-			attrs.append(dosAttrs.isHidden() ? "h" : "-");
-			attrs.append(dosAttrs.isArchive() ? "a" : "-");
-			attrs.append(dosAttrs.isSystem() ? "s" : "-");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return attrs.toString();
+	else if (SystemUtils.IS_OS_MAC_OSX) {
+	    defaultPath = Paths.get(System.getenv().get("HOME")); //$NON-NLS-1$
 	}
+	return defaultPath;
+    }
 
-	/**
-	 * @param path
-	 * @return
-	 */
-	public static String getPosixAttributesString(Path path) {
-		PosixFileAttributeView posixView = Files.getFileAttributeView(path,
-				PosixFileAttributeView.class);
-		StringBuilder attrs = new StringBuilder();
+    /**
+     * @param path
+     * @return
+     */
+    public static String getAttributesString(Path path) {
+	Set<String> views = FileSystems.getDefault()
+		.supportedFileAttributeViews();
 
-		try {
-			// + all basic attributes
-			PosixFileAttributes posixAttrs = posixView.readAttributes();
-
-			if (posixAttrs != null) {
-				attrs.append(PosixFilePermissions.toString(posixAttrs
-						.permissions()));
-			}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		return attrs.toString();
+	if (views.contains("posix")) {
+	    return getPosixAttributesString(path);
 	}
+	else {
+	    return getDosAttributesString(path);
+	}
+    }
+
+    /**
+     * @param path
+     * @return
+     */
+    public static String getDosAttributesString(Path path) {
+	DosFileAttributeView basicView = Files.getFileAttributeView(path,
+		DosFileAttributeView.class, LinkOption.NOFOLLOW_LINKS);
+	StringBuilder attrs = new StringBuilder();
+
+	try {
+	    // + all basic attributes
+	    DosFileAttributes dosAttrs = basicView.readAttributes();
+
+	    attrs.append(dosAttrs.isReadOnly() ? "r" : "-");
+	    attrs.append(dosAttrs.isHidden() ? "h" : "-");
+	    attrs.append(dosAttrs.isArchive() ? "a" : "-");
+	    attrs.append(dosAttrs.isSystem() ? "s" : "-");
+	}
+	catch (IOException e) {
+	    e.printStackTrace();
+	}
+	return attrs.toString();
+    }
+
+    /**
+     * @param path
+     * @return
+     */
+    public static String getPosixAttributesString(Path path) {
+	PosixFileAttributeView posixView = Files.getFileAttributeView(path,
+		PosixFileAttributeView.class);
+	StringBuilder attrs = new StringBuilder();
+
+	try {
+	    // + all basic attributes
+	    PosixFileAttributes posixAttrs = posixView.readAttributes();
+
+	    if (posixAttrs != null) {
+		attrs.append(PosixFilePermissions.toString(posixAttrs
+			.permissions()));
+	    }
+	}
+	catch (IOException e) {
+	    System.out.println(e.getMessage());
+	}
+	return attrs.toString();
+    }
 }
