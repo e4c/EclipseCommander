@@ -35,11 +35,19 @@ public class RemoveSelectionPartHandler {
     @Inject
     private EPartService partService;
 
+    // @Inject
+    // public void clearOtherSelection(
+    // @Optional @Named(IServiceConstants.ACTIVE_SELECTION) PathFixture
+    // selectedFixture) {
+    // if (selectedFixture != null) {
+    // System.out.println("selection");
+    // }
+    // }
+
     @Inject
-    @Optional
     @Execute
     public void removeSelection(
-	    @UIEventTopic(PathEvents.TAB_REMOVE_SELECTION) MPart activePart) {
+	    @Optional @UIEventTopic(PathEvents.TAB_REMOVE_SELECTION) MPart activePart) {
 
 	if (activePart != null && partService != null) {
 
