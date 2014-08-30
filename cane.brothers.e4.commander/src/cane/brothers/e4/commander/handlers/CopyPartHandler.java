@@ -94,7 +94,6 @@ public class CopyPartHandler {
 
 			newPart.setLabel(PathUtils.getFileName(rootPath));
 			newPart.setElementId(PartUtils.createElementId());
-			// newPart.setElementId(PartUtils.createElementId(part));
 
 			// NB! copy also "active" tag
 			newPart.getTags().addAll(part.getTags());
