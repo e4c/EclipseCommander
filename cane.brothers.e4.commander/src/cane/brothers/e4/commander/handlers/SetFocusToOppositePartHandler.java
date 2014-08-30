@@ -52,17 +52,8 @@ public class SetFocusToOppositePartHandler {
 
 	if (activePart != null) {
 
-	    // clear current selection
-	    PartUtils.clearSelection(activePart);
-	    System.out.println("remove selection from current tab");
-
 	    MPart oppositePart = PartUtils.getVisibleOppositePart(application,
 		    modelService, partService, activePart);
-
-	    // TODO will be not necessary after #31
-	    // clear opposite part selection
-	    PartUtils.clearSelection(oppositePart);
-	    System.out.println("remove selection from opposite tab");
 
 	    // set opposite tab focus and selection
 	    PartUtils.setSelection(oppositePart);
