@@ -44,6 +44,7 @@ import org.eclipse.swt.widgets.Display;
 import cane.brothers.e4.commander.PathEvents;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.pathTable.data.PathFixture;
+import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
  * Dynamic Tab. GUI class of part descriptor implementation.
@@ -124,22 +125,17 @@ public class DynamicTab {
 			IStructuredSelection selection = (IStructuredSelection) event
 				.getSelection();
 
-			// set the selection to the service
-			selectionService.setSelection(selection.size() == 1 ? selection
-				.getFirstElement() : selection.toArray());
+			if (!selection.isEmpty()) {
+			    Object firstElement = selection.getFirstElement();
 
-			for (Object sel : selection.toArray()) {
-			    if (sel instanceof PathFixture) {
-				PathFixture fixture = (PathFixture) sel;
-				System.out.println("   " + fixture);
+			    // set the selection to the service
+			    // TODO: not working for RemoveSelectionPartHandler
+			    selectionService.setSelection(firstElement);
 
-				if (activePart != null) {
-				    // asynchronously sending a path
-				    if (eventBroker != null) {
-					eventBroker
-						.post(PathEvents.TAB_REMOVE_SELECTION,
-							activePart);
-				    }
+			    for (Object sel : selection.toArray()) {
+				if (sel instanceof PathFixture) {
+				    PathFixture fixture = (PathFixture) sel;
+				    System.out.println("   " + fixture);
 				}
 			    }
 			}
@@ -163,16 +159,25 @@ public class DynamicTab {
 	    if (table != null) {
 		table.setRootPath(rootPath);
 		table.refresh();
-		setFocus();
+		setSelection();
 	    }
 	}
     }
+
+    // @Inject
+    // public void clearOtherSelection(
+    // @Optional @Named(IServiceConstants.ACTIVE_SELECTION) PathFixture
+    // selectedFixture) {
+    // if (selectedFixture != null) {
+    // System.out.println("selection");
+    // }
+    // }
 
     /**
      * clear table selection
      */
     public void clearSelection() {
-	if (table != null) {
+	if (table != null && !table.isDisposed() && table.hasSelection()) {
 	    table.clearSelection();
 	}
     }
@@ -181,7 +186,7 @@ public class DynamicTab {
      * set default table selection
      */
     public void setSelection() {
-	if (table != null) {
+	if (table != null && !table.isDisposed()) {
 	    table.setDefaultSelection();
 	    System.out.println("set default table selection");
 	}
@@ -189,7 +194,7 @@ public class DynamicTab {
 
     @Focus
     public void setFocus() {
-	if (table != null) {
+	if (table != null && !table.isDisposed()) {
 	    if (table.setFocus()) {
 		System.out.println("set focus for table");
 	    }
@@ -205,8 +210,8 @@ public class DynamicTab {
 
     @Override
     public String toString() {
-	return super.toString() + " "
-		+ (rootPath != null ? rootPath.toString() : rootPath);
+	return DynamicTab.class.getSimpleName() + " [roopPath: "
+		+ PathUtils.getPath(rootPath) + "]";
     }
 
 }
