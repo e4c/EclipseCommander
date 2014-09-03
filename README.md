@@ -38,6 +38,14 @@ Third-party libraries
 - [Nebula NatTable][7] - NatTable is a powerful and flexible SWT table/grid widget that is built to handle very large data sets, real-time updates, dynamic styling, and more.
 
 
+How to run
+-------
+- import all the bundles from this repository
+- open the `e4.base.rcp.site.luna.target` or `e4.base.rcp.site.kepler.target` (depends on Your Eclipse version)  file form the `cane.brothers.e4.commander.target` project and set as Target Platform
+- open the `cane.brothers.e4.commander.ios.product` or `cane.brothers.e4.commander.product` (depends on Your platform) file from the `cane.brothers.e4.commander.product` project and launch as an Eclipse application
+
+
+
 Get in touch
 -------
 
