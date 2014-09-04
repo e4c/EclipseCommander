@@ -102,9 +102,9 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 	this.rootPath = rootPath;
 	fillContentList(rootPath);
 
-	propertyToLabelMap.put("name", "Name");
-	propertyToLabelMap.put("size", "Size");
-	propertyToLabelMap.put("attr", "Attr");
+	propertyToLabelMap.put(PathFixture.FIELD_NAME, "Name");
+	propertyToLabelMap.put(PathFixture.FIELD_SIZE, "Size");
+	propertyToLabelMap.put(PathFixture.FIELD_ATTRS, "Attr");
 
 	columnPropertyAccessor = new PathColumnPropertyAccessor(
 		propertyToLabelMap, rootPath);

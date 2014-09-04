@@ -31,6 +31,13 @@ public class PathFixture {
 
     private Path path;
 
+    // maybe use it later
+    public static final String FIELD_ID = "id";
+
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_SIZE = "size";
+    public static final String FIELD_ATTRS = "attr";
+
     private String name;
     private long size;
     private String attributes;
