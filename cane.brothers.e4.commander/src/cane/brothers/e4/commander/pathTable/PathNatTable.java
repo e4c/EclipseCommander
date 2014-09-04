@@ -31,7 +31,7 @@ import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.style.theme.DefaultNatTableThemeConfiguration;
 import org.eclipse.swt.widgets.Composite;
 
-import cane.brothers.e4.commander.pathTable.data.PathFixture;
+import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.layer.PathCompositeLayer;
 import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
 

@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brothers.e4.commander.pathTable.data;
+package cane.brothers.e4.commander.model;
 
 import java.io.IOException;
 import java.nio.file.Files;

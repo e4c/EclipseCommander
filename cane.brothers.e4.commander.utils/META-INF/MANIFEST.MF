@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Utils
+Bundle-SymbolicName: cane.brothers.e4.commander.utils
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: cane.brothers.e4.commander.utils
+Require-Bundle: org.apache.commons.lang

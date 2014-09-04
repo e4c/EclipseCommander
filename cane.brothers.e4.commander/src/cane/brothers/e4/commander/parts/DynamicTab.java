@@ -44,8 +44,8 @@ import org.eclipse.swt.widgets.Display;
 import org.osgi.service.event.Event;
 
 import cane.brothers.e4.commander.PathEvents;
+import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
-import cane.brothers.e4.commander.pathTable.data.PathFixture;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**

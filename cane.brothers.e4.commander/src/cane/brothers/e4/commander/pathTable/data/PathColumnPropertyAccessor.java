@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.eclipse.nebula.widgets.nattable.data.IColumnPropertyAccessor;
 
+import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.IRootPath;
 
 /**

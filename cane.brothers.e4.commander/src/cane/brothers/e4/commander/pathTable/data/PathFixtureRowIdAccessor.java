@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.eclipse.nebula.widgets.nattable.data.IRowIdAccessor;
 
+import cane.brothers.e4.commander.model.PathFixture;
+
 /**
  * Row id accessor for path fixtures.
  *

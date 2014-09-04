@@ -27,7 +27,7 @@ import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
 import cane.brothers.e4.commander.PathEvents;
-import cane.brothers.e4.commander.pathTable.data.PathFixture;
+import cane.brothers.e4.commander.model.PathFixture;
 
 /**
  * Open new path. Selection in the table should be not null.

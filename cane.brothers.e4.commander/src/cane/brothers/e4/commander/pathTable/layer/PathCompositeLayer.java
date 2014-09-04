@@ -39,11 +39,11 @@ import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 
+import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.IRootPath;
 import cane.brothers.e4.commander.pathTable.command.OpenPathHandler;
 import cane.brothers.e4.commander.pathTable.config.PathSelectionUiBinding;
 import cane.brothers.e4.commander.pathTable.data.PathColumnPropertyAccessor;
-import cane.brothers.e4.commander.pathTable.data.PathFixture;
 import cane.brothers.e4.commander.pathTable.data.PathFixtureRowIdAccessor;
 import cane.brothers.e4.commander.pathTable.data.SimpleColumnHeaderDataProvider;
 
