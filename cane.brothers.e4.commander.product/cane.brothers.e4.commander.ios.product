@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="EclipseCommander" id="cane.brothers.e4.commander.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
-
+<product name="EclipseCommander" uid="cane.brothers.e4.commander.ios.product" id="cane.brothers.e4.commander.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -16,7 +15,6 @@
 
    <windowImages/>
 
-
    <launcher name="EclipseCommander">
       <solaris/>
       <win useIco="true">
@@ -24,11 +22,9 @@
       </win>
    </launcher>
 
-
    <vm>
       <macos include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</macos>
    </vm>
-
 
    <plugins>
       <plugin id="cane.brothers.e4.commander"/>
