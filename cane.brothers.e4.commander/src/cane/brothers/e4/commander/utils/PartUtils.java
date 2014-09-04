@@ -107,13 +107,30 @@ public class PartUtils {
 	if (part != null) {
 
 	    Map<String, String> state = part.getPersistedState();
-	    Path rootPath = Paths.get(state.get("rootPath"));
+	    if (state != null) {
+		Path rootPath = null;
+		String strRootPath = state.get("rootPath");
 
-	    newPart.setLabel(PathUtils.getFileName(rootPath));
-	    newPart.setElementId(PartUtils.createElementId());
+		if (strRootPath == null) {
+		    DynamicTab tab = getTab(part);
+		    rootPath = tab.getRootPath();
+		}
+		else {
+		    rootPath = Paths.get(strRootPath);
+		}
 
-	    // NB! copy also "active" tag
-	    newPart.getTags().addAll(part.getTags());
+		if (rootPath != null) {
+		    newPart.setLabel(PathUtils.getFileName(rootPath));
+		    newPart.setElementId(PartUtils.createElementId());
+
+		    // NB! copy also "active" tag
+		    newPart.getTags().addAll(part.getTags());
+		}
+	    }
+	    else {
+		System.out
+			.println("there are no root path in persisted states");
+	    }
 	}
 
 	return newPart;
