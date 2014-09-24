@@ -91,6 +91,8 @@ public class PartUtils {
 	// part.getHandlers().addAll(EcoreUtil.copyAll(descriptor.getHandlers()));
 
 	part.getTags().addAll(descriptor.getTags());
+
+	// TODO set if property
 	part.getPersistedState().putAll(descriptor.getPersistedState());
 	part.getBindingContexts().addAll(descriptor.getBindingContexts());
 	return part;

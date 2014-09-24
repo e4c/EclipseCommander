@@ -17,7 +17,6 @@
 package cane.brothers.e4.commander.lifecycle;
 
 import java.nio.file.Path;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -25,7 +24,6 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
 import org.eclipse.e4.ui.workbench.lifecycle.PreSave;
@@ -38,6 +36,7 @@ import org.osgi.service.event.EventHandler;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.parts.DynamicTab;
+import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.utils.PartUtils;
 import cane.brothers.e4.commander.utils.PathUtils;
 
@@ -60,6 +59,10 @@ public class LifeCycleManager {
     // @Preference(PreferenceConstants.PS_DEFAULT_TAB_PATH)
     // boolean defaultTabPath;
 
+    // @Inject
+    // @Optional
+    // IPartService partService;
+
     /**
      * Constructor
      *
@@ -78,12 +81,22 @@ public class LifeCycleManager {
     @ProcessRemovals
     public void processRemovals() {
 	System.out.println("processRemovals()");
+
+	// set default path
+	// Path rootPath = PathUtils.getDefaultPath();
+	//
+	// partService = Activator.getDefault().getPartService();
+	// if (partService != null) {
+	// partService.createPart(rootPath, IdStorage.LEFT_PANEL_ID);
+	// partService.createPart(rootPath, IdStorage.RIGHT_PANEL_ID);
+	// }
     }
 
     @PostContextCreate
     public void postContextCreate(MApplication application,
 	    EModelService modelService, EPartService partService) {
 	System.out.println("postContextCreate()");
+
     }
 
     @ProcessAdditions
@@ -92,57 +105,31 @@ public class LifeCycleManager {
 
 	System.out.println("processAdditions()");
 
-	// set default path
-	Path rootPath = PathUtils.getDefaultPath();
-	String rootPathString = null;
-
-	if (rootPath != null) {
-
-	    rootPathString = PathUtils.getFileName(rootPath);
-
-	    // FIXME set general context value
-	    context.set("rootPath", rootPath.toString());
-
-	    // persist default path
-	    // prefs.put(PreferenceConstants.PS_DEFAULT_TAB_PATH,
-	    // rootPathString);
-
-	    //
-	    // create first parts, one left and one right
-	    //
-
-	    // left part
-	    MPart leftPart = PartUtils.createPart(modelService);
-
-	    leftPart.setLabel(rootPathString);
-	    leftPart.setElementId(PartUtils.createElementId());
-
-	    Map<String, String> state = leftPart.getPersistedState();
-	    state.put("rootPath", rootPath.toString());
-
-	    // add tab to left stack
-	    MPartStack leftPartStack = (MPartStack) modelService.find(
-		    IdStorage.LEFT_PANEL_ID, application);
-
-	    leftPartStack.getChildren().add(leftPart);
-
-	    // right part
-	    MPart rightPart = PartUtils.createPart(modelService);
-
-	    rightPart.setLabel(rootPathString);
-	    rightPart.setElementId(PartUtils.createElementId());
-
-	    state = rightPart.getPersistedState();
-	    state.put("rootPath", rootPath.toString()); //$NON-NLS-1$
-
-	    // add tab to right stack
-	    MPartStack rightPartStack = (MPartStack) modelService.find(
-		    IdStorage.RIGHT_PANEL_ID, application);
-	    rightPartStack.getChildren().add(rightPart);
-
-	}
+	createInitialModel(context);
 
 	// setAppWindowSize();
+    }
+
+    /**
+     * create initial path model
+     * 
+     * @param context
+     *            eclipse context
+     */
+    private void createInitialModel(IEclipseContext context) {
+	// get default path
+	Path rootPath = PathUtils.getDefaultPath();
+
+	// FIXME set general context value
+	context.set("rootPath", rootPath.toString());
+
+	// path service already exist in eclipse context
+	IPartService partService = context.get(IPartService.class);
+	if (partService != null) {
+
+	    partService.createPart(rootPath, IdStorage.LEFT_PANEL_ID);
+	    partService.createPart(rootPath, IdStorage.RIGHT_PANEL_ID);
+	}
     }
 
     // private void setAppWindowSize() {

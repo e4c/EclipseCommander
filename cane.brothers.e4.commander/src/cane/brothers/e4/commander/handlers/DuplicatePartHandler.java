@@ -54,6 +54,8 @@ public class DuplicatePartHandler {
 	    // �������� ������� ������������ ������ ��� ����,
 	    // ����� ���������� id � ��� ��� ����� �������.
 
+	    // TODO use part service
+
 	    // create a new Part based on a PartDescriptor
 	    // in the application model
 	    // assume the ID is used for the PartDescriptor

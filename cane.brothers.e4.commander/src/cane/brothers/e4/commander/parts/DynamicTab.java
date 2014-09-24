@@ -28,6 +28,7 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.UIEvents;
@@ -60,8 +61,8 @@ public class DynamicTab {
     // @Inject
     // private EModelService modelService;
 
-    // @Inject
-    // private MApplication application;
+    @Inject
+    private MApplication application;
 
     @Inject
     private IEclipseContext context;
@@ -110,42 +111,49 @@ public class DynamicTab {
 	panel.setLayout(gridLayout);
 
 	// TODO switch context
-	rootPath = Paths.get(context.get("rootPath").toString());
-	// rootPath = Paths.get(activePart.getPersistedState().get("rootPath"));
 
-	// create path table
-	table = new PathNatTable(panel, rootPath, eventBroker);
-	table.setBackground(bgColor);
+	Object rootPathObject = context.get("rootPath");
+	if (rootPathObject != null) {
+	    rootPath = Paths.get(rootPathObject.toString());
+	    // rootPath =
+	    // Paths.get(activePart.getPersistedState().get("rootPath"));
 
-	// attach a selection listener to our table
-	table.getSelectionProvider().addSelectionChangedListener(
-		new ISelectionChangedListener() {
-		    @Override
-		    public void selectionChanged(SelectionChangedEvent event) {
-			System.out.println("Selection changed:");
+	    // create path table
+	    table = new PathNatTable(panel, rootPath, eventBroker);
+	    table.setBackground(bgColor);
 
-			IStructuredSelection selection = (IStructuredSelection) event
-				.getSelection();
+	    // attach a selection listener to our table
+	    table.getSelectionProvider().addSelectionChangedListener(
+		    new ISelectionChangedListener() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+			    System.out.println("Selection changed:");
 
-			if (!selection.isEmpty()) {
-			    Object firstElement = selection.getFirstElement();
+			    IStructuredSelection selection = (IStructuredSelection) event
+				    .getSelection();
 
-			    // set the selection to the service
-			    // TODO: not working for RemoveSelectionPartHandler
-			    selectionService.setSelection(firstElement);
+			    if (!selection.isEmpty()) {
+				Object firstElement = selection
+					.getFirstElement();
 
-			    for (Object sel : selection.toArray()) {
-				if (sel instanceof PathFixture) {
-				    PathFixture fixture = (PathFixture) sel;
-				    System.out.println("   " + fixture);
+				// set the selection to the service
+				// TODO: not working for
+				// RemoveSelectionPartHandler
+				selectionService.setSelection(firstElement);
+
+				for (Object sel : selection.toArray()) {
+				    if (sel instanceof PathFixture) {
+					PathFixture fixture = (PathFixture) sel;
+					System.out.println("   " + fixture);
+				    }
 				}
 			    }
 			}
-		    }
-		});
+		    });
 
-	// layout
-	GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
+	    // layout
+	    GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
+	}
 
     }
 
@@ -193,8 +201,12 @@ public class DynamicTab {
 
 		MPart part = (MPart) obj;
 
-		// send event only ones
-		if (part.equals(activePart) && part.getObject() == this) {
+		IEclipseContext activeWindowContext = application.getContext()
+			.getActiveChild();
+
+		// send event only ones if active context is exist
+		if (activeWindowContext != null && part.equals(activePart)
+			&& part.getObject() == this) {
 		    // asynchronously sending an active part
 		    if (eventBroker != null) {
 			eventBroker.post(PathEvents.TAB_REMOVE_SELECTION,

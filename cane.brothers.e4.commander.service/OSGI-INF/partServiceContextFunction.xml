@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="Part Service context function">
+   <implementation class="cane.brothers.e4.commander.service.internal.PartServiceContextFunction"/>
+   <property name="service.context.key" type="String" value="cane.brothers.e4.commander.service.api.IPartService"/>
+   <service>
+      <provide interface="org.eclipse.e4.core.contexts.IContextFunction"/>
+   </service>
+</scr:component>

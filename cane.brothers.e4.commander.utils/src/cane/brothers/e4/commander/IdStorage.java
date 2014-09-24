@@ -26,6 +26,10 @@ public final class IdStorage {
     // "cane.brothers.e4.commander.partsashcontainer.main"
     // .intern();
 
+    /**
+     * ID's
+     */
+
     /** plugin id */
     public static final String PLUGIN_ID = "cane.brothers.e4.commander";
 
@@ -44,10 +48,21 @@ public final class IdStorage {
     public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic"
 	    .intern();
 
+    public static final String DYNAMIC_PART_ELEMENT_PREFIX_ID = "cane.brothers.e4.commander.part.dynamictab."
+	    .intern();
+
     /** panel id's */
     public static String LEFT_PANEL_ID = "cane.brothers.e4.commander.partstack.left"
 	    .intern();
 
     public static String RIGHT_PANEL_ID = "cane.brothers.e4.commander.partstack.right"
 	    .intern();
+
+    /**
+     * STATES
+     */
+
+    /** root path */
+    public static final String STATE_ROOT_PATH = "rootPath".intern(); //$NON-NLS-1$
+
 }

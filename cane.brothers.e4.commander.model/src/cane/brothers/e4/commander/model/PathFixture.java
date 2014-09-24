@@ -32,11 +32,11 @@ public class PathFixture {
     private Path path;
 
     // maybe use it later
-    public static final String FIELD_ID = "id";
+    public static final String FIELD_ID = "id"; //$NON-NLS-1$
 
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_SIZE = "size";
-    public static final String FIELD_ATTRS = "attr";
+    public static final String FIELD_NAME = "name"; //$NON-NLS-1$
+    public static final String FIELD_SIZE = "size"; //$NON-NLS-1$
+    public static final String FIELD_ATTRS = "attr"; //$NON-NLS-1$
 
     private String name;
     private long size;

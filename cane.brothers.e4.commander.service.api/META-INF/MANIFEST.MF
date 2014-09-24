@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Api
+Bundle-SymbolicName: cane.brothers.e4.commander.service.api
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.e4.ui.model.workbench
+Export-Package: cane.brothers.e4.commander.service.api
