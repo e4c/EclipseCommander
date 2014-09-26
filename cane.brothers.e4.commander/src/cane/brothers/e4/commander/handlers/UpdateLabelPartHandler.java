@@ -27,7 +27,7 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
-import cane.brothers.e4.commander.PathEvents;
+import cane.brothers.e4.commander.event.PathEvents;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**

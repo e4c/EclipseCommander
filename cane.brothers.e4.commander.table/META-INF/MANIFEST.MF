@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Path Table plug-in
+Bundle-SymbolicName: cane.brothers.e4.commander.table;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.jface,
+ org.eclipse.nebula.widgets.nattable.core,
+ org.eclipse.e4.core.services,
+ cane.brothers.e4.commander.model,
+ cane.brothers.e4.commander.event
+Export-Package: cane.brothers.e4.commander.pathTable

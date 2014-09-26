@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Events plug-in
+Bundle-SymbolicName: cane.brothers.e4.commander.event;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: cane.brothers.e4.commander.event

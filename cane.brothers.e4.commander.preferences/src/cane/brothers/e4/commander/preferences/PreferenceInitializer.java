@@ -43,7 +43,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
      */
     @Override
     public void initializeDefaultPreferences() {
-	System.out.println("Enter in default Preference Initializer");
+	System.out.println("Enter in default Preference Initializer"); //$NON-NLS-1$
 
 	IPreferenceStore store = new ScopedPreferenceStore(
 		InstanceScope.INSTANCE, IdStorage.PLUGIN_ID);

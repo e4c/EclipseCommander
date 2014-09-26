@@ -35,9 +35,18 @@ public interface IPartService {
     Set<MPart> getParts();
 
     /**
+     * create new MPart from the scratch.
+     * 
      * @return true if part was created and assigned to one of two panel.
      */
     boolean createPart(Path rootPath, String panelId);
+
+    /**
+     * copy MPart to opposite panel.
+     * 
+     * @return true if part was created and assigned to opposite panel.
+     */
+    boolean copyPart(MPart activePart);
 
     /**
      * @param id
@@ -51,4 +60,13 @@ public interface IPartService {
      * @return true if part was closed
      */
     boolean closePart(String id);
+
+    /**
+     * get visible opposite part
+     * 
+     * @param activePart
+     *            activePart must be not null
+     * @return
+     */
+    MPart getOppositePart(MPart activePart);
 }

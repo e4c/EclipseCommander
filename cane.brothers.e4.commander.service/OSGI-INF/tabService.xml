@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="E4 Commander Tab Service">
+   <implementation class="cane.brothers.e4.commander.service.internal.TabServiceImpl"/>
+   <service>
+      <provide interface="cane.brothers.e4.commander.service.api.ITabService"/>
+   </service>
+</scr:component>

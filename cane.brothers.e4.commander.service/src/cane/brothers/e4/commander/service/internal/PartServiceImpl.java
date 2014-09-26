@@ -17,25 +17,35 @@
 package cane.brothers.e4.commander.service.internal;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.IdStorage;
+import cane.brothers.e4.commander.api.IDynamicTab;
+import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
+import cane.brothers.e4.commander.service.api.ITabService;
+import cane.brothers.e4.commander.utils.PartUtils;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
- * TODO
+ * Part service concrete realisation
  */
 public class PartServiceImpl implements IPartService {
 
@@ -49,6 +59,17 @@ public class PartServiceImpl implements IPartService {
 
     @Inject
     private IEventBroker broker;
+
+    @Inject
+    EPartService partService;
+
+    @Inject
+    ITabService tabService;
+
+    @SuppressWarnings("restriction")
+    @Inject
+    @Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
+    boolean stayActiveTab;
 
     private Set<MPart> openedParts = new LinkedHashSet<MPart>();
 
@@ -132,6 +153,7 @@ public class PartServiceImpl implements IPartService {
      * @return MPart created on part descriptor. There are no menus, handlers
      *         and toolbar.
      */
+    @Inject
     private MPart createDynamicPart(EModelService modelService) {
 	MPartDescriptor descriptor = modelService
 		.getPartDescriptor(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
@@ -162,6 +184,229 @@ public class PartServiceImpl implements IPartService {
 	part.getPersistedState().putAll(descriptor.getPersistedState());
 	part.getBindingContexts().addAll(descriptor.getBindingContexts());
 	return part;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cane.brothers.e4.commander.service.api.IPartService#copyPart(org.eclipse
+     * .e4.ui.model.application.ui.basic.MPart)
+     */
+    @Override
+    public boolean copyPart(MPart activePart) {
+
+	// 1. copy part
+	MPart newPart = copyPart(partService, activePart);
+
+	// 2. get panel
+	MPartStack panel = getOppositePanel(modelService, application,
+		activePart);
+
+	// 3. add part into panel
+	if (panel != null && panel.getChildren() != null) {
+	    panel.getChildren().add(newPart);
+	}
+
+	// 4. add created part to opened parts set
+	openedParts.add(newPart);
+
+	// TODO Send out events
+	// broker.post(MyEventConstants.TOPIC_TODO_NEW, updateTodo);
+
+	// 6. show part
+	showPart(partService, newPart, activePart);
+
+	return true;
+    }
+
+    /**
+     * Copy all available parameters from initial part to build part
+     * 
+     * @param partService
+     *            EPartService
+     * @param activePart
+     *            initial part
+     * @return MPart finite part
+     */
+    private MPart copyPart(EPartService partService, MPart activePart) {
+
+	MPart newPart = partService
+		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+	newPart = copyPart(newPart, activePart);
+
+	return newPart;
+    }
+
+    /**
+     * Copy all necessary data from given part to new one
+     * 
+     * @param newPart
+     * @param part
+     * @return copy of part
+     */
+    public MPart copyPart(MPart newPart, MPart part) {
+	if (part != null) {
+
+	    Map<String, String> state = part.getPersistedState();
+	    if (state != null) {
+		Path rootPath = null;
+		String strRootPath = state.get("rootPath"); //$NON-NLS-1$
+
+		if (strRootPath == null) {
+		    IDynamicTab tab = tabService.getTab(part);
+		    rootPath = tab.getRootPath();
+		}
+		else {
+		    rootPath = Paths.get(strRootPath);
+		}
+
+		if (rootPath != null) {
+		    newPart.setLabel(PathUtils.getFileName(rootPath));
+		    newPart.setElementId(PartUtils.createElementId());
+
+		    // NB! copy also "active" tag
+		    newPart.getTags().addAll(part.getTags());
+		}
+	    }
+	    else {
+		System.out
+			.println("there are no root path in persisted states");
+	    }
+	}
+
+	return newPart;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cane.brothers.e4.commander.service.api.IPartService#getOppositePart(org
+     * .eclipse.e4.ui.model.application.ui.basic.MPart)
+     */
+    @Override
+    public MPart getOppositePart(MPart activePart) {
+	MPart visiblePart = null;
+
+	if (activePart != null) {
+	    // find opposite panel
+	    String oppositePanelId = getPanelId(activePart, true);
+	    MUIElement oppositePanel = modelService.find(oppositePanelId,
+		    application);
+
+	    if (oppositePanel instanceof MPartStack) {
+		for (MStackElement elem : ((MPartStack) oppositePanel)
+			.getChildren()) {
+		    if (elem instanceof MPart) {
+			MPart part = (MPart) elem;
+
+			// get opposite visible part
+			if (partService.isPartVisible(part)) {
+			    visiblePart = part;
+			    break;
+			}
+		    }
+		}
+	    }
+	}
+	return visiblePart;
+    }
+
+    /**
+     * @param part
+     * @param opposite
+     * @return
+     */
+    public String getPanelId(MPart part, boolean opposite) {
+	// panel id's
+	String panelId = null;
+
+	if (part != null && part.getParent() != null) {
+	    panelId = part.getParent().getElementId();
+	    if (opposite) {
+		panelId = getOppositePanelId(panelId);
+	    }
+	    System.out.println("panel id: " + panelId + "; current: "
+		    + !opposite);
+	}
+
+	return panelId;
+    }
+
+    /**
+     * @param panelId
+     * @return
+     */
+    private String getOppositePanelId(String panelId) {
+	if (panelId != null) {
+	    return (panelId.equals(IdStorage.LEFT_PANEL_ID) ? IdStorage.RIGHT_PANEL_ID
+		    : IdStorage.LEFT_PANEL_ID);
+	}
+	return panelId;
+    }
+
+    /**
+     * @param part
+     *            MPart associated with IDynamicTab
+     * @return IDynamicTab association
+     */
+    // public IDynamicTab getTab(MPart part) {
+    // IDynamicTab tab = null;
+    // if (part != null) {
+    // if (part.getObject() instanceof IDynamicTab) {
+    // tab = (IDynamicTab) part.getObject();
+    // }
+    // else {
+    // System.out
+    // .println("Error: it is not a kind of DynamicTab part");
+    // }
+    // }
+    // else {
+    // System.out.println("Error: part is null");
+    // }
+    // return tab;
+    // }
+
+    /**
+     * @param partService
+     * @param newPart
+     * @param activePart
+     */
+    private void showPart(EPartService partService, MPart newPart,
+	    MPart activePart) {
+
+	partService.showPart(newPart, PartState.VISIBLE);
+
+	// The current tab will stay active
+	partService.showPart(stayActiveTab ? activePart : newPart,
+		PartState.ACTIVATE);
+    }
+
+    /**
+     * Returns opposite panel for given active part
+     * 
+     * @param modelService
+     *            EModelService
+     * @param app
+     *            MApplication
+     * @param activePart
+     *            active MPart
+     * @return MPartStack panel
+     */
+    private MPartStack getOppositePanel(EModelService modelService,
+	    MApplication app, MPart activePart) {
+	MPartStack panel = null;
+
+	String oppositePanelId = getPanelId(activePart, true);
+	MUIElement oppositeElement = modelService.find(oppositePanelId,
+		application);
+
+	if (oppositeElement instanceof MPartStack) {
+	    panel = (MPartStack) oppositeElement;
+	}
+
+	return panel;
     }
 
     /*

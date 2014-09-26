@@ -7,4 +7,6 @@ Bundle-Vendor: cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander,
  cane.brothers.e4.commander.utils
-Require-Bundle: org.apache.commons.lang
+Require-Bundle: org.apache.commons.lang,
+ org.eclipse.e4.ui.model.workbench,
+ org.eclipse.e4.ui.workbench

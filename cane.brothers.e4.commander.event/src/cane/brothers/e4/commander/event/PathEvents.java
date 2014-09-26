@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brothers.e4.commander;
+package cane.brothers.e4.commander.event;
 
 /**
  * E4 UI path event constants.

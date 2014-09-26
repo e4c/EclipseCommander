@@ -24,32 +24,13 @@
          </property>
          <property
                name="preferenceCustomization"
-               value="preferences/plugin_customization.ini">
+               value="platform:/plugin/cane.brothers.e4.commander.preferences/preferences/plugin_customization.ini">
          </property>
          <property
                name="lifeCycleURI"
                value="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.lifecycle.LifeCycleManager">
          </property>
       </product>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="cane.brothers.e4.commander.preferences.PreferenceInitializer">
-      </initializer>
-   </extension>
-   <extension
-         point="com.opcoach.e4.preferences.e4PreferencePages">
-      <page
-            class="cane.brothers.e4.commander.preferences.pages.GeneralPreferencePage"
-            id="cane.brothers.e4.commander.preferences.GeneralPreferencePage"
-            name="General Preferences">
-      </page>
-      <page
-            class="cane.brothers.e4.commander.preferences.pages.TabsPreferencePage"
-            id="cane.brothers.e4.commander.preferences.TabsPreferencePage"
-            name="Tabs Preferences">
-      </page>
    </extension>
 
 

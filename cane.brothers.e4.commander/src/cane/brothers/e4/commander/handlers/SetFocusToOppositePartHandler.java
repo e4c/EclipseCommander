@@ -20,13 +20,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.modeling.EModelService;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
-import cane.brothers.e4.commander.utils.PartUtils;
+import cane.brothers.e4.commander.service.api.IPartService;
+import cane.brothers.e4.commander.service.api.ITabService;
 
 /**
  * set focus to opposite part by Tab key.
@@ -34,14 +32,17 @@ import cane.brothers.e4.commander.utils.PartUtils;
  */
 public class SetFocusToOppositePartHandler {
 
-    @Inject
-    MApplication application;
+    // @Inject
+    // MApplication application;
+
+    // @Inject
+    // EModelService modelService;
 
     @Inject
-    EModelService modelService;
+    private IPartService partService;
 
     @Inject
-    private EPartService partService;
+    private ITabService tabService;
 
     @Inject
     @Named(IServiceConstants.ACTIVE_PART)
@@ -51,12 +52,11 @@ public class SetFocusToOppositePartHandler {
     public void execute() {
 
 	if (activePart != null) {
-
-	    MPart oppositePart = PartUtils.getVisibleOppositePart(application,
-		    modelService, partService, activePart);
+	    // TODO use getPart()
+	    MPart oppositePart = partService.getOppositePart(activePart);
 
 	    // set opposite tab focus and selection
-	    PartUtils.setSelection(oppositePart);
+	    tabService.setSelection(oppositePart);
 	    System.out
 		    .println("set focus and default selection on opposite tab");
 	}

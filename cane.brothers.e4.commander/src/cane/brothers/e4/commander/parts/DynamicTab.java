@@ -44,7 +44,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.service.event.Event;
 
-import cane.brothers.e4.commander.PathEvents;
+import cane.brothers.e4.commander.api.IDynamicTab;
+import cane.brothers.e4.commander.event.PathEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.utils.PathUtils;
@@ -53,7 +54,7 @@ import cane.brothers.e4.commander.utils.PathUtils;
  * Dynamic Tab. GUI class of part descriptor implementation.
  * 
  */
-public class DynamicTab {
+public class DynamicTab implements IDynamicTab {
 
     @Inject
     private IEventBroker eventBroker;
@@ -221,6 +222,7 @@ public class DynamicTab {
     /**
      * clear table selection
      */
+    @Override
     public void clearSelection() {
 	if (table != null && !table.isDisposed() && table.hasSelection()) {
 	    table.clearSelection();
@@ -230,6 +232,7 @@ public class DynamicTab {
     /**
      * set default table selection
      */
+    @Override
     public void setSelection() {
 	if (table != null && !table.isDisposed()) {
 	    table.setDefaultSelection();
@@ -237,6 +240,7 @@ public class DynamicTab {
 	}
     }
 
+    @Override
     @Focus
     public void setFocus() {
 	if (table != null && !table.isDisposed()) {
@@ -249,6 +253,7 @@ public class DynamicTab {
     /**
      * @return the rootPath
      */
+    @Override
     public Path getRootPath() {
 	return rootPath;
     }

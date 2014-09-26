@@ -26,7 +26,7 @@ import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
-import cane.brothers.e4.commander.PathEvents;
+import cane.brothers.e4.commander.event.PathEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 
 /**

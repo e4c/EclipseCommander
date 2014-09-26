@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e4 commander preferences
+Bundle-SymbolicName: cane.brothers.e4.commander.preferences;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.10.0",
+ org.eclipse.jface,
+ com.opcoach.e4.preferences,
+ cane.brothers.e4.commander.utils
+Bundle-ActivationPolicy: lazy
+Export-Package: cane.brothers.e4.commander.preferences

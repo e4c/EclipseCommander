@@ -35,9 +35,9 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import cane.brothers.e4.commander.IdStorage;
-import cane.brothers.e4.commander.parts.DynamicTab;
+import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.service.api.IPartService;
-import cane.brothers.e4.commander.utils.PartUtils;
+import cane.brothers.e4.commander.service.api.ITabService;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
@@ -62,6 +62,9 @@ public class LifeCycleManager {
     // @Inject
     // @Optional
     // IPartService partService;
+
+    // @Inject
+    // private ITabService tabService;
 
     /**
      * Constructor
@@ -139,7 +142,8 @@ public class LifeCycleManager {
     // }
 
     @PostConstruct
-    private void setDefaultSelection(final IEventBroker eventBroker) {
+    private void setDefaultSelection(final IEventBroker eventBroker,
+	    final IEclipseContext context) {
 	// System.out.println("1. postConstruct");
 
 	// subscribe once for default MPart activation
@@ -154,11 +158,18 @@ public class LifeCycleManager {
 			    Object obj = event.getProperty(event
 				    .getPropertyNames()[0]);
 			    if (obj instanceof MPart) {
-				DynamicTab tab = PartUtils.getTab((MPart) obj);
-				// System.out.println("3. " + tab);
 
-				// set default selection
-				tab.setSelection();
+				// tab service already exist in eclipse context
+				ITabService tabService = context
+					.get(ITabService.class);
+				if (tabService != null) {
+				    IDynamicTab tab = tabService
+					    .getTab((MPart) obj);
+				    // System.out.println("3. " + tab);
+
+				    // set default selection
+				    tab.setSelection();
+				}
 			    }
 			}
 			eventBroker.unsubscribe(this);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="cane.brothers.e4.commander.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferencePages">
+      <page
+            class="cane.brothers.e4.commander.preferences.pages.GeneralPreferencePage"
+            id="cane.brothers.e4.commander.preferences.GeneralPreferencePage"
+            name="General Preferences">
+      </page>
+      <page
+            class="cane.brothers.e4.commander.preferences.pages.TabsPreferencePage"
+            id="cane.brothers.e4.commander.preferences.TabsPreferencePage"
+            name="Tabs Preferences">
+      </page>
+   </extension>
+
+</plugin>
