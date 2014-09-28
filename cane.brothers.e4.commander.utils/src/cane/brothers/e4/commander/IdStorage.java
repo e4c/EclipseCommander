@@ -30,33 +30,33 @@ public final class IdStorage {
      * ID's
      */
 
-    /** plugin id */
-    public static final String PLUGIN_ID = "cane.brothers.e4.commander";
+    /** application plug-in id */
+    public static final String PLUGIN_ID = "cane.brothers.e4.commander"; //$NON-NLS-1$
 
     /** application id */
-    public static final String APPLICATION_ID = "cane.brothers.e4.commander.application"
-	    .intern();
+    public static final String APPLICATION_ID = "cane.brothers.e4.commander.application" //$NON-NLS-1$
+    .intern();
 
     /** window id */
-    public static final String WINDOW_ID = "cane.brothers.e4.commander.trimmedwindow"
-	    .intern();
+    public static final String WINDOW_ID = "cane.brothers.e4.commander.trimmedwindow" //$NON-NLS-1$
+    .intern();
 
     /** perspective id */
-    public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main";
+    public static final String MAIN_PERSPECTIVE_ID = "cane.brothers.e4.commander.perspective.main"; //$NON-NLS-1$
 
     /** part descriptor id */
-    public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic"
-	    .intern();
+    public static final String DYNAMIC_PART_DESCRIPTOR_ID = "cane.brothers.e4.commander.partdescriptor.dynamic" //$NON-NLS-1$
+    .intern();
 
-    public static final String DYNAMIC_PART_ELEMENT_PREFIX_ID = "cane.brothers.e4.commander.part.dynamictab."
-	    .intern();
+    public static final String DYNAMIC_PART_ELEMENT_PREFIX_ID = "cane.brothers.e4.commander.part.dynamictab." //$NON-NLS-1$
+    .intern();
 
     /** panel id's */
-    public static String LEFT_PANEL_ID = "cane.brothers.e4.commander.partstack.left"
-	    .intern();
+    public static String LEFT_PANEL_ID = "cane.brothers.e4.commander.partstack.left" //$NON-NLS-1$
+    .intern();
 
-    public static String RIGHT_PANEL_ID = "cane.brothers.e4.commander.partstack.right"
-	    .intern();
+    public static String RIGHT_PANEL_ID = "cane.brothers.e4.commander.partstack.right" //$NON-NLS-1$
+    .intern();
 
     /**
      * STATES
