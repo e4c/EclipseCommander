@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_ki1VgEZ1EeSYiqipFj0sag">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_phVP0EZ1EeSYiqipFj0sag" featurename="descriptors" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="basic:PartDescriptor" xmi:id="__7AyIEZ2EeSYiqipFj0sag" elementId="cane.brothers.e4.commander.partdescriptor.dynamic" label="dynamic part" allowMultiple="true" closeable="true" contributionURI="bundleclass://cane.brothers.e4.commander.part/cane.brothers.e4.commander.part.DynamicTab">
+      <persistedState key="rootPath"/>
+      <menus xmi:id="_w7zLYEZ3EeSYiqipFj0sag" elementId="cane.brothers.e4.commander.partDescriptor.menu" label="tab menu">
+        <tags>ViewMenu</tags>
+      </menus>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

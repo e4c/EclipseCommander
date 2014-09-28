@@ -110,6 +110,7 @@ public class LifeCycleManager {
 
 	createInitialModel(context);
 
+	System.out.println(application.getDescriptors());
 	// setAppWindowSize();
     }
 

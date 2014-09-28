@@ -56,12 +56,14 @@
     </bindings>
   </bindingTables>
   <rootContext xmi:id="_s7WREFnPEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+  <!--
   <descriptors xmi:id="_LxzbwP9vEeOZGL8AHW3wCQ" elementId="cane.brothers.e4.commander.partdescriptor.dynamic" label="dynamic part" allowMultiple="true" closeable="true" contributionURI="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.parts.DynamicTab">
     <persistedState key="rootPath"/>
     <menus xmi:id="_epOL8APIEeSqlIblLCtLJA" elementId="cane.brothers.e4.commander.partDescriptor.menu" label="tab menu">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
+  -->
   <commands xmi:id="_OqxgQFmoEeOT-PJJdUfiZQ" elementId="org.eclipse.ui.file.exit" commandName="command.exit" category="_lKWmIARWEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_1mZAUFmoEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.test" commandName="command.test" category="_z-hlEARWEeSRJPX1RYcCyQ"/>
   <commands xmi:id="_Y5AKoFmvEeOT-PJJdUfiZQ" elementId="cane.brothers.e4.commander.command.closePart" commandName="command.closePart" description="close active tab" category="_6QycEARQEeSRJPX1RYcCyQ"/>

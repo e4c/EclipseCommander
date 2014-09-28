@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dynamic Part plug-in
+Bundle-SymbolicName: cane.brothers.e4.commander.part;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: cane
+Require-Bundle: cane.brothers.e4.commander.api,
+ org.eclipse.e4.core.services,
+ javax.inject,
+ javax.annotation;bundle-version="1.2.0",
+ org.eclipse.e4.ui.model.workbench,
+ org.eclipse.e4.core.contexts,
+ org.eclipse.e4.ui.services,
+ org.eclipse.e4.ui.workbench,
+ cane.brothers.e4.commander.table,
+ org.eclipse.swt,
+ org.eclipse.jface,
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.ui.di,
+ cane.brothers.e4.commander.event,
+ org.eclipse.osgi.services,
+ cane.brothers.e4.commander.utils,
+ org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0",
+ cane.brothers.e4.commander.model
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
