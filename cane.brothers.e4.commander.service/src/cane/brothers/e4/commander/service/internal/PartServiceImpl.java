@@ -41,7 +41,6 @@ import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
-import cane.brothers.e4.commander.utils.PartUtils;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
@@ -168,9 +167,12 @@ public class PartServiceImpl implements IPartService {
 	// part.setToolbar((MToolBar) EcoreUtil.copy((EObject)
 	// descriptor.getToolbar()));
 	// }
-
+	System.out.println("ContributorURI: " + descriptor.getContributorURI());
 	part.setContributorURI(descriptor.getContributorURI());
 	part.setCloseable(descriptor.isCloseable());
+
+	System.out.println("ContributionURI: "
+		+ descriptor.getContributionURI());
 	part.setContributionURI(descriptor.getContributionURI());
 	part.setLabel(descriptor.getLabel());
 	part.setIconURI(descriptor.getIconURI());
@@ -263,7 +265,7 @@ public class PartServiceImpl implements IPartService {
 
 		if (rootPath != null) {
 		    newPart.setLabel(PathUtils.getFileName(rootPath));
-		    newPart.setElementId(PartUtils.createElementId());
+		    newPart.setElementId(createElementId());
 
 		    // NB! copy also "active" tag
 		    newPart.getTags().addAll(part.getTags());

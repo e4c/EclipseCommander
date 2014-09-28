@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/partServiceContextFunction.xml, OSGI-INF/tabServiceContextFunction.xml
-Require-Bundle: cane.brothers.e4.commander.service.api;bundle-version="1.0.0",
+Require-Bundle: cane.brothers.e4.commander.api;bundle-version="1.0.0",
  cane.brothers.e4.commander.preferences,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.workbench,
