@@ -26,7 +26,7 @@ import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
 
-import cane.brothers.e4.commander.event.PathEvents;
+import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 
 /**
@@ -100,7 +100,7 @@ public class OpenPathHandler extends
 		System.out.println("open new path: " + fixture.getPath());
 		// asynchronously sending a path
 		if (eventBroker != null) {
-		    eventBroker.post(PathEvents.TAB_PATH_OPEN,
+		    eventBroker.post(PartEvents.TOPIC_PART_PATH_OPEN,
 			    fixture.getPath());
 		}
 

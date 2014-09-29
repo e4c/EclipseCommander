@@ -38,16 +38,18 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
+import cane.brothers.e4.commander.event.TabEvents;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
- * Part service concrete realisation
+ * Part service concrete realization
  */
 public class PartServiceImpl implements IPartService {
 
+    // counter
     private static int tabsId = 1;
 
     @Inject
@@ -77,7 +79,6 @@ public class PartServiceImpl implements IPartService {
      *
      */
     public PartServiceImpl() {
-	// createInitialModel();
     }
 
     /**
@@ -135,7 +136,7 @@ public class PartServiceImpl implements IPartService {
 	    openedParts.add(part);
 
 	    // TODO Send out events
-	    // broker.post(MyEventConstants.TOPIC_TODO_NEW, updateTodo);
+	    broker.post(TabEvents.TOPIC_TAB_OPEN, part);
 
 	    result = true;
 	}
