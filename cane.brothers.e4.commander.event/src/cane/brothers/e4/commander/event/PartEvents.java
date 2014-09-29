@@ -26,18 +26,17 @@ public final class PartEvents extends BaseEvents {
     /**
      * Base name of all path events
      */
-    public static final String TOPIC_BASE_PART = TOPIC_BASE + "/part/".intern(); //$NON-NLS-1$
+    public static final String TOPIC_BASE_PART = TOPIC_BASE + "/part/"; //$NON-NLS-1$
 
     /**
      * Sent when opening new path in active tab.
      */
     public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART
-	    + "path/open".intern(); //$NON-NLS-1$
+	    + "path/open"; //$NON-NLS-1$
 
     /**
      * Sent when necessary to remove selection from opposite tab.
      */
-    public static final String TOPIC_PART_REMOVE_SELECTION = TOPIC_BASE_PART
-	    + "selection/remove"; //$NON-NLS-1$
+    public static final String TOPIC_PART_REMOVE_SELECTION = "cane/brothers/e4/commander/event/part/selection/remove"; //$NON-NLS-1$
 
 }

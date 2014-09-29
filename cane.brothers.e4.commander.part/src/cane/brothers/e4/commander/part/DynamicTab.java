@@ -159,28 +159,10 @@ public class DynamicTab implements IDynamicTab {
 
     }
 
-    // @Inject
-    // @Optional
-    // private void setRootPart(
-    // @UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
-    //
-    // // update root path of current tab
-    // if (activePart != null && activePart.getObject() == this) {
-    //
-    // rootPath = newPath;
-    // if (table != null) {
-    // table.setRootPath(rootPath);
-    // table.refresh();
-    // setSelection();
-    // }
-    // }
-    // }
-
-    // PartEvents.TOPIC_PART_PATH_OPEN
     @Inject
     @Optional
-    private void openPath(
-	    @UIEventTopic("cane/brothers/e4/commander/event/part/path/open") final Path newPath) {
+    private void setRootPath(
+	    @UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) final Path newPath) {
 
 	// update root path of current tab
 	if (activePart != null && activePart.getObject() == this) {
