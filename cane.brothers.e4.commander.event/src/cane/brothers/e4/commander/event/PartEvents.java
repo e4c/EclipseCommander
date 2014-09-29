@@ -17,30 +17,27 @@
 package cane.brothers.e4.commander.event;
 
 /**
- * E4 UI path event constants.
+ * E4 UI part event constants.
+ * Occurs on the part.
  *
  */
-public final class PathEvents {
-
-    /**
-     * Base name of all app events
-     */
-    public static final String TOPIC_BASE = "cane/brothers/e4/commander/ui"; //$NON-NLS-1$
+public final class PartEvents extends BaseEvents {
 
     /**
      * Base name of all path events
      */
-    public static final String PATH_TOPIC_BASE = TOPIC_BASE + "/tab/path/"; //$NON-NLS-1$
+    public static final String TOPIC_BASE_PART = TOPIC_BASE + "/part/".intern(); //$NON-NLS-1$
 
     /**
      * Sent when opening new path in active tab.
      */
-    public static final String TAB_PATH_OPEN = PATH_TOPIC_BASE + "open"; //$NON-NLS-1$
+    public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART
+	    + "path/open"; //$NON-NLS-1$
 
     /**
      * Sent when necessary to remove selection from opposite tab.
      */
-    public static final String TAB_REMOVE_SELECTION = PATH_TOPIC_BASE
+    public static final String TOPIC_PART_REMOVE_SELECTION = TOPIC_BASE_PART
 	    + "selection/remove"; //$NON-NLS-1$
 
 }
