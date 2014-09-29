@@ -98,9 +98,9 @@ public class OpenPathHandler extends
 		System.out.println("dir");
 
 		System.out.println("open new path: " + fixture.getPath());
-		// asynchronously sending a path
+		// synchronously sending a path
 		if (eventBroker != null) {
-		    eventBroker.post(PartEvents.TOPIC_PART_PATH_OPEN,
+		    eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN,
 			    fixture.getPath());
 		}
 

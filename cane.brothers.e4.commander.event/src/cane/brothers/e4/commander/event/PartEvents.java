@@ -32,7 +32,7 @@ public final class PartEvents extends BaseEvents {
      * Sent when opening new path in active tab.
      */
     public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART
-	    + "path/open"; //$NON-NLS-1$
+	    + "path/open".intern(); //$NON-NLS-1$
 
     /**
      * Sent when necessary to remove selection from opposite tab.

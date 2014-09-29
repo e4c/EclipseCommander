@@ -27,7 +27,6 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
-import cane.brothers.e4.commander.event.PathEvents;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
@@ -40,10 +39,12 @@ public class UpdateLabelPartHandler {
     @Named(IServiceConstants.ACTIVE_PART)
     private MPart activePart;
 
+    // PartEvents.TOPIC_PART_PATH_OPEN
     @Inject
     @Optional
     @Execute
-    public void execute(@UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
+    public void execute(
+	    @UIEventTopic("cane/brothers/e4/commander/event/part/path/open") Path newPath) {
 
 	// update label of current tab
 	if (activePart != null && newPath != null) {

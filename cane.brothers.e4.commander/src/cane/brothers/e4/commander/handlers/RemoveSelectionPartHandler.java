@@ -24,7 +24,6 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
-import cane.brothers.e4.commander.event.PathEvents;
 import cane.brothers.e4.commander.service.api.ITabService;
 
 /**
@@ -47,10 +46,11 @@ public class RemoveSelectionPartHandler {
     // }
     // }
 
+    // PartEvents.TOPIC_PART_REMOVE_SELECTION
     @Inject
     @Execute
     public void removeSelection(
-	    @Optional @UIEventTopic(PathEvents.TAB_REMOVE_SELECTION) MPart activePart) {
+	    @Optional @UIEventTopic("cane/brothers/e4/commander/event/part/selection/remove") final MPart activePart) {
 
 	if (activePart != null && partService != null) {
 

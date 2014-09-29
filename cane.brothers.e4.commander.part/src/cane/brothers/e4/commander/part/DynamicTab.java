@@ -1,4 +1,5 @@
 package cane.brothers.e4.commander.part;
+
 /*******************************************************************************
  * File: DynamicTab.java
  * 
@@ -15,7 +16,6 @@ package cane.brothers.e4.commander.part;
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,7 +46,7 @@ import org.eclipse.swt.widgets.Display;
 import org.osgi.service.event.Event;
 
 import cane.brothers.e4.commander.api.IDynamicTab;
-import cane.brothers.e4.commander.event.PathEvents;
+import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.utils.PathUtils;
@@ -159,10 +159,28 @@ public class DynamicTab implements IDynamicTab {
 
     }
 
+    // @Inject
+    // @Optional
+    // private void setRootPart(
+    // @UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
+    //
+    // // update root path of current tab
+    // if (activePart != null && activePart.getObject() == this) {
+    //
+    // rootPath = newPath;
+    // if (table != null) {
+    // table.setRootPath(rootPath);
+    // table.refresh();
+    // setSelection();
+    // }
+    // }
+    // }
+
+    // PartEvents.TOPIC_PART_PATH_OPEN
     @Inject
     @Optional
-    private void setRootPart(
-	    @UIEventTopic(PathEvents.TAB_PATH_OPEN) Path newPath) {
+    private void openPath(
+	    @UIEventTopic("cane/brothers/e4/commander/event/part/path/open") final Path newPath) {
 
 	// update root path of current tab
 	if (activePart != null && activePart.getObject() == this) {
@@ -211,7 +229,8 @@ public class DynamicTab implements IDynamicTab {
 			&& part.getObject() == this) {
 		    // asynchronously sending an active part
 		    if (eventBroker != null) {
-			eventBroker.post(PathEvents.TAB_REMOVE_SELECTION,
+			eventBroker.post(
+				PartEvents.TOPIC_PART_REMOVE_SELECTION,
 				(MPart) obj);
 		    }
 		}
