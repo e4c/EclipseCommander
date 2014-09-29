@@ -7,7 +7,7 @@ Bundle-Vendor: cane
 Require-Bundle: cane.brothers.e4.commander.api,
  org.eclipse.e4.core.services,
  javax.inject,
- javax.annotation;bundle-version="1.2.0",
+ javax.annotation;bundle-version="1.1.0",
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.ui.services,
