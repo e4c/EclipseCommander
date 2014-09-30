@@ -21,6 +21,8 @@ import java.util.Set;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
+import cane.brothers.e4.commander.api.PartCopyType;
+
 /**
  * Service for model of tabs.
  * 
@@ -46,7 +48,15 @@ public interface IPartService {
      * 
      * @return true if part was created and assigned to opposite panel.
      */
-    boolean copyPart(MPart activePart);
+    /**
+     * @param activePart
+     *            Source Part
+     * @param copyType
+     *            copy tab to opposite panel or duplicate
+     * 
+     * @return true if part was created and assigned to panel.
+     */
+    boolean copyPart(MPart activePart, PartCopyType copyType);
 
     /**
      * @param id

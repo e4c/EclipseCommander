@@ -38,6 +38,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
+import cane.brothers.e4.commander.api.PartCopyType;
 import cane.brothers.e4.commander.event.TabEvents;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
@@ -194,17 +195,18 @@ public class PartServiceImpl implements IPartService {
      * 
      * @see
      * cane.brothers.e4.commander.service.api.IPartService#copyPart(org.eclipse
-     * .e4.ui.model.application.ui.basic.MPart)
+     * .e4.ui.model.application.ui.basic.MPart,
+     * cane.brothers.e4.commander.api.PartCopyType)
      */
     @Override
-    public boolean copyPart(MPart activePart) {
+    public boolean copyPart(MPart activePart, PartCopyType copyType) {
 
 	// 1. copy part
 	MPart newPart = copyPart(partService, activePart);
 
 	// 2. get panel
-	MPartStack panel = getOppositePanel(modelService, application,
-		activePart);
+	MPartStack panel = getPanel(modelService, application, activePart,
+		copyType);
 
 	// 3. add part into panel
 	if (panel != null && panel.getChildren() != null) {
@@ -236,7 +238,7 @@ public class PartServiceImpl implements IPartService {
 
 	MPart newPart = partService
 		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	newPart = copyPart(newPart, activePart);
+	newPart = internalCopyPart(newPart, activePart);
 
 	return newPart;
     }
@@ -248,9 +250,15 @@ public class PartServiceImpl implements IPartService {
      * @param part
      * @return copy of part
      */
-    public MPart copyPart(MPart newPart, MPart part) {
+    /**
+     * @param newPart
+     * @param part
+     * @return
+     */
+    private MPart internalCopyPart(MPart newPart, MPart part) {
 	if (part != null) {
 
+	    // TODO copy persist state
 	    Map<String, String> state = part.getPersistedState();
 	    if (state != null) {
 		Path rootPath = null;
@@ -294,7 +302,7 @@ public class PartServiceImpl implements IPartService {
 
 	if (activePart != null) {
 	    // find opposite panel
-	    String oppositePanelId = getPanelId(activePart, true);
+	    String oppositePanelId = getPanelId(activePart, PartCopyType.COPY);
 	    MUIElement oppositePanel = modelService.find(oppositePanelId,
 		    application);
 
@@ -321,17 +329,17 @@ public class PartServiceImpl implements IPartService {
      * @param opposite
      * @return
      */
-    public String getPanelId(MPart part, boolean opposite) {
+    private String getPanelId(MPart part, PartCopyType copyType) {
 	// panel id's
 	String panelId = null;
 
 	if (part != null && part.getParent() != null) {
 	    panelId = part.getParent().getElementId();
-	    if (opposite) {
+	    if (PartCopyType.COPY == copyType) {
 		panelId = getOppositePanelId(panelId);
 	    }
-	    System.out.println("panel id: " + panelId + "; current: "
-		    + !opposite);
+	    System.out.println("panel id: " + panelId + "; copy type: "
+		    + copyType);
 	}
 
 	return panelId;
@@ -348,28 +356,6 @@ public class PartServiceImpl implements IPartService {
 	}
 	return panelId;
     }
-
-    /**
-     * @param part
-     *            MPart associated with IDynamicTab
-     * @return IDynamicTab association
-     */
-    // public IDynamicTab getTab(MPart part) {
-    // IDynamicTab tab = null;
-    // if (part != null) {
-    // if (part.getObject() instanceof IDynamicTab) {
-    // tab = (IDynamicTab) part.getObject();
-    // }
-    // else {
-    // System.out
-    // .println("Error: it is not a kind of DynamicTab part");
-    // }
-    // }
-    // else {
-    // System.out.println("Error: part is null");
-    // }
-    // return tab;
-    // }
 
     /**
      * @param partService
@@ -395,13 +381,15 @@ public class PartServiceImpl implements IPartService {
      *            MApplication
      * @param activePart
      *            active MPart
+     * @param copyType
+     *            TODO
      * @return MPartStack panel
      */
-    private MPartStack getOppositePanel(EModelService modelService,
-	    MApplication app, MPart activePart) {
+    private MPartStack getPanel(EModelService modelService, MApplication app,
+	    MPart activePart, PartCopyType copyType) {
 	MPartStack panel = null;
 
-	String oppositePanelId = getPanelId(activePart, true);
+	String oppositePanelId = getPanelId(activePart, copyType);
 	MUIElement oppositeElement = modelService.find(oppositePanelId,
 		application);
 

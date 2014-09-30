@@ -23,12 +23,13 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
+import cane.brothers.e4.commander.api.PartCopyType;
 import cane.brothers.e4.commander.service.api.IPartService;
 
 /**
- * Copy tab to other panel using PartDescriptor.
+ * Copy tab to other panel using part service.
  * 
- * @see PartDescriptor
+ * @see IPartService
  */
 public class CopyPartHandler {
 
@@ -39,7 +40,7 @@ public class CopyPartHandler {
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
 	System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
 
-	if (partService.copyPart(activePart)) {
+	if (partService.copyPart(activePart, PartCopyType.COPY)) {
 	    System.out
 		    .println("part was copied to opposite panel sucessfully!");
 	}

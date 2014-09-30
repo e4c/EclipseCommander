@@ -23,14 +23,15 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
+import cane.brothers.e4.commander.api.PartCopyType;
 import cane.brothers.e4.commander.service.api.IPartService;
 
 /**
- * Open new tab directly after active part using PartDescriptor.
+ * Open new tab directly after active part using part service.
  * 
  * TODO open after active tab or in the tail
  * 
- * @see PartDescriptor
+ * @see IPartService
  * 
  */
 public class DuplicatePartHandler {
@@ -42,55 +43,11 @@ public class DuplicatePartHandler {
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
 
 	// TODO
-	if (partService.copyPart(activePart)) {
-	    System.out
-		    .println("part was copied to opposite panel sucessfully!");
+	if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
+	    System.out.println("part was duplicated sucessfully!");
 	}
 	else {
-	    System.out
-		    .println("there are some problems on copying part to another panel");
+	    System.out.println("there are some problems on duplicating part");
 	}
-	//
-	// if (activePart != null && partService != null) {
-	//
-	// // �������� ������� ������������ ������ ��� ����,
-	// // ����� ���������� id � ��� ��� ����� �������.
-	//
-	// // TODO use part service
-	//
-	// // create a new Part based on a PartDescriptor
-	// // in the application model
-	// // assume the ID is used for the PartDescriptor
-	// MPart newPart = partService
-	// .createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	// newPart = PartUtils.copyPart(newPart, activePart);
-	//
-	// // ��������� ����� ������� �� ���� �������
-	// // 1.
-	// // newPart.setParent(part.getParent());
-	//
-	// // 2.
-	// MElementContainer<MUIElement> container = activePart.getParent();
-	//
-	// // 3.
-	// if (container != null && container.getChildren() != null) {
-	// container.getChildren().add(newPart);
-	// }
-	//
-	// // 4. EPartService
-	// // MPartStack stack = (MPartStack)modelService.find(stack_id,
-	// // application);
-	// // stack.getChildren().add(part);
-	//
-	// // If multiple parts of this type are now allowed
-	// // in the application model,
-	// // then the provided part will be shown
-	// // and returned
-	// newPart = partService.showPart(newPart, PartState.VISIBLE);
-	//
-	// // The current tab will stay active
-	// partService.showPart(stayActiveTab ? activePart : newPart,
-	// PartState.ACTIVATE);
-	// }
     }
 }
