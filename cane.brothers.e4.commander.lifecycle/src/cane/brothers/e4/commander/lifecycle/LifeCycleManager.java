@@ -145,7 +145,7 @@ public class LifeCycleManager {
     @PostConstruct
     private void setDefaultSelection(final IEventBroker eventBroker,
 	    final IEclipseContext context) {
-	// System.out.println("1. postConstruct");
+	System.out.println("postConstruct()");
 
 	// subscribe once for default MPart activation
 	eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
