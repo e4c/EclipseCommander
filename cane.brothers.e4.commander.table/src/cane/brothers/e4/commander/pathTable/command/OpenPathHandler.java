@@ -36,12 +36,20 @@ import cane.brothers.e4.commander.model.PathFixture;
 public class OpenPathHandler extends
 	AbstractLayerCommandHandler<OpenPathCommand> {
 
+    // @Inject
     private IEventBroker eventBroker;
 
     private SelectionLayer selectionLayer;
 
-    private final ListDataProvider<PathFixture> bodyDataProvider;
+    private ListDataProvider<PathFixture> bodyDataProvider;
 
+    /**
+     * Constructor
+     *
+     * @param selectionLayer
+     * @param bodyDataProvider
+     * @param eventBroker
+     */
     public OpenPathHandler(SelectionLayer selectionLayer,
 	    ListDataProvider<PathFixture> bodyDataProvider,
 	    IEventBroker eventBroker) {

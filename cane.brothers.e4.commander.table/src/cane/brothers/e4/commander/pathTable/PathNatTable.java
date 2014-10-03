@@ -56,7 +56,11 @@ public class PathNatTable extends NatTable implements IRootPath {
     private DefaultNatTableThemeConfiguration theme = null;
 
     /**
+     * Constructor
+     *
      * @param parent
+     * @param rootPath
+     * @param eventBroker
      */
     public PathNatTable(Composite parent, Path rootPath,
 	    IEventBroker eventBroker) {
