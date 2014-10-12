@@ -12,14 +12,14 @@ Require-Bundle: cane.brothers.e4.commander.api,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.ui.workbench,
- cane.brothers.e4.commander.table,
+ org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0",
  org.eclipse.jface,
  org.eclipse.e4.ui.di,
  org.eclipse.osgi.services,
  cane.brothers.e4.commander.utils,
  cane.brothers.e4.commander.model,
  cane.brothers.e4.commander.event,
- org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0"
+ cane.brothers.e4.commander.table;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander.part

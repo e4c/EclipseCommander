@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Model
+Bundle-Name: Application model plug-in
 Bundle-SymbolicName: cane.brothers.e4.commander.model
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: cane
+Bundle-Version: 1.0.0
+Bundle-Vendor: Cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander.model
 Require-Bundle: cane.brothers.e4.commander.utils
