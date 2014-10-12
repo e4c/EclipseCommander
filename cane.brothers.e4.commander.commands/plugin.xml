@@ -20,10 +20,6 @@
             apply="always"
             uri="fragments/menuItems.e4xmi">
       </fragment>
-      <fragment
-            apply="always"
-            uri="fragments/binding.e4xmi">
-      </fragment>
    </extension>
 
 </plugin>
