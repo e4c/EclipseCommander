@@ -120,26 +120,31 @@ public class PartServiceImpl implements IPartService {
 	    // create dynamic part
 	    MPart part = createDynamicPart(modelService);
 
-	    // specify part
-	    part.setLabel(rootPathString);
-	    part.setElementId(createElementId());
+	    if (part != null) {
+		// specify part
+		part.setLabel(rootPathString);
+		part.setElementId(createElementId());
 
-	    // TODO save state if part not private
-	    Map<String, String> state = part.getPersistedState();
-	    state.put(IdStorage.STATE_ROOT_PATH, rootPath.toString());
+		// TODO save state if part not private
+		Map<String, String> state = part.getPersistedState();
+		state.put(IdStorage.STATE_ROOT_PATH, rootPath.toString());
 
-	    // add tab to the part stack (panel)
-	    MPartStack panel = (MPartStack) modelService.find(panelId,
-		    application);
-	    panel.getChildren().add(part);
+		// add tab to the part stack (panel)
+		MPartStack panel = (MPartStack) modelService.find(panelId,
+			application);
+		panel.getChildren().add(part);
 
-	    //
-	    openedParts.add(part);
+		//
+		openedParts.add(part);
 
-	    // TODO Send out events
-	    broker.post(TabEvents.TOPIC_TAB_OPEN, part);
+		// TODO Send out events
+		broker.post(TabEvents.TOPIC_TAB_OPEN, part);
 
-	    result = true;
+		result = true;
+	    }
+	    else {
+		System.out.println("ERROR: Unable to create dynamic part.");
+	    }
 	}
 
 	return result;
