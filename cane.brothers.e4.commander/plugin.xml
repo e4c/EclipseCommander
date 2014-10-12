@@ -28,7 +28,7 @@
          </property>
          <property
                name="lifeCycleURI"
-               value="bundleclass://cane.brothers.e4.commander.lifecycle/cane.brothers.e4.commander.lifecycle.LifeCycleManager">
+               value="bundleclass://cane.brothers.e4.commander/cane.brothers.e4.commander.lifecycle.LifeCycleManager">
          </property>
       </product>
    </extension>
