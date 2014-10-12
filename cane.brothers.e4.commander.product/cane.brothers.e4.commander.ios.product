@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="EclipseCommander" uid="cane.brothers.e4.commander.ios.product" id="cane.brothers.e4.commander.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="EclipseCommander" uid="cane.brothers.e4.commander.ios.product" id="cane.brothers.e4.commander.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -28,6 +28,9 @@
 
    <plugins>
       <plugin id="cane.brothers.e4.commander"/>
+      <plugin id="cane.brothers.e4.commander.api"/>
+      <plugin id="cane.brothers.e4.commander.event"/>
+      <plugin id="cane.brothers.e4.commander.utils"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.opcoach.e4.preferences"/>
       <plugin id="javax.annotation"/>
@@ -36,6 +39,7 @@
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.commons.lang"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
@@ -45,7 +49,6 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.e4.core.commands"/>
       <plugin id="org.eclipse.e4.core.contexts"/>
       <plugin id="org.eclipse.e4.core.di"/>
@@ -87,8 +90,6 @@
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
-      <plugin id="org.eclipse.ui.forms"/>
-      <plugin id="org.eclipse.ui.intro"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
