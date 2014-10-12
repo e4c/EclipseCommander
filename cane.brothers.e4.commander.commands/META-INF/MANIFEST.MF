@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Commands plug-in
+Bundle-SymbolicName: cane.brothers.e4.commander.commands;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Cane
+Require-Bundle: org.eclipse.e4.core.di,
+ org.eclipse.e4.ui.workbench,
+ org.eclipse.jface,
+ org.eclipse.e4.ui.services,
+ javax.inject,
+ cane.brothers.e4.commander.api,
+ org.eclipse.e4.ui.di,
+ cane.brothers.e4.commander.event,
+ org.eclipse.e4.ui.model.workbench,
+ cane.brothers.e4.commander.utils,
+ org.eclipse.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

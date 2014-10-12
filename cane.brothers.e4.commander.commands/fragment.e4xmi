@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_NiZZoFIDEeSHDbo-DJOyaw">
+  <imports xsi:type="commands:BindingContext" xmi:id="_ZmdWgFIFEeSHDbo-DJOyaw" elementId="org.eclipse.ui.contexts.window"/>
+  <imports xsi:type="application:Addon" xmi:id="_73W-cFIGEeSHDbo-DJOyaw" elementId="org.eclipse.e4.ui.workbench.bindings.model"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_eY_jUFIDEeSHDbo-DJOyaw" featurename="categories" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Category" xmi:id="_eY_jUVIDEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.category.tabs" name="Tabs" description="Tabs category"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lDPNwFIDEeSHDbo-DJOyaw" featurename="categories" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Category" xmi:id="_lDPNwVIDEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.category.file" name="File" description="File category"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_rLXpoFIDEeSHDbo-DJOyaw" featurename="categories" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Category" xmi:id="_rLXpoVIDEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.category.test" name="Test" description="Test category"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_vEgeYFIDEeSHDbo-DJOyaw" featurename="categories" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Category" xmi:id="_vEgeYVIDEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.category.selection" name="Selection" description="Selection category"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_6aRcwFIDEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_6aRcwVIDEeSHDbo-DJOyaw" elementId="org.eclipse.ui.file.exit" commandName="command.exit" category="_lDPNwVIDEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_el6IgFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_el6IgVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.test" commandName="command.test" category="_rLXpoVIDEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_nSe3EFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_nSe3EVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.closePart" commandName="command.closePart" description="close active tab" category="_eY_jUVIDEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_udivkFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_udivkVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.duplicatePart" commandName="command.duplicatePart" description="duplicate this tab">
+      <category href="fragments/commands.e4xmi#_WCjHME5dEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_w83RsFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_w83RsVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.copyPart" commandName="command.copyPart" description="copy tab to other panel">
+      <category href="fragments/commands.e4xmi#_WCjHME5dEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2CRFQFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_2CRFQVIEEeSHDbo-DJOyaw" elementId="org.eclipse.ui.window.preferences" commandName="command.preferences" description="open preferences" category="_lDPNwVIDEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5jfwUFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_5jfwUVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.updatePartLabel" commandName="command.updatePartLabel" description="update part label">
+      <category href="fragments/commands.e4xmi#_mOkp4E5dEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_9AJdYFIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_9AJdYVIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab" commandName="command.setFocusToOppositeTab" description="set focus to opposite tab">
+      <category href="fragments/commands.e4xmi#_mOkp4E5dEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_-2pE8FIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Command" xmi:id="_-2pE8VIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.removeSelectionPart" commandName="command.removeSelectionPart" description="remove selection from unactive part">
+      <category href="fragments/commands.e4xmi#_mOkp4E5dEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClJXAFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_ClJXAVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.ExitHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.ExitHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxIU5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_IrV5MFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_IrV5MVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.CloseActivePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.CloseActivePartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxI05UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_KNm9MFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_KNm9MVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.DuplicatePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.DuplicatePartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxJE5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_MlhPwFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_MlhPwVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.CopyPartToOppositeHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.CopyPartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxJU5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_OfvgwFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_OfvgwVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.PreferencesHandler" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxJk5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q8hsQFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_Q8hsQVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.SetFocusToOppositePartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxKE5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_UfD-4FIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_UfD-4VIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.UpdateLabelPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.UpdateLabelPartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxJ05UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Wr5p4FIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_Wr5p4VIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.RemoveSelectionPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.RemoveSelectionPartHandler">
+      <command href="fragments/handlers.e4xmi#_QmxxKU5UEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_bD_EcFIFEeSHDbo-DJOyaw" featurename="bindings" parentElementId="cane.brothers.e4.commander.bindingtable">
+    <elements xsi:type="commands:KeyBinding" xmi:id="_bD_EcVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T">
+      <tags>type:user</tags>
+      <command href="fragments/binding.e4xmi#_rzGe4E5cEeSHDbo-DJOyaw"/>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_bD_EclIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.copyTabToOtherPanel" keySequence="M1+M2+T">
+      <tags>type:user</tags>
+      <command href="fragments/binding.e4xmi#_pcz88E5cEeSHDbo-DJOyaw"/>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_bD_Ec1IFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.closeTab" keySequence="M1+W">
+      <tags>type:user</tags>
+      <command href="fragments/binding.e4xmi#_vEWNME5cEeSHDbo-DJOyaw"/>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_bD_EdFIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.exit" keySequence="M3+F4">
+      <tags>type:user</tags>
+      <command href="fragments/binding.e4xmi#_ycZHEE5cEeSHDbo-DJOyaw"/>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_bD_EdVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.setFocusToOpposite" keySequence="TAB">
+      <tags>type:user</tags>
+      <command href="fragments/binding.e4xmi#_0_3wcE5cEeSHDbo-DJOyaw"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_fVJXoFIFEeSHDbo-DJOyaw" featurename="children" parentElementId="org.eclipse.ui.file.menu">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_fVJXoVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.commands.handledmenuitem.exit" label="exit" command="_6aRcwVIDEeSHDbo-DJOyaw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_fVJXolIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handledmenuitem.preferences" label="preferences" command="_2CRFQVIEEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_iSSeMFIFEeSHDbo-DJOyaw" featurename="children" parentElementId="cane.brothers.e4.commander.menu.tabs">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_iSSeMVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handledmenuitem.copyTab" label="copy tab to other panel" command="_w83RsVIEEeSHDbo-DJOyaw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_iSSeMlIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handledmenuitem.duplicateTab" label="duplicate this tab" command="_udivkVIEEeSHDbo-DJOyaw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_iSSeM1IFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handledmenuitem.closeTab" label="close active tab" command="_nSe3EVIEEeSHDbo-DJOyaw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_iSSeNFIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.commands.handledmenuitem.tabFocus" label="tab focus" command="_9AJdYVIEEeSHDbo-DJOyaw"/>
+  </fragments>
+</fragment:ModelFragments>

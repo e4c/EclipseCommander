@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_w_lPAE5VEeSHDbo-DJOyaw">
+  <imports xsi:type="commands:Command" xmi:id="_pcz88E5cEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.copyPart"/>
+  <imports xsi:type="commands:Command" xmi:id="_rzGe4E5cEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.duplicatePart"/>
+  <imports xsi:type="commands:Command" xmi:id="_vEWNME5cEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.closePart"/>
+  <imports xsi:type="commands:Command" xmi:id="_ycZHEE5cEeSHDbo-DJOyaw" elementId="org.eclipse.ui.file.exit"/>
+  <imports xsi:type="commands:Command" xmi:id="_0_3wcE5cEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab"/>
+  <imports xsi:type="commands:BindingContext" xmi:id="_B0PlYE5eEeSHDbo-DJOyaw" elementId="org.eclipse.ui.contexts.window"/>
+  <imports xsi:type="commands:BindingContext" xmi:id="_cZkKAFGGEeSHDbo-DJOyaw" elementId="org.eclipse.ui.contexts.dialog"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_w_lPAU5VEeSHDbo-DJOyaw" featurename="bindings" parentElementId="cane.brothers.e4.commander.bindingtable">
+    <elements xsi:type="commands:KeyBinding" xmi:id="_jWqpkFGHEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.duplicateTab" keySequence="M1+T" command="_rzGe4E5cEeSHDbo-DJOyaw">
+      <tags>type:user</tags>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_kwrwgFGHEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.copyTabToOtherPanel" keySequence="M1+M2+T" command="_pcz88E5cEeSHDbo-DJOyaw">
+      <tags>type:user</tags>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_mQ_ssFGHEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.closeTab" keySequence="M1+W" command="_vEWNME5cEeSHDbo-DJOyaw">
+      <tags>type:user</tags>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_nhkjwFGHEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.exit" keySequence="M3+F4" command="_ycZHEE5cEeSHDbo-DJOyaw">
+      <tags>type:user</tags>
+    </elements>
+    <elements xsi:type="commands:KeyBinding" xmi:id="_p9nvcFGHEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.keybinding.setFocusToOpposite" keySequence="TAB" command="_0_3wcE5cEeSHDbo-DJOyaw">
+      <tags>type:user</tags>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

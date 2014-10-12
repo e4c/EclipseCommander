@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="cane.brothers.e4.commander.commands.fragment"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            apply="always"
+            uri="fragments/commandCategory.e4xmi">
+      </fragment>
+      <fragment
+            apply="always"
+            uri="fragments/commands.e4xmi">
+      </fragment>
+      <fragment
+            apply="always"
+            uri="fragments/handlers.e4xmi">
+      </fragment>
+      <fragment
+            apply="always"
+            uri="fragments/menuItems.e4xmi">
+      </fragment>
+      <fragment
+            apply="always"
+            uri="fragments/binding.e4xmi">
+      </fragment>
+   </extension>
+
+</plugin>
