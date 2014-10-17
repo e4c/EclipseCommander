@@ -33,6 +33,8 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
@@ -46,44 +48,26 @@ import cane.brothers.e4.commander.utils.PathUtils;
  */
 public class LifeCycleManager {
 
-    // @Inject
-    // MApplication application;
-
-    // @Inject
-    // EModelService modelService;
-
-    // @Inject
-    // EPartService partService;
-
-    // @Inject
-    // @Preference(PreferenceConstants.PS_DEFAULT_TAB_PATH)
-    // boolean defaultTabPath;
-
-    // @Inject
-    // @Optional
-    // IPartService partService;
-
-    // @Inject
-    // private ITabService tabService;
+    Logger log = LoggerFactory.getLogger(LifeCycleManager.class);
 
     /**
      * Constructor
      *
      */
     public LifeCycleManager() {
-	System.out.println("life cycle manager");
+	log.info("life cycle manager");
     }
 
     @PreSave
     public void preSave(MApplication application, EModelService modelService,
 	    EPartService partService) {
-	System.out.println("preSave()");
+	log.info("preSave()");
 	// setAppWindowSize();
     }
 
     @ProcessRemovals
     public void processRemovals() {
-	System.out.println("processRemovals()");
+	log.info("processRemovals()");
 
 	// set default path
 	// Path rootPath = PathUtils.getDefaultPath();
@@ -96,21 +80,23 @@ public class LifeCycleManager {
     }
 
     @PostContextCreate
-    public void postContextCreate(MApplication application,
-	    EModelService modelService, EPartService partService) {
-	System.out.println("postContextCreate()");
+    public void postContextCreate(IEventBroker eventBroker) {
+	log.info("postContextCreate()");
+
+	eventBroker.subscribe(UIEvents.UILifeCycle.APP_STARTUP_COMPLETE,
+		new AppStartupCompleteEventHandler());
 
     }
 
     @ProcessAdditions
     public void processAdditions(MApplication application,
 	    EModelService modelService, IEclipseContext context) {
-
-	System.out.println("processAdditions()");
+	log.info("processAdditions()");
 
 	createInitialModel(context);
+	log.debug("initial model was created");
 
-	System.out.println(application.getDescriptors());
+	// System.out.println(application.getDescriptors());
 	// setAppWindowSize();
     }
 
@@ -125,7 +111,7 @@ public class LifeCycleManager {
 	Path rootPath = PathUtils.getDefaultPath();
 
 	// FIXME set general context value
-	context.set("rootPath", rootPath.toString());
+	context.set("rootPath", rootPath.toString()); //$NON-NLS-1$
 
 	// path service already exist in eclipse context
 	IPartService partService = context.get(IPartService.class);
@@ -135,7 +121,7 @@ public class LifeCycleManager {
 	    partService.createPart(rootPath, IdStorage.RIGHT_PANEL_ID);
 	}
 	else {
-	    System.out.println("ERROR: there is no part service avaliable.");
+	    log.error("ERROR: there is no part service avaliable.");
 	}
     }
 
@@ -148,7 +134,7 @@ public class LifeCycleManager {
     @PostConstruct
     private void setDefaultSelection(final IEventBroker eventBroker,
 	    final IEclipseContext context) {
-	System.out.println("postConstruct()");
+	log.info("postConstruct()");
 
 	// subscribe once for default MPart activation
 	eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
@@ -179,6 +165,13 @@ public class LifeCycleManager {
 			eventBroker.unsubscribe(this);
 		    }
 		});
+    }
+
+    private final class AppStartupCompleteEventHandler implements EventHandler {
+	@Override
+	public void handleEvent(final Event event) {
+	    log.debug("Application startup completed.");
+	}
     }
 
 }

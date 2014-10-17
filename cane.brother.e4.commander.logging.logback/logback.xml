@@ -1,0 +1,3 @@
+<configuration>
+  <appender name="ECLIPSE" class="cane.brother.e4.commander.logback.appender.EclipseAppender"></appender>
+</configuration>

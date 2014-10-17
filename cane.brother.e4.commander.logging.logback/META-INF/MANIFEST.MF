@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Logback config fragment
+Bundle-SymbolicName: cane.brother.e4.commander.logging.logback;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Cane
+Fragment-Host: cane.brothers.e4.commander.logging;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: ch.qos.logback.core;bundle-version="1.0.7",
+ ch.qos.logback.classic;bundle-version="1.0.7",
+ org.eclipse.core.runtime;bundle-version="3.10.0"

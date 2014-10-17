@@ -19,12 +19,17 @@ package cane.brothers.e4.commander.pathTable.command;
 import java.nio.file.Files;
 import java.util.Set;
 
+import javax.inject.Inject;
+
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.nebula.widgets.nattable.command.AbstractLayerCommandHandler;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
 import org.eclipse.nebula.widgets.nattable.data.ListDataProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.util.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
@@ -36,8 +41,13 @@ import cane.brothers.e4.commander.model.PathFixture;
 public class OpenPathHandler extends
 	AbstractLayerCommandHandler<OpenPathCommand> {
 
+    Logger log = LoggerFactory.getLogger(OpenPathHandler.class);
+
     // @Inject
     private IEventBroker eventBroker;
+
+    @Inject
+    IEclipseContext context;
 
     private SelectionLayer selectionLayer;
 
@@ -84,7 +94,9 @@ public class OpenPathHandler extends
 	Set<Range> selections = selectionLayer.getSelectedRowPositions();
 	PathFixture fixture = null;
 
-	System.out.println("Selected Row: " + ObjectUtils.toString(selections));
+	if (log.isDebugEnabled()) {
+	    log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$ 
+	}
 
 	for (Range r : selections) {
 	    for (int i = r.start; i < r.end; i++) {

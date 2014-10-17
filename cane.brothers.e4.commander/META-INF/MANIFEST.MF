@@ -6,11 +6,14 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: Cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.e4.ui.workbench,
+Require-Bundle: javax.inject,
+ org.eclipse.e4.ui.workbench,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.osgi.services,
  org.eclipse.core.runtime,
  cane.brothers.e4.commander.utils,
  cane.brothers.e4.commander.api,
  org.eclipse.e4.core.services,
- org.eclipse.e4.core.contexts
+ org.eclipse.e4.core.contexts,
+ org.eclipse.osgi,
+ cane.brothers.e4.commander.logging

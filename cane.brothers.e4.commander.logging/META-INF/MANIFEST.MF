@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Logging plug-in
+Bundle-SymbolicName: cane.brothers.e4.commander.logging
+Bundle-Version: 1.0.0
+Bundle-Vendor: Cane
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.slf4j.api;bundle-version="1.7.2";visibility:=reexport

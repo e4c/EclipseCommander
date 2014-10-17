@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="e4 Luna Base RCP" sequenceNumber="21">
+<?pde version="3.8"?><target includeMode="feature" name="e4 Luna Base RCP" sequenceNumber="22">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group" version="1.1.0.201405012245"/>
@@ -7,21 +7,41 @@
 <repository location="http://download.eclipse.org/nattable/releases/1.1.0/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
-<unit id="org.apache.commons.lang.source" version="2.6.0.v201205030909"/>
-<unit id="ca.odell.glazedlists.source" version="1.9.0.v201303080712"/>
-<unit id="org.apache.commons.logging" version="1.1.1.v201101211721"/>
-<unit id="org.apache.commons.lang" version="2.6.0.v201205030909"/>
-<unit id="org.apache.commons.logging.source" version="1.1.1.v201101211721"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.common.feature.group" version="2.10.0.v20140514-1158"/>
 <unit id="org.eclipse.emf.ecore.feature.group" version="2.10.0.v20140514-1158"/>
 <unit id="org.eclipse.rcp.sdk.id" version="4.4.0.I20140606-1215"/>
 <repository location="http://download.eclipse.org/releases/luna/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.orbit.build.feature.set1.feature.group" version="1.0.0.v201305151255-FJ8FLmFbULjF0KLmcHxH-7um-tgX"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"/>
+</location>
 </locations>
+<includeBundles>
+<feature id="org.eclipse.e4.rcp"/>
+<feature id="org.eclipse.e4.rcp.source"/>
+<feature id="org.eclipse.emf.common"/>
+<feature id="org.eclipse.emf.ecore"/>
+<feature id="org.eclipse.nebula.widgets.nattable.core.feature"/>
+<feature id="org.eclipse.nebula.widgets.nattable.core.source.feature"/>
+<feature id="org.eclipse.rcp"/>
+<feature id="org.eclipse.rcp.configuration"/>
+<feature id="org.eclipse.rcp.source"/>
+<plugin id="ca.odell.glazedlists"/>
+<plugin id="ca.odell.glazedlists.source"/>
+<plugin id="ch.qos.logback.classic"/>
+<plugin id="ch.qos.logback.classic.source"/>
+<plugin id="ch.qos.logback.core"/>
+<plugin id="ch.qos.logback.core.source"/>
+<plugin id="ch.qos.logback.slf4j"/>
+<plugin id="ch.qos.logback.slf4j.source"/>
+<plugin id="org.apache.commons.lang"/>
+<plugin id="org.apache.commons.lang.source"/>
+<plugin id="org.apache.commons.logging"/>
+<plugin id="org.apache.commons.logging.source"/>
+<plugin id="org.slf4j.api"/>
+<plugin id="org.slf4j.api.source"/>
+</includeBundles>
 <environment>
 <os>macosx</os>
 <ws>cocoa</ws>

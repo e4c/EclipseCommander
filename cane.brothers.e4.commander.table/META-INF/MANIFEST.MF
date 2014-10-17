@@ -6,9 +6,14 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0",
+Require-Bundle: javax.inject,
+ org.eclipse.nebula.widgets.nattable.core;bundle-version="1.1.0",
  org.eclipse.jface,
  org.eclipse.e4.core.services,
  cane.brothers.e4.commander.model,
- cane.brothers.e4.commander.event
+ cane.brothers.e4.commander.event,
+ org.eclipse.ui.workbench,
+ cane.brothers.e4.commander.utils,
+ org.eclipse.e4.core.contexts,
+ cane.brothers.e4.commander.logging
 Export-Package: cane.brothers.e4.commander.pathTable
