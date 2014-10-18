@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brother.e4.commander.logback.appender;
+package cane.brothers.e4.commander.logback.appender;
 
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
