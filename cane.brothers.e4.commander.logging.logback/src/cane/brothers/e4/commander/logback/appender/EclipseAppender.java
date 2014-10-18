@@ -28,9 +28,11 @@ import ch.qos.logback.core.AppenderBase;
 /**
  * "This sourcecode is released under EPL."
  * 
- * @author David Virdefors, www.oixx.se, Copyright 2012 Appends logback logging
- *         events to Eclipse RCP logging events. This makes the logs visible in
- *         the Eclipse GUI in the <strong>Error Log</strong> view as well as in
+ * @author David Virdefors, www.oixx.se,
+ * 
+ *         Copyright 2012 Appends logback logging events to Eclipse RCP logging
+ *         events. This makes the logs visible in the Eclipse GUI in the
+ *         <strong>Error Log</strong> view as well as in
  *         the log files in your workspace.
  */
 public class EclipseAppender extends AppenderBase<ILoggingEvent> {
@@ -43,7 +45,7 @@ public class EclipseAppender extends AppenderBase<ILoggingEvent> {
     @Override
     protected void append(ILoggingEvent event) {
 	Bundle bundle = Platform
-		.getBundle("cane.brother.e4.commander.logback.config");
+		.getBundle("cane.brothers.e4.commander.logging.logback");
 	if (bundle == null) {
 	    System.out
 		    .println("No bundle found when trying to log to eclipse.");
