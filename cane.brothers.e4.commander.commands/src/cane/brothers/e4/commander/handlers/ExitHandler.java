@@ -35,8 +35,8 @@ public class ExitHandler {
     @Execute
     public void execute(IWorkbench workbench,
 	    @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
-	if (MessageDialog.openConfirm(shell, "Confirmation",
-		"Do you want to exit?")) {
+	if (MessageDialog.openConfirm(shell, "Confirmation", //$NON-NLS-1$
+		"Do you want to exit?")) { //$NON-NLS-1$
 	    workbench.close();
 	}
     }

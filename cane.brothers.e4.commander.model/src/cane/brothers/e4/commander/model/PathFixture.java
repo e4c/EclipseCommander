@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
@@ -28,6 +31,9 @@ import cane.brothers.e4.commander.utils.PathUtils;
  *
  */
 public class PathFixture {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(PathFixture.class);
 
     private Path path;
 
@@ -61,10 +67,11 @@ public class PathFixture {
 	    catch (IOException ex) {
 		this.size = 0;
 		// TODO ex
+		log.warn("there is problems on size retrieve", ex); //$NON-NLS-1$ 
 	    }
 	}
 	else {
-	    System.out.println("path is null");
+	    log.warn("path is null"); //$NON-NLS-1$
 	}
 
 	this.attributes = PathUtils.getAttributesString(path);
@@ -89,7 +96,7 @@ public class PathFixture {
     @Override
     public String toString() {
 	// TODO size to Kb/Mb
-	return "[" + name + ", " + size + ", " + attributes + "]";
+	return "[" + name + ", " + size + ", " + attributes + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
     }
 
 }

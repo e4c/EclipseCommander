@@ -22,6 +22,8 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
@@ -31,6 +33,9 @@ import cane.brothers.e4.commander.service.api.ITabService;
  *
  */
 public class SetFocusToOppositePartHandler {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(SetFocusToOppositePartHandler.class);
 
     // @Inject
     // MApplication application;
@@ -50,6 +55,9 @@ public class SetFocusToOppositePartHandler {
 
     @Execute
     public void execute() {
+	if (log.isDebugEnabled()) {
+	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+	}
 
 	if (activePart != null) {
 	    // TODO use getPart()
@@ -57,8 +65,9 @@ public class SetFocusToOppositePartHandler {
 
 	    // set opposite tab focus and selection
 	    tabService.setSelection(oppositePart);
-	    System.out
-		    .println("set focus and default selection on opposite tab");
+	    if (log.isDebugEnabled()) {
+		log.debug("set focus and default selection on opposite tab");
+	    }
 	}
     }
 }

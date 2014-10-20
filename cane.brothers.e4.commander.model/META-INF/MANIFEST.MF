@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: Cane
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander.model
-Require-Bundle: cane.brothers.e4.commander.utils
+Require-Bundle: cane.brothers.e4.commander.utils,
+ org.slf4j.api

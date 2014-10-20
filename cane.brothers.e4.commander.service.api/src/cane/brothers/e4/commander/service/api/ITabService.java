@@ -21,7 +21,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import cane.brothers.e4.commander.api.IDynamicTab;
 
 /**
- * TODO
+ * Service for model of tabs.
  */
 public interface ITabService {
 

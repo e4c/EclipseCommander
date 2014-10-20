@@ -19,6 +19,8 @@ package cane.brothers.e4.commander.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.IdStorage;
 
@@ -28,6 +30,9 @@ import com.opcoach.e4.preferences.ScopedPreferenceStore;
  * Class used to initialize default preference values.
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(PreferenceInitializer.class);
 
     /**
      * default constructor
@@ -43,7 +48,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
      */
     @Override
     public void initializeDefaultPreferences() {
-	System.out.println("Enter in default Preference Initializer"); //$NON-NLS-1$
+	if (log.isDebugEnabled()) {
+	    log.debug("Enter in default Preference Initializer"); //$NON-NLS-1$
+	}
 
 	IPreferenceStore store = new ScopedPreferenceStore(
 		InstanceScope.INSTANCE, IdStorage.PLUGIN_ID);

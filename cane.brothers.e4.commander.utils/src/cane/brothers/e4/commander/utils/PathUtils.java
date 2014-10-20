@@ -30,11 +30,15 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Set;
 
 import org.apache.commons.lang.SystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * some useful path utils.
  */
 public class PathUtils {
+
+    private static final Logger log = LoggerFactory.getLogger(PathUtils.class);
 
     /**
      * @param path
@@ -91,7 +95,7 @@ public class PathUtils {
 	Set<String> views = FileSystems.getDefault()
 		.supportedFileAttributeViews();
 
-	if (views.contains("posix")) {
+	if (views.contains("posix")) { //$NON-NLS-1$
 	    return getPosixAttributesString(path);
 	}
 	else {
@@ -112,13 +116,13 @@ public class PathUtils {
 	    // + all basic attributes
 	    DosFileAttributes dosAttrs = basicView.readAttributes();
 
-	    attrs.append(dosAttrs.isReadOnly() ? "r" : "-");
-	    attrs.append(dosAttrs.isHidden() ? "h" : "-");
-	    attrs.append(dosAttrs.isArchive() ? "a" : "-");
-	    attrs.append(dosAttrs.isSystem() ? "s" : "-");
+	    attrs.append(dosAttrs.isReadOnly() ? "r" : "-"); //$NON-NLS-1$ //$NON-NLS-2$
+	    attrs.append(dosAttrs.isHidden() ? "h" : "-");//$NON-NLS-1$ //$NON-NLS-2$
+	    attrs.append(dosAttrs.isArchive() ? "a" : "-");//$NON-NLS-1$ //$NON-NLS-2$
+	    attrs.append(dosAttrs.isSystem() ? "s" : "-");//$NON-NLS-1$ //$NON-NLS-2$
 	}
 	catch (IOException e) {
-	    e.printStackTrace();
+	    log.warn("unable to read DOS attributes.", e); //$NON-NLS-1$
 	}
 	return attrs.toString();
     }
@@ -142,7 +146,7 @@ public class PathUtils {
 	    }
 	}
 	catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    log.warn("unable to read Posix file attributes.", e); //$NON-NLS-1$
 	}
 	return attrs.toString();
     }

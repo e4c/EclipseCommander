@@ -45,10 +45,10 @@ public class EclipseAppender extends AppenderBase<ILoggingEvent> {
     @Override
     protected void append(ILoggingEvent event) {
 	Bundle bundle = Platform
-		.getBundle("cane.brothers.e4.commander.logging.logback");
+		.getBundle("cane.brothers.e4.commander.logging.logback"); //$NON-NLS-1$
 	if (bundle == null) {
 	    System.out
-		    .println("No bundle found when trying to log to eclipse.");
+		    .println("No bundle found when trying to log to eclipse."); //$NON-NLS-1$
 	}
 	else {
 	    ILog log = Platform.getLog(bundle);

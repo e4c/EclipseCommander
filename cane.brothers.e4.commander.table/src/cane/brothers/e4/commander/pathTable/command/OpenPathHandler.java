@@ -41,7 +41,8 @@ import cane.brothers.e4.commander.model.PathFixture;
 public class OpenPathHandler extends
 	AbstractLayerCommandHandler<OpenPathCommand> {
 
-    Logger log = LoggerFactory.getLogger(OpenPathHandler.class);
+    private static final Logger log = LoggerFactory
+	    .getLogger(OpenPathHandler.class);
 
     // @Inject
     private IEventBroker eventBroker;
@@ -115,9 +116,11 @@ public class OpenPathHandler extends
 	    // 2. check if directory
 	    if (Files.isDirectory(fixture.getPath())) {
 		// 2.1 open new path
-		System.out.println("dir");
+		if (log.isDebugEnabled()) {
+		    log.debug(fixture.getPath() + " is dir"); //$NON-NLS-1$
+		    log.debug("open new path: " + fixture.getPath()); //$NON-NLS-1$
+		}
 
-		System.out.println("open new path: " + fixture.getPath());
 		// synchronously sending a path
 		if (eventBroker != null) {
 		    eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN,
@@ -127,6 +130,7 @@ public class OpenPathHandler extends
 	    }
 	    else {
 		// 2.2 do nothing at this moment
+		log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
 	    }
 	}
 

@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.e4.core.di,
  cane.brothers.e4.commander.event,
  org.eclipse.e4.ui.model.workbench,
  cane.brothers.e4.commander.utils,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.slf4j.api
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

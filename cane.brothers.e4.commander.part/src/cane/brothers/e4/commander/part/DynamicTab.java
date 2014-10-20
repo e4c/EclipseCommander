@@ -44,6 +44,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.service.event.Event;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.event.PartEvents;
@@ -56,6 +58,8 @@ import cane.brothers.e4.commander.utils.PathUtils;
  * 
  */
 public class DynamicTab implements IDynamicTab {
+
+    private static final Logger log = LoggerFactory.getLogger(DynamicTab.class);
 
     @Inject
     private IEventBroker eventBroker;
@@ -129,12 +133,16 @@ public class DynamicTab implements IDynamicTab {
 		    new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-			    System.out.println("Selection changed:");
+			    if (log.isDebugEnabled()) {
+				log.debug("Selection changed:"); //$NON-NLS-1$
+			    }
 
 			    IStructuredSelection selection = (IStructuredSelection) event
 				    .getSelection();
+			    boolean hasSelection = selection != null
+				    && selection.isEmpty() == false;
 
-			    if (!selection.isEmpty()) {
+			    if (hasSelection) {
 				Object firstElement = selection
 					.getFirstElement();
 
@@ -146,7 +154,9 @@ public class DynamicTab implements IDynamicTab {
 				for (Object sel : selection.toArray()) {
 				    if (sel instanceof PathFixture) {
 					PathFixture fixture = (PathFixture) sel;
-					System.out.println("   " + fixture);
+					if (log.isDebugEnabled()) {
+					    log.debug("   " + fixture); //$NON-NLS-1$
+					}
 				    }
 				}
 			    }
@@ -238,7 +248,9 @@ public class DynamicTab implements IDynamicTab {
     public void setSelection() {
 	if (table != null && !table.isDisposed()) {
 	    table.setDefaultSelection();
-	    System.out.println("set default table selection");
+	    if (log.isDebugEnabled()) {
+		log.debug("set default table selection"); //$NON-NLS-1$
+	    }
 	}
     }
 
@@ -247,7 +259,9 @@ public class DynamicTab implements IDynamicTab {
     public void setFocus() {
 	if (table != null && !table.isDisposed()) {
 	    if (table.setFocus()) {
-		System.out.println("set focus for table");
+		if (log.isDebugEnabled()) {
+		    log.debug("set focus for table"); //$NON-NLS-1$
+		}
 	    }
 	}
     }

@@ -17,6 +17,8 @@
 package cane.brothers.e4.commander.service.internal;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.service.api.ITabService;
@@ -25,6 +27,9 @@ import cane.brothers.e4.commander.service.api.ITabService;
  * TODO
  */
 public class TabServiceImpl implements ITabService {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(TabServiceImpl.class);
 
     /**
      * Constructor
@@ -49,12 +54,11 @@ public class TabServiceImpl implements ITabService {
 		tab = (IDynamicTab) part.getObject();
 	    }
 	    else {
-		System.out
-			.println("Error: it is not a kind of DynamicTab part");
+		log.error("Given MPart is not a kind of DynamicTab part: " + part.toString()); //$NON-NLS-1$
 	    }
 	}
 	else {
-	    System.out.println("Error: part is null");
+	    log.error("Part is null");
 	}
 	return tab;
     }

@@ -38,6 +38,8 @@ import org.eclipse.nebula.widgets.nattable.selection.RowSelectionModel;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.selection.config.RowOnlySelectionConfiguration;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.IRootPath;
@@ -58,6 +60,9 @@ import cane.brothers.e4.commander.pathTable.data.SimpleColumnHeaderDataProvider;
  *
  */
 public class PathCompositeLayer extends CompositeLayer implements IRootPath {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(PathCompositeLayer.class);
 
     private Path rootPath;
 
@@ -170,7 +175,7 @@ public class PathCompositeLayer extends CompositeLayer implements IRootPath {
 		}
 	    }
 	    catch (DirectoryIteratorException | IOException ex) {
-		System.out.println(ex.getMessage());
+		log.warn(ex.getMessage());
 	    }
 
 	}

@@ -20,6 +20,8 @@ import org.eclipse.nebula.widgets.nattable.NatTable;
 import org.eclipse.nebula.widgets.nattable.ui.action.IMouseClickAction;
 import org.eclipse.nebula.widgets.nattable.viewport.command.ViewportSelectRowCommand;
 import org.eclipse.swt.events.MouseEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
 
@@ -27,6 +29,9 @@ import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
  * double click action in the path table -> open new path.
  */
 public class OpenPathMouseClickAction implements IMouseClickAction {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(OpenPathMouseClickAction.class);
 
     /*
      * (non-Javadoc)
@@ -38,7 +43,9 @@ public class OpenPathMouseClickAction implements IMouseClickAction {
     @Override
     public void run(NatTable natTable, MouseEvent event) {
 	int rowPosition = natTable.getRowPositionByY(event.y);
-	System.out.println("rowPos: " + rowPosition);
+	if (log.isDebugEnabled()) {
+	    log.debug("rowPos: " + rowPosition); //$NON-NLS-1$
+	}
 
 	if (rowPosition != -1) {
 	    natTable.doCommand(new OpenPathCommand());

@@ -24,7 +24,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import cane.brothers.e4.commander.api.PartCopyType;
 
 /**
- * Service for model of tabs.
+ * Service for model of parts connected with tabs.
  * 
  * TODO
  * use as argument <code>MPart</code> or <code>id</code>.

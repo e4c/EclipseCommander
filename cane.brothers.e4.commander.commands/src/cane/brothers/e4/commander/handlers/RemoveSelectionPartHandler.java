@@ -23,6 +23,8 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.service.api.ITabService;
@@ -31,6 +33,9 @@ import cane.brothers.e4.commander.service.api.ITabService;
  * remove selection on non active part by event.
  */
 public class RemoveSelectionPartHandler {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(RemoveSelectionPartHandler.class);
 
     @Inject
     private EPartService partService;
@@ -52,6 +57,9 @@ public class RemoveSelectionPartHandler {
     @Execute
     public void removeSelection(
 	    @Optional @UIEventTopic(PartEvents.TOPIC_PART_REMOVE_SELECTION) final MPart activePart) {
+	if (log.isDebugEnabled()) {
+	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+	}
 
 	if (activePart != null && partService != null) {
 
@@ -60,7 +68,9 @@ public class RemoveSelectionPartHandler {
 		if (p != null && !p.equals(activePart)) {
 
 		    tabService.clearSelection(p);
-		    System.out.println("remove selection from non active tab");
+		    if (log.isDebugEnabled()) {
+			log.debug("remove selection from non active tab");
+		    }
 		}
 	    }
 	}

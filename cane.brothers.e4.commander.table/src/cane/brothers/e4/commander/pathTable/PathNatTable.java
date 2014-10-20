@@ -30,6 +30,8 @@ import org.eclipse.nebula.widgets.nattable.selection.RowSelectionProvider;
 import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.style.theme.DefaultNatTableThemeConfiguration;
 import org.eclipse.swt.widgets.Composite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.layer.PathCompositeLayer;
@@ -40,6 +42,9 @@ import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
  *
  */
 public class PathNatTable extends NatTable implements IRootPath {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(PathNatTable.class);
 
     private Path rootPath = null;
 

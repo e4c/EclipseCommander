@@ -22,6 +22,8 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.api.PartCopyType;
 import cane.brothers.e4.commander.service.api.IPartService;
@@ -33,20 +35,25 @@ import cane.brothers.e4.commander.service.api.IPartService;
  */
 public class CopyPartHandler {
 
+    private static final Logger log = LoggerFactory
+	    .getLogger(CopyPartHandler.class);
+
     @Inject
     IPartService partService;
 
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-	System.out.println((this.getClass().getSimpleName() + " called")); //$NON-NLS-1$
+	if (log.isDebugEnabled()) {
+	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+	}
 
 	if (partService.copyPart(activePart, PartCopyType.COPY)) {
-	    System.out
-		    .println("part was copied to opposite panel sucessfully!");
+	    if (log.isDebugEnabled()) {
+		log.debug("part was copied to opposite panel sucessfully!");
+	    }
 	}
 	else {
-	    System.out
-		    .println("there are some problems on copying part to another panel");
+	    log.error("there are some problems on copying part to another panel");
 	}
 
     }

@@ -19,7 +19,8 @@ Require-Bundle: cane.brothers.e4.commander.api,
  cane.brothers.e4.commander.utils,
  cane.brothers.e4.commander.model,
  cane.brothers.e4.commander.event,
- cane.brothers.e4.commander.table;bundle-version="1.0.0"
+ cane.brothers.e4.commander.table;bundle-version="1.0.0",
+ org.slf4j.api
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander.part

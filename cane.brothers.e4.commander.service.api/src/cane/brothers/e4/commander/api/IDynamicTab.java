@@ -19,17 +19,29 @@ package cane.brothers.e4.commander.api;
 import java.nio.file.Path;
 
 /**
- * TODO
+ * Defines dynamic tab interface for the Tab Service.
  */
 public interface IDynamicTab {
 
     // public PathNatTable getTable();
 
+    /**
+     * @return root path of tab
+     */
     public Path getRootPath();
 
+    /**
+     * clear selected path in the path table
+     */
     public void clearSelection();
 
+    /**
+     * set selection via selection service
+     */
     public void setSelection();
 
+    /**
+     * set focus on the tab
+     */
     public void setFocus();
 }

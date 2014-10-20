@@ -35,6 +35,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
@@ -49,6 +51,9 @@ import cane.brothers.e4.commander.utils.PathUtils;
  * Part service concrete realization
  */
 public class PartServiceImpl implements IPartService {
+
+    private static final Logger log = LoggerFactory
+	    .getLogger(PartServiceImpl.class);
 
     // counter
     private static int tabsId = 1;
@@ -143,7 +148,7 @@ public class PartServiceImpl implements IPartService {
 		result = true;
 	    }
 	    else {
-		System.out.println("ERROR: Unable to create dynamic part.");
+		log.error("Unable to create dynamic part.");
 	    }
 	}
 
@@ -174,12 +179,14 @@ public class PartServiceImpl implements IPartService {
 	// part.setToolbar((MToolBar) EcoreUtil.copy((EObject)
 	// descriptor.getToolbar()));
 	// }
-	System.out.println("ContributorURI: " + descriptor.getContributorURI());
+	if (log.isDebugEnabled()) {
+	    log.debug("ContributorURI: " + descriptor.getContributorURI()); //$NON-NLS-1$
+	}
 	part.setContributorURI(descriptor.getContributorURI());
 	part.setCloseable(descriptor.isCloseable());
-
-	System.out.println("ContributionURI: "
-		+ descriptor.getContributionURI());
+	if (log.isDebugEnabled()) {
+	    log.debug("ContributionURI: " + descriptor.getContributionURI());
+	}
 	part.setContributionURI(descriptor.getContributionURI());
 	part.setLabel(descriptor.getLabel());
 	part.setIconURI(descriptor.getIconURI());
@@ -286,8 +293,7 @@ public class PartServiceImpl implements IPartService {
 		}
 	    }
 	    else {
-		System.out
-			.println("there are no root path in persisted states");
+		log.warn("there are no root path in persisted states");
 	    }
 	}
 
@@ -343,8 +349,10 @@ public class PartServiceImpl implements IPartService {
 	    if (PartCopyType.COPY == copyType) {
 		panelId = getOppositePanelId(panelId);
 	    }
-	    System.out.println("panel id: " + panelId + "; copy type: "
-		    + copyType);
+	    if (log.isDebugEnabled()) {
+		log.debug("panel id: " + panelId + //$NON-NLS-1$
+			"; copy type: " + copyType); //$NON-NLS-1$
+	    }
 	}
 
 	return panelId;
