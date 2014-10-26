@@ -73,10 +73,10 @@ public class PartServiceImpl implements IPartService {
     @Inject
     ITabService tabService;
 
-    @SuppressWarnings("restriction")
+    // @SuppressWarnings("restriction")
     @Inject
-    @Preference(PreferenceConstants.PB_STAY_ACTIVE_TAB)
-    boolean stayActiveTab;
+    @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
+    private boolean stayActiveTab;
 
     private Set<MPart> openedParts = new LinkedHashSet<MPart>();
 

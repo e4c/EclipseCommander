@@ -56,7 +56,7 @@ public class DuplicatePartHandler {
 	    }
 	}
 	else {
-	    log.error("there are some problems on duplicating part");
+	    log.error("there are some problems on duplicating part"); //$NON-NLS-1$
 	}
     }
 }

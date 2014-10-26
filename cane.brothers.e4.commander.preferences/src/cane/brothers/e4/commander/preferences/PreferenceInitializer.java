@@ -53,7 +53,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	}
 
 	IPreferenceStore store = new ScopedPreferenceStore(
-		InstanceScope.INSTANCE, IdStorage.PLUGIN_ID);
+		InstanceScope.INSTANCE, IdStorage.PREF_PLUGIN_ID);
 
 	store.setDefault(PreferenceConstants.PB_STAY_ACTIVE_TAB, true);
     }

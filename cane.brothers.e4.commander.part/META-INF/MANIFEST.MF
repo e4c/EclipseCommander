@@ -24,4 +24,6 @@ Require-Bundle: cane.brothers.e4.commander.api,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cane.brothers.e4.commander.part
-Import-Package: org.eclipse.e4.core.di.annotations
+Import-Package: cane.brothers.e4.commander.preferences,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.core.di.extensions

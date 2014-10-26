@@ -33,6 +33,9 @@ public final class IdStorage {
     /** application plug-in id */
     public static final String PLUGIN_ID = "cane.brothers.e4.commander"; //$NON-NLS-1$
 
+    /** preferences plug-in id */
+    public static final String PREF_PLUGIN_ID = "cane.brothers.e4.commander.preferences"; //$NON-NLS-1$
+
     /** application id */
     public static final String APPLICATION_ID = "cane.brothers.e4.commander.application" //$NON-NLS-1$
     .intern();

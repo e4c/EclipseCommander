@@ -83,6 +83,11 @@ public class DynamicTab implements IDynamicTab {
     // @Inject
     // private EPartService partService;
 
+    // @Inject
+    // @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath =
+    // IdStorage.PREF_PLUGIN_ID)
+    // private boolean stayActiveTab;
+
     /**
      * GUI stuff
      */
@@ -118,11 +123,12 @@ public class DynamicTab implements IDynamicTab {
 
 	// TODO switch context
 
-	Object rootPathObject = context.get("rootPath");
+	Object rootPathObject = context.get("rootPath"); //$NON-NLS-1$
 	if (rootPathObject != null) {
 	    rootPath = Paths.get(rootPathObject.toString());
 	    // rootPath =
 	    // Paths.get(activePart.getPersistedState().get("rootPath"));
+	    // log.debug("pref: {}", stayActiveTab);
 
 	    // create path table
 	    table = new PathNatTable(panel, rootPath, eventBroker);
@@ -133,8 +139,10 @@ public class DynamicTab implements IDynamicTab {
 		    new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+			    Object prevSelection = selectionService
+				    .getSelection();
 			    if (log.isDebugEnabled()) {
-				log.debug("Selection changed:"); //$NON-NLS-1$
+				log.debug("Prev selection is {}", prevSelection); //$NON-NLS-1$
 			    }
 
 			    IStructuredSelection selection = (IStructuredSelection) event
@@ -145,12 +153,19 @@ public class DynamicTab implements IDynamicTab {
 			    if (hasSelection) {
 				Object firstElement = selection
 					.getFirstElement();
+				if (log.isDebugEnabled()) {
+				    log.debug(
+					    "Current selection is {}", firstElement); //$NON-NLS-1$
+				}
 
 				// set the selection to the service
 				// TODO: not working for
 				// RemoveSelectionPartHandler
 				selectionService.setSelection(firstElement);
 
+				if (log.isDebugEnabled()) {
+				    log.debug("Selection changed:"); //$NON-NLS-1$
+				}
 				for (Object sel : selection.toArray()) {
 				    if (sel instanceof PathFixture) {
 					PathFixture fixture = (PathFixture) sel;
@@ -210,22 +225,30 @@ public class DynamicTab implements IDynamicTab {
 	    // get active part
 	    Object obj = event.getProperty(event.getPropertyNames()[0]);
 	    if (obj instanceof MPart) {
-
 		MPart part = (MPart) obj;
 
-		IEclipseContext activeWindowContext = application.getContext()
-			.getActiveChild();
-
-		// send event only ones if active context is exist
-		if (activeWindowContext != null && part.equals(activePart)
-			&& part.getObject() == this) {
-		    // asynchronously sending an active part
-		    if (eventBroker != null) {
-			eventBroker.post(
-				PartEvents.TOPIC_PART_REMOVE_SELECTION,
-				(MPart) obj);
-		    }
+		// clear selection for non-active tabs
+		if (part.getObject() != this) {
+		    clearSelection();
 		}
+
+		// // send event only ones if active context is exist
+		// if (part.equals(activePart) && part.getObject() == this) {
+		//
+		// // send event only ones if active context is exist
+		// IEclipseContext activeWindowContext = application
+		// .getContext().getActiveChild();
+		//
+		// // asynchronously sending an active part
+		// // if (activeWindowContext != null && eventBroker != null) {
+		// // eventBroker.post(
+		// // PartEvents.TOPIC_PART_REMOVE_SELECTION,
+		// // (MPart) obj);
+		// // }
+		// }
+		// else {
+		// clearSelection();
+		// }
 	    }
 	}
 
