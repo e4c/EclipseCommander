@@ -33,6 +33,13 @@ public interface ITabService {
     public IDynamicTab getTab(MPart part);
 
     /**
+     * @param part
+     *            given part
+     * @return tab id or -1
+     */
+    public int getTabId(MPart part);
+
+    /**
      * Clear table selection on the tab
      * 
      * @param part

@@ -51,6 +51,7 @@ import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
+import cane.brothers.e4.commander.service.api.ITabService;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
@@ -76,6 +77,9 @@ public class DynamicTab implements IDynamicTab {
     @Inject
     @Named(IServiceConstants.ACTIVE_PART)
     private MPart activePart;
+
+    @Inject
+    ITabService tabService;
 
     @Inject
     private ESelectionService selectionService;
@@ -230,6 +234,15 @@ public class DynamicTab implements IDynamicTab {
 		// clear selection for non-active tabs
 		if (part.getObject() != this) {
 		    clearSelection();
+		    try {
+			if (log.isDebugEnabled()) {
+			    log.debug("part {} was activated", //$NON-NLS-1$
+				    String.valueOf(tabService.getTabId(part)));
+			}
+		    }
+		    catch (Exception ex) {
+			log.warn("unable to retreview tab id");
+		    }
 		}
 
 		// // send event only ones if active context is exist
@@ -261,6 +274,9 @@ public class DynamicTab implements IDynamicTab {
     public void clearSelection() {
 	if (table != null && !table.isDisposed() && table.hasSelection()) {
 	    table.clearSelection();
+	    if (log.isDebugEnabled()) {
+		log.debug("clear table selection"); //$NON-NLS-1$
+	    }
 	}
     }
 
@@ -299,8 +315,9 @@ public class DynamicTab implements IDynamicTab {
 
     @Override
     public String toString() {
-	return DynamicTab.class.getSimpleName() + " [roopPath: "
-		+ PathUtils.getPath(rootPath) + "]";
+	return // DynamicTab.class.getSimpleName()
+	super.toString() + " [roopPath: " //$NON-NLS-1$
+		+ PathUtils.getPath(rootPath) + "]"; //$NON-NLS-1$
     }
 
 }

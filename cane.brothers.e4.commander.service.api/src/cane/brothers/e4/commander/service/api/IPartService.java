@@ -66,6 +66,13 @@ public interface IPartService {
     MPart getPart(String id);
 
     /**
+     * @param part
+     *            given MPart
+     * @return part id or null if there is no given part in set of opened parts
+     */
+    String getPartId(MPart part);
+
+    /**
      * @param id
      * @return true if part was closed
      */

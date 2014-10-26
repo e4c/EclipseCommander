@@ -58,9 +58,44 @@ public class TabServiceImpl implements ITabService {
 	    }
 	}
 	else {
-	    log.error("Part is null");
+	    log.error("Part is null"); //$NON-NLS-1$
 	}
 	return tab;
+    }
+
+    @Override
+    public int getTabId(MPart part) {
+	int result = -1;
+
+	if (part != null) {
+
+	    // TODO partService.getPartId() to test if part is opened
+
+	    String elemId = part.getElementId();
+	    if (elemId != null) {
+
+		String stringId = null;
+		try {
+		    stringId = elemId.substring(elemId.lastIndexOf(".") + 1); //$NON-NLS-1$
+		    // if (log.isDebugEnabled()) {
+		    //			log.debug("part id is {}", stringId); //$NON-NLS-1$
+		    // }
+		}
+		catch (Exception ex) {
+		    log.warn("element id \"{}\" has unsatisfied format", elemId); //$NON-NLS-1$
+		    result = -1;
+		}
+		try {
+		    result = Integer.valueOf(stringId).intValue();
+		}
+		catch (Exception ex) {
+		    log.warn("unable to get int value from {}", stringId); //$NON-NLS-1$
+		    result = -1;
+		}
+	    }
+	}
+
+	return result;
     }
 
     /*

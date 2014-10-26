@@ -148,7 +148,7 @@ public class PartServiceImpl implements IPartService {
 		result = true;
 	    }
 	    else {
-		log.error("Unable to create dynamic part.");
+		log.error("Unable to create dynamic part."); //$NON-NLS-1$
 	    }
 	}
 
@@ -424,6 +424,15 @@ public class PartServiceImpl implements IPartService {
     public MPart getPart(String id) {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    @Override
+    public String getPartId(MPart part) {
+	String result = null;
+	if (openedParts.contains(part)) {
+	    result = part.getElementId();
+	}
+	return result;
     }
 
     /*
