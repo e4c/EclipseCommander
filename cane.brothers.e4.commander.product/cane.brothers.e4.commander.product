@@ -29,6 +29,12 @@
 
    <plugins>
       <plugin id="cane.brothers.e4.commander"/>
+      <plugin id="cane.brothers.e4.commander.api"/>
+      <plugin id="cane.brothers.e4.commander.event"/>
+      <plugin id="cane.brothers.e4.commander.model"/>
+      <plugin id="cane.brothers.e4.commander.preferences"/>
+      <plugin id="cane.brothers.e4.commander.table"/>
+      <plugin id="cane.brothers.e4.commander.utils"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.opcoach.e4.preferences"/>
       <plugin id="javax.annotation"/>
