@@ -43,210 +43,210 @@ import cane.brothers.e4.commander.pathTable.style.PathFirstThemeConfiguration;
  */
 public class PathNatTable extends NatTable implements IRootPath {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(PathNatTable.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(PathNatTable.class);
 
-    private Path rootPath = null;
+	private Path rootPath = null;
 
-    private ISelectionProvider selectionProvider;
+	private final ISelectionProvider selectionProvider;
 
-    /**
-     * @return the selectionProvider
-     */
-    public ISelectionProvider getSelectionProvider() {
-	return selectionProvider;
-    }
+	/**
+	 * @return the selectionProvider
+	 */
+	public ISelectionProvider getSelectionProvider() {
+		return selectionProvider;
+	}
 
-    private PathCompositeLayer compositeLayer = null;
-    private DefaultNatTableThemeConfiguration theme = null;
+	private PathCompositeLayer compositeLayer = null;
+	private DefaultNatTableThemeConfiguration theme = null;
 
-    /**
-     * Constructor
-     *
-     * @param parent
-     * @param rootPath
-     * @param eventBroker
-     */
-    public PathNatTable(Composite parent, Path rootPath,
-	    IEventBroker eventBroker) {
-	super(parent, false);
-	// this.rootPath = rootPath;
+	/**
+	 * Constructor
+	 *
+	 * @param parent
+	 * @param rootPath
+	 * @param eventBroker
+	 */
+	public PathNatTable(Composite parent, Path rootPath,
+			IEventBroker eventBroker) {
+		super(parent, false);
+		// this.rootPath = rootPath;
 
-	compositeLayer = new PathCompositeLayer(rootPath, eventBroker);
-	theme = new PathFirstThemeConfiguration();
+		compositeLayer = new PathCompositeLayer(rootPath, eventBroker);
+		theme = new PathFirstThemeConfiguration();
 
-	// natTable.setBackground(GUIHelper.COLOR_WHITE);
-	// natTable.addConfiguration(new PathStyleConfiguration());
-	// natTable.addConfiguration(new ActiveTableStyleConfiguration());
-	// add overlay painter for full borders
-	// natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
+		// natTable.setBackground(GUIHelper.COLOR_WHITE);
+		// natTable.addConfiguration(new PathStyleConfiguration());
+		// natTable.addConfiguration(new ActiveTableStyleConfiguration());
+		// add overlay painter for full borders
+		// natTable.addOverlayPainter(new NatTableBorderOverlayPainter());
 
-	// addKeyListener(new KeyListener() {
-	//
-	// @Override
-	// public void keyReleased(KeyEvent e) {
-	// if (e.keyCode == SWT.En) {
-	// closeDialog();
-	// }
-	//
-	// }
-	//
-	// @Override
-	// public void keyPressed(KeyEvent e) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	// })
+		// addKeyListener(new KeyListener() {
+		//
+		// @Override
+		// public void keyReleased(KeyEvent e) {
+		// if (e.keyCode == SWT.En) {
+		// closeDialog();
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public void keyPressed(KeyEvent e) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// })
 
-	//
-	// 1.
-	//
+		//
+		// 1.
+		//
 
-	// // This adds a custom ILayerListener that will listen and handle
-	// selection events on NatTable level
-	// // !!!There are no mouse selection handling here !!!
-	// addLayerListener(new ILayerListener() {
-	//
-	// // row selection behavior
-	// @Override
-	// public void handleLayerEvent(ILayerEvent event) {
-	// if (event instanceof RowSelectionEvent) {
-	//
-	// RowSelectionEvent rowEvent = (RowSelectionEvent) event;
-	// System.out.println("Selected Row: " +
-	// ObjectUtils.toString(rowEvent.getRowPositionRanges()));
-	//
-	//
-	//
-	// // //directly ask the SelectionLayer about the selected rows and
-	// access the data via IRowDataProvider
-	// // SelectionLayer selectionLayer = ((RowSelectionEvent)
-	// event).getSelectionLayer();
-	// // Set<Range> selections = selectionLayer.getSelectedRowPositions();
-	// //
-	// // for (Range r : selections) {
-	// // for (int i = r.start; i < r.end; i++) {
-	// //
-	// // ListDataProvider<PathFixture> dataProvider =
-	// compositeLayer.getBodyDataProvider();
-	// //
-	// // PathFixture fixture = dataProvider.getRowObject(i);
-	// // System.out.println(fixture);
-	// //
-	// // }
-	// // }
-	// } else if (event instanceof CellSelectionEvent) {
-	// System.out.println(event);
-	// }
-	// }
-	// });
+		// // This adds a custom ILayerListener that will listen and handle
+		// selection events on NatTable level
+		// // !!!There are no mouse selection handling here !!!
+		// addLayerListener(new ILayerListener() {
+		//
+		// // row selection behavior
+		// @Override
+		// public void handleLayerEvent(ILayerEvent event) {
+		// if (event instanceof RowSelectionEvent) {
+		//
+		// RowSelectionEvent rowEvent = (RowSelectionEvent) event;
+		// System.out.println("Selected Row: " +
+		// ObjectUtils.toString(rowEvent.getRowPositionRanges()));
+		//
+		//
+		//
+		// // //directly ask the SelectionLayer about the selected rows and
+		// access the data via IRowDataProvider
+		// // SelectionLayer selectionLayer = ((RowSelectionEvent)
+		// event).getSelectionLayer();
+		// // Set<Range> selections = selectionLayer.getSelectedRowPositions();
+		// //
+		// // for (Range r : selections) {
+		// // for (int i = r.start; i < r.end; i++) {
+		// //
+		// // ListDataProvider<PathFixture> dataProvider =
+		// compositeLayer.getBodyDataProvider();
+		// //
+		// // PathFixture fixture = dataProvider.getRowObject(i);
+		// // System.out.println(fixture);
+		// //
+		// // }
+		// // }
+		// } else if (event instanceof CellSelectionEvent) {
+		// System.out.println(event);
+		// }
+		// }
+		// });
 
-	//
-	// 2.
-	//
+		//
+		// 2.
+		//
 
-	// Provides rows where any cell in the row is selected
-	selectionProvider = new RowSelectionProvider<PathFixture>(
-		compositeLayer.getSelectionLayer(),
-		compositeLayer.getBodyDataProvider(), true, false);
+		// Provides rows where any cell in the row is selected
+		selectionProvider = new RowSelectionProvider<PathFixture>(
+				compositeLayer.getSelectionLayer(),
+				compositeLayer.getBodyDataProvider(), true, false);
 
-	// // Programmatically select a few rows
-	// selectionProvider.setSelection(new StructuredSelection(new Person[] {
-	// homer, smithers, nelson }));
+		// // Programmatically select a few rows
+		// selectionProvider.setSelection(new StructuredSelection(new Person[] {
+		// homer, smithers, nelson }));
 
-	setLayer(compositeLayer);
-	configure();
+		setLayer(compositeLayer);
+		configure();
 
-	// add overlay painter for full borders
-	// addOverlayPainter(new NatTableBorderOverlayPainter());
+		// add overlay painter for full borders
+		// addOverlayPainter(new NatTableBorderOverlayPainter());
 
-	setTheme(theme);
-    }
+		setTheme(theme);
+	}
 
-    public int getSelectedRowPosition() {
-	if (compositeLayer != null) {
-	    SelectionLayer selectionLayer = compositeLayer.getSelectionLayer();
+	public int getSelectedRowPosition() {
+		if (compositeLayer != null) {
+			SelectionLayer selectionLayer = compositeLayer.getSelectionLayer();
 
-	    final Set<Range> selectedRows = selectionLayer
-		    .getSelectedRowPositions();
-	    List<Integer> selectedRowPositions = new ArrayList<Integer>();
-	    for (Range range : selectedRows) {
-		for (int rowPosition = range.start; rowPosition < range.end; rowPosition++) {
-		    // + 1
-		    selectedRowPositions.add(rowPosition + 1);
+			final Set<Range> selectedRows = selectionLayer
+					.getSelectedRowPositions();
+			List<Integer> selectedRowPositions = new ArrayList<Integer>();
+			for (Range range : selectedRows) {
+				for (int rowPosition = range.start; rowPosition < range.end; rowPosition++) {
+					// + 1
+					selectedRowPositions.add(rowPosition + 1);
+				}
+			}
+			Collections.sort(selectedRowPositions);
+
+			// at this moment return only first
+			if (selectedRowPositions.size() > 0) {
+				return selectedRowPositions.get(0).intValue();
+			}
 		}
-	    }
-	    Collections.sort(selectedRowPositions);
-
-	    // at this moment return only first
-	    if (selectedRowPositions.size() > 0) {
-		return selectedRowPositions.get(0).intValue();
-	    }
+		return -1;
 	}
-	return -1;
-    }
 
-    /**
-     * clear selection
-     */
-    public void clearSelection() {
-	SelectionLayer selLayer = getSelectionLayer();
-	if (selLayer != null) {
-	    selLayer.clear();
+	/**
+	 * clear selection
+	 */
+	public void clearSelection() {
+		SelectionLayer selLayer = getSelectionLayer();
+		if (selLayer != null) {
+			selLayer.clear();
+		}
 	}
-    }
 
-    private SelectionLayer getSelectionLayer() {
-	if (compositeLayer != null) {
-	    return compositeLayer.getSelectionLayer();
+	private SelectionLayer getSelectionLayer() {
+		if (compositeLayer != null) {
+			return compositeLayer.getSelectionLayer();
+		}
+		return null;
 	}
-	return null;
-    }
 
-    /**
-     * select first row in the table
-     */
-    public void setDefaultSelection() {
-	SelectionLayer selLayer = getSelectionLayer();
-	if (selLayer != null) {
-	    selLayer.selectRow(0, 0, false, false);
+	/**
+	 * select first row in the table
+	 */
+	public void setDefaultSelection() {
+		SelectionLayer selLayer = getSelectionLayer();
+		if (selLayer != null) {
+			selLayer.selectRow(0, 0, false, false);
+		}
 	}
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see cane.brothers.e4.commander.pathTable.IRootPath#getRootPath()
-     */
-    @Override
-    public Path getRootPath() {
-	return rootPath;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * cane.brothers.e4.commander.pathTable.IRootPath#setRootPath(java.nio.file
-     * .Path)
-     */
-    @Override
-    public void setRootPath(Path newPath) {
-	this.rootPath = newPath;
-	if (compositeLayer != null) {
-	    compositeLayer.setRootPath(newPath);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cane.brothers.e4.commander.pathTable.IRootPath#getRootPath()
+	 */
+	@Override
+	public Path getRootPath() {
+		return rootPath;
 	}
-    }
 
-    /**
-     * @return true if selection layer have selected rows
-     */
-    public boolean hasSelection() {
-	SelectionLayer selLayer = getSelectionLayer();
-	if (selLayer != null && selLayer.hasRowSelection()) {
-	    return true;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cane.brothers.e4.commander.pathTable.IRootPath#setRootPath(java.nio.file
+	 * .Path)
+	 */
+	@Override
+	public void setRootPath(Path newPath) {
+		this.rootPath = newPath;
+		if (compositeLayer != null) {
+			compositeLayer.setRootPath(newPath);
+		}
 	}
-	return false;
-    }
+
+	/**
+	 * @return true if selection layer have selected rows
+	 */
+	public boolean hasSelection() {
+		SelectionLayer selLayer = getSelectionLayer();
+		if (selLayer != null && selLayer.hasRowSelection()) {
+			return true;
+		}
+		return false;
+	}
 
 }
