@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="e4 commander target" sequenceNumber="100">
+<?pde version="3.8"?><target name="e4 commander target" sequenceNumber="101">
 <locations>
 <location id="org.eclipse.e4.rcp" path="${eclipse_home}" type="Feature"/>
 <location id="org.eclipse.emf.ecore" path="${eclipse_home}" type="Feature"/>
@@ -24,5 +24,7 @@
 </location>
 <location id="org.eclipse.nebula.widgets.nattable.core.feature" path="${eclipse_home}" type="Feature"/>
 <location id="org.eclipse.nebula.widgets.nattable.core.source.feature" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.emf.ecore.edit" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.emf.ecore.editor" path="${eclipse_home}" type="Feature"/>
 </locations>
 </target>
