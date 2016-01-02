@@ -32,8 +32,7 @@ import cane.brothers.e4.commander.utils.PathUtils;
  */
 public class PathFixture {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(PathFixture.class);
+    private static final Logger log = LoggerFactory.getLogger(PathFixture.class);
 
     private Path path;
 
@@ -54,49 +53,49 @@ public class PathFixture {
      * @param path
      */
     public PathFixture(Path path) {
-	this.path = path;
+        this.path = path;
 
-	if (path != null) {
+        if (path != null) {
 
-	    // root path have no file name
-	    this.name = PathUtils.getFileName(path);
+            // root path have no file name
+            this.name = PathUtils.getFileName(path);
 
-	    try {
-		this.size = Files.size(path);
-	    }
-	    catch (IOException ex) {
-		this.size = 0;
-		// TODO ex
-		log.warn("there is problems on size retrieve", ex); //$NON-NLS-1$ 
-	    }
-	}
-	else {
-	    log.warn("path is null"); //$NON-NLS-1$
-	}
+            try {
+                this.size = Files.size(path);
+            }
+            catch (IOException ex) {
+                this.size = 0;
+                // TODO ex
+                log.warn("there is problems on size retrieve", ex); //$NON-NLS-1$ 
+            }
+        }
+        else {
+            log.warn("path is null"); //$NON-NLS-1$
+        }
 
-	this.attributes = PathUtils.getAttributesString(path);
+        this.attributes = PathUtils.getAttributesString(path);
     }
 
     public Path getPath() {
-	return path;
+        return path;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public long getSize() {
-	return size;
+        return size;
     }
 
     public String getAttributes() {
-	return attributes;
+        return attributes;
     }
 
     @Override
     public String toString() {
-	// TODO size to Kb/Mb
-	return "[" + name + ", " + size + ", " + attributes + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
+        // TODO size to Kb/Mb
+        return "[" + name + ", " + size + ", " + attributes + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
     }
 
 }

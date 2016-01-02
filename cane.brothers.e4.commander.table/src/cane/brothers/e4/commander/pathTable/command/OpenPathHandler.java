@@ -38,21 +38,19 @@ import cane.brothers.e4.commander.model.PathFixture;
  * Open new path. Selection in the table should be not null.
  *
  */
-public class OpenPathHandler extends
-	AbstractLayerCommandHandler<OpenPathCommand> {
+public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand> {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(OpenPathHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(OpenPathHandler.class);
 
     // @Inject
-    private IEventBroker eventBroker;
+    private final IEventBroker eventBroker;
 
     @Inject
     IEclipseContext context;
 
-    private SelectionLayer selectionLayer;
+    private final SelectionLayer selectionLayer;
 
-    private ListDataProvider<PathFixture> bodyDataProvider;
+    private final ListDataProvider<PathFixture> bodyDataProvider;
 
     /**
      * Constructor
@@ -61,12 +59,11 @@ public class OpenPathHandler extends
      * @param bodyDataProvider
      * @param eventBroker
      */
-    public OpenPathHandler(SelectionLayer selectionLayer,
-	    ListDataProvider<PathFixture> bodyDataProvider,
-	    IEventBroker eventBroker) {
-	this.selectionLayer = selectionLayer;
-	this.bodyDataProvider = bodyDataProvider;
-	this.eventBroker = eventBroker;
+    public OpenPathHandler(SelectionLayer selectionLayer, ListDataProvider<PathFixture> bodyDataProvider,
+            IEventBroker eventBroker) {
+        this.selectionLayer = selectionLayer;
+        this.bodyDataProvider = bodyDataProvider;
+        this.eventBroker = eventBroker;
     }
 
     /*
@@ -77,7 +74,7 @@ public class OpenPathHandler extends
      */
     @Override
     public Class<OpenPathCommand> getCommandClass() {
-	return OpenPathCommand.class;
+        return OpenPathCommand.class;
     }
 
     /*
@@ -89,52 +86,51 @@ public class OpenPathHandler extends
      */
     @Override
     protected boolean doCommand(OpenPathCommand command) {
-	// open new Path if possible
+        // open new Path if possible
 
-	// 1. get path
-	Set<Range> selections = selectionLayer.getSelectedRowPositions();
-	PathFixture fixture = null;
+        // 1. get path
+        Set<Range> selections = selectionLayer.getSelectedRowPositions();
+        PathFixture fixture = null;
 
-	if (log.isDebugEnabled()) {
-	    log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$ 
-	}
+        if (log.isDebugEnabled()) {
+            log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$ 
+        }
 
-	for (Range r : selections) {
-	    for (int i = r.start; i < r.end; i++) {
-		if (i > -1) {
-		    // handle only first row object in range
-		    fixture = bodyDataProvider.getRowObject(i);
-		    break;
-		}
-	    }
-	}
+        for (Range r : selections) {
+            for (int i = r.start; i < r.end; i++) {
+                if (i > -1) {
+                    // handle only first row object in range
+                    fixture = bodyDataProvider.getRowObject(i);
+                    break;
+                }
+            }
+        }
 
-	// clear selection
-	// selectionLayer.doCommand(new ClearAllSelectionsCommand());
+        // clear selection
+        // selectionLayer.doCommand(new ClearAllSelectionsCommand());
 
-	if (fixture != null) {
-	    // 2. check if directory
-	    if (Files.isDirectory(fixture.getPath())) {
-		// 2.1 open new path
-		if (log.isDebugEnabled()) {
-		    log.debug(fixture.getPath() + " is dir"); //$NON-NLS-1$
-		    log.debug("open new path: " + fixture.getPath()); //$NON-NLS-1$
-		}
+        if (fixture != null) {
+            // 2. check if directory
+            if (Files.isDirectory(fixture.getPath())) {
+                // 2.1 open new path
+                if (log.isDebugEnabled()) {
+                    log.debug(fixture.getPath() + " is dir"); //$NON-NLS-1$
+                    log.debug("open new path: " + fixture.getPath()); //$NON-NLS-1$
+                }
 
-		// synchronously sending a path
-		if (eventBroker != null) {
-		    eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN,
-			    fixture.getPath());
-		}
+                // synchronously sending a path
+                if (eventBroker != null) {
+                    eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN, fixture.getPath());
+                }
 
-	    }
-	    else {
-		// 2.2 do nothing at this moment
-		log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
-	    }
-	}
+            }
+            else {
+                // 2.2 do nothing at this moment
+                log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
+            }
+        }
 
-	return false;
+        return false;
     }
 
 }

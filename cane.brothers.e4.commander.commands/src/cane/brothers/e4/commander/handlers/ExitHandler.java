@@ -33,12 +33,11 @@ public class ExitHandler {
     // MApplication application;
 
     @Execute
-    public void execute(IWorkbench workbench,
-	    @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
-	if (MessageDialog.openConfirm(shell, "Confirmation", //$NON-NLS-1$
-		"Do you want to exit?")) { //$NON-NLS-1$
-	    workbench.close();
-	}
+    public void execute(IWorkbench workbench, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
+        if (MessageDialog.openConfirm(shell, "Confirmation", //$NON-NLS-1$
+                "Do you want to exit?")) { //$NON-NLS-1$
+            workbench.close();
+        }
     }
 
     // @Execute

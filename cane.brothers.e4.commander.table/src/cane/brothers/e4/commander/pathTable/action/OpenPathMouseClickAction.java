@@ -30,8 +30,7 @@ import cane.brothers.e4.commander.pathTable.command.OpenPathCommand;
  */
 public class OpenPathMouseClickAction implements IMouseClickAction {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(OpenPathMouseClickAction.class);
+    private static final Logger log = LoggerFactory.getLogger(OpenPathMouseClickAction.class);
 
     /*
      * (non-Javadoc)
@@ -42,18 +41,17 @@ public class OpenPathMouseClickAction implements IMouseClickAction {
      */
     @Override
     public void run(NatTable natTable, MouseEvent event) {
-	int rowPosition = natTable.getRowPositionByY(event.y);
-	if (log.isDebugEnabled()) {
-	    log.debug("rowPos: " + rowPosition); //$NON-NLS-1$
-	}
+        int rowPosition = natTable.getRowPositionByY(event.y);
+        if (log.isDebugEnabled()) {
+            log.debug("rowPos: " + rowPosition); //$NON-NLS-1$
+        }
 
-	if (rowPosition != -1) {
-	    natTable.doCommand(new OpenPathCommand());
-	}
+        if (rowPosition != -1) {
+            natTable.doCommand(new OpenPathCommand());
+        }
 
-	// select first
-	natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
-		false));
+        // select first
+        natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false, false));
     }
 
     /*
@@ -65,7 +63,7 @@ public class OpenPathMouseClickAction implements IMouseClickAction {
      */
     @Override
     public boolean isExclusive() {
-	return true;
+        return true;
     }
 
 }

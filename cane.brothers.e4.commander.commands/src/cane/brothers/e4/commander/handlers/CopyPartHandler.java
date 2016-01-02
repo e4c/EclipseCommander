@@ -35,27 +35,24 @@ import cane.brothers.e4.commander.service.api.IPartService;
  */
 public class CopyPartHandler {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(CopyPartHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(CopyPartHandler.class);
 
     @Inject
     IPartService partService;
 
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-	if (log.isDebugEnabled()) {
-	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
-	}
+        if (log.isDebugEnabled()) {
+            log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+        }
 
-	if (partService.copyPart(activePart, PartCopyType.COPY)) {
-	    if (log.isDebugEnabled()) {
-		log.debug("part was copied to opposite panel sucessfully!");
-	    }
-	}
-	else {
-	    log.error("there are some problems on copying part to another panel");
-	}
-
+        if (partService.copyPart(activePart, PartCopyType.COPY)) {
+            if (log.isDebugEnabled()) {
+                log.debug("part was copied to opposite panel sucessfully!");
+            }
+        }
+        else {
+            log.error("there are some problems on copying part to another panel");
+        }
     }
-
 }

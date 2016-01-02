@@ -30,14 +30,12 @@ import cane.brothers.e4.commander.pathTable.IRootPath;
 /**
  * The column property accessor class for Path table.
  * 
- * Defines column count, in which column
- * should be which data.
- * Defines hooks for special data values like parent path representation and dir
- * size substitution.
+ * Defines column count, in which column should be which data. Defines hooks for
+ * special data values like parent path representation and dir size
+ * substitution.
  *
  */
-public class PathColumnPropertyAccessor implements
-	IColumnPropertyAccessor<PathFixture>, IRootPath {
+public class PathColumnPropertyAccessor implements IColumnPropertyAccessor<PathFixture>, IRootPath {
 
     /** use list instead of set because indexes */
     private List<String> propertyNames;
@@ -55,57 +53,54 @@ public class PathColumnPropertyAccessor implements
      * 
      * @param propertyToLabels
      */
-    public PathColumnPropertyAccessor(Map<String, String> propertyToLabels,
-	    Path rootPath) {
-	this.rootPath = rootPath;
-	this.propertyNames = new ArrayList<String>(propertyToLabels.keySet());
-	this.parentPath = rootPath.getParent();
+    public PathColumnPropertyAccessor(Map<String, String> propertyToLabels, Path rootPath) {
+        this.rootPath = rootPath;
+        this.propertyNames = new ArrayList<String>(propertyToLabels.keySet());
+        this.parentPath = rootPath.getParent();
     }
 
     @Override
     public Object getDataValue(PathFixture rowObject, int columnIndex) {
-	switch (columnIndex) {
-	    case 0:
-		// there are parent path of root path
-		if (parentPath != null
-			&& parentPath.equals(rowObject.getPath())) {
-		    return parentPathStr;
-		}
-		else {
-		    return rowObject.getName();
-		}
-	    case 1:
-		if (Files.isDirectory(rowObject.getPath())) {
-		    return pathDirSizeStr;
-		}
-		else {
-		    return rowObject.getSize();
-		}
-	    case 2:
-		return rowObject.getAttributes();
-	}
-	return null;
+        switch (columnIndex) {
+        case 0:
+            // there are parent path of root path
+            if (parentPath != null && parentPath.equals(rowObject.getPath())) {
+                return parentPathStr;
+            }
+            else {
+                return rowObject.getName();
+            }
+        case 1:
+            if (Files.isDirectory(rowObject.getPath())) {
+                return pathDirSizeStr;
+            }
+            else {
+                return rowObject.getSize();
+            }
+        case 2:
+            return rowObject.getAttributes();
+        }
+        return null;
     }
 
     @Override
-    public void setDataValue(PathFixture rowObject, int columnIndex,
-	    Object newValue) {
-	new UnsupportedOperationException("none"); //$NON-NLS-1$
+    public void setDataValue(PathFixture rowObject, int columnIndex, Object newValue) {
+        new UnsupportedOperationException("none"); //$NON-NLS-1$
     }
 
     @Override
     public int getColumnCount() {
-	return 3;
+        return 3;
     }
 
     @Override
     public String getColumnProperty(int columnIndex) {
-	return propertyNames.get(columnIndex);
+        return propertyNames.get(columnIndex);
     }
 
     @Override
     public int getColumnIndex(String propertyName) {
-	return propertyNames.indexOf(propertyName);
+        return propertyNames.indexOf(propertyName);
     }
 
     /*
@@ -117,10 +112,10 @@ public class PathColumnPropertyAccessor implements
      */
     @Override
     public void setRootPath(Path newPath) {
-	if (newPath != null) {
-	    this.rootPath = newPath;
-	    this.parentPath = newPath.getParent();
-	}
+        if (newPath != null) {
+            this.rootPath = newPath;
+            this.parentPath = newPath.getParent();
+        }
     }
 
     /*
@@ -130,7 +125,7 @@ public class PathColumnPropertyAccessor implements
      */
     @Override
     public Path getRootPath() {
-	return rootPath;
+        return rootPath;
     }
 
 }

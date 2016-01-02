@@ -37,11 +37,11 @@ public class PathFixtureRowIdAccessor implements IRowIdAccessor<PathFixture> {
      * @param list
      */
     public PathFixtureRowIdAccessor(List<PathFixture> list) {
-	this.list = list;
+        this.list = list;
     }
 
     @Override
     public Serializable getRowId(PathFixture rowObject) {
-	return list.indexOf(rowObject);
+        return list.indexOf(rowObject);
     }
 }

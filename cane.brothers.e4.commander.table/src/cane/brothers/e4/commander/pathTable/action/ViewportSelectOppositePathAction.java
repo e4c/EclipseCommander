@@ -37,17 +37,16 @@ public class ViewportSelectOppositePathAction implements IKeyAction {
     @Override
     public void run(NatTable natTable, KeyEvent event) {
 
-	// new SetFocusToOppositePartHandler().execute();
+        // new SetFocusToOppositePartHandler().execute();
 
-	// first row
-	int rowPosition = 1;
+        // first row
+        int rowPosition = 1;
 
-	Composite cmp = natTable.getParent();
+        Composite cmp = natTable.getParent();
 
-	// only perform the selection if the cursor is null
-	if (natTable.getCursor() == null) {
-	    natTable.doCommand(new ViewportSelectRowCommand(natTable,
-		    rowPosition, false, false));
-	}
+        // only perform the selection if the cursor is null
+        if (natTable.getCursor() == null) {
+            natTable.doCommand(new ViewportSelectRowCommand(natTable, rowPosition, false, false));
+        }
     }
 }

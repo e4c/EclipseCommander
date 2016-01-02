@@ -38,25 +38,24 @@ import cane.brothers.e4.commander.service.api.IPartService;
  */
 public class DuplicatePartHandler {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(DuplicatePartHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(DuplicatePartHandler.class);
 
     @Inject
     IPartService partService;
 
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
-	if (log.isDebugEnabled()) {
-	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
-	}
+        if (log.isDebugEnabled()) {
+            log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+        }
 
-	if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
-	    if (log.isDebugEnabled()) {
-		log.debug("part was duplicated sucessfully!"); //$NON-NLS-1$
-	    }
-	}
-	else {
-	    log.error("there are some problems on duplicating part"); //$NON-NLS-1$
-	}
+        if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
+            if (log.isDebugEnabled()) {
+                log.debug("part was duplicated sucessfully!"); //$NON-NLS-1$
+            }
+        }
+        else {
+            log.error("there are some problems on duplicating part"); //$NON-NLS-1$
+        }
     }
 }

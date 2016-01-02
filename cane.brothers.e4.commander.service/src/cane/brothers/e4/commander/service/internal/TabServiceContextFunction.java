@@ -31,18 +31,17 @@ public class TabServiceContextFunction extends ContextFunction {
     @Override
     public Object compute(IEclipseContext context, String contextKey) {
 
-	ITabService partService = ContextInjectionFactory.make(
-		TabServiceImpl.class, context);
+        ITabService partService = ContextInjectionFactory.make(TabServiceImpl.class, context);
 
-	MApplication app = context.get(MApplication.class);
-	if (app != null) {
-	    IEclipseContext appCtx = app.getContext();
-	    if (appCtx != null) {
-		appCtx.set(ITabService.class, partService);
-	    }
-	}
+        MApplication app = context.get(MApplication.class);
+        if (app != null) {
+            IEclipseContext appCtx = app.getContext();
+            if (appCtx != null) {
+                appCtx.set(ITabService.class, partService);
+            }
+        }
 
-	return partService;
+        return partService;
     }
 
 }

@@ -38,14 +38,13 @@ public class OpenPathAction implements IKeyAction {
      */
     @Override
     public void run(NatTable natTable, KeyEvent event) {
-	// open new path
-	natTable.doCommand(new OpenPathCommand());
+        // open new path
+        natTable.doCommand(new OpenPathCommand());
 
-	// select first
-	if (natTable.getCursor() == null) {
-	    natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false,
-		    false));
-	}
+        // select first
+        if (natTable.getCursor() == null) {
+            natTable.doCommand(new ViewportSelectRowCommand(natTable, 1, false, false));
+        }
     }
 
 }

@@ -32,8 +32,8 @@ import ch.qos.logback.core.AppenderBase;
  * 
  *         Copyright 2012 Appends logback logging events to Eclipse RCP logging
  *         events. This makes the logs visible in the Eclipse GUI in the
- *         <strong>Error Log</strong> view as well as in
- *         the log files in your workspace.
+ *         <strong>Error Log</strong> view as well as in the log files in your
+ *         workspace.
  */
 public class EclipseAppender extends AppenderBase<ILoggingEvent> {
 
@@ -44,17 +44,14 @@ public class EclipseAppender extends AppenderBase<ILoggingEvent> {
 
     @Override
     protected void append(ILoggingEvent event) {
-	Bundle bundle = Platform
-		.getBundle("cane.brothers.e4.commander.logging.logback"); //$NON-NLS-1$
-	if (bundle == null) {
-	    System.out
-		    .println("No bundle found when trying to log to eclipse."); //$NON-NLS-1$
-	}
-	else {
-	    ILog log = Platform.getLog(bundle);
-	    log.log(new Status(getStatus(event), event.getLoggerName(), event
-		    .getMessage()));
-	}
+        Bundle bundle = Platform.getBundle("cane.brothers.e4.commander.logging.logback"); //$NON-NLS-1$
+        if (bundle == null) {
+            System.out.println("No bundle found when trying to log to eclipse."); //$NON-NLS-1$
+        }
+        else {
+            ILog log = Platform.getLog(bundle);
+            log.log(new Status(getStatus(event), event.getLoggerName(), event.getMessage()));
+        }
     }
 
     /**
@@ -65,19 +62,19 @@ public class EclipseAppender extends AppenderBase<ILoggingEvent> {
      * @return the IStatus value as an int.
      */
     private int getStatus(ILoggingEvent event) {
-	final int level = event.getLevel().levelInt;
-	if (level == ERROR) {
-	    return IStatus.ERROR;
-	}
-	else if (level == INFO) {
-	    return IStatus.INFO;
-	}
-	else if (level == DEBUG) {
-	    return IStatus.INFO;
-	}
-	else if (level == WARN) {
-	    return IStatus.WARNING;
-	}
-	return IStatus.INFO;
+        final int level = event.getLevel().levelInt;
+        if (level == ERROR) {
+            return IStatus.ERROR;
+        }
+        else if (level == INFO) {
+            return IStatus.INFO;
+        }
+        else if (level == DEBUG) {
+            return IStatus.INFO;
+        }
+        else if (level == WARN) {
+            return IStatus.WARNING;
+        }
+        return IStatus.INFO;
     }
 }

@@ -34,8 +34,7 @@ import cane.brothers.e4.commander.service.api.ITabService;
  */
 public class SetFocusToOppositePartHandler {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(SetFocusToOppositePartHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(SetFocusToOppositePartHandler.class);
 
     // @Inject
     // MApplication application;
@@ -55,19 +54,19 @@ public class SetFocusToOppositePartHandler {
 
     @Execute
     public void execute() {
-	if (log.isDebugEnabled()) {
-	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
-	}
+        if (log.isDebugEnabled()) {
+            log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+        }
 
-	if (activePart != null) {
-	    // TODO use getPart()
-	    MPart oppositePart = partService.getOppositePart(activePart);
+        if (activePart != null) {
+            // TODO use getPart()
+            MPart oppositePart = partService.getOppositePart(activePart);
 
-	    // set opposite tab focus and selection
-	    tabService.setSelection(oppositePart);
-	    if (log.isDebugEnabled()) {
-		log.debug("set focus and default selection on opposite tab");
-	    }
-	}
+            // set opposite tab focus and selection
+            tabService.setSelection(oppositePart);
+            if (log.isDebugEnabled()) {
+                log.debug("set focus and default selection on opposite tab");
+            }
+        }
     }
 }

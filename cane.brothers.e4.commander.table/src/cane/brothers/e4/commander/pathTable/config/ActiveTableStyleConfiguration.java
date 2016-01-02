@@ -29,24 +29,21 @@ import org.eclipse.nebula.widgets.nattable.util.GUIHelper;
  * TODO
  *
  */
-public class ActiveTableStyleConfiguration extends
-	AbstractRegistryConfiguration {
+public class ActiveTableStyleConfiguration extends AbstractRegistryConfiguration {
 
     public static final String ACTIVE_LABEL = "ACTIVE";
 
     @Override
     public void configureRegistry(IConfigRegistry configRegistry) {
-	IStyle style = new Style();
-	style.setAttributeValue(CellStyleAttributes.BACKGROUND_COLOR,
-		GUIHelper.COLOR_BLUE);
-	style.setAttributeValue(CellStyleAttributes.FOREGROUND_COLOR,
-		GUIHelper.COLOR_WHITE);
+        IStyle style = new Style();
+        style.setAttributeValue(CellStyleAttributes.BACKGROUND_COLOR, GUIHelper.COLOR_BLUE);
+        style.setAttributeValue(CellStyleAttributes.FOREGROUND_COLOR, GUIHelper.COLOR_WHITE);
 
-	configRegistry.registerConfigAttribute(CellConfigAttributes.CELL_STYLE,
-		style, DisplayMode.NORMAL, ACTIVE_LABEL);
+        configRegistry
+                .registerConfigAttribute(CellConfigAttributes.CELL_STYLE, style, DisplayMode.NORMAL, ACTIVE_LABEL);
 
-	configRegistry.registerConfigAttribute(CellConfigAttributes.CELL_STYLE,
-		style, DisplayMode.SELECT, ACTIVE_LABEL);
+        configRegistry
+                .registerConfigAttribute(CellConfigAttributes.CELL_STYLE, style, DisplayMode.SELECT, ACTIVE_LABEL);
     }
 
 }

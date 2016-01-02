@@ -29,31 +29,26 @@ public final class TabEvents extends BaseEvents {
     /**
      * Sent when opening new tab.
      */
-    public static final String TOPIC_TAB_OPEN = TOPIC_BASE_TAB
-	    + "open".intern(); //$NON-NLS-1$
+    public static final String TOPIC_TAB_OPEN = TOPIC_BASE_TAB + "open".intern(); //$NON-NLS-1$
 
     /**
      * Sent when closing tab.
      */
-    public static final String TOPIC_TAB_CLOSE = TOPIC_BASE_TAB
-	    + "close".intern(); //$NON-NLS-1$
+    public static final String TOPIC_TAB_CLOSE = TOPIC_BASE_TAB + "close".intern(); //$NON-NLS-1$
 
     /**
      * Sent when moving tab on the same panel.
      */
-    public static final String TOPIC_TAB_MOVE = TOPIC_BASE_TAB
-	    + "move".intern(); //$NON-NLS-1$
+    public static final String TOPIC_TAB_MOVE = TOPIC_BASE_TAB + "move".intern(); //$NON-NLS-1$
 
     /**
      * Sent when moving tab to another panel.
      */
-    public static final String TOPIC_TAB_MOVE_OPPOSITE = TOPIC_BASE_TAB
-	    + "moveToOpposite".intern(); //$NON-NLS-1$
+    public static final String TOPIC_TAB_MOVE_OPPOSITE = TOPIC_BASE_TAB + "moveToOpposite".intern(); //$NON-NLS-1$
 
     /**
      * Sent on dClick on tab label.
      */
-    public static final String TOPIC_TAB_DCLICK = TOPIC_BASE_TAB
-	    + "dClick".intern(); //$NON-NLS-1$
+    public static final String TOPIC_TAB_DCLICK = TOPIC_BASE_TAB + "dClick".intern(); //$NON-NLS-1$
 
 }

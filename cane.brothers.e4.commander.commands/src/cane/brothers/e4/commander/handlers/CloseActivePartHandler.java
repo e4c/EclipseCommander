@@ -30,16 +30,14 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
  */
 public class CloseActivePartHandler {
     @Execute
-    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
-	    EPartService partService) {
-	// close active part
-	partService.hidePart(part);
+    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part, EPartService partService) {
+        // close active part
+        partService.hidePart(part);
     }
 
     @CanExecute
-    public boolean canExecute(@Named(IServiceConstants.ACTIVE_PART) MPart part,
-	    EPartService partService) {
-	return partService.isPartVisible(part);
+    public boolean canExecute(@Named(IServiceConstants.ACTIVE_PART) MPart part, EPartService partService) {
+        return partService.isPartVisible(part);
     }
 
 }

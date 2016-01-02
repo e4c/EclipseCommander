@@ -37,67 +37,54 @@ public class PathSelectionUiBinding extends RowOnlySelectionBindings {
 
     @Override
     public void configureUiBindings(UiBindingRegistry uiBindingRegistry) {
-	super.configureUiBindings(uiBindingRegistry);
+        super.configureUiBindings(uiBindingRegistry);
 
-	// press Enter
-	configureEnterBindings(uiBindingRegistry, new OpenPathAction());
+        // press Enter
+        configureEnterBindings(uiBindingRegistry, new OpenPathAction());
 
-	// press Tab
-	// for tab key we have global key binding
+        // press Tab
+        // for tab key we have global key binding
     }
 
     // add Enter key binding
-    protected void configureEnterBindings(UiBindingRegistry uiBindingRegistry,
-	    IKeyAction action) {
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE,
-		SWT.CR), action);
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
-		SWT.CR), action);
+    protected void configureEnterBindings(UiBindingRegistry uiBindingRegistry, IKeyAction action) {
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE, SWT.CR), action);
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1, SWT.CR), action);
     }
 
     @Override
-    protected void configureBodyMouseClickBindings(
-	    UiBindingRegistry uiBindingRegistry) {
+    protected void configureBodyMouseClickBindings(UiBindingRegistry uiBindingRegistry) {
 
-	super.configureBodyMouseClickBindings(uiBindingRegistry);
+        super.configureBodyMouseClickBindings(uiBindingRegistry);
 
-	// added NoOpMouseAction on single click because of Bug 428901
-	uiBindingRegistry.registerFirstSingleClickBinding(
-		MouseEventMatcher.bodyLeftClick(SWT.NONE),
-		new NoOpMouseAction());
+        // added NoOpMouseAction on single click because of Bug 428901
+        uiBindingRegistry.registerFirstSingleClickBinding(MouseEventMatcher.bodyLeftClick(SWT.NONE),
+                new NoOpMouseAction());
 
-	uiBindingRegistry.registerDoubleClickBinding(
-		MouseEventMatcher.bodyLeftClick(SWT.NONE),
-		new OpenPathMouseClickAction());
+        uiBindingRegistry.registerDoubleClickBinding(MouseEventMatcher.bodyLeftClick(SWT.NONE),
+                new OpenPathMouseClickAction());
     }
 
     @Override
-    protected void configureColumnHeaderMouseClickBindings(
-	    UiBindingRegistry uiBindingRegistry) {
+    protected void configureColumnHeaderMouseClickBindings(UiBindingRegistry uiBindingRegistry) {
 
-	uiBindingRegistry.registerSingleClickBinding(
-		MouseEventMatcher.columnHeaderLeftClick(SWT.NONE),
-		new ViewportSelectFirstPathAction());
+        uiBindingRegistry.registerSingleClickBinding(MouseEventMatcher.columnHeaderLeftClick(SWT.NONE),
+                new ViewportSelectFirstPathAction());
 
-	uiBindingRegistry.registerSingleClickBinding(
-		MouseEventMatcher.columnHeaderLeftClick(SWT.MOD1),
-		new ViewportSelectFirstPathAction());
+        uiBindingRegistry.registerSingleClickBinding(MouseEventMatcher.columnHeaderLeftClick(SWT.MOD1),
+                new ViewportSelectFirstPathAction());
     }
 
     @Override
-    protected void configureMoveDownBindings(
-	    UiBindingRegistry uiBindingRegistry, IKeyAction action) {
+    protected void configureMoveDownBindings(UiBindingRegistry uiBindingRegistry, IKeyAction action) {
 
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE,
-		SWT.ARROW_DOWN), action);
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.NONE, SWT.ARROW_DOWN), action);
 
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT,
-		SWT.ARROW_DOWN), action);
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT, SWT.ARROW_DOWN), action);
 
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1,
-		SWT.ARROW_DOWN), new MoveToLastRowAction());
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.MOD1, SWT.ARROW_DOWN), new MoveToLastRowAction());
 
-	uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT
-		| SWT.MOD1, SWT.ARROW_DOWN), new MoveToLastRowAction());
+        uiBindingRegistry.registerKeyBinding(new KeyEventMatcher(SWT.SHIFT | SWT.MOD1, SWT.ARROW_DOWN),
+                new MoveToLastRowAction());
     }
 }

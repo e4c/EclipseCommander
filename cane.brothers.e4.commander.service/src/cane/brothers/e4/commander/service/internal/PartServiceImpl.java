@@ -25,6 +25,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.extensions.Preference;
+//import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
@@ -52,8 +53,7 @@ import cane.brothers.e4.commander.utils.PathUtils;
  */
 public class PartServiceImpl implements IPartService {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(PartServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(PartServiceImpl.class);
 
     // counter
     private static int tabsId = 1;
@@ -78,7 +78,7 @@ public class PartServiceImpl implements IPartService {
     @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
     private boolean stayActiveTab;
 
-    private Set<MPart> openedParts = new LinkedHashSet<MPart>();
+    private final Set<MPart> openedParts = new LinkedHashSet<MPart>();
 
     /**
      * Constructor
@@ -93,7 +93,7 @@ public class PartServiceImpl implements IPartService {
      * @return element id for the new tab.
      */
     public static String createElementId() {
-	return IdStorage.DYNAMIC_PART_ELEMENT_PREFIX_ID + tabsId++;
+        return IdStorage.DYNAMIC_PART_ELEMENT_PREFIX_ID + tabsId++;
     }
 
     /*
@@ -103,7 +103,7 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public Set<MPart> getParts() {
-	return openedParts;
+        return openedParts;
     }
 
     /*
@@ -115,44 +115,43 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public boolean createPart(Path rootPath, String panelId) {
-	boolean result = false;
+        boolean result = false;
 
-	if (rootPath != null) {
-	    String rootPathString = null;
+        if (rootPath != null) {
+            String rootPathString = null;
 
-	    rootPathString = PathUtils.getFileName(rootPath);
+            rootPathString = PathUtils.getFileName(rootPath);
 
-	    // create dynamic part
-	    MPart part = createDynamicPart(modelService);
+            // create dynamic part
+            MPart part = createDynamicPart(modelService);
 
-	    if (part != null) {
-		// specify part
-		part.setLabel(rootPathString);
-		part.setElementId(createElementId());
+            if (part != null) {
+                // specify part
+                part.setLabel(rootPathString);
+                part.setElementId(createElementId());
 
-		// TODO save state if part not private
-		Map<String, String> state = part.getPersistedState();
-		state.put(IdStorage.STATE_ROOT_PATH, rootPath.toString());
+                // TODO save state if part not private
+                Map<String, String> state = part.getPersistedState();
+                state.put(IdStorage.STATE_ROOT_PATH, rootPath.toString());
 
-		// add tab to the part stack (panel)
-		MPartStack panel = (MPartStack) modelService.find(panelId,
-			application);
-		panel.getChildren().add(part);
+                // add tab to the part stack (panel)
+                MPartStack panel = (MPartStack) modelService.find(panelId, application);
+                panel.getChildren().add(part);
 
-		//
-		openedParts.add(part);
+                //
+                openedParts.add(part);
 
-		// TODO Send out events
-		broker.post(TabEvents.TOPIC_TAB_OPEN, part);
+                // TODO Send out events
+                broker.post(TabEvents.TOPIC_TAB_OPEN, part);
 
-		result = true;
-	    }
-	    else {
-		log.error("Unable to create dynamic part."); //$NON-NLS-1$
-	    }
-	}
+                result = true;
+            }
+            else {
+                log.error("Unable to create dynamic part."); //$NON-NLS-1$
+            }
+        }
 
-	return result;
+        return result;
     }
 
     /**
@@ -166,40 +165,39 @@ public class PartServiceImpl implements IPartService {
      */
     @Inject
     private MPart createDynamicPart(EModelService modelService) {
-	MPartDescriptor descriptor = modelService
-		.getPartDescriptor(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	if (descriptor == null) {
-	    return null;
-	}
-	MPart part = modelService.createModelElement(MPart.class);
-	part.setElementId(descriptor.getElementId());
+        MPartDescriptor descriptor = modelService.getPartDescriptor(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+        if (descriptor == null) {
+            return null;
+        }
+        MPart part = modelService.createModelElement(MPart.class);
+        part.setElementId(descriptor.getElementId());
 
-	// part.getMenus().addAll(EcoreUtil.copyAll(descriptor.getMenus()));
-	// if (descriptor.getToolbar() != null) {
-	// part.setToolbar((MToolBar) EcoreUtil.copy((EObject)
-	// descriptor.getToolbar()));
-	// }
-	if (log.isDebugEnabled()) {
-	    log.debug("ContributorURI: " + descriptor.getContributorURI()); //$NON-NLS-1$
-	}
-	part.setContributorURI(descriptor.getContributorURI());
-	part.setCloseable(descriptor.isCloseable());
-	if (log.isDebugEnabled()) {
-	    log.debug("ContributionURI: " + descriptor.getContributionURI());
-	}
-	part.setContributionURI(descriptor.getContributionURI());
-	part.setLabel(descriptor.getLabel());
-	part.setIconURI(descriptor.getIconURI());
-	part.setTooltip(descriptor.getTooltip());
+        // part.getMenus().addAll(EcoreUtil.copyAll(descriptor.getMenus()));
+        // if (descriptor.getToolbar() != null) {
+        // part.setToolbar((MToolBar) EcoreUtil.copy((EObject)
+        // descriptor.getToolbar()));
+        // }
+        if (log.isDebugEnabled()) {
+            log.debug("ContributorURI: " + descriptor.getContributorURI()); //$NON-NLS-1$
+        }
+        part.setContributorURI(descriptor.getContributorURI());
+        part.setCloseable(descriptor.isCloseable());
+        if (log.isDebugEnabled()) {
+            log.debug("ContributionURI: " + descriptor.getContributionURI());
+        }
+        part.setContributionURI(descriptor.getContributionURI());
+        part.setLabel(descriptor.getLabel());
+        part.setIconURI(descriptor.getIconURI());
+        part.setTooltip(descriptor.getTooltip());
 
-	// part.getHandlers().addAll(EcoreUtil.copyAll(descriptor.getHandlers()));
+        // part.getHandlers().addAll(EcoreUtil.copyAll(descriptor.getHandlers()));
 
-	part.getTags().addAll(descriptor.getTags());
+        part.getTags().addAll(descriptor.getTags());
 
-	// TODO set if property
-	part.getPersistedState().putAll(descriptor.getPersistedState());
-	part.getBindingContexts().addAll(descriptor.getBindingContexts());
-	return part;
+        // TODO set if property
+        part.getPersistedState().putAll(descriptor.getPersistedState());
+        part.getBindingContexts().addAll(descriptor.getBindingContexts());
+        return part;
     }
 
     /*
@@ -213,28 +211,27 @@ public class PartServiceImpl implements IPartService {
     @Override
     public boolean copyPart(MPart activePart, PartCopyType copyType) {
 
-	// 1. copy part
-	MPart newPart = copyPart(partService, activePart);
+        // 1. copy part
+        MPart newPart = copyPart(partService, activePart);
 
-	// 2. get panel
-	MPartStack panel = getPanel(modelService, application, activePart,
-		copyType);
+        // 2. get panel
+        MPartStack panel = getPanel(modelService, application, activePart, copyType);
 
-	// 3. add part into panel
-	if (panel != null && panel.getChildren() != null) {
-	    panel.getChildren().add(newPart);
-	}
+        // 3. add part into panel
+        if (panel != null && panel.getChildren() != null) {
+            panel.getChildren().add(newPart);
+        }
 
-	// 4. add created part to opened parts set
-	openedParts.add(newPart);
+        // 4. add created part to opened parts set
+        openedParts.add(newPart);
 
-	// TODO Send out events
-	// broker.post(MyEventConstants.TOPIC_TODO_NEW, updateTodo);
+        // TODO Send out events
+        // broker.post(MyEventConstants.TOPIC_TODO_NEW, updateTodo);
 
-	// 6. show part
-	showPart(partService, newPart, activePart);
+        // 6. show part
+        showPart(partService, newPart, activePart);
 
-	return true;
+        return true;
     }
 
     /**
@@ -248,11 +245,10 @@ public class PartServiceImpl implements IPartService {
      */
     private MPart copyPart(EPartService partService, MPart activePart) {
 
-	MPart newPart = partService
-		.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
-	newPart = internalCopyPart(newPart, activePart);
+        MPart newPart = partService.createPart(IdStorage.DYNAMIC_PART_DESCRIPTOR_ID);
+        newPart = internalCopyPart(newPart, activePart);
 
-	return newPart;
+        return newPart;
     }
 
     /**
@@ -268,36 +264,36 @@ public class PartServiceImpl implements IPartService {
      * @return
      */
     private MPart internalCopyPart(MPart newPart, MPart part) {
-	if (part != null) {
+        if (part != null) {
 
-	    // TODO copy persist state
-	    Map<String, String> state = part.getPersistedState();
-	    if (state != null) {
-		Path rootPath = null;
-		String strRootPath = state.get("rootPath"); //$NON-NLS-1$
+            // TODO copy persist state
+            Map<String, String> state = part.getPersistedState();
+            if (state != null) {
+                Path rootPath = null;
+                String strRootPath = state.get(IdStorage.STATE_ROOT_PATH); // "rootPath"
 
-		if (strRootPath == null) {
-		    IDynamicTab tab = tabService.getTab(part);
-		    rootPath = tab.getRootPath();
-		}
-		else {
-		    rootPath = Paths.get(strRootPath);
-		}
+                if (strRootPath == null) {
+                    IDynamicTab tab = tabService.getTab(part);
+                    rootPath = tab.getRootPath();
+                }
+                else {
+                    rootPath = Paths.get(strRootPath);
+                }
 
-		if (rootPath != null) {
-		    newPart.setLabel(PathUtils.getFileName(rootPath));
-		    newPart.setElementId(createElementId());
+                if (rootPath != null) {
+                    newPart.setLabel(PathUtils.getFileName(rootPath));
+                    newPart.setElementId(createElementId());
 
-		    // NB! copy also "active" tag
-		    newPart.getTags().addAll(part.getTags());
-		}
-	    }
-	    else {
-		log.warn("there are no root path in persisted states");
-	    }
-	}
+                    // NB! copy also "active" tag
+                    newPart.getTags().addAll(part.getTags());
+                }
+            }
+            else {
+                log.warn("there are no root path in persisted states");
+            }
+        }
 
-	return newPart;
+        return newPart;
     }
 
     /*
@@ -309,30 +305,28 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public MPart getOppositePart(MPart activePart) {
-	MPart visiblePart = null;
+        MPart visiblePart = null;
 
-	if (activePart != null) {
-	    // find opposite panel
-	    String oppositePanelId = getPanelId(activePart, PartCopyType.COPY);
-	    MUIElement oppositePanel = modelService.find(oppositePanelId,
-		    application);
+        if (activePart != null) {
+            // find opposite panel
+            String oppositePanelId = getPanelId(activePart, PartCopyType.COPY);
+            MUIElement oppositePanel = modelService.find(oppositePanelId, application);
 
-	    if (oppositePanel instanceof MPartStack) {
-		for (MStackElement elem : ((MPartStack) oppositePanel)
-			.getChildren()) {
-		    if (elem instanceof MPart) {
-			MPart part = (MPart) elem;
+            if (oppositePanel instanceof MPartStack) {
+                for (MStackElement elem : ((MPartStack) oppositePanel).getChildren()) {
+                    if (elem instanceof MPart) {
+                        MPart part = (MPart) elem;
 
-			// get opposite visible part
-			if (partService.isPartVisible(part)) {
-			    visiblePart = part;
-			    break;
-			}
-		    }
-		}
-	    }
-	}
-	return visiblePart;
+                        // get opposite visible part
+                        if (partService.isPartVisible(part)) {
+                            visiblePart = part;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return visiblePart;
     }
 
     /**
@@ -341,21 +335,21 @@ public class PartServiceImpl implements IPartService {
      * @return
      */
     private String getPanelId(MPart part, PartCopyType copyType) {
-	// panel id's
-	String panelId = null;
+        // panel id's
+        String panelId = null;
 
-	if (part != null && part.getParent() != null) {
-	    panelId = part.getParent().getElementId();
-	    if (PartCopyType.COPY == copyType) {
-		panelId = getOppositePanelId(panelId);
-	    }
-	    if (log.isDebugEnabled()) {
-		log.debug("panel id: " + panelId + //$NON-NLS-1$
-			"; copy type: " + copyType); //$NON-NLS-1$
-	    }
-	}
+        if (part != null && part.getParent() != null) {
+            panelId = part.getParent().getElementId();
+            if (PartCopyType.COPY == copyType) {
+                panelId = getOppositePanelId(panelId);
+            }
+            if (log.isDebugEnabled()) {
+                log.debug("panel id: " + panelId + //$NON-NLS-1$
+                        "; copy type: " + copyType); //$NON-NLS-1$
+            }
+        }
 
-	return panelId;
+        return panelId;
     }
 
     /**
@@ -363,11 +357,10 @@ public class PartServiceImpl implements IPartService {
      * @return
      */
     private String getOppositePanelId(String panelId) {
-	if (panelId != null) {
-	    return (panelId.equals(IdStorage.LEFT_PANEL_ID) ? IdStorage.RIGHT_PANEL_ID
-		    : IdStorage.LEFT_PANEL_ID);
-	}
-	return panelId;
+        if (panelId != null) {
+            return (panelId.equals(IdStorage.LEFT_PANEL_ID) ? IdStorage.RIGHT_PANEL_ID : IdStorage.LEFT_PANEL_ID);
+        }
+        return panelId;
     }
 
     /**
@@ -375,14 +368,12 @@ public class PartServiceImpl implements IPartService {
      * @param newPart
      * @param activePart
      */
-    private void showPart(EPartService partService, MPart newPart,
-	    MPart activePart) {
+    private void showPart(EPartService partService, MPart newPart, MPart activePart) {
 
-	partService.showPart(newPart, PartState.VISIBLE);
+        partService.showPart(newPart, PartState.VISIBLE);
 
-	// The current tab will stay active
-	partService.showPart(stayActiveTab ? activePart : newPart,
-		PartState.ACTIVATE);
+        // The current tab will stay active
+        partService.showPart(stayActiveTab ? activePart : newPart, PartState.ACTIVATE);
     }
 
     /**
@@ -398,19 +389,17 @@ public class PartServiceImpl implements IPartService {
      *            TODO
      * @return MPartStack panel
      */
-    private MPartStack getPanel(EModelService modelService, MApplication app,
-	    MPart activePart, PartCopyType copyType) {
-	MPartStack panel = null;
+    private MPartStack getPanel(EModelService modelService, MApplication app, MPart activePart, PartCopyType copyType) {
+        MPartStack panel = null;
 
-	String oppositePanelId = getPanelId(activePart, copyType);
-	MUIElement oppositeElement = modelService.find(oppositePanelId,
-		application);
+        String oppositePanelId = getPanelId(activePart, copyType);
+        MUIElement oppositeElement = modelService.find(oppositePanelId, application);
 
-	if (oppositeElement instanceof MPartStack) {
-	    panel = (MPartStack) oppositeElement;
-	}
+        if (oppositeElement instanceof MPartStack) {
+            panel = (MPartStack) oppositeElement;
+        }
 
-	return panel;
+        return panel;
     }
 
     /*
@@ -422,17 +411,17 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public MPart getPart(String id) {
-	// TODO Auto-generated method stub
-	return null;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public String getPartId(MPart part) {
-	String result = null;
-	if (openedParts.contains(part)) {
-	    result = part.getElementId();
-	}
-	return result;
+        String result = null;
+        if (openedParts.contains(part)) {
+            result = part.getElementId();
+        }
+        return result;
     }
 
     /*
@@ -444,8 +433,8 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public boolean closePart(String id) {
-	// TODO Auto-generated method stub
-	return false;
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

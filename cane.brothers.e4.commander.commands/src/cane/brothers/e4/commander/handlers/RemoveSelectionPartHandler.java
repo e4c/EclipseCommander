@@ -34,8 +34,7 @@ import cane.brothers.e4.commander.service.api.ITabService;
  */
 public class RemoveSelectionPartHandler {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(RemoveSelectionPartHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(RemoveSelectionPartHandler.class);
 
     @Inject
     private EPartService partService;
@@ -55,25 +54,24 @@ public class RemoveSelectionPartHandler {
     //
     @Inject
     @Execute
-    public void removeSelection(
-	    @Optional @UIEventTopic(PartEvents.TOPIC_PART_REMOVE_SELECTION) final MPart activePart) {
-	if (log.isDebugEnabled()) {
-	    log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
-	}
+    public void removeSelection(@Optional @UIEventTopic(PartEvents.TOPIC_PART_REMOVE_SELECTION) final MPart activePart) {
+        if (log.isDebugEnabled()) {
+            log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+        }
 
-	if (activePart != null && partService != null) {
+        if (activePart != null && partService != null) {
 
-	    // pass throw all parts
-	    for (MPart p : partService.getParts()) {
-		if (p != null && !p.equals(activePart)) {
+            // pass throw all parts
+            for (MPart p : partService.getParts()) {
+                if (p != null && !p.equals(activePart)) {
 
-		    tabService.clearSelection(p);
-		    if (log.isDebugEnabled()) {
-			log.debug("remove selection from non active tab");
-		    }
-		}
-	    }
-	}
+                    tabService.clearSelection(p);
+                    if (log.isDebugEnabled()) {
+                        log.debug("remove selection from non active tab");
+                    }
+                }
+            }
+        }
     }
 
 }

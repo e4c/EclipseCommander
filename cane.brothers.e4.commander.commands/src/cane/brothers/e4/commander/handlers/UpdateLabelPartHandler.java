@@ -17,6 +17,7 @@
 package cane.brothers.e4.commander.handlers;
 
 import java.nio.file.Path;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,6 +28,7 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.utils.PathUtils;
 
@@ -43,12 +45,15 @@ public class UpdateLabelPartHandler {
     @Inject
     @Optional
     @Execute
-    public void execute(
-	    @UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) Path newPath) {
+    public void execute(@UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) Path newPath) {
 
-	// update label of current tab
-	if (activePart != null && newPath != null) {
-	    activePart.setLabel(PathUtils.getFileName(newPath));
-	}
+        // update label of current tab
+        if (activePart != null && newPath != null) {
+            activePart.setLabel(PathUtils.getFileName(newPath));
+
+            // store opened path into Persisted State
+            Map<String, String> state = activePart.getPersistedState();
+            state.put(IdStorage.STATE_ROOT_PATH, newPath.toString());
+        }
     }
 }

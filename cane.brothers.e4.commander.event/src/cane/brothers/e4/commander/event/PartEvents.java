@@ -17,8 +17,7 @@
 package cane.brothers.e4.commander.event;
 
 /**
- * E4 UI part event constants.
- * Occurs on the part.
+ * E4 UI part event constants. Occurs on the part.
  *
  */
 public final class PartEvents extends BaseEvents {
@@ -31,8 +30,7 @@ public final class PartEvents extends BaseEvents {
     /**
      * Sent when opening new path in active tab.
      */
-    public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART
-	    + "path/open"; //$NON-NLS-1$
+    public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART + "path/open"; //$NON-NLS-1$
 
     /**
      * Sent when necessary to remove selection from opposite tab.

@@ -38,14 +38,13 @@ public class ViewportSelectFirstPathAction implements IMouseClickAction {
      */
     @Override
     public void run(NatTable natTable, MouseEvent event) {
-	// first row
-	int rowPosition = 1;
+        // first row
+        int rowPosition = 1;
 
-	// only perform the selection if the cursor is null
-	if (natTable.getCursor() == null) {
-	    natTable.doCommand(new ViewportSelectRowCommand(natTable,
-		    rowPosition, false, false));
-	}
+        // only perform the selection if the cursor is null
+        if (natTable.getCursor() == null) {
+            natTable.doCommand(new ViewportSelectRowCommand(natTable, rowPosition, false, false));
+        }
 
     }
 
@@ -58,7 +57,7 @@ public class ViewportSelectFirstPathAction implements IMouseClickAction {
      */
     @Override
     public boolean isExclusive() {
-	return true;
+        return true;
     }
 
 }

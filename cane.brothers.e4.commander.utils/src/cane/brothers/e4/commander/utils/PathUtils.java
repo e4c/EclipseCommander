@@ -45,10 +45,10 @@ public class PathUtils {
      * @return path as string or null
      */
     public static String getPath(Path path) {
-	if (path != null) {
-	    return path.toString();
-	}
-	return null;
+        if (path != null) {
+            return path.toString();
+        }
+        return null;
     }
 
     /**
@@ -58,16 +58,16 @@ public class PathUtils {
      * @return file name
      */
     public static String getFileName(Path path) {
-	String pathString = null;
-	if (path != null) {
-	    if (path.getFileName() != null) {
-		pathString = path.getFileName().toString();
-	    }
-	    else {
-		pathString = path.toString();
-	    }
-	}
-	return pathString;
+        String pathString = null;
+        if (path != null) {
+            if (path.getFileName() != null) {
+                pathString = path.getFileName().toString();
+            }
+            else {
+                pathString = path.toString();
+            }
+        }
+        return pathString;
     }
 
     /**
@@ -76,15 +76,15 @@ public class PathUtils {
      * @return default path
      */
     public static Path getDefaultPath() {
-	Path defaultPath = Paths.get(""); //$NON-NLS-1$
+        Path defaultPath = Paths.get(""); //$NON-NLS-1$
 
-	if (SystemUtils.IS_OS_WINDOWS) {
-	    defaultPath = Paths.get("C:\\"); //$NON-NLS-1$
-	}
-	else if (SystemUtils.IS_OS_MAC_OSX) {
-	    defaultPath = Paths.get(System.getenv().get("HOME")); //$NON-NLS-1$
-	}
-	return defaultPath;
+        if (SystemUtils.IS_OS_WINDOWS) {
+            defaultPath = Paths.get("C:\\"); //$NON-NLS-1$
+        }
+        else if (SystemUtils.IS_OS_MAC_OSX) {
+            defaultPath = Paths.get(System.getenv().get("HOME")); //$NON-NLS-1$
+        }
+        return defaultPath;
     }
 
     /**
@@ -92,15 +92,14 @@ public class PathUtils {
      * @return
      */
     public static String getAttributesString(Path path) {
-	Set<String> views = FileSystems.getDefault()
-		.supportedFileAttributeViews();
+        Set<String> views = FileSystems.getDefault().supportedFileAttributeViews();
 
-	if (views.contains("posix")) { //$NON-NLS-1$
-	    return getPosixAttributesString(path);
-	}
-	else {
-	    return getDosAttributesString(path);
-	}
+        if (views.contains("posix")) { //$NON-NLS-1$
+            return getPosixAttributesString(path);
+        }
+        else {
+            return getDosAttributesString(path);
+        }
     }
 
     /**
@@ -108,23 +107,23 @@ public class PathUtils {
      * @return
      */
     public static String getDosAttributesString(Path path) {
-	DosFileAttributeView basicView = Files.getFileAttributeView(path,
-		DosFileAttributeView.class, LinkOption.NOFOLLOW_LINKS);
-	StringBuilder attrs = new StringBuilder();
+        DosFileAttributeView basicView = Files.getFileAttributeView(path, DosFileAttributeView.class,
+                LinkOption.NOFOLLOW_LINKS);
+        StringBuilder attrs = new StringBuilder();
 
-	try {
-	    // + all basic attributes
-	    DosFileAttributes dosAttrs = basicView.readAttributes();
+        try {
+            // + all basic attributes
+            DosFileAttributes dosAttrs = basicView.readAttributes();
 
-	    attrs.append(dosAttrs.isReadOnly() ? "r" : "-"); //$NON-NLS-1$ //$NON-NLS-2$
-	    attrs.append(dosAttrs.isHidden() ? "h" : "-");//$NON-NLS-1$ //$NON-NLS-2$
-	    attrs.append(dosAttrs.isArchive() ? "a" : "-");//$NON-NLS-1$ //$NON-NLS-2$
-	    attrs.append(dosAttrs.isSystem() ? "s" : "-");//$NON-NLS-1$ //$NON-NLS-2$
-	}
-	catch (IOException e) {
-	    log.warn("unable to read DOS attributes.", e); //$NON-NLS-1$
-	}
-	return attrs.toString();
+            attrs.append(dosAttrs.isReadOnly() ? "r" : "-"); //$NON-NLS-1$ //$NON-NLS-2$
+            attrs.append(dosAttrs.isHidden() ? "h" : "-");//$NON-NLS-1$ //$NON-NLS-2$
+            attrs.append(dosAttrs.isArchive() ? "a" : "-");//$NON-NLS-1$ //$NON-NLS-2$
+            attrs.append(dosAttrs.isSystem() ? "s" : "-");//$NON-NLS-1$ //$NON-NLS-2$
+        }
+        catch (IOException e) {
+            log.warn("unable to read DOS attributes.", e); //$NON-NLS-1$
+        }
+        return attrs.toString();
     }
 
     /**
@@ -132,22 +131,20 @@ public class PathUtils {
      * @return
      */
     public static String getPosixAttributesString(Path path) {
-	PosixFileAttributeView posixView = Files.getFileAttributeView(path,
-		PosixFileAttributeView.class);
-	StringBuilder attrs = new StringBuilder();
+        PosixFileAttributeView posixView = Files.getFileAttributeView(path, PosixFileAttributeView.class);
+        StringBuilder attrs = new StringBuilder();
 
-	try {
-	    // + all basic attributes
-	    PosixFileAttributes posixAttrs = posixView.readAttributes();
+        try {
+            // + all basic attributes
+            PosixFileAttributes posixAttrs = posixView.readAttributes();
 
-	    if (posixAttrs != null) {
-		attrs.append(PosixFilePermissions.toString(posixAttrs
-			.permissions()));
-	    }
-	}
-	catch (IOException e) {
-	    log.warn("unable to read Posix file attributes.", e); //$NON-NLS-1$
-	}
-	return attrs.toString();
+            if (posixAttrs != null) {
+                attrs.append(PosixFilePermissions.toString(posixAttrs.permissions()));
+            }
+        }
+        catch (IOException e) {
+            log.warn("unable to read Posix file attributes.", e); //$NON-NLS-1$
+        }
+        return attrs.toString();
     }
 }

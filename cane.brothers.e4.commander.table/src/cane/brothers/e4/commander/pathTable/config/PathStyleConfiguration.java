@@ -51,32 +51,21 @@ public class PathStyleConfiguration extends AbstractRegistryConfiguration {
 
     @Override
     public void configureRegistry(IConfigRegistry configRegistry) {
-	configRegistry.registerConfigAttribute(
-		CellConfigAttributes.CELL_PAINTER, cellPainter);
+        configRegistry.registerConfigAttribute(CellConfigAttributes.CELL_PAINTER, cellPainter);
 
-	Style cellStyle = new Style();
-	cellStyle.setAttributeValue(CellStyleAttributes.BACKGROUND_COLOR,
-		bgColor);
-	cellStyle.setAttributeValue(CellStyleAttributes.FOREGROUND_COLOR,
-		fgColor);
-	cellStyle.setAttributeValue(
-		CellStyleAttributes.GRADIENT_BACKGROUND_COLOR, gradientBgColor);
-	cellStyle.setAttributeValue(
-		CellStyleAttributes.GRADIENT_FOREGROUND_COLOR, gradientFgColor);
-	cellStyle.setAttributeValue(CellStyleAttributes.FONT, font);
-	cellStyle.setAttributeValue(CellStyleAttributes.HORIZONTAL_ALIGNMENT,
-		hAlign);
-	cellStyle.setAttributeValue(CellStyleAttributes.VERTICAL_ALIGNMENT,
-		vAlign);
-	cellStyle.setAttributeValue(CellStyleAttributes.BORDER_STYLE,
-		borderStyle);
+        Style cellStyle = new Style();
+        cellStyle.setAttributeValue(CellStyleAttributes.BACKGROUND_COLOR, bgColor);
+        cellStyle.setAttributeValue(CellStyleAttributes.FOREGROUND_COLOR, fgColor);
+        cellStyle.setAttributeValue(CellStyleAttributes.GRADIENT_BACKGROUND_COLOR, gradientBgColor);
+        cellStyle.setAttributeValue(CellStyleAttributes.GRADIENT_FOREGROUND_COLOR, gradientFgColor);
+        cellStyle.setAttributeValue(CellStyleAttributes.FONT, font);
+        cellStyle.setAttributeValue(CellStyleAttributes.HORIZONTAL_ALIGNMENT, hAlign);
+        cellStyle.setAttributeValue(CellStyleAttributes.VERTICAL_ALIGNMENT, vAlign);
+        cellStyle.setAttributeValue(CellStyleAttributes.BORDER_STYLE, borderStyle);
 
-	configRegistry.registerConfigAttribute(CellConfigAttributes.CELL_STYLE,
-		cellStyle);
+        configRegistry.registerConfigAttribute(CellConfigAttributes.CELL_STYLE, cellStyle);
 
-	configRegistry.registerConfigAttribute(
-		CellConfigAttributes.DISPLAY_CONVERTER,
-		new DefaultDisplayConverter());
+        configRegistry.registerConfigAttribute(CellConfigAttributes.DISPLAY_CONVERTER, new DefaultDisplayConverter());
     }
 
 }

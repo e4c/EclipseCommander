@@ -31,8 +31,7 @@ import com.opcoach.e4.preferences.ScopedPreferenceStore;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(PreferenceInitializer.class);
+    private static final Logger log = LoggerFactory.getLogger(PreferenceInitializer.class);
 
     /**
      * default constructor
@@ -48,13 +47,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
      */
     @Override
     public void initializeDefaultPreferences() {
-	if (log.isDebugEnabled()) {
-	    log.debug("Enter in default Preference Initializer"); //$NON-NLS-1$
-	}
+        if (log.isDebugEnabled()) {
+            log.debug("Enter in default Preference Initializer"); //$NON-NLS-1$
+        }
 
-	IPreferenceStore store = new ScopedPreferenceStore(
-		InstanceScope.INSTANCE, IdStorage.PREF_PLUGIN_ID);
+        IPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, IdStorage.PREF_PLUGIN_ID);
 
-	store.setDefault(PreferenceConstants.PB_STAY_ACTIVE_TAB, true);
+        store.setDefault(PreferenceConstants.PB_STAY_ACTIVE_TAB, true);
     }
 }

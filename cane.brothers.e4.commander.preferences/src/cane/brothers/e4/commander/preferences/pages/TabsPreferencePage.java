@@ -32,9 +32,9 @@ public class TabsPreferencePage extends FieldEditorPreferencePage {
      * 
      */
     public TabsPreferencePage() {
-	super(GRID);
-	// setTitle("Tabs Settings");
-	setDescription("There are preferences present on this page to show tab's properies."); //$NON-NLS-1$
+        super(GRID);
+        // setTitle("Tabs Settings");
+        setDescription("There are preferences present on this page to show tab's properies."); //$NON-NLS-1$
     }
 
     /*
@@ -46,8 +46,8 @@ public class TabsPreferencePage extends FieldEditorPreferencePage {
      */
     @Override
     protected void createFieldEditors() {
-	addField(new BooleanFieldEditor(PreferenceConstants.PB_STAY_ACTIVE_TAB,
-		"&Stay tab active", getFieldEditorParent())); //$NON-NLS-1$
+        addField(new BooleanFieldEditor(PreferenceConstants.PB_STAY_ACTIVE_TAB,
+                "&Stay tab active", getFieldEditorParent())); //$NON-NLS-1$
     }
 
 }

@@ -47,6 +47,7 @@ import org.osgi.service.event.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
@@ -58,267 +59,262 @@ import cane.brothers.e4.commander.utils.PathUtils;
  * Dynamic Tab. GUI class of part descriptor implementation.
  * 
  */
-public class DynamicTab implements IDynamicTab {
+public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
 
-	private static final Logger log = LoggerFactory.getLogger(DynamicTab.class);
+    private static final Logger log = LoggerFactory.getLogger(DynamicTab.class);
 
-	@Inject
-	private IEventBroker eventBroker;
+    @Inject
+    private IEventBroker eventBroker;
 
-	// @Inject
-	// private EModelService modelService;
+    // @Inject
+    // private EModelService modelService;
 
-	@Inject
-	private MApplication application;
+    @Inject
+    private MApplication application;
 
-	@Inject
-	private IEclipseContext context;
+    @Inject
+    private IEclipseContext context;
 
-	@Inject
-	@Named(IServiceConstants.ACTIVE_PART)
-	private MPart activePart;
+    @Inject
+    @Named(IServiceConstants.ACTIVE_PART)
+    private MPart activePart;
 
-	@Inject
-	ITabService tabService;
+    @Inject
+    ITabService tabService;
 
-	@Inject
-	private ESelectionService selectionService;
+    @Inject
+    private ESelectionService selectionService;
 
-	// @Inject
-	// private EPartService partService;
+    // @Inject
+    // private EPartService partService;
 
-	// @Inject
-	// @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath =
-	// IdStorage.PREF_PLUGIN_ID)
-	// private boolean stayActiveTab;
+    // @Inject
+    // @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath =
+    // IdStorage.PREF_PLUGIN_ID)
+    // private boolean stayActiveTab;
 
-	/**
-	 * GUI stuff
-	 */
-	private PathNatTable table;
+    /**
+     * GUI stuff
+     */
+    private PathNatTable table;
 
-	/**
-	 * @return the table
-	 */
-	public PathNatTable getTable() {
-		return table;
-	}
+    /**
+     * @return the table
+     */
+    public PathNatTable getTable() {
+        return table;
+    }
 
-	private Path rootPath;
+    private Path rootPath;
 
-	private final Color bgColor = Display.getCurrent().getSystemColor(
-			SWT.COLOR_WHITE);
+    private final Color bgColor = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
 
-	@Inject
-	public DynamicTab() {
-	}
+    @Inject
+    public DynamicTab() {
+    }
 
-	@PostConstruct
-	public void createPartControl(Composite parent) {
+    @PostConstruct
+    public void createPartControl(Composite parent) {
 
-		Composite panel = new Composite(parent, SWT.NONE);
-		// panel.setLayout(new GridLayout(2, true));
+        Composite panel = new Composite(parent, SWT.NONE);
+        // panel.setLayout(new GridLayout(2, true));
 
-		panel.setBackground(bgColor);
+        panel.setBackground(bgColor);
 
-		GridLayout gridLayout = new GridLayout();
-		gridLayout.marginWidth = 0;
-		panel.setLayout(gridLayout);
+        GridLayout gridLayout = new GridLayout();
+        gridLayout.marginWidth = 0;
+        panel.setLayout(gridLayout);
 
-		// TODO switch context
+        // TODO switch context
 
-		Object rootPathObject = context.get("rootPath"); //$NON-NLS-1$
-		if (rootPathObject != null) {
-			rootPath = Paths.get(rootPathObject.toString());
-			// rootPath =
-			// Paths.get(activePart.getPersistedState().get("rootPath"));
-			// log.debug("pref: {}", stayActiveTab);
+        Object rootPathObject = context.get(IdStorage.STATE_ROOT_PATH);
+        if (rootPathObject != null) {
+            rootPath = Paths.get(rootPathObject.toString());
+            // rootPath =
+            // Paths.get(activePart.getPersistedState().get("rootPath"));
+            // log.debug("pref: {}", stayActiveTab);
 
-			// create path table
-			table = new PathNatTable(panel, rootPath, eventBroker);
-			table.setBackground(bgColor);
+            // create path table
+            table = new PathNatTable(panel, rootPath, eventBroker);
+            table.setBackground(bgColor);
 
-			// attach a selection listener to our table
-			table.getSelectionProvider().addSelectionChangedListener(
-					new ISelectionChangedListener() {
-						@Override
-						public void selectionChanged(SelectionChangedEvent event) {
-							Object prevSelection = selectionService
-									.getSelection();
-							if (log.isDebugEnabled()) {
-								log.debug("Prev selection is {}", prevSelection); //$NON-NLS-1$
-							}
+            // attach a selection listener to our table
+            table.getSelectionProvider().addSelectionChangedListener(this);
 
-							IStructuredSelection selection = (IStructuredSelection) event
-									.getSelection();
-							boolean hasSelection = selection != null
-									&& selection.isEmpty() == false;
+            // layout
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
+        }
 
-							if (hasSelection) {
-								Object firstElement = selection
-										.getFirstElement();
-								if (log.isDebugEnabled()) {
-									log.debug(
-											"Current selection is {}", firstElement); //$NON-NLS-1$
-								}
+    }
 
-								// set the selection to the service
-								// TODO: not working for
-								// RemoveSelectionPartHandler
-								selectionService.setSelection(firstElement);
+    @Inject
+    @Optional
+    private void setRootPath(@UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) final Path newPath) {
 
-								if (log.isDebugEnabled()) {
-									log.debug("Selection changed:"); //$NON-NLS-1$
-								}
-								for (Object sel : selection.toArray()) {
-									if (sel instanceof PathFixture) {
-										PathFixture fixture = (PathFixture) sel;
-										if (log.isDebugEnabled()) {
-											log.debug("   " + fixture); //$NON-NLS-1$
-										}
-									}
-								}
-							}
-						}
-					});
+        // update root path of current tab
+        if (activePart != null && activePart.getObject() == this) {
 
-			// layout
-			GridDataFactory.fillDefaults().grab(true, true).applyTo(table);
-		}
+            // store root path
+            // context.set(IdStorage.STATE_ROOT_PATH, newPath); //$NON-NLS-1$
 
-	}
+            rootPath = newPath;
+            if (table != null) {
+                table.setRootPath(rootPath);
+                table.refresh();
 
-	@Inject
-	@Optional
-	private void setRootPath(
-			@UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) final Path newPath) {
+                // do not make selection while event not finished
+                // setSelection();
+            }
+        }
+    }
 
-		// update root path of current tab
-		if (activePart != null && activePart.getObject() == this) {
+    // @Inject
+    // public void clearOtherSelection(
+    // @Optional @Named(IServiceConstants.ACTIVE_SELECTION) PathFixture
+    // selectedFixture) {
+    // if (selectedFixture != null) {
+    // System.out.println("selection");
+    // }
+    // }
 
-			rootPath = newPath;
-			if (table != null) {
-				table.setRootPath(rootPath);
-				table.refresh();
+    /**
+     * remove selection on other tabs if any tab was activated
+     * 
+     * @param event
+     */
+    @Inject
+    @Optional
+    public void partActivation(@UIEventTopic(UIEvents.UILifeCycle.ACTIVATE) Event event) {
 
-				// do not make selection while event not finished
-				// setSelection();
-			}
-		}
-	}
+        if (event != null && event.getPropertyNames() != null) {
 
-	// @Inject
-	// public void clearOtherSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) PathFixture
-	// selectedFixture) {
-	// if (selectedFixture != null) {
-	// System.out.println("selection");
-	// }
-	// }
+            // get active part
+            Object obj = event.getProperty(event.getPropertyNames()[0]);
+            if (obj instanceof MPart) {
+                MPart part = (MPart) obj;
 
-	/**
-	 * remove selection on other tabs if any tab was activated
-	 * 
-	 * @param event
-	 */
-	@Inject
-	@Optional
-	public void partActivation(
-			@UIEventTopic(UIEvents.UILifeCycle.ACTIVATE) Event event) {
+                // clear selection for non-active tabs
+                if (part.getObject() != this) {
+                    clearSelection();
+                    try {
+                        if (log.isDebugEnabled()) {
+                            log.debug("part {} was activated", //$NON-NLS-1$
+                                    String.valueOf(tabService.getTabId(part)));
+                        }
+                    }
+                    catch (Exception ex) {
+                        log.warn("unable to retreview tab id");
+                    }
+                }
 
-		if (event != null && event.getPropertyNames() != null) {
+                // // send event only ones if active context is exist
+                // if (part.equals(activePart) && part.getObject() == this) {
+                //
+                // // send event only ones if active context is exist
+                // IEclipseContext activeWindowContext = application
+                // .getContext().getActiveChild();
+                //
+                // // asynchronously sending an active part
+                // // if (activeWindowContext != null && eventBroker != null) {
+                // // eventBroker.post(
+                // // PartEvents.TOPIC_PART_REMOVE_SELECTION,
+                // // (MPart) obj);
+                // // }
+                // }
+                // else {
+                // clearSelection();
+                // }
+            }
+        }
 
-			// get active part
-			Object obj = event.getProperty(event.getPropertyNames()[0]);
-			if (obj instanceof MPart) {
-				MPart part = (MPart) obj;
+    }
 
-				// clear selection for non-active tabs
-				if (part.getObject() != this) {
-					clearSelection();
-					try {
-						if (log.isDebugEnabled()) {
-							log.debug("part {} was activated", //$NON-NLS-1$
-									String.valueOf(tabService.getTabId(part)));
-						}
-					} catch (Exception ex) {
-						log.warn("unable to retreview tab id");
-					}
-				}
+    /**
+     * clear table selection
+     */
+    @Override
+    public void clearSelection() {
+        if (table != null && !table.isDisposed() && table.hasSelection()) {
+            table.clearSelection();
+            if (log.isDebugEnabled()) {
+                log.debug("clear table selection"); //$NON-NLS-1$
+            }
+        }
+    }
 
-				// // send event only ones if active context is exist
-				// if (part.equals(activePart) && part.getObject() == this) {
-				//
-				// // send event only ones if active context is exist
-				// IEclipseContext activeWindowContext = application
-				// .getContext().getActiveChild();
-				//
-				// // asynchronously sending an active part
-				// // if (activeWindowContext != null && eventBroker != null) {
-				// // eventBroker.post(
-				// // PartEvents.TOPIC_PART_REMOVE_SELECTION,
-				// // (MPart) obj);
-				// // }
-				// }
-				// else {
-				// clearSelection();
-				// }
-			}
-		}
+    /**
+     * set default table selection
+     */
+    @Override
+    public void setSelection() {
+        if (table != null && !table.isDisposed()) {
+            table.setDefaultSelection();
+            if (log.isDebugEnabled()) {
+                log.debug("set default table selection"); //$NON-NLS-1$
+            }
+        }
+    }
 
-	}
+    @Override
+    @Focus
+    public void setFocus() {
+        if (table != null && !table.isDisposed()) {
+            if (table.setFocus()) {
+                if (log.isDebugEnabled()) {
+                    log.debug("set focus for table"); //$NON-NLS-1$
+                }
+            }
+        }
+    }
 
-	/**
-	 * clear table selection
-	 */
-	@Override
-	public void clearSelection() {
-		if (table != null && !table.isDisposed() && table.hasSelection()) {
-			table.clearSelection();
-			if (log.isDebugEnabled()) {
-				log.debug("clear table selection"); //$NON-NLS-1$
-			}
-		}
-	}
+    /**
+     * @return the rootPath
+     */
+    @Override
+    public Path getRootPath() {
+        return rootPath;
+    }
 
-	/**
-	 * set default table selection
-	 */
-	@Override
-	public void setSelection() {
-		if (table != null && !table.isDisposed()) {
-			table.setDefaultSelection();
-			if (log.isDebugEnabled()) {
-				log.debug("set default table selection"); //$NON-NLS-1$
-			}
-		}
-	}
+    @Override
+    public String toString() {
+        return // DynamicTab.class.getSimpleName()
+        super.toString() + " [roopPath: " //$NON-NLS-1$
+                + PathUtils.getPath(rootPath) + "]"; //$NON-NLS-1$
+    }
 
-	@Override
-	@Focus
-	public void setFocus() {
-		if (table != null && !table.isDisposed()) {
-			if (table.setFocus()) {
-				if (log.isDebugEnabled()) {
-					log.debug("set focus for table"); //$NON-NLS-1$
-				}
-			}
-		}
-	}
+    @Override
+    public void selectionChanged(SelectionChangedEvent event) {
+        Object prevSelection = selectionService.getSelection();
+        if (log.isDebugEnabled()) {
+            log.debug("Prev selection is {}", prevSelection); //$NON-NLS-1$
+        }
 
-	/**
-	 * @return the rootPath
-	 */
-	@Override
-	public Path getRootPath() {
-		return rootPath;
-	}
+        IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+        boolean hasSelection = selection != null && selection.isEmpty() == false;
 
-	@Override
-	public String toString() {
-		return // DynamicTab.class.getSimpleName()
-		super.toString() + " [roopPath: " //$NON-NLS-1$
-				+ PathUtils.getPath(rootPath) + "]"; //$NON-NLS-1$
-	}
+        if (hasSelection) {
+            Object firstElement = selection.getFirstElement();
+            if (log.isDebugEnabled()) {
+                log.debug("Current selection is {}", firstElement); //$NON-NLS-1$
+            }
+
+            // set the selection to the service
+            // TODO: not working for
+            // RemoveSelectionPartHandler
+            selectionService.setSelection(firstElement);
+
+            if (log.isDebugEnabled()) {
+                log.debug("Selection changed:"); //$NON-NLS-1$
+            }
+            for (Object sel : selection.toArray()) {
+                if (sel instanceof PathFixture) {
+                    PathFixture fixture = (PathFixture) sel;
+                    if (log.isDebugEnabled()) {
+                        log.debug("   " + fixture); //$NON-NLS-1$
+                    }
+                }
+            }
+        }
+    }
 
 }

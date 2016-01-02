@@ -26,8 +26,7 @@ import cane.brothers.e4.commander.api.PartCopyType;
 /**
  * Service for model of parts connected with tabs.
  * 
- * TODO
- * use as argument <code>MPart</code> or <code>id</code>.
+ * TODO use as argument <code>MPart</code> or <code>id</code>.
  */
 public interface IPartService {
 

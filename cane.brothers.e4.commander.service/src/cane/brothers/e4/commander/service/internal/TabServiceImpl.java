@@ -28,15 +28,14 @@ import cane.brothers.e4.commander.service.api.ITabService;
  */
 public class TabServiceImpl implements ITabService {
 
-    private static final Logger log = LoggerFactory
-	    .getLogger(TabServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(TabServiceImpl.class);
 
     /**
      * Constructor
      *
      */
     public TabServiceImpl() {
-	// TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -48,54 +47,54 @@ public class TabServiceImpl implements ITabService {
      */
     @Override
     public IDynamicTab getTab(MPart part) {
-	IDynamicTab tab = null;
-	if (part != null) {
-	    if (part.getObject() instanceof IDynamicTab) {
-		tab = (IDynamicTab) part.getObject();
-	    }
-	    else {
-		log.error("Given MPart is not a kind of DynamicTab part: " + part.toString()); //$NON-NLS-1$
-	    }
-	}
-	else {
-	    log.error("Part is null"); //$NON-NLS-1$
-	}
-	return tab;
+        IDynamicTab tab = null;
+        if (part != null) {
+            if (part.getObject() instanceof IDynamicTab) {
+                tab = (IDynamicTab) part.getObject();
+            }
+            else {
+                log.error("Given MPart is not a kind of DynamicTab part: " + part.toString()); //$NON-NLS-1$
+            }
+        }
+        else {
+            log.error("Part is null"); //$NON-NLS-1$
+        }
+        return tab;
     }
 
     @Override
     public int getTabId(MPart part) {
-	int result = -1;
+        int result = -1;
 
-	if (part != null) {
+        if (part != null) {
 
-	    // TODO partService.getPartId() to test if part is opened
+            // TODO partService.getPartId() to test if part is opened
 
-	    String elemId = part.getElementId();
-	    if (elemId != null) {
+            String elemId = part.getElementId();
+            if (elemId != null) {
 
-		String stringId = null;
-		try {
-		    stringId = elemId.substring(elemId.lastIndexOf(".") + 1); //$NON-NLS-1$
-		    // if (log.isDebugEnabled()) {
-		    //			log.debug("part id is {}", stringId); //$NON-NLS-1$
-		    // }
-		}
-		catch (Exception ex) {
-		    log.warn("element id \"{}\" has unsatisfied format", elemId); //$NON-NLS-1$
-		    result = -1;
-		}
-		try {
-		    result = Integer.valueOf(stringId).intValue();
-		}
-		catch (Exception ex) {
-		    log.warn("unable to get int value from {}", stringId); //$NON-NLS-1$
-		    result = -1;
-		}
-	    }
-	}
+                String stringId = null;
+                try {
+                    stringId = elemId.substring(elemId.lastIndexOf(".") + 1); //$NON-NLS-1$
+                    // if (log.isDebugEnabled()) {
+                    //			log.debug("part id is {}", stringId); //$NON-NLS-1$
+                    // }
+                }
+                catch (Exception ex) {
+                    log.warn("element id \"{}\" has unsatisfied format", elemId); //$NON-NLS-1$
+                    result = -1;
+                }
+                try {
+                    result = Integer.valueOf(stringId).intValue();
+                }
+                catch (Exception ex) {
+                    log.warn("unable to get int value from {}", stringId); //$NON-NLS-1$
+                    result = -1;
+                }
+            }
+        }
 
-	return result;
+        return result;
     }
 
     /*
@@ -107,10 +106,10 @@ public class TabServiceImpl implements ITabService {
      */
     @Override
     public void clearSelection(MPart part) {
-	IDynamicTab tab = getTab(part);
-	if (tab != null) {
-	    tab.clearSelection();
-	}
+        IDynamicTab tab = getTab(part);
+        if (tab != null) {
+            tab.clearSelection();
+        }
     }
 
     /*
@@ -122,11 +121,11 @@ public class TabServiceImpl implements ITabService {
      */
     @Override
     public void setSelection(MPart part) {
-	IDynamicTab tab = getTab(part);
-	if (tab != null) {
-	    tab.setFocus();
-	    tab.setSelection();
-	}
+        IDynamicTab tab = getTab(part);
+        if (tab != null) {
+            tab.setFocus();
+            tab.setSelection();
+        }
     }
 
 }
