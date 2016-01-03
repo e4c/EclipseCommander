@@ -19,11 +19,11 @@ package cane.brothers.e4.commander.service.internal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 //import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -72,6 +72,9 @@ public class PartServiceImpl implements IPartService {
 
     @Inject
     ITabService tabService;
+
+    @Inject
+    private IEclipseContext context;
 
     // @SuppressWarnings("restriction")
     @Inject
@@ -130,10 +133,6 @@ public class PartServiceImpl implements IPartService {
                 part.setLabel(rootPathString);
                 part.setElementId(createElementId());
 
-                // TODO save state if part not private
-                Map<String, String> state = part.getPersistedState();
-                state.put(IdStorage.STATE_ROOT_PATH, rootPath.toString());
-
                 // add tab to the part stack (panel)
                 MPartStack panel = (MPartStack) modelService.find(panelId, application);
                 panel.getChildren().add(part);
@@ -141,7 +140,7 @@ public class PartServiceImpl implements IPartService {
                 //
                 openedParts.add(part);
 
-                // TODO Send out events
+                // TODO Send out events: workout
                 broker.post(TabEvents.TOPIC_TAB_OPEN, part);
 
                 result = true;
@@ -265,34 +264,32 @@ public class PartServiceImpl implements IPartService {
      */
     private MPart internalCopyPart(MPart newPart, MPart part) {
         if (part != null) {
+            Path rootPath = null;
 
-            Map<String, String> state = part.getPersistedState();
-            if (state != null) {
-                Path rootPath = null;
-                String strRootPath = state.get(IdStorage.STATE_ROOT_PATH); // "rootPath"
+            // get root path from context
+            Object rootPathObject = context.get(IdStorage.STATE_ROOT_PATH);
 
-                // get or create root path
-                if (strRootPath == null) {
-                    IDynamicTab tab = tabService.getTab(part);
-                    rootPath = tab.getRootPath();
-                }
-                else {
-                    rootPath = Paths.get(strRootPath);
-                }
-
-                if (rootPath != null) {
-                    newPart.setLabel(PathUtils.getFileName(rootPath));
-                    newPart.setElementId(createElementId());
-
-                    // NB! copy also "active" tag
-                    newPart.getTags().addAll(part.getTags());
-
-                    // copy persist state
-                    newPart.getPersistedState().putAll(part.getPersistedState());
-                }
+            // get or create root path
+            if (rootPathObject == null) {
+                IDynamicTab tab = tabService.getTab(part);
+                rootPath = tab.getRootPath();
             }
             else {
-                log.warn("there are no root path in persisted states");
+                rootPath = Paths.get(rootPathObject.toString());
+            }
+
+            if (rootPath != null) {
+                newPart.setLabel(PathUtils.getFileName(rootPath));
+                newPart.setElementId(createElementId());
+
+                // NB! copy also "active" tag
+                newPart.getTags().addAll(part.getTags());
+
+                // copy persist state
+                newPart.getPersistedState().putAll(part.getPersistedState());
+            }
+            else {
+                log.warn("root path is undefined");
             }
         }
 
@@ -414,7 +411,7 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public MPart getPart(String id) {
-        // TODO Auto-generated method stub
+        // TODO
         return null;
     }
 
@@ -436,7 +433,7 @@ public class PartServiceImpl implements IPartService {
      */
     @Override
     public boolean closePart(String id) {
-        // TODO Auto-generated method stub
+        // TODO
         return false;
     }
 

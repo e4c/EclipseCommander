@@ -27,6 +27,7 @@
   <imports xsi:type="commands:Command" xmi:id="_QmxxKU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.removeSelectionPart" commandName="command.removeSelectionPart" description="remove selection from unactive part">
     <category href="Application.e4xmi#_l21IYC7ZEeSXLKrPMWRFLg"/>
   </imports>
+  <imports xsi:type="commands:Command" xmi:id="_-C1ZoLJpEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.command.storeNewPath"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxKk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Handler" xmi:id="_QmxxK05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.ExitHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.ExitHandler" command="_QmxxIU5UEeSHDbo-DJOyaw"/>
   </fragments>
@@ -50,5 +51,8 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxOk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Handler" xmi:id="_QmxxO05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.RemoveSelectionPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.RemoveSelectionPartHandler" command="_QmxxKU5UEeSHDbo-DJOyaw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_C8a-wLJqEeWVw6Et5mGQMQ" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_KYvmYLJqEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.handler.StoreNewPathPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.StoreNewPathPartHandler" command="_-C1ZoLJpEeWVw6Et5mGQMQ"/>
   </fragments>
 </fragment:ModelFragments>

@@ -56,7 +56,7 @@ public class DuplicatePartHandler {
             log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
         }
 
-        storePathInContext(activePart);
+        // storePathInContext(activePart);
 
         if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
             if (log.isDebugEnabled()) {

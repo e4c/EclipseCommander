@@ -93,7 +93,7 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
         PathFixture fixture = null;
 
         if (log.isDebugEnabled()) {
-            log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$Â 
+            log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$ 
         }
 
         for (Range r : selections) {
@@ -120,7 +120,16 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
 
                 // synchronously sending a path
                 if (eventBroker != null) {
-                    eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN, fixture.getPath());
+                    if (eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN, fixture.getPath())) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("new path was opened fine"); //$NON-NLS-1$
+                        }
+                    }
+                    else {
+                        if (log.isDebugEnabled()) {
+                            log.debug("There is problem during opening new path"); //$NON-NLS-1$
+                        }
+                    }
                 }
 
             }

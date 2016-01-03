@@ -154,9 +154,6 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
         // update root path of current tab
         if (activePart != null && activePart.getObject() == this) {
 
-            // store root path
-            // context.set(IdStorage.STATE_ROOT_PATH, newPath); //$NON-NLS-1$
-
             rootPath = newPath;
             if (table != null) {
                 table.setRootPath(rootPath);
@@ -167,15 +164,6 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             }
         }
     }
-
-    // @Inject
-    // public void clearOtherSelection(
-    // @Optional @Named(IServiceConstants.ACTIVE_SELECTION) PathFixture
-    // selectedFixture) {
-    // if (selectedFixture != null) {
-    // System.out.println("selection");
-    // }
-    // }
 
     /**
      * remove selection on other tabs if any tab was activated

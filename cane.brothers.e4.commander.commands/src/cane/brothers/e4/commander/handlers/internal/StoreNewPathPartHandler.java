@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UIEventTopic;
@@ -26,9 +27,15 @@ public class StoreNewPathPartHandler {
     private MPart activePart;
 
     @Inject
+    private IEclipseContext context;
+
+    @Inject
     @Optional
     @Execute
-    public void execute(@UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) Path newPath) {
+    public void execute(@UIEventTopic(PartEvents.TOPIC_PART_PATH_OPEN) final Path newPath) {
+
+        // store root path
+        context.set(IdStorage.STATE_ROOT_PATH, newPath);
 
         // Store the root path of opening part
         if (activePart != null && newPath != null) {
