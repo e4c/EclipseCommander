@@ -54,6 +54,8 @@ public class PathUtils {
     /**
      * Root path have no file name.
      * 
+     * TODO rework extra symbols
+     * 
      * @param path
      * @return file name
      */
