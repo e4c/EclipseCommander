@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: fragment for Winndows based systems
+Bundle-SymbolicName: cane.brothers.e4.commander.win;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: cane
+Fragment-Host: cane.brothers.e4.commander;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
