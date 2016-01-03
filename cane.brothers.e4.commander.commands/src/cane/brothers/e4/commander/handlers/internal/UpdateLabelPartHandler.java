@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brothers.e4.commander.handlers;
+package cane.brothers.e4.commander.handlers.internal;
 
 import java.nio.file.Path;
 
@@ -26,6 +26,8 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.utils.PathUtils;
@@ -35,6 +37,8 @@ import cane.brothers.e4.commander.utils.PathUtils;
  *
  */
 public class UpdateLabelPartHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(UpdateLabelPartHandler.class);
 
     @Inject
     @Named(IServiceConstants.ACTIVE_PART)
@@ -47,7 +51,12 @@ public class UpdateLabelPartHandler {
 
         // update label of current tab
         if (activePart != null && newPath != null) {
-            activePart.setLabel(PathUtils.getFileName(newPath));
+            String fileName = PathUtils.getFileName(newPath);
+            activePart.setLabel(fileName);
+
+            if (log.isDebugEnabled()) {
+                log.debug("active part has new tab label: " + fileName); //$NON-NLS-1$
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
  * Contributors:
  * Mikhail Niedre - initial API and implementation
  *******************************************************************************/
-package cane.brothers.e4.commander.handlers;
+package cane.brothers.e4.commander.handlers.internal;
 
 import javax.inject.Inject;
 

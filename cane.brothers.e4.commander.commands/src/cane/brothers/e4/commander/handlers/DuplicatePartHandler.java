@@ -56,13 +56,7 @@ public class DuplicatePartHandler {
             log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
         }
 
-        // store current path into context
-        // Object rootPathObject = context.get();
-        if (activePart != null) {
-            Map<String, String> state = activePart.getPersistedState();
-            String rootPath = state.get(IdStorage.STATE_ROOT_PATH);
-            context.set(IdStorage.STATE_ROOT_PATH, rootPath);
-        }
+        storePathInContext(activePart);
 
         if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
             if (log.isDebugEnabled()) {
@@ -71,6 +65,16 @@ public class DuplicatePartHandler {
         }
         else {
             log.error("there are some problems on duplicating part"); //$NON-NLS-1$
+        }
+    }
+
+    private void storePathInContext(MPart activePart) {
+        // store current path into context
+        // Object rootPathObject = context.get();
+        if (activePart != null) {
+            Map<String, String> state = activePart.getPersistedState();
+            String rootPath = state.get(IdStorage.STATE_ROOT_PATH);
+            context.set(IdStorage.STATE_ROOT_PATH, rootPath);
         }
     }
 }
