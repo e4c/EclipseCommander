@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="E4 Commander Luna Win target" sequenceNumber="35">
+<?pde version="3.8"?><target includeMode="feature" name="E4 Commander Luna Win target" sequenceNumber="44">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.common.feature.group" version="2.10.1.v20150123-0348"/>
