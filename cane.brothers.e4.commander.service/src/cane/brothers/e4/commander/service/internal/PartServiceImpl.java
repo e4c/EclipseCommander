@@ -266,12 +266,12 @@ public class PartServiceImpl implements IPartService {
     private MPart internalCopyPart(MPart newPart, MPart part) {
         if (part != null) {
 
-            // TODO copy persist state
             Map<String, String> state = part.getPersistedState();
             if (state != null) {
                 Path rootPath = null;
                 String strRootPath = state.get(IdStorage.STATE_ROOT_PATH); // "rootPath"
 
+                // get or create root path
                 if (strRootPath == null) {
                     IDynamicTab tab = tabService.getTab(part);
                     rootPath = tab.getRootPath();
@@ -286,6 +286,9 @@ public class PartServiceImpl implements IPartService {
 
                     // NB! copy also "active" tag
                     newPart.getTags().addAll(part.getTags());
+
+                    // copy persist state
+                    newPart.getPersistedState().putAll(part.getPersistedState());
                 }
             }
             else {
