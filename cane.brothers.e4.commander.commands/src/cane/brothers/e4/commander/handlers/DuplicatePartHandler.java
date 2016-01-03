@@ -16,15 +16,19 @@
  *******************************************************************************/
 package cane.brothers.e4.commander.handlers;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.PartCopyType;
 import cane.brothers.e4.commander.service.api.IPartService;
 
@@ -43,10 +47,21 @@ public class DuplicatePartHandler {
     @Inject
     IPartService partService;
 
+    @Inject
+    private IEclipseContext context;
+
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
         if (log.isDebugEnabled()) {
             log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
+        }
+
+        // store current path into context
+        // Object rootPathObject = context.get();
+        if (activePart != null) {
+            Map<String, String> state = activePart.getPersistedState();
+            String rootPath = state.get(IdStorage.STATE_ROOT_PATH);
+            context.set(IdStorage.STATE_ROOT_PATH, rootPath);
         }
 
         if (partService.copyPart(activePart, PartCopyType.DUPLICATE)) {
