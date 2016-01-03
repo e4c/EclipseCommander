@@ -43,12 +43,12 @@
     <elements xsi:type="commands:Handler" xmi:id="_QmxxNU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.PreferencesHandler" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_QmxxJk5UEeSHDbo-DJOyaw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxNk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Handler" xmi:id="_QmxxN05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.UpdateLabelPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.UpdateLabelPartHandler" command="_QmxxJ05UEeSHDbo-DJOyaw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_QmxxN05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.UpdateLabelPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.UpdateLabelPartHandler" command="_QmxxJ05UEeSHDbo-DJOyaw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxOE5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Handler" xmi:id="_QmxxOU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.SetFocusToOppositePartHandler" command="_QmxxKE5UEeSHDbo-DJOyaw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_QmxxOU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.SetFocusToOppositePartHandler" command="_QmxxKE5UEeSHDbo-DJOyaw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxOk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Handler" xmi:id="_QmxxO05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.RemoveSelectionPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.RemoveSelectionPartHandler" command="_QmxxKU5UEeSHDbo-DJOyaw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_QmxxO05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.RemoveSelectionPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.RemoveSelectionPartHandler" command="_QmxxKU5UEeSHDbo-DJOyaw"/>
   </fragments>
 </fragment:ModelFragments>

@@ -77,7 +77,7 @@
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q8hsQFIFEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Handler" xmi:id="_Q8hsQVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.SetFocusToOppositePartHandler">
+    <elements xsi:type="commands:Handler" xmi:id="_Q8hsQVIFEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.SetFocusToOppositePartHandler">
       <command href="fragments/handlers.e4xmi#_QmxxKE5UEeSHDbo-DJOyaw"/>
     </elements>
   </fragments>
