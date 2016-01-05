@@ -88,12 +88,67 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
     protected boolean doCommand(OpenPathCommand command) {
         // open new Path if possible
 
-        // 1. get path
-        Set<Range> selections = selectionLayer.getSelectedRowPositions();
-        PathFixture fixture = null;
+        // 1. get path fixture
+        PathFixture fixture = getSelectedPathFixture();
+        if (fixture != null) {
+
+            // 2. check if directory
+            if (Files.isDirectory(fixture.getPath())) {
+
+                // 2.1 open new path
+                openNewPath(fixture);
+            }
+            else {
+                // 2.2 do nothing at this moment
+                log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
+
+                // TODO show message for user: unable to open such kind of
+                // files.
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param fixture
+     */
+    private void openNewPath(PathFixture fixture) {
 
         if (log.isDebugEnabled()) {
-            log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$ 
+            log.debug(fixture.getPath() + " is dir"); //$NON-NLS-1$
+            log.debug("open new path: " + fixture.getPath()); //$NON-NLS-1$
+        }
+
+        // synchronously sending a path
+        if (eventBroker != null) {
+
+            if (eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN, fixture.getPath())) {
+                if (log.isDebugEnabled()) {
+                    log.debug("new path was opened fine"); //$NON-NLS-1$
+                }
+            }
+            else {
+                if (log.isDebugEnabled()) {
+                    log.debug("There is problem during opening new path"); //$NON-NLS-1$
+                }
+            }
+        }
+        else {
+            log.error("There is no avail event broker");
+        }
+    }
+
+    /**
+     * @param selections
+     * @return
+     */
+    private PathFixture getSelectedPathFixture() {
+        PathFixture fixture = null;
+        Set<Range> selections = selectionLayer.getSelectedRowPositions();
+
+        if (log.isDebugEnabled()) {
+            log.debug("Selected Row: " + ObjectUtils.toString(selections)); //$NON-NLS-1$  
         }
 
         for (Range r : selections) {
@@ -105,41 +160,7 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
                 }
             }
         }
-
-        // clear selection
-        // selectionLayer.doCommand(new ClearAllSelectionsCommand());
-
-        if (fixture != null) {
-            // 2. check if directory
-            if (Files.isDirectory(fixture.getPath())) {
-                // 2.1 open new path
-                if (log.isDebugEnabled()) {
-                    log.debug(fixture.getPath() + " is dir"); //$NON-NLS-1$
-                    log.debug("open new path: " + fixture.getPath()); //$NON-NLS-1$
-                }
-
-                // synchronously sending a path
-                if (eventBroker != null) {
-                    if (eventBroker.send(PartEvents.TOPIC_PART_PATH_OPEN, fixture.getPath())) {
-                        if (log.isDebugEnabled()) {
-                            log.debug("new path was opened fine"); //$NON-NLS-1$
-                        }
-                    }
-                    else {
-                        if (log.isDebugEnabled()) {
-                            log.debug("There is problem during opening new path"); //$NON-NLS-1$
-                        }
-                    }
-                }
-
-            }
-            else {
-                // 2.2 do nothing at this moment
-                log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
-            }
-        }
-
-        return false;
+        return fixture;
     }
 
 }
