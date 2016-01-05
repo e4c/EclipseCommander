@@ -29,7 +29,6 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.UIEvents;
@@ -69,8 +68,8 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     // @Inject
     // private EModelService modelService;
 
-    @Inject
-    private MApplication application;
+    // @Inject
+    // private MApplication application;
 
     @Inject
     private IEclipseContext context;
@@ -166,6 +165,8 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     }
 
     /**
+     * TODO clean-up
+     * 
      * remove selection on other tabs if any tab was activated
      * 
      * @param event
@@ -183,7 +184,8 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
 
                 // clear selection for non-active tabs
                 if (part.getObject() != this) {
-                    clearSelection();
+                    // clearSelection();
+
                     try {
                         if (log.isDebugEnabled()) {
                             log.debug("part {} was activated", //$NON-NLS-1$
@@ -194,24 +196,10 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
                         log.warn("unable to retreview tab id");
                     }
                 }
+                // restore selection
+                else {
 
-                // // send event only ones if active context is exist
-                // if (part.equals(activePart) && part.getObject() == this) {
-                //
-                // // send event only ones if active context is exist
-                // IEclipseContext activeWindowContext = application
-                // .getContext().getActiveChild();
-                //
-                // // asynchronously sending an active part
-                // // if (activeWindowContext != null && eventBroker != null) {
-                // // eventBroker.post(
-                // // PartEvents.TOPIC_PART_REMOVE_SELECTION,
-                // // (MPart) obj);
-                // // }
-                // }
-                // else {
-                // clearSelection();
-                // }
+                }
             }
         }
 
@@ -287,13 +275,13 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             }
 
             // set the selection to the service
-            // TODO: not working for
-            // RemoveSelectionPartHandler
             selectionService.setSelection(firstElement);
 
             if (log.isDebugEnabled()) {
                 log.debug("Selection changed:"); //$NON-NLS-1$
             }
+
+            // trace selected objects
             for (Object sel : selection.toArray()) {
                 if (sel instanceof PathFixture) {
                     PathFixture fixture = (PathFixture) sel;

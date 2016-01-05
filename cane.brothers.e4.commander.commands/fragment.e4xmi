@@ -47,7 +47,7 @@
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_-2pE8FIEEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Command" xmi:id="_-2pE8VIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.removeSelectionPart" commandName="command.removeSelectionPart" description="remove selection from unactive part">
+    <elements xsi:type="commands:Command" xmi:id="_-2pE8VIEEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.resolveSelectionTab" commandName="command.resolveSelectionTab" description="remove selection from unactive part">
       <category href="fragments/commands.e4xmi#_mOkp4E5dEeSHDbo-DJOyaw"/>
     </elements>
   </fragments>

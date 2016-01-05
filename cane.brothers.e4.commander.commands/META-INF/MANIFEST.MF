@@ -16,7 +16,10 @@ Require-Bundle: org.eclipse.e4.core.di,
  cane.brothers.e4.commander.utils,
  org.eclipse.ui,
  org.slf4j.api,
- org.eclipse.e4.core.contexts
+ org.eclipse.e4.core.contexts,
+ org.eclipse.e4.core.services,
+ cane.brothers.e4.commander.preferences,
+ org.eclipse.e4.core.di.extensions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.inject;version="1.0.0"
 Bundle-ActivationPolicy: lazy

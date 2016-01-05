@@ -36,12 +36,6 @@ public class SetFocusToOppositePartHandler {
 
     private static final Logger log = LoggerFactory.getLogger(SetFocusToOppositePartHandler.class);
 
-    // @Inject
-    // MApplication application;
-
-    // @Inject
-    // EModelService modelService;
-
     @Inject
     private IPartService partService;
 
@@ -61,6 +55,7 @@ public class SetFocusToOppositePartHandler {
         if (activePart != null) {
             // TODO use getPart()
             MPart oppositePart = partService.getOppositePart(activePart);
+            tabService.clearSelection(activePart);
 
             // set opposite tab focus and selection
             tabService.setSelection(oppositePart);

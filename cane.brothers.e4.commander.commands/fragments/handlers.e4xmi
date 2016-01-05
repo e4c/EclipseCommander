@@ -24,7 +24,7 @@
   <imports xsi:type="commands:Command" xmi:id="_QmxxKE5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab" commandName="command.setFocusToOppositeTab" description="set focus to opposite tab">
     <category href="Application.e4xmi#_l21IYC7ZEeSXLKrPMWRFLg"/>
   </imports>
-  <imports xsi:type="commands:Command" xmi:id="_QmxxKU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.removeSelectionPart" commandName="command.removeSelectionPart" description="remove selection from unactive part">
+  <imports xsi:type="commands:Command" xmi:id="_QmxxKU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.resolveSelectionTab" commandName="command.removeSelectionPart" description="remove selection from unactive part">
     <category href="Application.e4xmi#_l21IYC7ZEeSXLKrPMWRFLg"/>
   </imports>
   <imports xsi:type="commands:Command" xmi:id="_-C1ZoLJpEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.command.storeNewPath"/>
@@ -50,7 +50,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_QmxxOU5UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.SetFocusToOppositePartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.SetFocusToOppositePartHandler" command="_QmxxKE5UEeSHDbo-DJOyaw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxOk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Handler" xmi:id="_QmxxO05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.RemoveSelectionPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.RemoveSelectionPartHandler" command="_QmxxKU5UEeSHDbo-DJOyaw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_QmxxO05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handler.ResolveSelectionTabHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.ResolveSelectionTabHandler" command="_QmxxKU5UEeSHDbo-DJOyaw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_C8a-wLJqEeWVw6Et5mGQMQ" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Handler" xmi:id="_KYvmYLJqEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.handler.StoreNewPathPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.StoreNewPathPartHandler" command="_-C1ZoLJpEeWVw6Et5mGQMQ"/>
