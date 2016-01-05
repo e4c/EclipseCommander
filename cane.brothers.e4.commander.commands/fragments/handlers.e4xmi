@@ -28,6 +28,7 @@
     <category href="Application.e4xmi#_l21IYC7ZEeSXLKrPMWRFLg"/>
   </imports>
   <imports xsi:type="commands:Command" xmi:id="_-C1ZoLJpEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.command.storeNewPath"/>
+  <imports xsi:type="commands:Command" xmi:id="_FzhBALPFEeWRnoxbDMdLWA" elementId="cane.brothers.e4.commander.command.refreshPath"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_QmxxKk5UEeSHDbo-DJOyaw" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Handler" xmi:id="_QmxxK05UEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.handlers.ExitHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.ExitHandler" command="_QmxxIU5UEeSHDbo-DJOyaw"/>
   </fragments>
@@ -54,5 +55,8 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_C8a-wLJqEeWVw6Et5mGQMQ" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Handler" xmi:id="_KYvmYLJqEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.handler.StoreNewPathPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.StoreNewPathPartHandler" command="_-C1ZoLJpEeWVw6Et5mGQMQ"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_A9qP4LPGEeWRnoxbDMdLWA" featurename="handlers" parentElementId="cane.brothers.e4.commander.application">
+    <elements xsi:type="commands:Handler" xmi:id="_DrnD4LPGEeWRnoxbDMdLWA" elementId="cane.brothers.e4.commander.handler.RefreshPathPartHandler" contributionURI="bundleclass://cane.brothers.e4.commander.commands/cane.brothers.e4.commander.handlers.internal.RefreshPathPartHandler" command="_FzhBALPFEeWRnoxbDMdLWA"/>
   </fragments>
 </fragment:ModelFragments>

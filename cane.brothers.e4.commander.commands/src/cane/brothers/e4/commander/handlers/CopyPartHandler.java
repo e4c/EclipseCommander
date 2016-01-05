@@ -27,8 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.api.PartCopyType;
-import cane.brothers.e4.commander.event.TabEvents;
 import cane.brothers.e4.commander.service.api.IPartService;
+import cane.brothers.e4.commander.service.api.ITabService;
 
 /**
  * Copy tab to other panel using part service.
@@ -42,8 +42,8 @@ public class CopyPartHandler {
     @Inject
     private IPartService partService;
 
-    // @Inject
-    // private ITabService tabService;
+    @Inject
+    private ITabService tabService;
 
     @Inject
     private IEventBroker eventBroker;
@@ -75,11 +75,14 @@ public class CopyPartHandler {
             // // (MPart) obj);
             // // }
 
-            // remove selection
-            // tabService.clearSelection(getInactivePart(activePart));
-            // tabService.setSelection(getActivePart(activePart));
+            // TODO
 
-            eventBroker.post(TabEvents.TOPIC_TAB_RESOLVE_SELECTION, activePart);
+            // resolve selection
+            tabService.clearSelection(partService.getInactivePart(activePart));
+            tabService.setSelection(partService.getActivePart(activePart));
+
+            // eventBroker.post(TabEvents.TOPIC_TAB_REMOVE_SELECTION,
+            // activePart);
         }
         else {
             log.error("there are some problems on copying part to another panel");

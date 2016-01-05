@@ -19,4 +19,5 @@ package cane.brothers.e4.commander.pathTable.command;
 import org.eclipse.nebula.widgets.nattable.command.AbstractContextFreeCommand;
 
 public class OpenPathCommand extends AbstractContextFreeCommand {
+
 }

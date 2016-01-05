@@ -56,6 +56,8 @@ public final class TabEvents extends BaseEvents {
      * active/inactive tabs.
      */
     // cane/brothers/e4/commander/events/tab/resolve
-    public static final String TOPIC_TAB_RESOLVE_SELECTION = TOPIC_BASE_TAB + "resolve"; //$NON-NLS-1$
+    public static final String TOPIC_TAB_REMOVE_SELECTION = TOPIC_BASE_TAB + "remove"; //$NON-NLS-1$
+
+    public static final String TOPIC_TAB_SET_SELECTION = TOPIC_BASE_TAB + "set"; //$NON-NLS-1$
 
 }

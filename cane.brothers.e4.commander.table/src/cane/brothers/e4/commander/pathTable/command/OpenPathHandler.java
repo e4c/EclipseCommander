@@ -19,9 +19,6 @@ package cane.brothers.e4.commander.pathTable.command;
 import java.nio.file.Files;
 import java.util.Set;
 
-import javax.inject.Inject;
-
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.nebula.widgets.nattable.command.AbstractLayerCommandHandler;
 import org.eclipse.nebula.widgets.nattable.coordinate.Range;
@@ -42,11 +39,8 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
 
     private static final Logger log = LoggerFactory.getLogger(OpenPathHandler.class);
 
-    // @Inject
+    // @Inject not working here
     private final IEventBroker eventBroker;
-
-    @Inject
-    IEclipseContext context;
 
     private final SelectionLayer selectionLayer;
 
@@ -101,6 +95,9 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
             else {
                 // 2.2 do nothing at this moment
                 log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
+
+                // to reset selections
+                eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, fixture.getPath());
 
                 // TODO show message for user: unable to open such kind of
                 // files.

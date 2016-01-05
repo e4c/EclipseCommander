@@ -50,7 +50,6 @@ import org.slf4j.LoggerFactory;
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.event.PartEvents;
-import cane.brothers.e4.commander.event.TabEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
 import cane.brothers.e4.commander.preferences.PreferenceConstants;
@@ -169,9 +168,15 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     private void resolveSelections() {
         // hook: active part always should have selection - dont't care of
         // PB_STAY_ACTIVE_TAB
-        MPart selPart = (stayActiveTab ? activePart : partService.getOppositePart(activePart));
+        // MPart selPart = (stayActiveTab ? activePart :
+        // partService.getOppositePart(activePart));
 
-        eventBroker.post(TabEvents.TOPIC_TAB_RESOLVE_SELECTION, selPart);
+        // eventBroker.post(TabEvents.TOPIC_TAB_REMOVE_SELECTION, selPart);
+
+        // resolve selection
+        // tabService.clearSelection(partService.getOppositePart(activePart));
+        // tabService.setSelection(activePart);
+        eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, null);
     }
 
     /**

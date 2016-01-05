@@ -48,7 +48,7 @@ public class ResolveSelectionTabHandler {
      */
     @Inject
     @Execute
-    public void execute(@Optional @UIEventTopic(TabEvents.TOPIC_TAB_RESOLVE_SELECTION) final MPart activePart) {
+    public void execute(@Optional @UIEventTopic(TabEvents.TOPIC_TAB_REMOVE_SELECTION) final MPart activePart) {
         if (log.isDebugEnabled()) {
             log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
         }

@@ -27,9 +27,15 @@ public final class PartEvents extends BaseEvents {
      */
     public static final String TOPIC_BASE_PART = TOPIC_BASE + "/part/"; //$NON-NLS-1$
 
+    public static final String TOPIC_BASE_PART_PATH = TOPIC_BASE + "/part/path/";
     /**
      * Sent when opening new path in active tab.
      */
-    public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART + "path/open"; //$NON-NLS-1$
+    public static final String TOPIC_PART_PATH_OPEN = TOPIC_BASE_PART_PATH + "open"; //$NON-NLS-1$
+
+    /**
+     * Sent when need to refresh path in visible tabs.
+     */
+    public static final String TOPIC_PART_PATH_REFRESH = TOPIC_BASE_PART_PATH + "refresh"; //$NON-NLS-1$
 
 }
