@@ -20,15 +20,12 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.event.TabEvents;
-import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 
@@ -45,10 +42,6 @@ public class ResolveSelectionTabHandler {
     @Inject
     private IPartService partService;
 
-    @Inject
-    @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
-    private boolean stayActiveTab;
-
     /**
      * 
      * @param activePart
@@ -62,10 +55,10 @@ public class ResolveSelectionTabHandler {
 
         if (activePart != null) {
             // remove selection on inactive tab
-            tabService.clearSelection(getActivePart(activePart, !stayActiveTab));
+            tabService.clearSelection(partService.getInactivePart(activePart));
 
             // set default selection on active tab
-            tabService.setSelection(getActivePart(activePart, stayActiveTab));
+            tabService.setSelection(partService.getActivePart(activePart));
         }
     }
 
@@ -86,17 +79,5 @@ public class ResolveSelectionTabHandler {
     // }
     // }
     // }
-
-    /**
-     * use preference PB_STAY_ACTIVE_TAB to decide which part will be active or
-     * inactive
-     * 
-     * @param activePart
-     * @param isStayActive
-     * @return
-     */
-    private MPart getActivePart(MPart activePart, boolean isStayActive) {
-        return (isStayActive ? activePart : partService.getOppositePart(activePart));
-    }
 
 }

@@ -35,7 +35,6 @@ public class TabServiceImpl implements ITabService {
      *
      */
     public TabServiceImpl() {
-        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -77,7 +76,7 @@ public class TabServiceImpl implements ITabService {
                 try {
                     stringId = elemId.substring(elemId.lastIndexOf(".") + 1); //$NON-NLS-1$
                     // if (log.isDebugEnabled()) {
-                    //			log.debug("part id is {}", stringId); //$NON-NLS-1$
+                    // log.debug("part id is {}", stringId); //$NON-NLS-1$
                     // }
                 }
                 catch (Exception ex) {
@@ -115,9 +114,8 @@ public class TabServiceImpl implements ITabService {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * cane.brothers.e4.commander.service.api.ITabService#setSelection(org.eclipse
-     * .e4.ui.model.application.ui.basic.MPart)
+     * @see cane.brothers.e4.commander.service.api.ITabService#setSelection(org.
+     * eclipse .e4.ui.model.application.ui.basic.MPart)
      */
     @Override
     public void setSelection(MPart part) {

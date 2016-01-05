@@ -437,4 +437,26 @@ public class PartServiceImpl implements IPartService {
         return false;
     }
 
+    @Override
+    public MPart getActivePart(MPart activePart) {
+        return getActivePart(activePart, stayActiveTab);
+    }
+
+    @Override
+    public MPart getInactivePart(MPart activePart) {
+        return getActivePart(activePart, !stayActiveTab);
+    }
+
+    /**
+     * use preference PB_STAY_ACTIVE_TAB to decide which part will be active or
+     * inactive
+     * 
+     * @param activePart
+     * @param isStayActive
+     * @return
+     */
+    private MPart getActivePart(MPart activePart, boolean isStayActive) {
+        return (isStayActive ? activePart : getOppositePart(activePart));
+    }
+
 }

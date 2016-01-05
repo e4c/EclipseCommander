@@ -85,4 +85,20 @@ public interface IPartService {
      * @return
      */
     MPart getOppositePart(MPart activePart);
+
+    /**
+     * get visible active part
+     * 
+     * @param activePart
+     * @return activePart
+     */
+    MPart getActivePart(MPart activePart);
+
+    /**
+     * get visible inactive part
+     * 
+     * @param activePart
+     * @return inactivePart
+     */
+    MPart getInactivePart(MPart activePart);
 }
