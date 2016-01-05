@@ -156,7 +156,6 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             rootPath = newPath;
             if (table != null) {
                 table.setRootPath(rootPath);
-                table.refresh();
 
                 // do not make selection while event not finished
                 // setSelection();
