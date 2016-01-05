@@ -104,10 +104,12 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
 
                 // TODO show message for user: unable to open such kind of
                 // files.
+                return false;
             }
         }
 
-        return false;
+        // command finished fine
+        return true;
     }
 
     /**
