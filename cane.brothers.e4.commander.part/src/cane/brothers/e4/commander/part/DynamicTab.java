@@ -159,6 +159,8 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             if (table != null) {
                 table.setRootPath(rootPath);
 
+                table.updateResize();
+
                 resolveSelections();
             }
         }
