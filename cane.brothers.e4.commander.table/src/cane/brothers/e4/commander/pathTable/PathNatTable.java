@@ -232,7 +232,7 @@ public class PathNatTable extends NatTable implements IRootPath {
         if (compositeLayer != null) {
             compositeLayer.setRootPath(newPath);
         }
-        refresh();
+        // refresh();
     }
 
     /**
