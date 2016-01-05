@@ -26,6 +26,7 @@ import javax.inject.Named;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
@@ -49,8 +50,11 @@ import org.slf4j.LoggerFactory;
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.event.PartEvents;
+import cane.brothers.e4.commander.event.TabEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
+import cane.brothers.e4.commander.preferences.PreferenceConstants;
+import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 import cane.brothers.e4.commander.utils.PathUtils;
 
@@ -84,13 +88,12 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     @Inject
     private ESelectionService selectionService;
 
-    // @Inject
-    // private EPartService partService;
+    @Inject
+    private IPartService partService;
 
-    // @Inject
-    // @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath =
-    // IdStorage.PREF_PLUGIN_ID)
-    // private boolean stayActiveTab;
+    @Inject
+    @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
+    private boolean stayActiveTab;
 
     /**
      * GUI stuff
@@ -157,10 +160,18 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             if (table != null) {
                 table.setRootPath(rootPath);
 
-                // do not make selection while event not finished
-                // setSelection();
+                resolveSelections();
             }
         }
+    }
+
+    // resolve visible tabs selections
+    private void resolveSelections() {
+        // hook: active part always should have selection - dont't care of
+        // PB_STAY_ACTIVE_TAB
+        MPart selPart = (stayActiveTab ? activePart : partService.getOppositePart(activePart));
+
+        eventBroker.post(TabEvents.TOPIC_TAB_RESOLVE_SELECTION, selPart);
     }
 
     /**
