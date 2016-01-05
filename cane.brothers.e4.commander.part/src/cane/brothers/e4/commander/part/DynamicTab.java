@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
 
 import cane.brothers.e4.commander.IdStorage;
 import cane.brothers.e4.commander.api.IDynamicTab;
+import cane.brothers.e4.commander.api.IResolveSelection;
 import cane.brothers.e4.commander.event.PartEvents;
 import cane.brothers.e4.commander.model.PathFixture;
 import cane.brothers.e4.commander.pathTable.PathNatTable;
@@ -61,7 +62,7 @@ import cane.brothers.e4.commander.utils.PathUtils;
  * Dynamic Tab. GUI class of part descriptor implementation.
  * 
  */
-public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
+public class DynamicTab implements IDynamicTab, IResolveSelection, ISelectionChangedListener {
 
     private static final Logger log = LoggerFactory.getLogger(DynamicTab.class);
 
@@ -102,11 +103,19 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     /**
      * @return the table
      */
-    public PathNatTable getTable() {
-        return table;
-    }
+    // public PathNatTable getTable() {
+    // return table;
+    // }
 
     private Path rootPath;
+
+    /**
+     * @return the rootPath
+     */
+    @Override
+    public Path getRootPath() {
+        return rootPath;
+    }
 
     private final Color bgColor = Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
 
@@ -159,26 +168,19 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
             if (table != null) {
                 table.setRootPath(rootPath);
 
+                // update scroll-bars
                 table.updateResize();
 
-                resolveSelections();
+                resolveSelections(activePart);
             }
         }
     }
 
-    // resolve visible tabs selections
-    private void resolveSelections() {
-        // hook: active part always should have selection - dont't care of
-        // PB_STAY_ACTIVE_TAB
-        // MPart selPart = (stayActiveTab ? activePart :
-        // partService.getOppositePart(activePart));
-
-        // eventBroker.post(TabEvents.TOPIC_TAB_REMOVE_SELECTION, selPart);
-
-        // resolve selection
-        // tabService.clearSelection(partService.getOppositePart(activePart));
-        // tabService.setSelection(activePart);
-        eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, null);
+    @Override
+    public void resolveSelections(MPart activePart) {
+        // resolve visible tabs selections
+        tabService.clearSelection(partService.getVisiblePart(activePart, !stayActiveTab));
+        tabService.setSelection(activePart);
     }
 
     /**
@@ -202,6 +204,12 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
                 // clear selection for non-active tabs
                 if (part.getObject() != this) {
                     // clearSelection();
+
+                    // to reset selections
+                    // eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH,
+                    // null);
+
+                    tabService.clearSelection(partService.getOppositePart(activePart));
 
                     try {
                         if (log.isDebugEnabled()) {
@@ -241,6 +249,8 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
     @Override
     public void setSelection() {
         if (table != null && !table.isDisposed()) {
+
+            // TODO restore selection
             table.setDefaultSelection();
             if (log.isDebugEnabled()) {
                 log.debug("set default table selection"); //$NON-NLS-1$
@@ -258,14 +268,6 @@ public class DynamicTab implements IDynamicTab, ISelectionChangedListener {
                 }
             }
         }
-    }
-
-    /**
-     * @return the rootPath
-     */
-    @Override
-    public Path getRootPath() {
-        return rootPath;
     }
 
     @Override

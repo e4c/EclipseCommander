@@ -25,6 +25,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cane.brothers.e4.commander.api.IResolveSelection;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 
@@ -32,7 +33,7 @@ import cane.brothers.e4.commander.service.api.ITabService;
  * set focus to opposite part by Tab key.
  *
  */
-public class SetFocusToOppositePartHandler {
+public class SetFocusToOppositePartHandler implements IResolveSelection {
 
     private static final Logger log = LoggerFactory.getLogger(SetFocusToOppositePartHandler.class);
 
@@ -42,26 +43,23 @@ public class SetFocusToOppositePartHandler {
     @Inject
     private ITabService tabService;
 
-    @Inject
-    @Named(IServiceConstants.ACTIVE_PART)
-    MPart activePart;
-
     @Execute
-    public void execute() {
+    public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
         if (log.isDebugEnabled()) {
             log.debug(this.getClass().getSimpleName() + " called"); //$NON-NLS-1$
         }
 
-        if (activePart != null) {
-            // TODO use getPart()
-            MPart oppositePart = partService.getOppositePart(activePart);
-            tabService.clearSelection(activePart);
+        resolveSelections(activePart);
 
-            // set opposite tab focus and selection
-            tabService.setSelection(oppositePart);
-            if (log.isDebugEnabled()) {
-                log.debug("set focus and default selection on opposite tab");
-            }
+        if (log.isDebugEnabled()) {
+            log.debug("set focus and default selection on opposite tab");
         }
+    }
+
+    @Override
+    public void resolveSelections(MPart activePart) {
+        tabService.clearSelection(activePart);
+        tabService.setSelection(partService.getOppositePart(activePart));
+
     }
 }

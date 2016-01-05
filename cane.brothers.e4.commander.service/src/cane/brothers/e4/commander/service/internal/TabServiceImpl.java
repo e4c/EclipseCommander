@@ -24,7 +24,7 @@ import cane.brothers.e4.commander.api.IDynamicTab;
 import cane.brothers.e4.commander.service.api.ITabService;
 
 /**
- * TODO
+ * The concrete realization of the tab service.
  */
 public class TabServiceImpl implements ITabService {
 

@@ -20,13 +20,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cane.brothers.e4.commander.IdStorage;
+import cane.brothers.e4.commander.api.IResolveSelection;
 import cane.brothers.e4.commander.api.PartCopyType;
+import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 
@@ -35,7 +38,7 @@ import cane.brothers.e4.commander.service.api.ITabService;
  * 
  * @see IPartService
  */
-public class CopyPartHandler {
+public class CopyPartHandler implements IResolveSelection {
 
     private static final Logger log = LoggerFactory.getLogger(CopyPartHandler.class);
 
@@ -46,12 +49,8 @@ public class CopyPartHandler {
     private ITabService tabService;
 
     @Inject
-    private IEventBroker eventBroker;
-
-    // @Inject
-    // @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath =
-    // IdStorage.PREF_PLUGIN_ID)
-    // private boolean stayActiveTab;
+    @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
+    private boolean stayActiveTab;
 
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart activePart) {
@@ -64,28 +63,16 @@ public class CopyPartHandler {
                 log.debug("part was copied to opposite panel sucessfully!");
             }
 
-            // // send event only ones if active context is exist
-            // IEclipseContext activeWindowContext = application
-            // .getContext().getActiveChild();
-            //
-            // // asynchronously sending an active part
-            // // if (activeWindowContext != null && eventBroker != null) {
-            // // eventBroker.post(
-            // // PartEvents.TOPIC_PART_REMOVE_SELECTION,
-            // // (MPart) obj);
-            // // }
-
-            // TODO
-
-            // resolve selection
-            tabService.clearSelection(partService.getInactivePart(activePart));
-            tabService.setSelection(partService.getActivePart(activePart));
-
-            // eventBroker.post(TabEvents.TOPIC_TAB_REMOVE_SELECTION,
-            // activePart);
+            resolveSelections(activePart);
         }
         else {
             log.error("there are some problems on copying part to another panel");
         }
+    }
+
+    @Override
+    public void resolveSelections(MPart activePart) {
+        tabService.clearSelection(stayActiveTab ? partService.getOppositePart(activePart) : activePart);
+        tabService.setSelection(stayActiveTab ? null : partService.getOppositePart(activePart));
     }
 }

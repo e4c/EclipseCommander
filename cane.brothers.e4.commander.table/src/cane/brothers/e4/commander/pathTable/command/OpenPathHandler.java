@@ -97,7 +97,7 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
                 log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
 
                 // to reset selections
-                eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, fixture.getPath());
+                eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, null);
 
                 // TODO show message for user: unable to open such kind of
                 // files.

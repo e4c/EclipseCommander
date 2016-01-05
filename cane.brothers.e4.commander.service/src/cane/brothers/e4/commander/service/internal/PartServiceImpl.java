@@ -49,7 +49,7 @@ import cane.brothers.e4.commander.service.api.ITabService;
 import cane.brothers.e4.commander.utils.PathUtils;
 
 /**
- * Part service concrete realization
+ * The concrete realization of the part service.
  */
 public class PartServiceImpl implements IPartService {
 
@@ -76,12 +76,13 @@ public class PartServiceImpl implements IPartService {
     @Inject
     private IEclipseContext context;
 
-    // @SuppressWarnings("restriction")
     @Inject
     @Preference(value = PreferenceConstants.PB_STAY_ACTIVE_TAB, nodePath = IdStorage.PREF_PLUGIN_ID)
     private boolean stayActiveTab;
 
     private final Set<MPart> openedParts = new LinkedHashSet<MPart>();
+
+    private MPart lastPart;
 
     /**
      * Constructor
@@ -224,11 +225,24 @@ public class PartServiceImpl implements IPartService {
         // 4. add created part to opened parts set
         openedParts.add(newPart);
 
+        lastPart = newPart;
         // TODO Send out events
         // broker.post(MyEventConstants.TOPIC_TODO_NEW, updateTodo);
 
         // 6. show part
         showPart(partService, newPart, activePart);
+
+        // 6. resolve selections
+        // if (PartCopyType.COPY == copyType) {
+        // tabService.clearSelection(getVisiblePart(activePart,
+        // !stayActiveTab));
+        // tabService.setSelection(getVisiblePart(activePart, stayActiveTab));
+        // }
+
+        // else if (PartCopyType.DUPLICATE == copyType) {
+        // tabService.clearSelection(activePart);
+        // tabService.setSelection(newPart);
+        // }
 
         return true;
     }
@@ -320,6 +334,11 @@ public class PartServiceImpl implements IPartService {
                         // get opposite visible part
                         if (partService.isPartVisible(part)) {
                             visiblePart = part;
+
+                            if (log.isDebugEnabled()) {
+                                log.debug("tab number {} - oposite tab number {}", //$NON-NLS-1$
+                                        tabService.getTabId(activePart), tabService.getTabId(visiblePart));
+                            }
                             break;
                         }
                     }
@@ -437,15 +456,15 @@ public class PartServiceImpl implements IPartService {
         return false;
     }
 
-    @Override
-    public MPart getActivePart(MPart activePart) {
-        return getActivePart(activePart, stayActiveTab);
-    }
-
-    @Override
-    public MPart getInactivePart(MPart activePart) {
-        return getActivePart(activePart, !stayActiveTab);
-    }
+    // @Override
+    // public MPart getActivePart(MPart activePart) {
+    // return getVisiblePart(activePart, stayActiveTab);
+    // }
+    //
+    // @Override
+    // public MPart getInactivePart(MPart activePart) {
+    // return getVisiblePart(activePart, !stayActiveTab);
+    // }
 
     /**
      * use preference PB_STAY_ACTIVE_TAB to decide which part will be active or
@@ -453,10 +472,16 @@ public class PartServiceImpl implements IPartService {
      * 
      * @param activePart
      * @param isStayActive
-     * @return
+     * @return active or inactive visible part
      */
-    private MPart getActivePart(MPart activePart, boolean isStayActive) {
+    @Override
+    public MPart getVisiblePart(MPart activePart, boolean isStayActive) {
         return (isStayActive ? activePart : getOppositePart(activePart));
+    }
+
+    @Override
+    public MPart getLastPart() {
+        return lastPart;
     }
 
 }

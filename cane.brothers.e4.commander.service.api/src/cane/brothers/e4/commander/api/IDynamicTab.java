@@ -23,12 +23,15 @@ import java.nio.file.Path;
  */
 public interface IDynamicTab {
 
-    // public PathNatTable getTable();
-
     /**
      * @return root path of tab
      */
     public Path getRootPath();
+
+    /**
+     * set focus on the tab
+     */
+    public void setFocus();
 
     /**
      * clear selected path in the path table
@@ -36,12 +39,7 @@ public interface IDynamicTab {
     public void clearSelection();
 
     /**
-     * set selection via selection service
+     * selection default path in the table
      */
     public void setSelection();
-
-    /**
-     * set focus on the tab
-     */
-    public void setFocus();
 }
