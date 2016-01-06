@@ -28,9 +28,6 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_OttEz05WEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Command" xmi:id="_OttE0E5WEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.setFocusToOppositeTab" commandName="command.setFocusToOppositeTab" description="set focus to opposite tab" category="_mOkp4E5dEeSHDbo-DJOyaw"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_OttE0U5WEeSHDbo-DJOyaw" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
-    <elements xsi:type="commands:Command" xmi:id="_OttE0k5WEeSHDbo-DJOyaw" elementId="cane.brothers.e4.commander.command.resolveSelectionTab" commandName="command.resolveSelectionTab" description="resolve selections on parts" category="_mOkp4E5dEeSHDbo-DJOyaw"/>
-  </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_VfsFoLJqEeWVw6Et5mGQMQ" featurename="commands" parentElementId="cane.brothers.e4.commander.application">
     <elements xsi:type="commands:Command" xmi:id="_ZZIcYLJqEeWVw6Et5mGQMQ" elementId="cane.brothers.e4.commander.command.storeNewPath" commandName="command.storeNewPath" description="store new path into context" category="_WCjHME5dEeSHDbo-DJOyaw"/>
   </fragments>
