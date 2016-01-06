@@ -39,7 +39,8 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
 
     private static final Logger log = LoggerFactory.getLogger(OpenPathHandler.class);
 
-    // @Inject not working here
+    // inject not working here: also with handler declaration
+    // @Inject
     private final IEventBroker eventBroker;
 
     private final SelectionLayer selectionLayer;
@@ -97,7 +98,9 @@ public class OpenPathHandler extends AbstractLayerCommandHandler<OpenPathCommand
                 log.warn("An error occurred while trying to open the file. This functionality is not implemented yet."); //$NON-NLS-1$
 
                 // to reset selections
-                eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, null);
+                if (eventBroker != null) {
+                    eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH, null);
+                }
 
                 // TODO show message for user: unable to open such kind of
                 // files.
