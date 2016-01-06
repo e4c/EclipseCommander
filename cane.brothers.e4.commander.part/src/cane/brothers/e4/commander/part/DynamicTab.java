@@ -30,6 +30,7 @@ import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.UIEvents;
@@ -72,8 +73,8 @@ public class DynamicTab implements IDynamicTab, IResolveSelection, ISelectionCha
     // @Inject
     // private EModelService modelService;
 
-    // @Inject
-    // private MApplication application;
+    @Inject
+    private MApplication application;
 
     @Inject
     private IEclipseContext context;
@@ -184,8 +185,6 @@ public class DynamicTab implements IDynamicTab, IResolveSelection, ISelectionCha
     }
 
     /**
-     * TODO clean-up
-     * 
      * remove selection on other tabs if any tab was activated
      * 
      * @param event
@@ -201,24 +200,20 @@ public class DynamicTab implements IDynamicTab, IResolveSelection, ISelectionCha
             if (obj instanceof MPart) {
                 MPart part = (MPart) obj;
 
+                // TODO do not do it many times
                 // clear selection for non-active tabs
                 if (part.getObject() != this) {
-                    // clearSelection();
 
-                    // to reset selections
-                    // eventBroker.post(PartEvents.TOPIC_PART_PATH_REFRESH,
-                    // null);
-
-                    tabService.clearSelection(partService.getOppositePart(activePart));
-
-                    try {
-                        if (log.isDebugEnabled()) {
-                            log.debug("part {} was activated", //$NON-NLS-1$
-                                    String.valueOf(tabService.getTabId(part)));
-                        }
+                    if (log.isDebugEnabled()) {
+                        log.debug("part {} was activated", //$NON-NLS-1$
+                                String.valueOf(tabService.getTabId(part)));
                     }
-                    catch (Exception ex) {
-                        log.warn("unable to retreview tab id");
+
+                    IEclipseContext activeWindowContext = application.getContext().getActiveChild();
+                    if (activeWindowContext != null) {
+
+                        // clear selection on opposite part
+                        tabService.clearSelection(partService.getOppositePart(activePart));
                     }
                 }
                 // restore selection
