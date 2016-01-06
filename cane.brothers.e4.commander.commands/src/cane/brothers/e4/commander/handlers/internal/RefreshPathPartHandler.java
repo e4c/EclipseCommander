@@ -21,6 +21,11 @@ import cane.brothers.e4.commander.preferences.PreferenceConstants;
 import cane.brothers.e4.commander.service.api.IPartService;
 import cane.brothers.e4.commander.service.api.ITabService;
 
+/**
+ * refresh tab selections if click was on unopenable path: - remove selection on
+ * opposite side. - make default selection on active side.
+ *
+ */
 public class RefreshPathPartHandler implements IResolveSelection {
 
     private static final Logger log = LoggerFactory.getLogger(RefreshPathPartHandler.class);

@@ -25,10 +25,11 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 /**
- * Close active tab handler.
+ * the close active tab handler.
  * 
  */
 public class CloseActivePartHandler {
+
     @Execute
     public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part, EPartService partService) {
         // close active part
