@@ -6,19 +6,7 @@
          point="org.eclipse.e4.workbench.model">
       <fragment
             apply="always"
-            uri="fragments/commandCategory.e4xmi">
-      </fragment>
-      <fragment
-            apply="always"
-            uri="fragments/commands.e4xmi">
-      </fragment>
-      <fragment
-            apply="always"
-            uri="fragments/handlers.e4xmi">
-      </fragment>
-      <fragment
-            apply="always"
-            uri="fragments/menuItems.e4xmi">
+            uri="fragment.e4xmi">
       </fragment>
    </extension>
 

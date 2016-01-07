@@ -3,7 +3,6 @@
 
 <product name="EclipseCommander" uid="cane.brothers.e4.commander.win.product" id="cane.brothers.e4.commander.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -14,14 +13,12 @@
 
    <windowImages/>
 
-
-   <launcher name="EclipseCommander">
+   <launcher name="ecommander">
       <solaris/>
       <win useIco="true">
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
@@ -30,13 +27,17 @@
    <plugins>
       <plugin id="cane.brothers.e4.commander"/>
       <plugin id="cane.brothers.e4.commander.api"/>
+      <plugin id="cane.brothers.e4.commander.commands"/>
       <plugin id="cane.brothers.e4.commander.event"/>
       <plugin id="cane.brothers.e4.commander.logging"/>
       <plugin id="cane.brothers.e4.commander.logging.logback" fragment="true"/>
       <plugin id="cane.brothers.e4.commander.model"/>
+      <plugin id="cane.brothers.e4.commander.part"/>
       <plugin id="cane.brothers.e4.commander.preferences"/>
+      <plugin id="cane.brothers.e4.commander.service"/>
       <plugin id="cane.brothers.e4.commander.table"/>
       <plugin id="cane.brothers.e4.commander.utils"/>
+      <plugin id="cane.brothers.e4.commander.win" fragment="true"/>
       <plugin id="ch.qos.logback.classic"/>
       <plugin id="ch.qos.logback.core"/>
       <plugin id="ch.qos.logback.slf4j" fragment="true"/>
@@ -48,6 +49,7 @@
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.lang"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -63,8 +65,10 @@
       <plugin id="org.eclipse.e4.core.commands"/>
       <plugin id="org.eclipse.e4.core.contexts"/>
       <plugin id="org.eclipse.e4.core.di"/>
+      <plugin id="org.eclipse.e4.core.di.annotations"/>
       <plugin id="org.eclipse.e4.core.di.extensions"/>
       <plugin id="org.eclipse.e4.core.services"/>
+      <plugin id="org.eclipse.e4.emf.xpath"/>
       <plugin id="org.eclipse.e4.ui.bindings"/>
       <plugin id="org.eclipse.e4.ui.css.core"/>
       <plugin id="org.eclipse.e4.ui.css.swt"/>
@@ -99,6 +103,7 @@
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.slf4j.api"/>
       <plugin id="org.w3c.css.sac"/>
@@ -107,5 +112,20 @@
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+   </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>
