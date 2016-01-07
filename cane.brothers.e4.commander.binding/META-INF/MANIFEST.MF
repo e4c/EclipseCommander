@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Bindings plug-in
-Bundle-SymbolicName: cane.brothers.e4.commander.binding;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Vendor: Cane
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.eclipse.e4.ui.workbench
