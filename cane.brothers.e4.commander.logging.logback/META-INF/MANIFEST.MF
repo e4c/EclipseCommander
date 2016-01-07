@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Logback logging fragment
-Bundle-SymbolicName: cane.brothers.e4.commander.logging.logback
+Bundle-SymbolicName: cane.brothers.e4.commander.logging.logback;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Cane
 Fragment-Host: cane.brothers.e4.commander.logging
